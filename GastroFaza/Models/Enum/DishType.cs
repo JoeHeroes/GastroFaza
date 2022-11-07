@@ -1,0 +1,30 @@
+﻿namespace GastroFaza.Models.Enum
+{
+    public enum DishType
+    {
+        Pasta,
+        Salad,
+        Bread,
+        Curry,
+        Vegan,
+        Soup,
+        Stew,
+        Pizza,
+        Sandwich,
+        Wrap,
+        Cake,
+        Souce,
+        Pudding,
+        Dessert,
+        Drinks,
+        Alcohol,
+        Steak,
+        Cookies,
+        Meatballs,
+        Pastabakes,
+        Burger,
+        Fish,
+        Meat,
+        Egg,
+    }
+}

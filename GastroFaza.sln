@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32811.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GastroFaza", "GastroFaza\GastroFaza.csproj", "{BAD485E4-CB8A-483B-8822-83AF103A78BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BAD485E4-CB8A-483B-8822-83AF103A78BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAD485E4-CB8A-483B-8822-83AF103A78BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAD485E4-CB8A-483B-8822-83AF103A78BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAD485E4-CB8A-483B-8822-83AF103A78BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D04FA51A-F66D-473F-866F-23AA91A4D8F7}
+	EndGlobalSection
+EndGlobal
