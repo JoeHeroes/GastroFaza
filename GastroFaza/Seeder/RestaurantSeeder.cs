@@ -383,7 +383,6 @@ namespace GastroFaza.Seeder
                     {
                         new Tablee()
                         {
-                            Number = 1,
                             Busy = true,
                             Reserved = false,
                             Seats = 8,
@@ -391,7 +390,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 2,
                             Busy = true,
                             Reserved = false,
                             Seats = 8,
@@ -399,7 +397,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 3,
                             Busy = true,
                             Reserved = false,
                             Seats = 12,
@@ -407,7 +404,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 4,
                             Busy = true,
                             Reserved = false,
                             Seats = 4,
@@ -415,7 +411,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 5,
                             Busy = true,
                             Reserved = false,
                             Seats = 4,
@@ -423,7 +418,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 6,
                             Busy = true,
                             Reserved = false,
                             Seats = 4,
@@ -431,7 +425,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 7,
                             Busy = false,
                             Reserved = false,
                             Seats = 2,
@@ -439,7 +432,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 8,
                             Busy = false,
                             Reserved = true,
                             Seats = 2,
@@ -447,7 +439,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 9,
                             Busy = false,
                             Reserved = false,
                             Seats = 2,
@@ -455,7 +446,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 10,
                             Busy = false,
                             Reserved = true,
                             Seats = 2,
@@ -691,7 +681,6 @@ namespace GastroFaza.Seeder
                     {
                         new Tablee()
                         {
-                            Number = 1,
                             Busy = true,
                             Reserved = false,
                             Seats = 8,
@@ -699,7 +688,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 2,
                             Busy = true,
                             Reserved = false,
                             Seats = 8,
@@ -707,7 +695,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 3,
                             Busy = true,
                             Reserved = false,
                             Seats = 12,
@@ -715,7 +702,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 4,
                             Busy = true,
                             Reserved = false,
                             Seats = 4,
@@ -723,7 +709,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 5,
                             Busy = true,
                             Reserved = false,
                             Seats = 4,
@@ -731,7 +716,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 6,
                             Busy = true,
                             Reserved = false,
                             Seats = 4,
@@ -739,7 +723,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 7,
                             Busy = false,
                             Reserved = false,
                             Seats = 2,
@@ -747,7 +730,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 8,
                             Busy = false,
                             Reserved = true,
                             Seats = 2,
@@ -755,7 +737,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 9,
                             Busy = false,
                             Reserved = false,
                             Seats = 2,
@@ -763,7 +744,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 10,
                             Busy = false,
                             Reserved = true,
                             Seats = 2,
@@ -771,7 +751,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 11,
                             Busy = false,
                             Reserved = true,
                             Seats = 14,
@@ -779,7 +758,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 12,
                             Busy = true,
                             Reserved = false,
                             Seats = 20,
@@ -1022,7 +1000,6 @@ namespace GastroFaza.Seeder
                     {
                         new Tablee()
                         {
-                            Number = 1,
                             Busy = true,
                             Reserved = false,
                             Seats = 8,
@@ -1030,7 +1007,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 2,
                             Busy = true,
                             Reserved = false,
                             Seats = 8,
@@ -1038,7 +1014,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 3,
                             Busy = true,
                             Reserved = false,
                             Seats = 12,
@@ -1046,7 +1021,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 4,
                             Busy = true,
                             Reserved = false,
                             Seats = 4,
@@ -1054,7 +1028,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 5,
                             Busy = true,
                             Reserved = false,
                             Seats = 4,
@@ -1062,7 +1035,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 6,
                             Busy = true,
                             Reserved = false,
                             Seats = 4,
@@ -1070,7 +1042,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 7,
                             Busy = false,
                             Reserved = false,
                             Seats = 2,
@@ -1078,7 +1049,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 8,
                             Busy = false,
                             Reserved = true,
                             Seats = 2,
@@ -1086,7 +1056,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 9,
                             Busy = false,
                             Reserved = false,
                             Seats = 2,
@@ -1094,7 +1063,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 10,
                             Busy = false,
                             Reserved = true,
                             Seats = 2,
@@ -1102,7 +1070,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 11,
                             Busy = false,
                             Reserved = true,
                             Seats = 14,
@@ -1110,7 +1077,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 12,
                             Busy = true,
                             Reserved = false,
                             Seats = 20,
@@ -1118,7 +1084,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 13,
                             Busy = false,
                             Reserved = true,
                             Seats = 4,
@@ -1126,7 +1091,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 14,
                             Busy = true,
                             Reserved = false,
                             Seats = 4,
@@ -1362,7 +1326,6 @@ namespace GastroFaza.Seeder
                     {
                         new Tablee()
                         {
-                            Number = 1,
                             Busy = true,
                             Reserved = false,
                             Seats = 8,
@@ -1370,7 +1333,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 2,
                             Busy = true,
                             Reserved = false,
                             Seats = 8,
@@ -1378,7 +1340,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 3,
                             Busy = true,
                             Reserved = false,
                             Seats = 12,
@@ -1386,7 +1347,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 4,
                             Busy = true,
                             Reserved = false,
                             Seats = 4,
@@ -1394,7 +1354,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 5,
                             Busy = true,
                             Reserved = false,
                             Seats = 4,
@@ -1402,7 +1361,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 6,
                             Busy = true,
                             Reserved = false,
                             Seats = 4,
@@ -1410,7 +1368,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 7,
                             Busy = false,
                             Reserved = false,
                             Seats = 2,
@@ -1418,7 +1375,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 8,
                             Busy = false,
                             Reserved = true,
                             Seats = 2,
@@ -1426,7 +1382,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 9,
                             Busy = false,
                             Reserved = false,
                             Seats = 2,
@@ -1434,7 +1389,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 10,
                             Busy = false,
                             Reserved = true,
                             Seats = 2,
@@ -1442,7 +1396,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 11,
                             Busy = false,
                             Reserved = true,
                             Seats = 14,
@@ -1450,7 +1403,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 12,
                             Busy = true,
                             Reserved = false,
                             Seats = 20,
@@ -1458,7 +1410,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 13,
                             Busy = false,
                             Reserved = true,
                             Seats = 4,
@@ -1466,7 +1417,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 14,
                             Busy = true,
                             Reserved = false,
                             Seats = 4,
@@ -1474,7 +1424,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 15,
                             Busy = false,
                             Reserved = true,
                             Seats = 2,
@@ -1482,7 +1431,6 @@ namespace GastroFaza.Seeder
                         },
                         new Tablee()
                         {
-                            Number = 16,
                             Busy = true,
                             Reserved = false,
                             Seats = 2,

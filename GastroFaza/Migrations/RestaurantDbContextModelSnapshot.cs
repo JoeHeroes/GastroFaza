@@ -210,9 +210,6 @@ namespace GastroFaza.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Number")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Reserved")
                         .HasColumnType("bit");
 

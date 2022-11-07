@@ -110,7 +110,6 @@ namespace GastroFaza.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Number = table.Column<int>(type: "int", nullable: false),
                     Busy = table.Column<bool>(type: "bit", nullable: false),
                     Reserved = table.Column<bool>(type: "bit", nullable: false),
                     Seats = table.Column<int>(type: "int", nullable: false),
