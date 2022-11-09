@@ -86,8 +86,8 @@ namespace GastroFaza.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: false),
                     DishType = table.Column<int>(type: "int", nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: true),
-                    RestaurantId = table.Column<int>(type: "int", nullable: true)
+                    RestaurantId = table.Column<int>(type: "int", nullable: false),
+                    OrderId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -101,7 +101,8 @@ namespace GastroFaza.Migrations
                         name: "FK_Dishs_Restaurants_RestaurantId",
                         column: x => x.RestaurantId,
                         principalTable: "Restaurants",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -180,7 +181,8 @@ namespace GastroFaza.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Restaurants_AddressID",
                 table: "Restaurants",
-                column: "AddressID");
+                column: "AddressID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tables_RestaurantId",

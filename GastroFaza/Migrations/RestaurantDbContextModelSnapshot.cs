@@ -127,7 +127,7 @@ namespace GastroFaza.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int?>("RestaurantId")
+                    b.Property<int>("RestaurantId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -191,7 +191,8 @@ namespace GastroFaza.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressID");
+                    b.HasIndex("AddressID")
+                        .IsUnique();
 
                     b.ToTable("Restaurants");
                 });
@@ -271,16 +272,20 @@ namespace GastroFaza.Migrations
                         .WithMany("Dishes")
                         .HasForeignKey("OrderId");
 
-                    b.HasOne("GastroFaza.Models.Restaurant", null)
+                    b.HasOne("GastroFaza.Models.Restaurant", "Restaurant")
                         .WithMany("Menu")
-                        .HasForeignKey("RestaurantId");
+                        .HasForeignKey("RestaurantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Restaurant");
                 });
 
             modelBuilder.Entity("GastroFaza.Models.Restaurant", b =>
                 {
                     b.HasOne("GastroFaza.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressID")
+                        .WithOne("Restaurant")
+                        .HasForeignKey("GastroFaza.Models.Restaurant", "AddressID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -314,6 +319,11 @@ namespace GastroFaza.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("GastroFaza.Models.Address", b =>
+                {
+                    b.Navigation("Restaurant");
                 });
 
             modelBuilder.Entity("GastroFaza.Models.Order", b =>

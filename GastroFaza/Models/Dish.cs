@@ -9,5 +9,9 @@ namespace GastroFaza.Models
         public string Description { get; set; } = null!;
         public double Price { get; set; }
         public DishType DishType { get; set; }
+
+
+        public int RestaurantId { get; set; }
+        public virtual Restaurant Restaurant { get; set; }
     }
 }

@@ -1,13 +1,14 @@
-﻿namespace GastroFaza.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GastroFaza.Models.DTO
 {
-    public class Address
+    public class AddressDto
     {
-        public int Id { get; set; }
+        [Required]
         public string City { get; set; } = null!;
+        [Required]
         public string Street { get; set; } = null!;
+        [Required]
         public string PostalCode { get; set; } = null!;
-
-
-        public virtual Restaurant Restaurant { get; set; }
     }
 }
