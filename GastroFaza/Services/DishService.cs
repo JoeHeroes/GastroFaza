@@ -1,10 +1,8 @@
-﻿using GastroFaza.Exceptions;
+﻿
+using GastroFaza.Exceptions;
 using GastroFaza.Models;
-using GastroFaza.Models.DTO;
+using GastroFaza.Models.DTO; 
 using Microsoft.EntityFrameworkCore;
-using System.IO;
-using System.Security.Cryptography;
-using System.Xml.Linq;
 
 namespace GastroFaza.Services
 {
@@ -13,8 +11,8 @@ namespace GastroFaza.Services
         IEnumerable<Dish> GetAll();
         Dish GetById(int id);
         void Delete(int id);
-        void Update(int id, UpdateDishtDto model);
-        int Create(DishtDto dto);
+        void Update(int id, UpdateDishDto dto);
+        int Create(UpdateDishDto dto);
     }
     public class DishService : IDishService
     {
@@ -41,7 +39,7 @@ namespace GastroFaza.Services
 
         public Dish GetById(int id)
         {
-            var dish = this.dbContext.dishs.FirstOrDefault(u => u.Id == id);
+            var dish = this.dbContext.Dishs.FirstOrDefault(u => u.Id == id);
 
             if (dish is null)
             {
@@ -76,7 +74,7 @@ namespace GastroFaza.Services
             }
         }
 
-        public void Update(int id, DishDto model)
+        public void Update(int id, UpdateDishDto dto)
         {
             var dish = this.dbContext
                  .Dishs
@@ -87,10 +85,10 @@ namespace GastroFaza.Services
                 throw new NotFoundException("Dish not found");
             }
 
-            dish.Name = model.Name;
-            dish.Description = model.Description;
-            dish.Price = model.Price;
-            dish.DishType = model.DishType;
+            dish.Name = dto.Name;
+            dish.Description = dto.Description;
+            dish.Price = dto.Price;
+            dish.DishType = dto.DishType;
 
 
             try
@@ -104,7 +102,7 @@ namespace GastroFaza.Services
         }
 
 
-        public int Create(DishDto dto)
+        public int Create(UpdateDishDto dto)
         {
             var dish = new Dish()
             {
@@ -124,7 +122,5 @@ namespace GastroFaza.Services
             }
             return dish.Id;
         }
-
-
     }
 }

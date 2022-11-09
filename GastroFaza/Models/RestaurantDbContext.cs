@@ -52,9 +52,6 @@ namespace GastroFaza.Models
                .IsRequired()
                .HasMaxLength(25);
 
-
-
-
             modelBuilder.Entity<Tablee>()
               .Property(r => r.Busy)
               .IsRequired();

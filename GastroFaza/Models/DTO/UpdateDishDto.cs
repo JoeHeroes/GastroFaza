@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using GastroFaza.Models.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace GastroFaza.Models.DTO
 {
-	public class DishDto
+	public class UpdateDishDto
 	{
 		[Required]
 		[MaxLength(25)]

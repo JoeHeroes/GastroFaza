@@ -49,7 +49,7 @@ namespace GastroFaza.Controllers
 
 
         [HttpPut("{id}")]
-        public ActionResult Update([FromBody] DishDto model, [FromRoute] int id)
+        public ActionResult Update([FromBody] UpdateDishDto model, [FromRoute] int id)
         {
             this.services.Update(id, model);
 
@@ -59,7 +59,7 @@ namespace GastroFaza.Controllers
 
 
         [HttpPost]
-        public ActionResult Create([FromBody] DishDto dto)
+        public ActionResult Create([FromBody] UpdateDishDto dto)
         {
 
             //HttpContext.Workers.IsInRole("Admin");

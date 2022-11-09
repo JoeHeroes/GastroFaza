@@ -2,7 +2,7 @@
 
 namespace GastroFaza.Models.DTO
 {
-    public class AddresstDto
+    public class AddressDto
     {
         [Required]
         public string City { get; set; } = null!;

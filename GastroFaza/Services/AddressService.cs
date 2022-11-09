@@ -13,8 +13,8 @@ namespace GastroFaza.Services
         IEnumerable<Address> GetAll();
         Address GetById(int id);
         void Delete(int id);
-        void Update(int id, AddressDto model);
-        int Create(AddresstDto dto);
+        void Update(int id, AddressDto dto);
+        int Create(AddressDto dto);
     }
     public class AddressService : IAddressService
     {
@@ -76,7 +76,7 @@ namespace GastroFaza.Services
             }
         }
 
-        public void Update(int id, AddressDto model)
+        public void Update(int id, AddressDto dto)
         {
             var address = this.dbContext
                  .Addresses
@@ -87,10 +87,9 @@ namespace GastroFaza.Services
                 throw new NotFoundException("Address not found");
             }
 
-            address.Name = model.Name;
-            address.HasDelivery = model.HasDelivery;
-            address.Description = model.Description;
-
+            address.City = dto.City;
+            address.Street = dto.Street;
+            address.PostalCode = dto.PostalCode;
 
             try
             {
@@ -107,9 +106,10 @@ namespace GastroFaza.Services
         {
             var address = new Address()
             {
-                Name = dto.Name,
-                Description = dto.Description,
-            };
+                City = dto.City,
+                Street = dto.Street,
+                PostalCode = dto.PostalCode
+        };
             dbContext.Addresses.Add(address);
             try
             {
