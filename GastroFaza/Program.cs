@@ -84,6 +84,7 @@ try
     builder.Services.AddScoped<IRestaurantService, RestaurantService>();
     builder.Services.AddScoped<IAddressService, AddressService>();
     builder.Services.AddScoped<IDishService, DishService>();
+    builder.Services.AddScoped<IClientService, ClientService>();
 
     //Middleware
     builder.Services.AddScoped<ErrorHandlingMiddleware>();
