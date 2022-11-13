@@ -1,12 +1,14 @@
-﻿namespace GastroFaza.Models
-{
-    public class Address
-    {
-        public int Id { get; set; }
-        public string City { get; set; } = null!;
-        public string Street { get; set; } = null!;
-        public string PostalCode { get; set; } = null!;
+﻿using System.ComponentModel.DataAnnotations;
 
-        public virtual Restaurant Restaurant { get; set; }
+namespace GastroFaza.Models.DTO
+{
+    public class AddressDto
+    {
+        [Required]
+        public string City { get; set; } = null!;
+        [Required]
+        public string Street { get; set; } = null!;
+        [Required]
+        public string PostalCode { get; set; } = null!;
     }
 }
