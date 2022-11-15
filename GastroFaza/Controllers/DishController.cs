@@ -2,48 +2,61 @@
 using GastroFaza.Models.DTO;
 using GastroFaza.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace GastroFaza.Controllers
 {
-    [Route("api/dish")]
-    [ApiController]
-    //[Authorize]
-    public class DishController : ControllerBase
+    public class DishController : Controller
     {
-        private readonly IDishService services;
-        public DishController(IDishService services)
+        private readonly RestaurantDbContext dbContext;
+
+        public DishController(RestaurantDbContext dbContext)
         {
-            this.services = services;
+            this.dbContext = dbContext;
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<Dish>> GetAll()
+        public IActionResult GetAll()
         {
-            var dishs = this.services.GetAll();
+            IEnumerable<Dish> dishs = this.dbContext.Dishs;
 
-            return Ok(dishs);
-        }
-
-
-
-        [HttpGet("{id}")]
-        public ActionResult<Dish> GetOne([FromRoute] int id)
-        {
-            var dish = this.services.GetById(id);
-
-            return Ok(dish);
+            return View(dishs);
         }
 
 
 
-
-        [HttpDelete("{id}")]
-        public ActionResult Delete([FromRoute] int id)
+        public IActionResult GetOne(int? id)
         {
-            this.services.Delete(id);
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
 
-            return NotFound();
+            var dish = this.dbContext.Dishs.Find(id);
+
+            return View(dish);
+        }
+
+
+        public IActionResult Delete(int? id)
+        {
+            var dish = this.dbContext.Dishs.Find(id);
+            if (dish == null)
+            {
+
+                return NotFound();
+            }
+
+            this.dbContext.Dishs.Remove(dish);
+            try
+            {
+                this.dbContext.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new DbUpdateException("Error DataBase", e);
+            }
+            return RedirectToAction("Index");
         }
 
 

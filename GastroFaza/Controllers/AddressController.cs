@@ -2,72 +2,118 @@
 using GastroFaza.Models.DTO;
 using GastroFaza.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace GastroFaza.Controllers
 {
-    [Route("api/address")]
-    [ApiController]
-    //[Authorize]
-    public class AddressController : ControllerBase
+    public class AddressController : Controller
     {
-        private readonly IAddressService services;
-        public AddressController(IAddressService services)
+        private readonly RestaurantDbContext dbContext;
+        public AddressController(RestaurantDbContext dbContext)
         {
-            this.services = services;
+            this.dbContext = dbContext;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Address>> GetAll()
+        public IActionResult GetAll()
         {
-            var addresses = this.services.GetAll();
+            IEnumerable<Address> addresses = this.dbContext.Addresses;
 
-            return Ok(addresses);
+            return View(addresses);
         }
 
 
 
-        [HttpGet("{id}")]
-        public ActionResult<Address> GetOne([FromRoute] int id)
+        public IActionResult GetOne(int? id)
         {
-            var address = this.services.GetById(id);
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
 
-            return Ok(address);
+            var address = this.dbContext.Addresses.Find(id);
+
+            return View(address);
         }
 
 
 
 
-        [HttpDelete("{id}")]
-        public ActionResult Delete([FromRoute] int id)
+        
+        public IActionResult Delete(int? id)
         {
-            this.services.Delete(id);
+            var address = this.dbContext.Addresses.Find(id);
+            if (address == null)
+            {
+                
+                return NotFound();
+            }
 
-            return NotFound();
+            this.dbContext.Addresses.Remove(address);
+            try
+            {
+                this.dbContext.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new DbUpdateException("Error DataBase", e);
+            }
+            return RedirectToAction("Index");
         }
 
 
 
-        [HttpPut("{id}")]
-        public ActionResult Update([FromBody] AddressDto model, [FromRoute] int id)
+        public IActionResult Edit(int? id,AddressDto modelDTO)
         {
-            this.services.Update(id, model);
+            if (ModelState.IsValid)
+            {
+                var model = this.dbContext.Addresses.Find(id);
+                model.City = modelDTO.City;
+                model.Street = modelDTO.Street;
+                model.PostalCode = modelDTO.PostalCode;
 
-            return Ok();
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+                
+                return RedirectToAction("Index");
+            }
+
+            return View(modelDTO);
         }
 
 
 
-        [HttpPost]
-        public ActionResult Create([FromBody] AddressDto dto)
+        public IActionResult Create([FromBody] AddressDto modelDTO)
         {
+            if (ModelState.IsValid)
+            {
+                this.dbContext.Addresses.Add(new Address()
+                {
+                    City = modelDTO.City,
+                    Street = modelDTO.Street,
+                    PostalCode = modelDTO.PostalCode,
+                });
 
-            //HttpContext.Workers.IsInRole("Admin");
-            //var userId = int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            var id = this.services.Create(dto);
 
-            return Created($"/api/bid/{id}", null);
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+                return RedirectToAction("Index");
+            }
+
+            return View(modelDTO);
         }
-
     }
 }
