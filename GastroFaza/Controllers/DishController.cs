@@ -1,9 +1,7 @@
 ﻿using GastroFaza.Models;
 using GastroFaza.Models.DTO;
-using GastroFaza.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace GastroFaza.Controllers
 {
@@ -15,15 +13,12 @@ namespace GastroFaza.Controllers
         {
             this.dbContext = dbContext;
         }
-
         public IActionResult GetAll()
         {
             IEnumerable<Dish> dishs = this.dbContext.Dishs;
 
             return View(dishs);
         }
-
-
 
         public IActionResult GetOne(int? id)
         {
@@ -36,14 +31,11 @@ namespace GastroFaza.Controllers
 
             return View(dish);
         }
-
-
         public IActionResult Delete(int? id)
         {
             var dish = this.dbContext.Dishs.Find(id);
             if (dish == null)
             {
-
                 return NotFound();
             }
 
@@ -59,28 +51,54 @@ namespace GastroFaza.Controllers
             return RedirectToAction("Index");
         }
 
-
-
-        [HttpPut("{id}")]
-        public ActionResult Update([FromBody] UpdateDishDto model, [FromRoute] int id)
+        public IActionResult Edit(int? id, DishDto modelDTO)
         {
-            this.services.Update(id, model);
+            if (ModelState.IsValid)
+            {
+                var model = this.dbContext.Dishs.Find(id);
+                model.Name = modelDTO.Name;
+                model.Description = modelDTO.Description;
+                model.Price = modelDTO.Price;
 
-            return Ok();
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+
+                return RedirectToAction("Index");
+            }
+
+            return View(modelDTO);
         }
 
-
-
-        [HttpPost]
-        public ActionResult Create([FromBody] UpdateDishDto dto)
+        public IActionResult Create(DishDto modelDTO)
         {
+            if (ModelState.IsValid)
+            {
+                this.dbContext.Dishs.Add(new Dish()
+                {
+                    Name = modelDTO.Name,
+                    Description = modelDTO.Description,
+                    Price = modelDTO.Price,
+                });
 
-            //HttpContext.Workers.IsInRole("Admin");
-            //var userId = int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            var id = this.services.Create(dto);
 
-            return Created($"/api/bid/{id}", null);
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+                return RedirectToAction("Index");
+            }
+
+            return View(modelDTO);
         }
-
     }
 }

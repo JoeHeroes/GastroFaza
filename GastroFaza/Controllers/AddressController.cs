@@ -1,9 +1,7 @@
 ﻿using GastroFaza.Models;
 using GastroFaza.Models.DTO;
-using GastroFaza.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace GastroFaza.Controllers
 {
@@ -15,16 +13,12 @@ namespace GastroFaza.Controllers
             this.dbContext = dbContext;
         }
 
-        [HttpGet]
         public IActionResult GetAll()
         {
             IEnumerable<Address> addresses = this.dbContext.Addresses;
 
             return View(addresses);
         }
-
-
-
         public IActionResult GetOne(int? id)
         {
             if (id == null || id == 0)
@@ -36,11 +30,6 @@ namespace GastroFaza.Controllers
 
             return View(address);
         }
-
-
-
-
-        
         public IActionResult Delete(int? id)
         {
             var address = this.dbContext.Addresses.Find(id);
@@ -62,9 +51,7 @@ namespace GastroFaza.Controllers
             return RedirectToAction("Index");
         }
 
-
-
-        public IActionResult Edit(int? id,AddressDto modelDTO)
+        public IActionResult Edit(int? id, AddressDto modelDTO)
         {
             if (ModelState.IsValid)
             {
@@ -88,9 +75,7 @@ namespace GastroFaza.Controllers
             return View(modelDTO);
         }
 
-
-
-        public IActionResult Create([FromBody] AddressDto modelDTO)
+        public IActionResult Create(AddressDto modelDTO)
         {
             if (ModelState.IsValid)
             {

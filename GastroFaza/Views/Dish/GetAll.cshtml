@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Dish>
+@{
+    ViewData["Title"] = "GetAll";
+}
+
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Addresess</h2>
+        </div>
+        <div class="col-6 text-end">
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                DishType
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model)
+        {
+            <tr>
+                <td width="25%">
+                    @obj.Name
+                </td>
+                <td width="55%">
+                    @obj.Description
+                </td>
+                <td width="10%">
+                    @obj.Price
+                </td>
+                <td width="10%">
+                    @obj.DishType
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

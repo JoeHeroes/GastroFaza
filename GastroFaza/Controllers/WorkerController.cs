@@ -1,70 +1,108 @@
-using GastroFaza.Models.DTO;
 using GastroFaza.Models;
-using GastroFaza.Services;
+using GastroFaza.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
-using GastroFaza.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace GastroFaza.Controllers
 {
-    [Route("api/worker")]
-    [ApiController]
-    public class WorkerController : ControllerBase
+    public class WorkerController : Controller
     {
-        private readonly IWorkerService services;
-        public WorkerController(IWorkerService services)
+        private readonly RestaurantDbContext dbContext;
+
+        public WorkerController(RestaurantDbContext dbContext)
         {
-            this.services = services;
+            this.dbContext = dbContext;
+        }
+        public IActionResult GetAll()
+        {
+            IEnumerable<Worker> workers = this.dbContext.Workers;
+
+            return View(workers);
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<Worker>> GetAll()
+        public IActionResult GetOne(int? id)
         {
-            var workers = this.services.GetAll();
-
-            return Ok(workers);
-        }
-
-        [HttpGet("{id}")]
-        public ActionResult<Worker> GetOne([FromRoute] int id)
-        {
-            var worker = this.services.GetById(id);
-
-            return Ok(worker);
-        }
-
-        [HttpPost]
-        public ActionResult Create([FromBody] CreateWorkerDto dto)
-        {
-
-            if(!ModelState.IsValid)
+            if (id == null || id == 0)
             {
-                throw new BadRequestException(ModelState.ToString());
+                return NotFound();
             }
 
-            var id = this.services.Create(dto);
+            var worker = this.dbContext.Workers.Find(id);
 
-            return Created($"/api/worker/{id}", null);
+            return View(worker);
         }
 
-        [HttpPut("{id}")]
-        public ActionResult Update([FromBody] UpdateWorkerDto dto, [FromRoute] int id)
+        public IActionResult Delete(int? id)
         {
-            if (!ModelState.IsValid)
+            var worker = this.dbContext.Workers.Find(id);
+            if (worker == null)
             {
-                throw new BadRequestException(ModelState.ToString());
+                return NotFound();
             }
 
-            this.services.Update(id, dto);
-
-            return Ok();
+            this.dbContext.Workers.Remove(worker);
+            try
+            {
+                this.dbContext.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new DbUpdateException("Error DataBase", e);
+            }
+            return RedirectToAction("Index");
         }
 
-        [HttpDelete("{id}")]
-        public ActionResult Delete([FromRoute] int id)
+        public IActionResult Edit(int? id, UpdateWorkerDto modelDTO)
         {
-            this.services.Delete(id);
+            if (ModelState.IsValid)
+            {
+                var model = this.dbContext.Workers.Find(id);
+                model.Salary = modelDTO.Salary;
+                model.Rating = modelDTO.Rating;
+                model.Email = modelDTO.Email;
 
-            return NotFound();
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+
+                return RedirectToAction("Index");
+            }
+
+            return View(modelDTO);
+        }
+        public IActionResult Create(CreateWorkerDto modelDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                this.dbContext.Workers.Add(new Worker()
+                {
+                    Email = modelDTO.Email,
+                    FirstName = modelDTO.FirstName,
+                    LastName = modelDTO.LastName,
+                    DateOfBirth = modelDTO.DateOfBirth,
+                    Nationality = modelDTO.Nationality,
+                    PasswordHash = modelDTO.PasswordHash,
+                    Salary = modelDTO.Salary,
+                    Rating = modelDTO.Rating
+                });
+
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+                return RedirectToAction("Index");
+            }
+
+            return View(modelDTO);
         }
     }
 }

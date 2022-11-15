@@ -1,67 +1,106 @@
-﻿using GastroFaza.Models.DTO;
-using GastroFaza.Models;
-using GastroFaza.Services;
+﻿using GastroFaza.Models;
+using GastroFaza.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GastroFaza.Controllers
 {
-    [Route("api/client")]
-    [ApiController]
-    public class ClientController : ControllerBase
+    public class ClientController : Controller
     {
-        private readonly IClientService services;
-        public ClientController(IClientService services)
+        private readonly RestaurantDbContext dbContext;
+
+        public ClientController(RestaurantDbContext dbContext)
         {
-            this.services = services;
+            this.dbContext = dbContext;
+        }
+        public IActionResult GetAll()
+        {
+            IEnumerable<Client> clients = this.dbContext.Clients;
+
+            return View(clients);
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<Client>> GetAll()
+        public IActionResult GetOne(int? id)
         {
-            var clients = this.services.GetAll();
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
 
-            return Ok(clients);
+            var client = this.dbContext.Clients.Find(id);
+
+            return View(client);
+        }
+        public IActionResult Delete(int? id)
+        {
+            var client = this.dbContext.Clients.Find(id);
+            if (client == null)
+            {
+                return NotFound();
+            }
+
+            this.dbContext.Clients.Remove(client);
+            try
+            {
+                this.dbContext.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new DbUpdateException("Error DataBase", e);
+            }
+            return RedirectToAction("Index");
         }
 
-
-
-        [HttpGet("{id}")]
-        public ActionResult<Client> GetOne([FromRoute] int id)
+        public IActionResult Edit(int? id, UpdateClientDto modelDTO)
         {
-            var client = this.services.GetById(id);
+            if (ModelState.IsValid)
+            {
+                var model = this.dbContext.Clients.Find(id);
+                model.OrderID = modelDTO.OrderID;
+                model.Email = modelDTO.Email;
 
-            return Ok(client);
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+
+                return RedirectToAction("Index");
+            }
+
+            return View(modelDTO);
         }
 
-
-
-
-        [HttpDelete("{id}")]
-        public ActionResult Delete([FromRoute] int id)
+        public IActionResult Create(CreateClientDto modelDTO)
         {
-            this.services.Delete(id);
+            if (ModelState.IsValid)
+            {
+                this.dbContext.Clients.Add(new Client()
+                {
+                    Email = modelDTO.Email,
+                    OrderID = modelDTO.OrderID,
+                    FirstName = modelDTO.FirstName,
+                    LastName = modelDTO.LastName,
+                    DateOfBirth = modelDTO.DateOfBirth,
+                    Nationality = modelDTO.Nationality,
+                    PasswordHash = modelDTO.PasswordHash,
+                });
 
-            return NotFound();
-        }
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+                return RedirectToAction("Index");
+            }
 
-
-
-        [HttpPut("{id}")]
-        public ActionResult Update([FromBody] UpdateClientDto model, [FromRoute] int id)
-        {
-            this.services.Update(id, model);
-
-            return Ok();
-        }
-
-
-
-        [HttpPost]
-        public ActionResult Create([FromBody] CreateClientDto dto)
-        {
-            var id = this.services.Create(dto);
-
-            return Created($"/api/bid/{id}", null);
+            return View(modelDTO);
         }
     }
 }
