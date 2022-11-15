@@ -2,6 +2,7 @@
 using GastroFaza.Models;
 using GastroFaza.Models.Enum;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace GastroFaza.Seeder
 {
@@ -18,6 +19,12 @@ namespace GastroFaza.Seeder
         {
             if (dbContext.Database.CanConnect())
             {
+                var pending = this.dbContext.Database.GetPendingMigrations();
+                if(pending != null && pending.Any())
+                {
+                    this.dbContext.Database.Migrate();
+                }
+
                 if (!dbContext.Roles.Any())
                 {
                     var roles = GetRoles();
