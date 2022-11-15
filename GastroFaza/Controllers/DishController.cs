@@ -1,73 +1,104 @@
 ﻿using GastroFaza.Models;
 using GastroFaza.Models.DTO;
-using GastroFaza.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 
 namespace GastroFaza.Controllers
 {
-    [Route("api/dish")]
-    [ApiController]
-    //[Authorize]
-    public class DishController : ControllerBase
+    public class DishController : Controller
     {
-        private readonly IDishService services;
-        public DishController(IDishService services)
+        private readonly RestaurantDbContext dbContext;
+
+        public DishController(RestaurantDbContext dbContext)
         {
-            this.services = services;
+            this.dbContext = dbContext;
+        }
+        public IActionResult GetAll()
+        {
+            IEnumerable<Dish> dishs = this.dbContext.Dishs;
+
+            return View(dishs);
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<Dish>> GetAll()
+        public IActionResult GetOne(int? id)
         {
-            var dishs = this.services.GetAll();
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
 
-            return Ok(dishs);
+            var dish = this.dbContext.Dishs.Find(id);
+
+            return View(dish);
+        }
+        public IActionResult Delete(int? id)
+        {
+            var dish = this.dbContext.Dishs.Find(id);
+            if (dish == null)
+            {
+                return NotFound();
+            }
+
+            this.dbContext.Dishs.Remove(dish);
+            try
+            {
+                this.dbContext.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new DbUpdateException("Error DataBase", e);
+            }
+            return RedirectToAction("Index");
         }
 
-
-
-        [HttpGet("{id}")]
-        public ActionResult<Dish> GetOne([FromRoute] int id)
+        public IActionResult Edit(int? id, DishDto modelDTO)
         {
-            var dish = this.services.GetById(id);
+            if (ModelState.IsValid)
+            {
+                var model = this.dbContext.Dishs.Find(id);
+                model.Name = modelDTO.Name;
+                model.Description = modelDTO.Description;
+                model.Price = modelDTO.Price;
 
-            return Ok(dish);
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+
+                return RedirectToAction("Index");
+            }
+
+            return View(modelDTO);
         }
 
-
-
-
-        [HttpDelete("{id}")]
-        public ActionResult Delete([FromRoute] int id)
+        public IActionResult Create(DishDto modelDTO)
         {
-            this.services.Delete(id);
+            if (ModelState.IsValid)
+            {
+                this.dbContext.Dishs.Add(new Dish()
+                {
+                    Name = modelDTO.Name,
+                    Description = modelDTO.Description,
+                    Price = modelDTO.Price,
+                });
 
-            return NotFound();
+
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+                return RedirectToAction("Index");
+            }
+
+            return View(modelDTO);
         }
-
-
-
-        [HttpPut("{id}")]
-        public ActionResult Update([FromBody] UpdateDishDto model, [FromRoute] int id)
-        {
-            this.services.Update(id, model);
-
-            return Ok();
-        }
-
-
-
-        [HttpPost]
-        public ActionResult Create([FromBody] UpdateDishDto dto)
-        {
-
-            //HttpContext.Workers.IsInRole("Admin");
-            //var userId = int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            var id = this.services.Create(dto);
-
-            return Created($"/api/bid/{id}", null);
-        }
-
     }
 }

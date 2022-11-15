@@ -1,23 +1,23 @@
-﻿using GastroFaza.Models;
+using GastroFaza.Models;
 using GastroFaza.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace GastroFaza.Controllers
 {
-    public class ClientController : Controller
+    public class WorkerController : Controller
     {
         private readonly RestaurantDbContext dbContext;
 
-        public ClientController(RestaurantDbContext dbContext)
+        public WorkerController(RestaurantDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
         public IActionResult GetAll()
         {
-            IEnumerable<Client> clients = this.dbContext.Clients;
+            IEnumerable<Worker> workers = this.dbContext.Workers;
 
-            return View(clients);
+            return View(workers);
         }
 
         public IActionResult GetOne(int? id)
@@ -27,19 +27,20 @@ namespace GastroFaza.Controllers
                 return NotFound();
             }
 
-            var client = this.dbContext.Clients.Find(id);
+            var worker = this.dbContext.Workers.Find(id);
 
-            return View(client);
+            return View(worker);
         }
+
         public IActionResult Delete(int? id)
         {
-            var client = this.dbContext.Clients.Find(id);
-            if (client == null)
+            var worker = this.dbContext.Workers.Find(id);
+            if (worker == null)
             {
                 return NotFound();
             }
 
-            this.dbContext.Clients.Remove(client);
+            this.dbContext.Workers.Remove(worker);
             try
             {
                 this.dbContext.SaveChanges();
@@ -51,12 +52,13 @@ namespace GastroFaza.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Edit(int? id, UpdateClientDto modelDTO)
+        public IActionResult Edit(int? id, UpdateWorkerDto modelDTO)
         {
             if (ModelState.IsValid)
             {
-                var model = this.dbContext.Clients.Find(id);
-                model.OrderID = modelDTO.OrderID;
+                var model = this.dbContext.Workers.Find(id);
+                model.Salary = modelDTO.Salary;
+                model.Rating = modelDTO.Rating;
                 model.Email = modelDTO.Email;
 
                 try
@@ -73,20 +75,20 @@ namespace GastroFaza.Controllers
 
             return View(modelDTO);
         }
-
-        public IActionResult Create(CreateClientDto modelDTO)
+        public IActionResult Create(CreateWorkerDto modelDTO)
         {
             if (ModelState.IsValid)
             {
-                this.dbContext.Clients.Add(new Client()
+                this.dbContext.Workers.Add(new Worker()
                 {
                     Email = modelDTO.Email,
-                    OrderID = modelDTO.OrderID,
                     FirstName = modelDTO.FirstName,
                     LastName = modelDTO.LastName,
                     DateOfBirth = modelDTO.DateOfBirth,
                     Nationality = modelDTO.Nationality,
                     PasswordHash = modelDTO.PasswordHash,
+                    Salary = modelDTO.Salary,
+                    Rating = modelDTO.Rating
                 });
 
                 try

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GastroFaza.Models.DTO
 {
-	public class UpdateDishDto
+	public class DishDto
 	{
 		[Required]
 		[MaxLength(25)]

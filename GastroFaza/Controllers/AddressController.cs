@@ -1,73 +1,104 @@
 ﻿using GastroFaza.Models;
 using GastroFaza.Models.DTO;
-using GastroFaza.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 
 namespace GastroFaza.Controllers
 {
-    [Route("api/address")]
-    [ApiController]
-    //[Authorize]
-    public class AddressController : ControllerBase
+    public class AddressController : Controller
     {
-        private readonly IAddressService services;
-        public AddressController(IAddressService services)
+        private readonly RestaurantDbContext dbContext;
+        public AddressController(RestaurantDbContext dbContext)
         {
-            this.services = services;
+            this.dbContext = dbContext;
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<Address>> GetAll()
+        public IActionResult GetAll()
         {
-            var addresses = this.services.GetAll();
+            IEnumerable<Address> addresses = this.dbContext.Addresses;
 
-            return Ok(addresses);
+            return View(addresses);
+        }
+        public IActionResult GetOne(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            var address = this.dbContext.Addresses.Find(id);
+
+            return View(address);
+        }
+        public IActionResult Delete(int? id)
+        {
+            var address = this.dbContext.Addresses.Find(id);
+            if (address == null)
+            {
+                
+                return NotFound();
+            }
+
+            this.dbContext.Addresses.Remove(address);
+            try
+            {
+                this.dbContext.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new DbUpdateException("Error DataBase", e);
+            }
+            return RedirectToAction("Index");
         }
 
-
-
-        [HttpGet("{id}")]
-        public ActionResult<Address> GetOne([FromRoute] int id)
+        public IActionResult Edit(int? id, AddressDto modelDTO)
         {
-            var address = this.services.GetById(id);
+            if (ModelState.IsValid)
+            {
+                var model = this.dbContext.Addresses.Find(id);
+                model.City = modelDTO.City;
+                model.Street = modelDTO.Street;
+                model.PostalCode = modelDTO.PostalCode;
 
-            return Ok(address);
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+                
+                return RedirectToAction("Index");
+            }
+
+            return View(modelDTO);
         }
 
-
-
-
-        [HttpDelete("{id}")]
-        public ActionResult Delete([FromRoute] int id)
+        public IActionResult Create(AddressDto modelDTO)
         {
-            this.services.Delete(id);
+            if (ModelState.IsValid)
+            {
+                this.dbContext.Addresses.Add(new Address()
+                {
+                    City = modelDTO.City,
+                    Street = modelDTO.Street,
+                    PostalCode = modelDTO.PostalCode,
+                });
 
-            return NotFound();
+
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+                return RedirectToAction("Index");
+            }
+
+            return View(modelDTO);
         }
-
-
-
-        [HttpPut("{id}")]
-        public ActionResult Update([FromBody] AddressDto model, [FromRoute] int id)
-        {
-            this.services.Update(id, model);
-
-            return Ok();
-        }
-
-
-
-        [HttpPost]
-        public ActionResult Create([FromBody] AddressDto dto)
-        {
-
-            //HttpContext.Workers.IsInRole("Admin");
-            //var userId = int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            var id = this.services.Create(dto);
-
-            return Created($"/api/bid/{id}", null);
-        }
-
     }
 }

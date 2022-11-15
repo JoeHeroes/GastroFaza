@@ -1,73 +1,111 @@
 ﻿using GastroFaza.Models;
 using GastroFaza.Models.DTO;
-using GastroFaza.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 
 namespace GastroFaza.Controllers
 {
-    [Route("api/restaurant")]
-    [ApiController]
-    //[Authorize]
-    public class RestaurantController : ControllerBase
+    public class RestaurantController : Controller
     {
-        private readonly IRestaurantService services;
-        public RestaurantController(IRestaurantService services)
+        private readonly RestaurantDbContext dbContext;
+
+        public RestaurantController(RestaurantDbContext dbContext)
         {
-            this.services = services;
+            this.dbContext = dbContext;
+        }
+        public IActionResult GetAll()
+        {
+            IEnumerable<Restaurant> restaurants = this.dbContext.Restaurants;
+
+            return View(restaurants);
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<Restaurant>> GetAll()
+        public IActionResult GetOne(int? id)
         {
-            var restaurants = this.services.GetAll();
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
 
-            return Ok(restaurants);
+            var restaurant = this.dbContext.Restaurants.Find(id);
+
+            return View(restaurant);
+        }
+        public IActionResult Delete(int? id)
+        {
+            var restaurant = this.dbContext.Restaurants.Find(id);
+            if (restaurant == null)
+            {
+                return NotFound();
+            }
+
+            this.dbContext.Restaurants.Remove(restaurant);
+            try
+            {
+                this.dbContext.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new DbUpdateException("Error DataBase", e);
+            }
+            return RedirectToAction("Index");
         }
 
-
-
-        [HttpGet("{id}")]
-        public ActionResult<Restaurant> GetOne([FromRoute] int id)
+        public IActionResult Edit(int? id, UpdateRestaurantDto modelDTO)
         {
-            var restaurant = this.services.GetById(id);
+            if (ModelState.IsValid)
+            {
+                var model = this.dbContext.Restaurants.Find(id);
+                model.Name = modelDTO.Name;
+                model.HasDelivery = modelDTO.HasDelivery;
+                model.Description = modelDTO.Description;
 
-            return Ok(restaurant);
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+
+                return RedirectToAction("Index");
+            }
+
+            return View(modelDTO);
         }
 
-
-
-
-        [HttpDelete("{id}")]
-        public ActionResult Delete([FromRoute] int id)
+        public IActionResult Create(CreateRestaurantDto modelDTO)
         {
-            this.services.Delete(id);
+            if (ModelState.IsValid)
+            {
+                this.dbContext.Restaurants.Add(new Restaurant()
+                {
+                    Name = modelDTO.Name,
+                    Description = modelDTO.Description,
+                    HasDelivery = modelDTO.HasDelivery,
+                    ContactEmail = modelDTO.ContactEmail,
+                    ContactNumber = modelDTO.ContactNumber,
+                    Address = new Address()
+                    {
+                        City = modelDTO.City,
+                        Street = modelDTO.Street,
+                        PostalCode = modelDTO.PostalCode
+                    }
+                });
 
-            return NotFound();
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+                return RedirectToAction("Index");
+            }
+
+            return View(modelDTO);
         }
-
-
-
-        [HttpPut("{id}")]
-        public ActionResult Update([FromBody] UpdateRestaurantDto model, [FromRoute] int id)
-        {
-            this.services.Update(id, model);
-
-            return Ok();
-        }
-
-
-
-        [HttpPost]
-        public ActionResult Create([FromBody] CreateRestaurantDto dto)
-        {
-
-            //HttpContext.Workers.IsInRole("Admin");
-            //var userId = int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            var id = this.services.Create(dto);
-
-            return Created($"/api/bid/{id}", null);
-        }
-
     }
 }
