@@ -4,15 +4,29 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GastroFaza.Controllers
 {
-    [Route("api/account")]
-    [ApiController]
-    public class AccountController: ControllerBase
+    public class AccountController: Controller
     {
         private readonly IAccountService _service;
         public AccountController(IAccountService service)
         {
             _service = service;
         }
+
+
+        [Route("Login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [Route("Register")]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+
+
 
         [HttpPost("registerWorker")]
         public ActionResult RegisterWorker([FromBody] RegisterWorkerDto dto) 

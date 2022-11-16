@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h3>Login to Account</h3>
+@ViewBag.error
+<form method="post" action="@Url.Action("Login", "Account")">
+    <table border="0" cellpadding="2" cellspacing="2">
+        <tr>
+            <td>Email</td>
+            <td><input type="text" name="email"></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" name="password"></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td><input type="submit" value="Login"></td>
+        </tr>
+    </table>
+</form>
+
+

@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h3>Register Account</h3>
+@ViewBag.error
+<form method="post" action="@Url.Action("Register", "Account")">
+    <table border="0" cellpadding="2" cellspacing="2">
+        <tr>
+            <td>Email</td>
+            <td><input type="text" name="email"></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" name="password"></td>
+        </tr>
+        <tr>
+            <td>ConfirmPassword</td>
+            <td><input type="password" name="confirmPassword"></td>
+        </tr>
+
+
+        <tr>
+            <td>FirstName</td>
+            <td><input type="text" name="firstName"></td>
+        </tr>
+        <tr>
+            <td>LastName</td>
+            <td><input type="text" name="lastName"></td>
+        </tr>
+
+        <tr>
+            <td>Nationality</td>
+            <td><input type="text" name="nationality"></td>
+        </tr>
+        <tr>
+            <td>DateOfBirth</td>
+            <td><input type="date" name="dateOfBirth" value="2000-01-01"></td>
+        </tr>
+
+
+
+        <tr>
+            <td>&nbsp;</td>
+            <td><input type="submit" value="Register"></td>
+        </tr>
+    </table>
+</form>
+
