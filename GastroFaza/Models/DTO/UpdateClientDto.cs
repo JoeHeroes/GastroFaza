@@ -6,7 +6,7 @@ namespace GastroFaza.Models.DTO
     {
         public int OrderID { get; set; }
 
-        public string Email { get; set; } = null!;
+        public string Email { get; set; }
 
     }
 }

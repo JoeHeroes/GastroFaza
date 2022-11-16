@@ -26,6 +26,9 @@ try
 
     
     builder.Services.AddControllersWithViews();
+
+    builder.Services.AddSession();
+
     builder.Logging.ClearProviders();
 
     //Nlog
@@ -108,6 +111,8 @@ try
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
     var app = builder.Build();
+
+    app.UseSession();
 
     var scope = app.Services.CreateScope();
 

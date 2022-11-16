@@ -143,43 +143,12 @@ namespace GastroFaza.Services
 
         public void RegisterClient(RegisterClientDto dto)
         {
-            var newClient = new Client()
-            {
-                Email = dto.Email,
-                DateOfBirth = dto.DateOfBirth,
-                Nationality = dto.Nationality,
-                FirstName = dto.FirstName,
-                LastName = dto.LastName,
-                PasswordHash = dto.Password,
-
-            };
-
-            var hashedPass = this.passwordHasherClient.HashPassword(newClient, dto.Password);
-
-            newClient.PasswordHash = hashedPass;
-            this.dbContext.Clients.Add(newClient);
-            this.dbContext.SaveChanges();
+            throw new NotImplementedException();
         }
 
         public void RegisterWorker(RegisterWorkerDto dto)
         {
-            var newWorker = new Worker()
-            {
-                Email = dto.Email,
-                DateOfBirth = dto.DateOfBirth,
-                Nationality = dto.Nationality,
-                FirstName = dto.FirstName,
-                LastName = dto.LastName,
-                PasswordHash = dto.Password,
-                RoleId = dto.RoleId
-
-            };
-
-            var hashedPass = this.passwordHasherWorker.HashPassword(newWorker, dto.Password);
-
-            newWorker.PasswordHash = hashedPass;
-            this.dbContext.Workers.Add(newWorker);
-            this.dbContext.SaveChanges();
+            throw new NotImplementedException();
         }
     }
 }

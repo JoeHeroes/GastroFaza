@@ -5,7 +5,8 @@
 
 <h3>Login to Account</h3>
 @ViewBag.error
-<form method="post" action="@Url.Action("Login", "Account")">
+@ViewBag.msg
+<form method="post" action="@Url.Action("loginClient", "Account")">
     <table border="0" cellpadding="2" cellspacing="2">
         <tr>
             <td>Email</td>

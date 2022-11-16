@@ -5,7 +5,8 @@
 
 <h3>Register Account</h3>
 @ViewBag.error
-<form method="post" action="@Url.Action("Register", "Account")">
+@ViewBag.msg
+<form method="post" action="@Url.Action("registerClient", "Account")">
     <table border="0" cellpadding="2" cellspacing="2">
         <tr>
             <td>Email</td>
@@ -38,9 +39,6 @@
             <td>DateOfBirth</td>
             <td><input type="date" name="dateOfBirth" value="2000-01-01"></td>
         </tr>
-
-
-
         <tr>
             <td>&nbsp;</td>
             <td><input type="submit" value="Register"></td>

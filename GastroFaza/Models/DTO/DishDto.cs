@@ -7,8 +7,8 @@ namespace GastroFaza.Models.DTO
 	{
 		[Required]
 		[MaxLength(25)]
-		public string Name { get; set; } = null!;
-		public string Description { get; set; } = null!;
+		public string Name { get; set; } 
+		public string Description { get; set; } 
 		public double Price { get; set; }
 		public DishType DishType { get; set; }
 	}

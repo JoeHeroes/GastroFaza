@@ -1,13 +1,22 @@
-﻿namespace GastroFaza.Models.DTO
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GastroFaza.Models.DTO
 {
     public class RegisterClientDto
     {
-        public string Email { get; set; } = null!;
-        public string Password { get; set; } = null!;
-        public string ConfirmPassword { get; set; } = null!;
-        public string FirstName { get; set; } = null!;
-        public string LastName { get; set; } = null!;
-        public string Nationality { get; set; } = null!;
+        [Required]
+        public string Email { get; set; }
+        [Required]
+        public string Password { get; set; }
+        [Required]
+        public string ConfirmPassword { get; set; }
+        [Required]
+        public string FirstName { get; set; } 
+        [Required]
+        public string LastName { get; set; }
+        [Required]
+        public string Nationality { get; set; }
+        [Required]
         public DateTime? DateOfBirth { get; set; }
 
     }

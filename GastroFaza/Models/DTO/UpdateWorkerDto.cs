@@ -6,7 +6,7 @@ namespace GastroFaza.Models.DTO
     public class UpdateWorkerDto
     {
         [EmailAddress]
-        public string Email { get; set; } = null!;
+        public string Email { get; set; }
 
         public float Salary { get; set; }
 
