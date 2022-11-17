@@ -76,9 +76,11 @@ namespace GastroFaza.Controllers
                 this.dbContext.Workers.Add(newWorker);
                 this.dbContext.SaveChanges();
 
+                HttpContext.Session.SetString("email", dto.Email);
                 return RedirectToAction("Welcome");
             }
-            return View(dto);
+            ViewBag.msg = "Invalid";
+            return View("Login");
         }
         
         [HttpPost]
@@ -133,7 +135,7 @@ namespace GastroFaza.Controllers
                 return RedirectToAction("Welcome");
             }
             ViewBag.msg = "Invalid";
-            return View("Login");
+            return View("Register");
         }
 
         [HttpPost]
