@@ -7,11 +7,9 @@ using GastroFaza.Models;
 using GastroFaza.Models.DTO;
 using GastroFaza.Models.Validators;
 using GastroFaza.Seeder;
-using GastroFaza.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using NLog;
 using NLog.Web;
@@ -80,11 +78,6 @@ try
     //Sedder
     builder.Services.AddScoped<RestaurantSeeder>();
 
-
-    //Interface
-    builder.Services.AddScoped<IAccountService, AccountService>();
-    builder.Services.AddScoped<IUserContextService, UserContextService>();
-
     //Middleware
     builder.Services.AddScoped<ErrorHandlingMiddleware>();
     builder.Services.AddScoped<RequestTimeMiddleware>();
@@ -99,9 +92,6 @@ try
 
     //ContextAccessor
     builder.Services.AddHttpContextAccessor();
-
-    //Swagger
-    builder.Services.AddSwaggerGen();
 
     //Razor
     builder.Services.AddRazorPages();
@@ -141,10 +131,6 @@ try
 
     app.UseHttpsRedirection();
 
-    app.UseSwagger();
-
-    app.UseSwaggerUI(x => x.SwaggerEndpoint("/swagger/v1/swagger.json", "v1.0"));
-
     app.UseRouting();
 
     app.UseAuthorization();
@@ -152,7 +138,6 @@ try
     app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
 
     app.Run();
 }

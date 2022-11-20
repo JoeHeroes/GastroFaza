@@ -1,7 +1,6 @@
 ﻿using GastroFaza.Exceptions;
 using GastroFaza.Models;
 using GastroFaza.Models.DTO;
-using GastroFaza.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,14 +11,12 @@ namespace GastroFaza.Controllers
     [Route("Account")]
     public class AccountController: Controller
     {
-        private readonly IAccountService service;
         private readonly RestaurantDbContext dbContext;
         private readonly IPasswordHasher<Client> passwordHasherClient;
         private readonly IPasswordHasher<Worker> passwordHasherWorker;
         private readonly AuthenticationSettings authenticationSetting;
-        public AccountController(IAccountService service, RestaurantDbContext dbContext, IPasswordHasher<Client> passwordHasherClient, IPasswordHasher<Worker> passwordHasherWorker, AuthenticationSettings authenticationSetting)
+        public AccountController(RestaurantDbContext dbContext, IPasswordHasher<Client> passwordHasherClient, IPasswordHasher<Worker> passwordHasherWorker, AuthenticationSettings authenticationSetting)
         {
-            this.service = service;
             this.dbContext = dbContext;
             this.passwordHasherClient = passwordHasherClient;
             this.passwordHasherWorker = passwordHasherWorker;

@@ -8,17 +8,7 @@
     }
   },
   "profiles": {
-    "RunSwagger": {
-      "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7084;http://localhost:5084",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "RunView": {
+    "RunAPI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
