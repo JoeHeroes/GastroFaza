@@ -24,7 +24,7 @@ namespace GastroFaza.Models.Validators
                     var emailInUse = dbContext.Workers.Any(u => u.Email ==value);
                     if (emailInUse)
                     {
-                        context.AddFailure("Emial", "That email is taken");
+                        context.AddFailure("Email", "That email is taken");
                     }
                 });
         }

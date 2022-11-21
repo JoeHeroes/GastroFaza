@@ -1,43 +1,47 @@
-﻿
+﻿@model GastroFaza.Authorization.User
 @{
     ViewData["Title"] = "Register";
 }
 
 <h3>Register Account</h3>
-@ViewBag.error
-@ViewBag.msg
 <form method="post" action="@Url.Action("registerClient", "Account")">
     <table border="0" cellpadding="2" cellspacing="2">
         <tr>
-            <td>Email</td>
-            <td><input type="text" name="email"></td>
-        </tr>
+            <div asp-validation-summary="All"></div>
+            <td><label asp-for="Email"></label></td>
+            <td><input asp-for="Email" class="form-control"></td>
+            <td></td>
+        </tr>   
         <tr>
             <td>Password</td>
-            <td><input type="password" name="password"></td>
+            <td><input type="password" class="form-control" name="password"></td>
         </tr>
         <tr>
             <td>ConfirmPassword</td>
-            <td><input type="password" name="confirmPassword"></td>
+            <td><input type="password" name="confirmPassword" class="form-control"></td>
         </tr>
 
 
         <tr>
-            <td>FirstName</td>
-            <td><input type="text" name="firstName"></td>
+            <td><label asp-for="FirstName"></label></td>
+            <td><input asp-for="FirstName" class="form-control" /></td>
+
         </tr>
         <tr>
-            <td>LastName</td>
-            <td><input type="text" name="lastName"></td>
+            <td><label asp-for="LastName"></label></td>
+            <td><input asp-for="LastName" class="form-control" /></td>
+
         </tr>
 
         <tr>
-            <td>Nationality</td>
-            <td><input type="text" name="nationality"></td>
+            <td><label asp-for="Nationality"></label></td>
+            <td><input asp-for="Nationality" class="form-control" /></td>
+
         </tr>
         <tr>
-            <td>DateOfBirth</td>
-            <td><input type="date" name="dateOfBirth" value="2000-01-01"></td>
+           <td><label asp-for="DateOfBirth"></label></td>
+            <td><input asp-for="DateOfBirth" class="form-control" /></td>
+
         </tr>
         <tr>
             <td>&nbsp;</td>
