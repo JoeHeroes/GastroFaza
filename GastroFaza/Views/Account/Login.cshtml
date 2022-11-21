@@ -1,22 +1,21 @@
-﻿
+﻿@model GastroFaza.Authorization.User
 @{
     ViewData["Title"] = "Login";
 }
 
 <h3>Login to Account</h3>
-@ViewBag.error
-@ViewBag.msg
 <form method="post" action="@Url.Action("loginClient", "Account")">
     <table border="0" cellpadding="2" cellspacing="2">
-        <tr>
-            <td>Email</td>
-            <td><input type="text" name="email"></td>
-        </tr>
+ <tr>
+            <div asp-validation-summary="All"></div>
+            <td><label asp-for="Email"></label></td>
+            <td><input asp-for="Email" class="form-control"></td>
+            <td></td>
+        </tr>   
         <tr>
             <td>Password</td>
-            <td><input type="password" name="password"></td>
+            <td><input type="password" class="form-control" name="password"></td>
         </tr>
-        <tr>
             <td>&nbsp;</td>
             <td><input type="submit" value="Login"></td>
         </tr>

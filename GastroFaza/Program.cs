@@ -90,6 +90,8 @@ try
     builder.Services.AddScoped<IValidator<RegisterClientDto>, RegisterClientDtoValidator>();
     builder.Services.AddScoped<IValidator<RegisterWorkerDto>, RegisterWorkerDtoValidator>();
 
+    builder.Services.AddScoped<IValidator<LoginDto>, LoginDtoValidator>();
+
     //ContextAccessor
     builder.Services.AddHttpContextAccessor();
 
