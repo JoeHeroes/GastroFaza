@@ -1,4 +1,4 @@
-﻿
+﻿@inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Welcome";
 }
@@ -7,10 +7,16 @@
 
 <div class="text-center">
     @if(@ViewBag.username!=null){
-        <h2>Welcome @ViewBag.username</h2>
+        @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") != "isWorker")
+        {
+            <h2>Welcome @ViewBag.username</h2>
+        } else
+        {
+            <h2>Welcome Worker @ViewBag.username</h2>
+        }
         <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Logout</a>
     }
-    else{
+    else {
         <h2>Registration Correct</h2>
         <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
     }
