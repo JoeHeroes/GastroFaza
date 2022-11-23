@@ -53,6 +53,30 @@ namespace GastroFaza.Controllers
             ViewBag.username = HttpContext.Session.GetString("email");
             return View("Welcome");
         }
+        [Route("AccountSettings")]
+        public IActionResult AccountSettings()
+        {
+            var account = dbContext.Clients.FirstOrDefault(x => x.Id == int.Parse(HttpContext.Session.GetString("id")));
+            return View(account);
+        }
+
+        [HttpPost]
+        [Route("AccountSettings")]
+        public IActionResult AccountSettings(EditClientDto dto)
+        {
+
+            
+            if (ModelState.IsValid)
+            {
+                var account = dbContext.Clients.FirstOrDefault(x => x.Id == int.Parse(HttpContext.Session.GetString("id")));
+                account.Nationality = dto.Nationality;
+                account.FirstName = dto.FirstName;
+                account.LastName = dto.LastName;
+
+                dbContext.SaveChanges();
+            }
+            return View("AccountSettings");
+        }
 
         [HttpPost]
         [Route("registerWorker")]
@@ -145,6 +169,7 @@ namespace GastroFaza.Controllers
                         ViewBag.msg = "Email or password is invalid.";
                         return View("Login");
                     }
+                    HttpContext.Session.SetString("id", client.Id.ToString());
                     HttpContext.Session.SetString("email", dto.Email);
                     HttpContext.Session.SetString("isWorker", "isClient");
                     return RedirectToAction("Welcome");
@@ -156,6 +181,7 @@ namespace GastroFaza.Controllers
                     ViewBag.msg = "Email or password is invalid.";
                     return View("Login");
                 }
+                HttpContext.Session.SetString("id", worker.Id.ToString());
                 HttpContext.Session.SetString("email", dto.Email);
                 HttpContext.Session.SetString("isWorker", "isWorker");
                 return RedirectToAction("Welcome");

@@ -93,11 +93,13 @@ try
     builder.Services.AddScoped<IPasswordHasher<Client>, PasswordHasher<Client>>();
     builder.Services.AddScoped<IPasswordHasher<Worker>, PasswordHasher<Worker>>();
 
-    //Validetor
+    //Validator
     builder.Services.AddScoped<IValidator<RegisterClientDto>, RegisterClientDtoValidator>();
     builder.Services.AddScoped<IValidator<RegisterWorkerDto>, RegisterWorkerDtoValidator>();
 
     builder.Services.AddScoped<IValidator<LoginDto>, LoginDtoValidator>();
+
+    builder.Services.AddScoped<IValidator<EditClientDto>, EditDtoValidator>();
 
     //ContextAccessor
     builder.Services.AddHttpContextAccessor();
