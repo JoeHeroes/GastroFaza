@@ -56,12 +56,15 @@ namespace GastroFaza.Controllers
 
         public IActionResult Edit(int? id, DishDto modelDTO)
         {
+            string stringFileName = UploadFile(modelDTO);
             if (ModelState.IsValid)
             {
                 var model = this.dbContext.Dishs.Find(id);
                 model.Name = modelDTO.Name;
                 model.Description = modelDTO.Description;
                 model.Price = modelDTO.Price;
+                model.DishType = modelDTO.DishType;
+                model.ProfileImg = stringFileName;
 
                 try
                 {
