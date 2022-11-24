@@ -1,15 +1,17 @@
-﻿using GastroFaza.Exceptions;
+﻿using GastroFaza.Authorization;
+using GastroFaza.Exceptions;
 using GastroFaza.Models;
 using GastroFaza.Models.DTO;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace GastroFaza.Controllers
 {
     [Route("Account")]
-    public class AccountController: Controller
+    public class AccountController : Controller
     {
         private readonly RestaurantDbContext dbContext;
         private readonly IPasswordHasher<Client> passwordHasherClient;
@@ -48,10 +50,34 @@ namespace GastroFaza.Controllers
             ViewBag.username = HttpContext.Session.GetString("email");
             return View("Welcome");
         }
+        [Route("AccountSettings")]
+        public IActionResult AccountSettings()
+        {
+            var account = dbContext.Clients.FirstOrDefault(x => x.Id == int.Parse(HttpContext.Session.GetString("id")));
+            return View(account);
+        }
+
+        [HttpPost]
+        [Route("AccountSettings")]
+        public IActionResult AccountSettings(EditClientDto dto)
+        {
+
+            
+            if (ModelState.IsValid)
+            {
+                var account = dbContext.Clients.FirstOrDefault(x => x.Id == int.Parse(HttpContext.Session.GetString("id")));
+                account.Nationality = dto.Nationality;
+                account.FirstName = dto.FirstName;
+                account.LastName = dto.LastName;
+
+                dbContext.SaveChanges();
+            }
+            return View("AccountSettings");
+        }
 
         [HttpPost]
         [Route("registerWorker")]
-        public IActionResult RegisterWorker(RegisterWorkerDto dto) 
+        public IActionResult RegisterWorker(RegisterWorkerDto dto)
         {
             if (ModelState.IsValid)
             {
@@ -74,36 +100,10 @@ namespace GastroFaza.Controllers
                 this.dbContext.SaveChanges();
 
                 HttpContext.Session.SetString("email", dto.Email);
-                return RedirectToAction("Welcome");
+                return RedirectToAction("WelcomeWorker");
             }
             ViewBag.msg = "Invalid";
             return View("Login");
-        }
-        
-        [HttpPost]
-        [Route("loginWorker")]
-        public IActionResult LoginWorker(LoginDto dto)
-        {
-            if (ModelState.IsValid)
-            {
-                var worker = this.dbContext
-                                .Workers
-                                .Include(u => u.Role)
-                                .FirstOrDefault(u => u.Email == dto.Email);
-
-                if (worker is null)
-                {
-                    throw new BadRequestException("Invalid username or password");
-                }
-
-                var result = this.passwordHasherWorker.VerifyHashedPassword(worker, worker.PasswordHash, dto.Password);
-                if (result == PasswordVerificationResult.Failed)
-                {
-                    throw new BadRequestException("Invalid username or password");
-                }
-                return RedirectToAction("Welcome");
-            }
-            return View(dto);
         }
 
         [HttpPost]
@@ -136,30 +136,57 @@ namespace GastroFaza.Controllers
         }
 
         [HttpPost]
-        [Route("loginClient")]
-        public IActionResult LoginClient(LoginDto dto)
+        [Route("Login")]
+        public IActionResult Login(LoginDto dto)
         {
             if (ModelState.IsValid)
             {
+                var worker = this.dbContext
+                                .Workers
+                                .Include(u => u.Role)
+                                .FirstOrDefault(u => u.Email == dto.Email);
+                
                 var client = this.dbContext
                  .Clients
                  .FirstOrDefault(u => u.Email == dto.Email);
 
-                if (client is null)
+                //If there is no such worker or client in database
+                if (worker is null && client is null)
                 {
-                    throw new BadRequestException("Invalid username or password");
+                        ViewBag.msg = "Email or password is invalid.";
+                        return View("Login");
                 }
 
-                var result = this.passwordHasherClient.VerifyHashedPassword(client, client.PasswordHash, dto.Password);
-                if (result == PasswordVerificationResult.Failed)
+                //if user is client then check for clients
+                if(worker is null)
                 {
-                    throw new BadRequestException("Invalid username or password");
+                    var result1 = this.passwordHasherClient.VerifyHashedPassword(client, client.PasswordHash, dto.Password);
+                    if (result1 == PasswordVerificationResult.Failed)
+                    {
+                        ViewBag.msg = "Email or password is invalid.";
+                        return View("Login");
+                    }
+                    HttpContext.Session.SetString("id", client.Id.ToString());
+                    HttpContext.Session.SetString("email", dto.Email);
+                    HttpContext.Session.SetString("isWorker", "isClient");
+                    return RedirectToAction("Welcome");
                 }
+                //else check workers
+                var result2 = this.passwordHasherWorker.VerifyHashedPassword(worker, worker.PasswordHash, dto.Password);
+                if (result2 == PasswordVerificationResult.Failed)
+                {
+                    ViewBag.msg = "Email or password is invalid.";
+                    return View("Login");
+                }
+                HttpContext.Session.SetString("id", worker.Id.ToString());
                 HttpContext.Session.SetString("email", dto.Email);
+                HttpContext.Session.SetString("isWorker", "isWorker");
                 return RedirectToAction("Welcome");
             }
-            ViewBag.msg = "Invalid";
-            return View("Login");            
+            return View("Login");
         }
+
+
     }
+    
 }

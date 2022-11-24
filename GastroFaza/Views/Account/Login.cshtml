@@ -4,8 +4,9 @@
 }
 
 <h3>Login to Account</h3>
-<form method="post" action="@Url.Action("loginClient", "Account")">
+<form method="post" action="@Url.Action("Login", "Account")">
     <table border="0" cellpadding="2" cellspacing="2">
+        @ViewBag.msg
  <tr>
             <div asp-validation-summary="All"></div>
             <td><label asp-for="Email"></label></td>
