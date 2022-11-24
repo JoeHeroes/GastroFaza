@@ -13,7 +13,7 @@ namespace GastroFaza.Migrations
                 name: "Addresses",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    AddressId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Street = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -21,7 +21,7 @@ namespace GastroFaza.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Addresses", x => x.Id);
+                    table.PrimaryKey("PK_Addresses", x => x.AddressId);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,16 +63,16 @@ namespace GastroFaza.Migrations
                     HasDelivery = table.Column<bool>(type: "bit", nullable: false),
                     ContactEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddressID = table.Column<int>(type: "int", nullable: false)
+                    AddressId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Restaurants", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Restaurants_Addresses_AddressID",
-                        column: x => x.AddressID,
+                        name: "FK_Restaurants_Addresses_AddressId",
+                        column: x => x.AddressId,
                         principalTable: "Addresses",
-                        principalColumn: "Id",
+                        principalColumn: "AddressId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -86,8 +86,9 @@ namespace GastroFaza.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: false),
                     DishType = table.Column<int>(type: "int", nullable: false),
-                    RestaurantId = table.Column<int>(type: "int", nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: true)
+                    ProfileImg = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OrderId = table.Column<int>(type: "int", nullable: true),
+                    RestaurantId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -101,8 +102,7 @@ namespace GastroFaza.Migrations
                         name: "FK_Dishs_Restaurants_RestaurantId",
                         column: x => x.RestaurantId,
                         principalTable: "Restaurants",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -179,9 +179,9 @@ namespace GastroFaza.Migrations
                 column: "RestaurantId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Restaurants_AddressID",
+                name: "IX_Restaurants_AddressId",
                 table: "Restaurants",
-                column: "AddressID",
+                column: "AddressId",
                 unique: true);
 
             migrationBuilder.CreateIndex(

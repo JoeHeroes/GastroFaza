@@ -21,6 +21,9 @@
     <thead>
         <tr>
             <th>
+                Picture
+            </th>
+            <th>
                 Name
             </th>
             <th>
@@ -38,10 +41,13 @@
         @foreach (var obj in Model)
         {
             <tr>
-                <td width="25%">
+                <td width="10%">
+                    <img src="~/Images/@obj.ProfileImg" width="150" height="150" asp-append-version="true" />
+                </td>
+                <td width="20%">
                     @obj.Name
                 </td>
-                <td width="55%">
+                <td width="50%">
                     @obj.Description
                 </td>
                 <td width="10%">

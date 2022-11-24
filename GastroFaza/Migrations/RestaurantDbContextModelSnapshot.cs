@@ -4,7 +4,6 @@ using GastroFaza.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -12,10 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GastroFaza.Migrations
 {
     [DbContext(typeof(RestaurantDbContext))]
-    [Migration("20221118123014_Init")]
-    partial class Init
+    partial class RestaurantDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,68 +22,13 @@ namespace GastroFaza.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("GastroFaza.Authorization.Role", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Roles");
-                });
-
-            modelBuilder.Entity("GastroFaza.Authorization.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime?>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nationality")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("User");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
-                });
-
             modelBuilder.Entity("GastroFaza.Models.Address", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("AddressId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AddressId"), 1L, 1);
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -100,7 +43,7 @@ namespace GastroFaza.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("Id");
+                    b.HasKey("AddressId");
 
                     b.ToTable("Addresses");
                 });
@@ -129,7 +72,10 @@ namespace GastroFaza.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("RestaurantId")
+                    b.Property<string>("ProfileImg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("RestaurantId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -171,7 +117,7 @@ namespace GastroFaza.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AddressID")
+                    b.Property<int>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<string>("ContactEmail")
@@ -193,10 +139,27 @@ namespace GastroFaza.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressID")
+                    b.HasIndex("AddressId")
                         .IsUnique();
 
                     b.ToTable("Restaurants");
+                });
+
+            modelBuilder.Entity("GastroFaza.Models.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("GastroFaza.Models.Tablee", b =>
@@ -229,9 +192,47 @@ namespace GastroFaza.Migrations
                     b.ToTable("Tables");
                 });
 
+            modelBuilder.Entity("GastroFaza.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nationality")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
+                });
+
             modelBuilder.Entity("GastroFaza.Models.Client", b =>
                 {
-                    b.HasBaseType("GastroFaza.Authorization.User");
+                    b.HasBaseType("GastroFaza.Models.User");
 
                     b.Property<int>("OrderID")
                         .HasColumnType("int");
@@ -246,7 +247,7 @@ namespace GastroFaza.Migrations
 
             modelBuilder.Entity("GastroFaza.Models.Worker", b =>
                 {
-                    b.HasBaseType("GastroFaza.Authorization.User");
+                    b.HasBaseType("GastroFaza.Models.User");
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
@@ -274,20 +275,16 @@ namespace GastroFaza.Migrations
                         .WithMany("Dishes")
                         .HasForeignKey("OrderId");
 
-                    b.HasOne("GastroFaza.Models.Restaurant", "Restaurant")
+                    b.HasOne("GastroFaza.Models.Restaurant", null)
                         .WithMany("Menu")
-                        .HasForeignKey("RestaurantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Restaurant");
+                        .HasForeignKey("RestaurantId");
                 });
 
             modelBuilder.Entity("GastroFaza.Models.Restaurant", b =>
                 {
                     b.HasOne("GastroFaza.Models.Address", "Address")
                         .WithOne("Restaurant")
-                        .HasForeignKey("GastroFaza.Models.Restaurant", "AddressID")
+                        .HasForeignKey("GastroFaza.Models.Restaurant", "AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -314,7 +311,7 @@ namespace GastroFaza.Migrations
                         .WithMany("Workers")
                         .HasForeignKey("RestaurantId");
 
-                    b.HasOne("GastroFaza.Authorization.Role", "Role")
+                    b.HasOne("GastroFaza.Models.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)

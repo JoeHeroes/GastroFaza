@@ -1,5 +1,6 @@
 ﻿using GastroFaza.Models;
 using GastroFaza.Models.DTO;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,10 +9,12 @@ namespace GastroFaza.Controllers
     public class DishController : Controller
     {
         private readonly RestaurantDbContext dbContext;
+        private readonly IWebHostEnvironment webHost;
 
-        public DishController(RestaurantDbContext dbContext)
+        public DishController(RestaurantDbContext dbContext, IWebHostEnvironment webHost)
         {
             this.dbContext = dbContext;
+            this.webHost = webHost;
         }
         public IActionResult GetAll()
         {
@@ -75,17 +78,24 @@ namespace GastroFaza.Controllers
             return View(modelDTO);
         }
 
+        public IActionResult Add()
+        {
+            return View();
+        }
+
         public IActionResult Create(DishDto modelDTO)
         {
-            if (ModelState.IsValid)
-            {
+
+            string stringFileName = UploadFile(modelDTO);
+           
                 this.dbContext.Dishs.Add(new Dish()
                 {
                     Name = modelDTO.Name,
                     Description = modelDTO.Description,
                     Price = modelDTO.Price,
+                    DishType = modelDTO.DishType,
+                    ProfileImg = stringFileName,
                 });
-
 
                 try
                 {
@@ -95,10 +105,27 @@ namespace GastroFaza.Controllers
                 {
                     throw new DbUpdateException("Error DataBase", e);
                 }
-                return RedirectToAction("Index");
-            }
+          
 
-            return View(modelDTO);
+            return View("Add");
+        }
+
+
+        private string UploadFile(DishDto dto)
+        {
+            string fileName = null;
+            if (dto.PathPic != null)
+            {
+                string uploadDir = Path.Combine(webHost.WebRootPath, "Images");
+                fileName = Guid.NewGuid().ToString() + "-" + dto.PathPic.FileName;
+                string filePath = Path.Combine(uploadDir, fileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    dto.PathPic.CopyTo(fileStream);
+                }
+
+            }
+            return fileName;
         }
     }
 }
