@@ -9,7 +9,6 @@ namespace GastroFaza.Models
         public string Description { get; set; }
         public double Price { get; set; }
         public DishType DishType { get; set; }
-        public int RestaurantId { get; set; }
-        public virtual Restaurant Restaurant { get; set; }
+        public string ProfileImg { get; set; }
     }
 }

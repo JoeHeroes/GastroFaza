@@ -13,7 +13,7 @@ namespace GastroFaza.Models
         public string ContactEmail { get; set; } 
         [PhoneAttribute]
         public string ContactNumber { get; set; }
-        public int AddressID { get; set; }
+        public int AddressId { get; set; }
         public virtual Address Address { get; set; } 
         public virtual List<Dish> Menu { get; set; } = null!;
         public virtual List<Worker> Workers { get; set; } = null!;

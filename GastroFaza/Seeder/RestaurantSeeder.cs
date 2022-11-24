@@ -30,28 +30,29 @@ namespace GastroFaza.Seeder
                     dbContext.Roles.AddRange(roles);
                     dbContext.SaveChanges();
                 }
+                /*
+               if (!dbContext.Restaurants.Any())
+               {
+                   var restaurants = GetRestaurants();
+                   dbContext.Restaurants.AddRange(restaurants);
+                   dbContext.SaveChanges();
+               }
+                */
 
-                if (!dbContext.Restaurants.Any())
-                {
-                    var restaurants = GetRestaurants();
-                    dbContext.Restaurants.AddRange(restaurants);
-                    dbContext.SaveChanges();
-                }
+               if (!dbContext.Clients.Any())
+               {
+                   var clients = GetClients();
+                   dbContext.Clients.AddRange(clients);
+                   dbContext.SaveChanges();
+               }
 
-                if (!dbContext.Clients.Any())
-                {
-                    var clients = GetClients();
-                    dbContext.Clients.AddRange(clients);
-                    dbContext.SaveChanges();
-                }
-
-                if (!dbContext.Workers.Any())
-                {
-                    var workers = GetWorkers();
-                    dbContext.Workers.AddRange(workers);
-                    dbContext.SaveChanges();
-                }
-                
+               if (!dbContext.Workers.Any())
+               {
+                   var workers = GetWorkers();
+                   dbContext.Workers.AddRange(workers);
+                   dbContext.SaveChanges();
+               }
+                /*
                 if (!dbContext.Dishs.Any())
                 {
                     var dishes = GetDishes();
@@ -59,19 +60,20 @@ namespace GastroFaza.Seeder
                     dbContext.SaveChanges();
                 }
 
-                if (!dbContext.Addresses.Any())
-                {
-                    var addresses = GetAddresses();
-                    dbContext.Addresses.AddRange(addresses);
-                    dbContext.SaveChanges();
-                }
+                 if (!dbContext.Addresses.Any())
+                 {
+                     var addresses = GetAddresses();
+                     dbContext.Addresses.AddRange(addresses);
+                     dbContext.SaveChanges();
+                 }
 
-                if (!dbContext.Orders.Any())
-                {
-                    var orders = GetOrders();
-                    dbContext.Orders.AddRange(orders);
-                    dbContext.SaveChanges();
-                }
+                 if (!dbContext.Orders.Any())
+                 {
+                     var orders = GetOrders();
+                     dbContext.Orders.AddRange(orders);
+                     dbContext.SaveChanges();
+                 }
+                 */
             }
         }
 
