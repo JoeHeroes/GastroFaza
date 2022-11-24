@@ -2,25 +2,33 @@
 @{
     ViewData["Title"] = "Login";
 }
-
-<h3>Login to Account</h3>
-<form method="post" action="@Url.Action("Login", "Account")">
-    <table border="0" cellpadding="2" cellspacing="2">
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+</head>
+<body calss="loginbody">
+    <form class="loginbox" method="post" action="@Url.Action("Login", "Account")">
         @ViewBag.msg
- <tr>
-            <div asp-validation-summary="All"></div>
-            <td><label asp-for="Email"></label></td>
+        <h1>Login</h1>
+        <tr>     
+            <div asp-validation-summary="All"></div>            
+            <div class="text-light">Email</div>
             <td><input asp-for="Email" class="form-control"></td>
             <td></td>
-        </tr>   
+        </tr>
         <tr>
-            <td>Password</td>
+            <div class="text-light">Password</div>
             <td><input type="password" class="form-control" name="password"></td>
-        </tr>
+        </tr>   
+        <br />
+        <br />
+        <br />
+        <br />
+        <tr>
             <td>&nbsp;</td>
-            <td><input type="submit" value="Login"></td>
-        </tr>
-    </table>
-</form>
+            <td><input class="loginbox" type="submit" value="Login"></td>           
+        </tr> 
+    </form>
+    
+</body>
 
 

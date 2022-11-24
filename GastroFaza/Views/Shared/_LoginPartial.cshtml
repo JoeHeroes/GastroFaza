@@ -6,19 +6,19 @@
     @if (@HttpContextAccessor.HttpContext.Session.GetString("email")!=null)
 {
     <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Account" asp-action="accountSettings">Account settings</a>
+            <a class="nav-link text-light" asp-controller="Account" asp-action="accountSettings">Account settings</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Logout</a>
+        <a class="nav-link text-light" asp-controller="Account" asp-action="Logout">Logout</a>
     </li>
 }
 else
 {
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Register</a>
+        <a class="nav-link text-light" asp-controller="Account" asp-action="Register">Register</a>
     </li>
     <li class="nav-item">
-         <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+         <a class="nav-link text-light" asp-controller="Account" asp-action="Login">Login</a>
     </li>
 }
 </ul>
