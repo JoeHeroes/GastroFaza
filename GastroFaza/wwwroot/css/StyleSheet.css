@@ -1,0 +1,102 @@
+﻿body {
+    background-color: #71816D;
+    margin-bottom: 100px;
+}
+.table {
+    background-color: #ffa31a;
+    font-family: Andele Mono, monospace;
+    font-weight:1000;
+    border: 1px solid white;
+    table-collapse: collapse;
+    border-radius: 10px 10px 10px 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+    width: 100%;
+    color: white;
+}
+thead {
+    color: white;
+    background-color: #292929;
+}
+tbody {
+}
+ul {
+    list-style: none;
+}
+.index {
+    display: flex;
+}
+.index li {
+    width: 50%;
+    border: 1px solid black;
+    border-radius: 10px;
+    border-color: #292929;
+}
+.loginbody{
+    margin:0;
+    padding:0;
+    font-family: sans-serif;
+}
+.loginbox {
+    width: 400px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: 20px;
+    border-radius: 15px;
+    background: #191919;
+    text-align:center;
+}
+.loginbox h1{
+    color: white;
+    text-transform:uppercase;
+    font-weight: 500;
+}
+.loginbox td{
+    color: white;
+}
+    .loginbox input[type ="text"],
+    .loginbox input[type ="password"] {
+        border: 0;
+        background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border: 2px solid #ffa31a;
+        padding: 14px 10px;
+        width: 220px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+        cursor: pointer;
+    }
+        .loginbox input[type ="text"]:hover,
+        .loginbox input[type ="password"]:hover {
+            background: #ffa31a
+        }
+        .loginbox input[type ="text"]:focus,
+        .loginbox input[type ="password"]:focus {
+            width: 280px;
+            border-color: #ffa31a;
+        }
+    .loginbox input[type = "submit"] {
+        border: 0;
+        background: none;
+        display: block;
+        margin: 150px auto;
+        text-align: center;
+        border: 2px solid #2ecc71;
+        padding: 14px 40px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+        width: 200px;
+        cursor: pointer;
+    }
+.loginbox input[type = "submit"]:hover {
+    background: #2ecc71;
+}
