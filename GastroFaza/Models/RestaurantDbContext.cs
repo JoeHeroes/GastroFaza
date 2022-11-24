@@ -1,5 +1,4 @@
-﻿using GastroFaza.Authorization;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace GastroFaza.Models
 {

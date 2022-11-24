@@ -1,6 +1,4 @@
-﻿using GastroFaza.Authorization;
-
-namespace GastroFaza.Models
+﻿namespace GastroFaza.Models
 {
     public class Client : User
     {

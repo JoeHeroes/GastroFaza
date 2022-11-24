@@ -1,13 +1,11 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using GastroFaza;
-using GastroFaza.Authorization.Policy;
 using GastroFaza.Middleware;
 using GastroFaza.Models;
 using GastroFaza.Models.DTO;
 using GastroFaza.Models.Validators;
 using GastroFaza.Seeder;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -21,7 +19,6 @@ logger.Debug("init main");
 try
 {
     var builder = WebApplication.CreateBuilder();
-
     
     builder.Services.AddControllersWithViews();
 
@@ -56,17 +53,6 @@ try
         };
     });
 
-    builder.Services.AddAuthorization(options => {
-        options.AddPolicy("HasNationality", builder => builder.RequireClaim("Nationality", "German", "Polish"));
-        options.AddPolicy("Atleast20", builder => builder.AddRequirements(new MinimumAgeRequirment(20)));
-        options.AddPolicy("CreatedAtleast2Univeristy", builder => builder.AddRequirements(new CreateMultipleRestaurantRequirment(2)));
-
-    });
-
-    //RequirmentHandler
-    builder.Services.AddScoped<IAuthorizationHandler, MinimumAgeRequirmentHandler>();
-    builder.Services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementHandler>();
-    builder.Services.AddScoped<IAuthorizationHandler, CreateMultipleRestaurantRequirmentHandler>();
 
     //Validator
     //Obsolete
@@ -147,7 +133,6 @@ try
 }
 catch (Exception exception)
 {
-
     logger.Error(exception, "Stopped program because of exception");
     throw;
 }

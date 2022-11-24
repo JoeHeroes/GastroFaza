@@ -1,5 +1,4 @@
-﻿using GastroFaza.Authorization;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace GastroFaza.Models.DTO
 {

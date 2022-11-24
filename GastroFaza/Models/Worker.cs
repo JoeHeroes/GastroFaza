@@ -1,5 +1,4 @@
-﻿using GastroFaza.Authorization;
-using System.Data;
+﻿using System.Data;
 
 namespace GastroFaza.Models
 {

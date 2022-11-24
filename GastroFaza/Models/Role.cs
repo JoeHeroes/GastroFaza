@@ -1,4 +1,4 @@
-﻿namespace GastroFaza.Authorization
+﻿namespace GastroFaza.Models
 {
     public class Role
     {
