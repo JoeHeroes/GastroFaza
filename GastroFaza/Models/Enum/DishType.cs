@@ -26,5 +26,6 @@
         Fish,
         Meat,
         Egg,
+        none,
     }
 }

@@ -1,11 +1,14 @@
 ﻿using GastroFaza.Models;
 using GastroFaza.Models.DTO;
-
+using GastroFaza.Models.Enum;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Core.Types;
 
 namespace GastroFaza.Controllers
 {
+
     public class DishController : Controller
     {
         private readonly RestaurantDbContext dbContext;
@@ -129,6 +132,31 @@ namespace GastroFaza.Controllers
 
             }
             return fileName;
+        }
+
+        [Route("Search")]
+        public IActionResult Search(OptionFilterDto option)
+        {
+            var baseQuery = dbContext.Dishs.Where(x => x.Price >= option.MinPrice && x.Price <= option.MaxPrice); ;
+
+            if (option.SearchString != "")
+            {
+                var baseProducer = baseQuery.Where(x => x.Name == option.SearchString);
+                baseQuery = baseProducer;
+            }
+
+            if (option.Dish != DishType.none)
+            {
+                var baseProducer = baseQuery.Where(x => x.DishType == option.Dish);
+                baseQuery = baseProducer;
+            }
+
+
+
+
+
+
+            return View(baseQuery);
         }
     }
 }

@@ -1,7 +1,6 @@
-﻿@using GastroFaza.Models.Enum
-@model IEnumerable<Dish>
+﻿@model IEnumerable<Dish>
 @{
-    ViewData["Title"] = "GetAll";
+    ViewData["Title"] = "Search";
 }
 
 <head>
@@ -13,28 +12,8 @@
         <div class="col-6">
             <h2 class="text-primary">Menu</h2>
         </div>
-
-
-
-
-
-        <div class="col-6">
-            @Html.ActionLink("Alcohol", "Search", "Dish", new { dish = DishType.Alcohol }, null);
-
-            @Html.ActionLink("Pizza", "Search", "Dish", new { dish = DishType.Pizza }, null);
-        
-            @Html.ActionLink("Cake", "Search", "Dish", new { dish = DishType.Cake }, null);
-
-
-
-
-
+        <div class="col-6 text-end">
         </div>
-
-
-
-
-
     </div>
 </div>
 <br />
