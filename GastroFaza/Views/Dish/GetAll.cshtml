@@ -18,68 +18,40 @@
 
 
 
-        <div class="col-6">
-            @Html.ActionLink("Alcohol", "Search", "Dish", new { dish = DishType.Alcohol }, null);
-
-            @Html.ActionLink("Pizza", "Search", "Dish", new { dish = DishType.Pizza }, null);
-        
-            @Html.ActionLink("Cake", "Search", "Dish", new { dish = DishType.Cake }, null);
-
-
-
-
-
+      <div style="float:left">
+        <div style="float:left">
+           <table class="table table-bordered" style="width:10%">
+               <tr>
+                   <th>
+                       <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                @Html.ActionLink("Alcohol", "Search", "Dish", new { dish = DishType.Alcohol }, null);
+                </th>
+               </tr>
+            </table>
         </div>
-
-
+        <div style="float:left">
+            <table class="table table-bordered" style="width:10%">
+                 <tr>
+                   <th>
+                       <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                  @Html.ActionLink("Pizza", "Search", "Dish", new { dish = DishType.Pizza }, null);
+                   </th>
+               </tr>
+            </table>
+        </div>
+        <div style="float:left">
+            <table class="table table-bordered" style="width:10%">
+                 <tr>
+                   <th>
+                       <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                @Html.ActionLink("Cake", "Search", "Dish", new { dish = DishType.Cake }, null);
+                 </th>
+               </tr>
+            </table>
+        </div>
+        </div>
 
 
 
     </div>
 </div>
-<br />
-<br />
-<br />
-<table class="table table-bordered" style="width:100%">
-    <thead>
-        <tr>
-            <th>
-                Picture
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                Description
-            </th>
-            <th>
-                Price
-            </th>
-            <th>
-                DishType
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var obj in Model)
-        {
-            <tr>
-                <td width="10%">
-                    <img src="~/Images/@obj.ProfileImg" width="150" height="150" asp-append-version="true" />
-                </td>
-                <td width="20%">
-                    @obj.Name
-                </td>
-                <td width="50%">
-                    @obj.Description
-                </td>
-                <td width="10%">
-                    @obj.Price
-                </td>
-                <td width="10%">
-                    @obj.DishType
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>

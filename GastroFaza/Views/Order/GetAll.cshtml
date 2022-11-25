@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Order>
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Order";
+}
+
+<style>
+    #table {
+        width ="150";
+        height ="250";
+    }
+</style>
+
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+</head>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Orders</h2>
+        </div>
+        <div class="col-6 text-end">
+        </div>
+    </div>
+</div>
+<br/>
+<div>
+    <input type="submit" value="Create new Order" class="btn btn-primary" asp-controller="Order" asp-action="Create">Złóż nowe zamówienie/>
+</div>
+<br />
+<br />
+<br />
+<div style="float:left">
+    @foreach (var obj in Model)
+    {
+        <div style="float:left">
+            <table class="table table-bordered" id=table>
+                <tr>
+                    <th>
+                        @if (obj.Dishes != null)
+                        {
+                            @foreach (var dish in obj.Dishes)
+                            {
+                                <li>
+                                    @dish.Name
+                                </li>
+                            }
+
+                            <br />
+                            <div>
+                                Price: @obj.Price
+                            </div>
+                            <br />
+                            @if (@HttpContextAccessor.HttpContext.Session.GetString(obj.Id.ToString() + "paid") != null)
+                            {
+                                <div>
+                                    This order is paid
+                                </div>
+                            }
+                            else
+                            {
+                                @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
+                                {
+                                    <input type="submit" value="Pay for Order" class="btn btn-primary" />
+                                }
+                                else
+                                {
+                                    <input type="submit" value="Add to order" class="btn btn-primary" asp-controller="Account" asp-action="Login" />
+                                }
+                            }
+                        }
+                    </th>
+                </tr>
+            </table>
+        </div>
+    }
+</div>

@@ -1,7 +1,15 @@
 ﻿@model IEnumerable<Dish>
+@inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Search";
 }
+
+<style>
+    #table {
+        width ="150";
+        height ="250";
+    }
+</style>
 
 <head>
     <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
@@ -19,46 +27,35 @@
 <br />
 <br />
 <br />
-<table class="table table-bordered" style="width:100%">
-    <thead>
-        <tr>
-            <th>
-                Picture
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                Description
-            </th>
-            <th>
-                Price
-            </th>
-            <th>
-                DishType
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var obj in Model)
-        {
-            <tr>
-                <td width="10%">
-                    <img src="~/Images/@obj.ProfileImg" width="150" height="150" asp-append-version="true" />
-                </td>
-                <td width="20%">
-                    @obj.Name
-                </td>
-                <td width="50%">
-                    @obj.Description
-                </td>
-                <td width="10%">
-                    @obj.Price
-                </td>
-                <td width="10%">
-                    @obj.DishType
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div style="float:left">
+    @foreach (var obj in Model)
+    {
+        <div style="float:left">
+            <table class="table table-bordered" id=table>
+                <tr>
+                    <th>
+                        <img src="~/Images/@obj.ProfileImg" width="150" height="150" asp-append-version="true" />
+                        <br />
+                        @obj.Name
+                        <br />
+                        @obj.Description
+                        <br />
+                        Price: @obj.Price
+                        <br />
+                        @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
+                        {       
+                            if (@HttpContextAccessor.HttpContext.Session.GetString("current order") != null)
+                            {
+                                <input type="submit" value="Add to order" class="btn btn-primary" asp-controller="Dish" asp-action="AddToOrder" />
+                            }
+                        }
+                        else
+                        {
+                            <input type="submit" value="Add to order" class="btn btn-primary" asp-controller="Account" asp-action="Login" />
+                        }
+                    </th>
+                </tr>
+            </table>
+        </div>
+    }
+</div>

@@ -26,6 +26,22 @@ namespace GastroFaza.Controllers
             return View(dishs);
         }
 
+        public IActionResult AddToOrder(Dish dish)
+        {
+            int id = int.Parse(HttpContext.Session.GetString("current order"));
+            this.dbContext.Orders.FirstOrDefault(u => u.Id == id).Dishes.Add(dish);
+            this.dbContext.Orders.FirstOrDefault(u => u.Id == id).Price += dish.Price;
+            try
+            {
+                this.dbContext.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new DbUpdateException("Error DataBase", e);
+            }
+            return View("Search");
+        }
+
         public IActionResult GetOne(int? id)
         {
             if (id == null || id == 0)
