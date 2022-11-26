@@ -5,8 +5,8 @@
 .table {
     background-color: #ffa31a;
     font-family: Andele Mono, monospace;
-    font-weight:1000;
-    border: 1px solid white;
+    font-weight: 900;
+    border: 2px solid white;
     table-collapse: collapse;
     border-radius: 10px 10px 10px 10px;
     overflow: hidden;
@@ -41,6 +41,7 @@ ul {
     width: 400px;
     padding: 40px;
     position: absolute;
+    margin-top: 50px;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -49,20 +50,36 @@ ul {
     background: #191919;
     text-align:center;
 }
+.registerbox {
+    width: 500px;
+    padding: 40px;
+    position: absolute;
+    margin-top: 100px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: 20px;
+    border-radius: 15px;
+    background: #191919;
+    text-align: center;
+}
 .loginbox h1{
     color: white;
     text-transform:uppercase;
     font-weight: 500;
 }
-.loginbox td{
+.registerbox h1 {
     color: white;
+    text-transform: uppercase;
+    font-weight: 500;
 }
     .loginbox input[type ="text"],
     .loginbox input[type ="password"] {
         border: 0;
         background: none;
+        height: 30px;
         display: block;
-        margin: 20px auto;
+        margin: 5px auto;
         text-align: center;
         border: 2px solid #ffa31a;
         padding: 14px 10px;
@@ -73,20 +90,50 @@ ul {
         transition: 0.25s;
         cursor: pointer;
     }
+.registerbox input[type ="text"],
+.registerbox input[type ="password"],
+.registerbox input[type ="datetime-local"]{
+    border: 0;
+    height: 30px;
+    background: none;
+    display: block;
+    margin: 5px auto;
+    text-align: center;
+    border: 2px solid #ffa31a;
+    padding: 14px 10px;
+    width: 220px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}
         .loginbox input[type ="text"]:hover,
         .loginbox input[type ="password"]:hover {
             background: #ffa31a
         }
+.registerbox input[type ="text"]:hover,
+.registerbox input[type ="password"]:hover,
+.registerbox input[type ="datetime-local"]:hover {
+    background: #ffa31a
+}
         .loginbox input[type ="text"]:focus,
         .loginbox input[type ="password"]:focus {
             width: 280px;
             border-color: #ffa31a;
         }
+.registerbox input[type ="text"]:focus,
+.registerbox input[type ="password"]:focus,
+.registerbox input[type ="datetime-local"] {
+    width: 280px;
+    border-color: #ffa31a;
+}
     .loginbox input[type = "submit"] {
         border: 0;
         background: none;
+        height: 50px;
         display: block;
-        margin: 150px auto;
+        margin: 90px auto;
         text-align: center;
         border: 2px solid #2ecc71;
         padding: 14px 40px;
@@ -97,6 +144,44 @@ ul {
         width: 200px;
         cursor: pointer;
     }
+.registerbox input[type = "submit"] {
+    border: 0;
+    background: none;
+    height: 50px;
+    display: block;
+    margin: 5px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    width: 200px;
+    cursor: pointer;
+}
 .loginbox input[type = "submit"]:hover {
     background: #2ecc71;
+}
+.registerbox input[type = "submit"]:hover {
+    background: #2ecc71;
+}
+.menu_buttons {
+    border: 2px;
+    background: #2ecc71;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 900;
+    height: 25px;
+    width: 30px;
+    display: block;
+    margin: 5px auto;
+    text-align: center;
+    text-align-last: center;
+    border: 2px solid #2ecc71;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    width: 100px;
+    cursor: pointer;
 }
