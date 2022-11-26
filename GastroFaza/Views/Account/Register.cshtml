@@ -9,47 +9,37 @@
     <form class="registerbox" method="post" action="@Url.Action("registerClient", "Account")">
         
             <h1>Register</h1>
-            <tr>
+            <section class="rejestracja">
                 <div asp-validation-summary="All"></div>
-                <td><label class="text-light" asp-for="Email"></label></td>
-                <td><input asp-for="Email" class="form-control"></td>
-                <td></td>
-            </tr>
-            <tr>
+                <label class="text-light" asp-for="Email"></label>
+                <input asp-for="Email" class="form-control">
                 <div class="text-light">Password</div>
-                <td><input type="password" class="form-control" name="password"></td>
-            </tr>
-            <tr>
+                <input type="password" class="form-control" name="password">
+           </section>
+
+            <section class="rejestracja">
                 <div class="text-light">ConfirmPassword</div>
-                <td><input type="password" name="confirmPassword" class="form-control"></td>
-            </tr>
+                <input type="password" name="confirmPassword" class="form-control">
 
+                <label class="text-light" asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" />
+            </section>
 
-            <tr>
-                <td><label class="text-light" asp-for="FirstName"></label></td>
-                <td><input asp-for="FirstName" class="form-control" /></td>
+            <section class="rejestracja">
+                <label class="text-light" asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control" />
 
-            </tr>
-            <tr>
-                <td><label class="text-light" asp-for="LastName"></label></td>
-                <td><input asp-for="LastName" class="form-control" /></td>
+                <label class="text-light" asp-for="Nationality"></label>
+                <input asp-for="Nationality" class="form-control" />
+            </section>
 
-            </tr>
+            <section class="rejestracja">
+                <label class="text-light" asp-for="DateOfBirth"></label>
+                <input asp-for="DateOfBirth" class="form-control" />
 
-            <tr>
-                <td><label class="text-light" asp-for="Nationality"></label></td>
-                <td><input asp-for="Nationality" class="form-control" /></td>
-
-            </tr>
-            <tr>
-                <td><label class="text-light" asp-for="DateOfBirth"></label></td>
-                <td><input asp-for="DateOfBirth" class="form-control" /></td>
-
-            </tr>
-            <tr>
                 <td>&nbsp;</td>
                 <td><input type="submit" value="Register"></td>
-            </tr>
+            </section>
     </form>
 </body>
 
