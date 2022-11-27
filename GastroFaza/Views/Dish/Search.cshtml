@@ -46,7 +46,7 @@
                         {       
                             if (@HttpContextAccessor.HttpContext.Session.GetString("current order") != null)
                             {
-                                <a class="btn btn-primary" asp-area="" asp-controller="Dish" asp-action="AddToOrder">Złóż nowe zamówienie</a>
+                                @Html.ActionLink("Złóż nowe zamówienie", "AddToOrder", "Dish", new { dishId = @obj.Id }, null)
                             }
                         }
 

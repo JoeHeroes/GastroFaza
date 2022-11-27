@@ -26,11 +26,18 @@ namespace GastroFaza.Controllers
             return View(dishs);
         }
 
-        public IActionResult AddToOrder(Dish dish)
+        public IActionResult AddToOrder(int dishId)
         {
             int id = int.Parse(HttpContext.Session.GetString("current order"));
-            this.dbContext.Orders.FirstOrDefault(u => u.Id == id).Dishes.Add(dish);
-            this.dbContext.Orders.FirstOrDefault(u => u.Id == id).Price += dish.Price;
+
+            var currentOrder = this.dbContext.Orders.FirstOrDefault(u => u.Id == id);
+
+            var dish = this.dbContext.Dishs.FirstOrDefault(u => u.Id == dishId);
+
+
+            currentOrder.Dishes.Add(dish);
+            currentOrder.Price += dish.Price;
+
             try
             {
                 this.dbContext.SaveChanges();
@@ -39,7 +46,7 @@ namespace GastroFaza.Controllers
             {
                 throw new DbUpdateException("Error DataBase", e);
             }
-            return View("Search");
+            return View("GetAll");
         }
 
         public IActionResult GetOne(int? id)
