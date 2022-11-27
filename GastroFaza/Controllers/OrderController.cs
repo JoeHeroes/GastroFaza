@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using GastroFaza.Models;
 using Microsoft.AspNetCore.Mvc;
-using GastroFaza.Models;
-using GastroFaza.Models.DTO;
-using GastroFaza.Models.Enum;
 using Microsoft.EntityFrameworkCore;
 
 namespace GastroFaza.Controllers
@@ -10,16 +7,14 @@ namespace GastroFaza.Controllers
     public class OrderController : Controller
     {
         private readonly RestaurantDbContext dbContext;
-        private readonly IWebHostEnvironment webHost;
 
-        public OrderController(RestaurantDbContext dbContext, IWebHostEnvironment webHost)
+        public OrderController(RestaurantDbContext dbContext)
         {
             this.dbContext = dbContext;
-            this.webHost = webHost;
         }
        
-        [Route("GetAll")]
-        public IActionResult GetAll()
+        [Route("Order")]
+        public IActionResult Order()
         {
             IEnumerable<Order> orders = this.dbContext.Orders;
             return View(orders);

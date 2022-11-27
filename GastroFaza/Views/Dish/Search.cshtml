@@ -46,13 +46,10 @@
                         {       
                             if (@HttpContextAccessor.HttpContext.Session.GetString("current order") != null)
                             {
-                                <input type="submit" value="Add to order" class="btn btn-primary" asp-controller="Dish" asp-action="AddToOrder" />
+                                <a class="btn btn-primary" asp-area="" asp-controller="Dish" asp-action="AddToOrder">Złóż nowe zamówienie</a>
                             }
                         }
-                        else
-                        {
-                            <input type="submit" value="Add to order" class="btn btn-primary" asp-controller="Account" asp-action="Login" />
-                        }
+
                     </th>
                 </tr>
             </table>
