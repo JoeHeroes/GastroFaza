@@ -22,31 +22,10 @@ namespace GastroFaza.Controllers
                 return RedirectToAction("Create");
             }
             Order order = this.dbContext.Orders.FirstOrDefault(u=>u.Id== int.Parse(HttpContext.Session.GetString("current order")));
+            
+            var dishes = this.dbContext.Orders.Where(o => o.Id == order.Id).SelectMany(o => o.Dishes);
 
-
-            var Dishes = new List<Dish>()
-                {
-                      new Dish()
-                        {
-                            Name = "Guwno",
-                            Description = "Tomato",
-                            Price = 5.0,
-                            DishType = DishType.Pasta,
-                            ProfileImg = ""
-                        },
-                       new Dish()
-                        {
-                            Name = "CiepleGuwno",
-                            Description = "Tomato",
-                            Price = 25.5,
-                            DishType = DishType.Pasta,
-                            ProfileImg = ""
-                        },
-                };
-
-
-
-            return View(Dishes);
+            return View(dishes);
         }
         public IActionResult RemoveDishFromOrder(Order order, Dish dish)
         {

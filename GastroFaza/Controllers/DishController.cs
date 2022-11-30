@@ -33,26 +33,10 @@ namespace GastroFaza.Controllers
 
             var dish = this.dbContext.Dishs.FirstOrDefault(u => u.Id == dishId);
 
-
             currentOrder.Dishes.Add(dish);
+
             currentOrder.Price += dish.Price;
             this.dbContext.SaveChanges();
-
-
-            var test = this.dbContext.Orders.FirstOrDefault(u => u.Id == id);
-
-            var lol = test.Dishes.ToList();
-
-
-            currentOrder.Dishes.Add(dish);
-            currentOrder.Price += dish.Price;
-            this.dbContext.SaveChanges();
-
-            test = this.dbContext.Orders.FirstOrDefault(u => u.Id == id);
-
-            lol = test.Dishes.ToList();
-
-
 
             try
             {

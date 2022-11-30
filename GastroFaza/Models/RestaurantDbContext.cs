@@ -64,6 +64,7 @@ namespace GastroFaza.Models
               .Property(r => r.Price)
               .IsRequired();
 
+           
         }
     }
 }
