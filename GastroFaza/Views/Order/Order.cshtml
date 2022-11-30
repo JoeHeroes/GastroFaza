@@ -25,10 +25,6 @@
     </div>
 </div>
 <br />
-<div>
-    <a class="btn btn-primary" asp-area="" asp-controller="Order" asp-action="Create">Złóż nowe zamówienie</a>
-</div>
-<br />
 <br />
 <br />
 <div style="float:left">
@@ -52,7 +48,7 @@
         }
     </div>
     <div style="float:left">
-        @if (@HttpContextAccessor.HttpContext.Session.GetString("email") == null)
+        @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
         {
             @Html.ActionLink("Add To Order", "GetAll", "Dish", null)
         }

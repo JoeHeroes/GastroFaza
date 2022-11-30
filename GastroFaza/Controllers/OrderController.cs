@@ -16,10 +16,12 @@ namespace GastroFaza.Controllers
         [Route("Order")]
         public IActionResult Order()
         {
-            Order order = this.dbContext.Orders.FirstOrDefault();
-            //if(order.Dishes.Count == 0)
-            //    return RedirectToAction("GetAll", "Dish");
-            HttpContext.Session.SetString("current order", order.Id.ToString());
+            if (HttpContext.Session.GetString("current order") == null)
+            {
+                return RedirectToAction("Create");
+            }
+            Order order = this.dbContext.Orders.FirstOrDefault(u=>u.Id== int.Parse(HttpContext.Session.GetString("current order")));
+            
             return View(order);
         }
         public IActionResult RemoveDishFromOrder(Order order, Dish dish)
