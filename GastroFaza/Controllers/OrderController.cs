@@ -1,4 +1,5 @@
 ﻿using GastroFaza.Models;
+using GastroFaza.Models.Enum;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,8 +22,31 @@ namespace GastroFaza.Controllers
                 return RedirectToAction("Create");
             }
             Order order = this.dbContext.Orders.FirstOrDefault(u=>u.Id== int.Parse(HttpContext.Session.GetString("current order")));
-            
-            return View(order);
+
+
+            var Dishes = new List<Dish>()
+                {
+                      new Dish()
+                        {
+                            Name = "Guwno",
+                            Description = "Tomato",
+                            Price = 5.0,
+                            DishType = DishType.Pasta,
+                            ProfileImg = ""
+                        },
+                       new Dish()
+                        {
+                            Name = "CiepleGuwno",
+                            Description = "Tomato",
+                            Price = 25.5,
+                            DishType = DishType.Pasta,
+                            ProfileImg = ""
+                        },
+                };
+
+
+
+            return View(Dishes);
         }
         public IActionResult RemoveDishFromOrder(Order order, Dish dish)
         {

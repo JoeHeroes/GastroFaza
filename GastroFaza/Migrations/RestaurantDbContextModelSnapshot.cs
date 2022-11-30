@@ -22,6 +22,21 @@ namespace GastroFaza.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("DishOrder", b =>
+                {
+                    b.Property<int>("DishesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrdersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DishesId", "OrdersId");
+
+                    b.HasIndex("OrdersId");
+
+                    b.ToTable("DishOrder");
+                });
+
             modelBuilder.Entity("GastroFaza.Models.Address", b =>
                 {
                     b.Property<int>("AddressId")
@@ -66,23 +81,13 @@ namespace GastroFaza.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
                     b.Property<string>("ProfileImg")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RestaurantId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("RestaurantId");
 
                     b.ToTable("Dishs");
                 });
@@ -269,15 +274,19 @@ namespace GastroFaza.Migrations
                     b.HasDiscriminator().HasValue("Worker");
                 });
 
-            modelBuilder.Entity("GastroFaza.Models.Dish", b =>
+            modelBuilder.Entity("DishOrder", b =>
                 {
-                    b.HasOne("GastroFaza.Models.Order", null)
-                        .WithMany("Dishes")
-                        .HasForeignKey("OrderId");
+                    b.HasOne("GastroFaza.Models.Dish", null)
+                        .WithMany()
+                        .HasForeignKey("DishesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("GastroFaza.Models.Restaurant", null)
-                        .WithMany("Menu")
-                        .HasForeignKey("RestaurantId");
+                    b.HasOne("GastroFaza.Models.Order", null)
+                        .WithMany()
+                        .HasForeignKey("OrdersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("GastroFaza.Models.Restaurant", b =>
@@ -325,16 +334,9 @@ namespace GastroFaza.Migrations
                     b.Navigation("Restaurant");
                 });
 
-            modelBuilder.Entity("GastroFaza.Models.Order", b =>
-                {
-                    b.Navigation("Dishes");
-                });
-
             modelBuilder.Entity("GastroFaza.Models.Restaurant", b =>
                 {
                     b.Navigation("Clients");
-
-                    b.Navigation("Menu");
 
                     b.Navigation("Tables");
 

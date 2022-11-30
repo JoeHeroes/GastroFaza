@@ -1,4 +1,4 @@
-﻿@model Order
+﻿@model IEnumerable<Dish>
 @inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Order";
@@ -30,7 +30,7 @@
 <div style="float:left">
     <div style="float:left">
 
-        @foreach (var obj in Model.Dishes)
+        @foreach (var obj in Model )
         {
             <table class="table table-bordered" id=table>
                 <tr>
@@ -59,7 +59,6 @@
         }
     </div>
     <div style="float:right">
-        Price: @Model.Price
         <input type="submit" value="Pay for order" class="btn btn-primary" />
     </div>
 </div>

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GastroFaza.Migrations
 {
-    public partial class Init : Migration
+    public partial class JebacPis : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,6 +22,23 @@ namespace GastroFaza.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Addresses", x => x.AddressId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Dishs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    DishType = table.Column<int>(type: "int", nullable: false),
+                    ProfileImg = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dishs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,32 +94,27 @@ namespace GastroFaza.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Dishs",
+                name: "DishOrder",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    DishType = table.Column<int>(type: "int", nullable: false),
-                    ProfileImg = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OrderId = table.Column<int>(type: "int", nullable: true),
-                    RestaurantId = table.Column<int>(type: "int", nullable: true)
+                    DishesId = table.Column<int>(type: "int", nullable: false),
+                    OrdersId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Dishs", x => x.Id);
+                    table.PrimaryKey("PK_DishOrder", x => new { x.DishesId, x.OrdersId });
                     table.ForeignKey(
-                        name: "FK_Dishs_Orders_OrderId",
-                        column: x => x.OrderId,
+                        name: "FK_DishOrder_Dishs_DishesId",
+                        column: x => x.DishesId,
+                        principalTable: "Dishs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DishOrder_Orders_OrdersId",
+                        column: x => x.OrdersId,
                         principalTable: "Orders",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Dishs_Restaurants_RestaurantId",
-                        column: x => x.RestaurantId,
-                        principalTable: "Restaurants",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -169,14 +181,9 @@ namespace GastroFaza.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dishs_OrderId",
-                table: "Dishs",
-                column: "OrderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Dishs_RestaurantId",
-                table: "Dishs",
-                column: "RestaurantId");
+                name: "IX_DishOrder_OrdersId",
+                table: "DishOrder",
+                column: "OrdersId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Restaurants_AddressId",
@@ -208,13 +215,16 @@ namespace GastroFaza.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Dishs");
+                name: "DishOrder");
 
             migrationBuilder.DropTable(
                 name: "Tables");
 
             migrationBuilder.DropTable(
                 name: "User");
+
+            migrationBuilder.DropTable(
+                name: "Dishs");
 
             migrationBuilder.DropTable(
                 name: "Orders");

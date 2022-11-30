@@ -15,7 +15,6 @@ namespace GastroFaza.Models
         public string ContactNumber { get; set; }
         public int AddressId { get; set; }
         public virtual Address Address { get; set; } 
-        public virtual List<Dish> Menu { get; set; } = null!;
         public virtual List<Worker> Workers { get; set; } = null!;
         public virtual List<Client> Clients { get; set; } = null!;
         public virtual List<Tablee> Tables { get; set; } = null!;
