@@ -46,7 +46,7 @@
                         {
                             if (@HttpContextAccessor.HttpContext.Session.GetString("current order") != null)
                             {
-                                @Html.ActionLink("Add To Order", "AddToOrder", "Dish", new { dishId = @obj.Id }, null)
+                                <a href='@Url.Action("AddToOrder", "Dish", new { dishId = @obj.Id }, null)' class="btn btn-primary">Add To Order</a>
                             }
                         }
 

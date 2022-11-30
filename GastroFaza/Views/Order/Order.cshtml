@@ -41,7 +41,7 @@
                         @obj.Price
                         <br />
                         <br />
-                        @Html.ActionLink("Remove From Order", "RemoveDishFromOrder", "Order", @obj, null)
+                        <a href='@Url.Action("RemoveDishFromOrder", "Order", @obj, null)' class="btn btn-primary">Remove From Order</a>
                     </th>
                 </tr>
             </table>
@@ -50,12 +50,11 @@
     <div style="float:left">
         @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
         {
-            @Html.ActionLink("Add To Order", "GetAll", "Dish", null)
+            <a href='@Url.Action("GetAll", "Dish")' class="btn btn-primary">Add To Order</a>
         }
         else
         {
-            
-            @Html.ActionLink("Add To Order", "Login", "Account", null)
+            <a href='@Url.Action("Login", "Account")' class="btn btn-primary">Login To Order</a>
         }
     </div>
     <div style="float:right">

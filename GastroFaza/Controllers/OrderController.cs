@@ -21,16 +21,22 @@ namespace GastroFaza.Controllers
             {
                 return RedirectToAction("Create");
             }
-            Order order = this.dbContext.Orders.FirstOrDefault(u=>u.Id== int.Parse(HttpContext.Session.GetString("current order")));
-            
-            var dishes = this.dbContext.Orders.Where(o => o.Id == order.Id).SelectMany(o => o.Dishes);
+            int id = int.Parse(HttpContext.Session.GetString("current order"));
+
+            var dishes = this.dbContext.Orders.Where(o => o.Id == id).SelectMany(o => o.Dishes);
 
             return View(dishes);
         }
         public IActionResult RemoveDishFromOrder(Order order, Dish dish)
         {
-            order.Dishes.Remove(dish);
-            this.dbContext.Orders.FirstOrDefault(u=>u.Id==order.Id).Dishes.Remove(dish);
+            //ToDo Zrobić usuwanie w relacji ManyToMany
+            //this.dbContext.Orders.FirstOrDefault(u=>u.Id==order.Id).Dishes.Remove(dish);
+
+
+            var lol = this.dbContext.Orders.FirstOrDefault(u => u.Id == order.Id);
+
+            lol.Dishes.Remove(dish);
+
             try
             {
                 this.dbContext.SaveChanges();
