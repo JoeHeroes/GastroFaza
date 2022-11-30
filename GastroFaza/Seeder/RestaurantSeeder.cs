@@ -30,28 +30,6 @@ namespace GastroFaza.Seeder
                     dbContext.Roles.AddRange(roles);
                     dbContext.SaveChanges();
                 }
-                
-               if (!dbContext.Restaurants.Any())
-               {
-                   var restaurants = GetRestaurants();
-                   dbContext.Restaurants.AddRange(restaurants);
-                   dbContext.SaveChanges();
-               }
-                
-
-               if (!dbContext.Clients.Any())
-               {
-                   var clients = GetClients();
-                   dbContext.Clients.AddRange(clients);
-                   dbContext.SaveChanges();
-               }
-
-               if (!dbContext.Workers.Any())
-               {
-                   var workers = GetWorkers();
-                   dbContext.Workers.AddRange(workers);
-                   dbContext.SaveChanges();
-               }
                
                 if (!dbContext.Dishs.Any())
                 {
@@ -59,128 +37,16 @@ namespace GastroFaza.Seeder
                     dbContext.Dishs.AddRange(dishes);
                     dbContext.SaveChanges();
                 }
-
-                 if (!dbContext.Addresses.Any())
-                 {
-                     var addresses = GetAddresses();
-                     dbContext.Addresses.AddRange(addresses);
-                     dbContext.SaveChanges();
-                 }
-
-                 if (!dbContext.Orders.Any())
-                 {
-                     var orders = GetOrders();
-                     dbContext.Orders.AddRange(orders);
-                     dbContext.SaveChanges();
-                 }
-                 
             }
         }
 
-        private IEnumerable<Order> GetOrders()
-        {
-            return new List<Order>()
-            {
-                new Order()
-                {
 
-                }
-            };
-        }
-
-        private IEnumerable<Address> GetAddresses()
-        {
-            return new List<Address>()
-            {
-                new Address()
-                {
-                      
-                }
-            };
-        }
 
         private IEnumerable<Dish> GetDishes()
         {
             return new List<Dish>()
             {
                 new Dish()
-                {
-
-                }
-                
-            };
-        }
-
-        private IEnumerable<Client> GetClients()
-        {
-            return new List<Client>()
-            {
-                new Client()
-                {
-                     Email = "JoeHeros@wp.pl",
-                     FirstName = "Joe",
-                     LastName = "Heros",
-                     DateOfBirth = new DateTime(),
-                     Nationality = "Poland",
-                }
-            };
-        }
-
-        private IEnumerable<Worker> GetWorkers()
-        {
-            return new List<Worker>()
-            {
-                new Worker()
-                {
-                     Email = "Krzys@wp.pl",
-                     FirstName = "Krzys",
-                     LastName = "Lulaj",
-                     DateOfBirth = new DateTime(),
-                     Nationality = "UK",
-                     RoleId = 3,
-                }
-            };
-        }
-
-        private IEnumerable<Role> GetRoles()
-        {
-            return new List<Role>()
-            {
-                new Role()
-                {
-                    Name ="Kelner"
-                },
-                new Role()
-                {
-                    Name ="Kucharz"
-                },
-                new Role()
-                {
-                    Name ="Menadżer"
-                },
-            };
-        }
-
-        private IEnumerable<Restaurant> GetRestaurants()
-        {
-            return new List<Restaurant>()
-            {
-                new Restaurant()
-                {
-                    Name="GastroFaza",
-                    Description="Restaurant GastroFaza",
-                    HasDelivery=false,
-                    ContactEmail="GastroFaza.Contact@wp.pl",
-                    ContactNumber="503 345 412",
-                    Address = new Address()
-                    {
-                        City = "Białystok",
-                        Street = "Piekna 7",
-                        PostalCode = "30-032"
-                    },
-                    Menu = new List<Dish>
-                    {
-                        new Dish() 
                         {
                             Name = "Margarita",
                             Description = "Margarita",
@@ -188,7 +54,7 @@ namespace GastroFaza.Seeder
                             DishType = DishType.Pizza,
                             ProfileImg = ""
                         },
-                        new Dish() 
+                        new Dish()
                         {
                             Name = "Pasta with Tomato",
                             Description = "Tomato",
@@ -196,7 +62,7 @@ namespace GastroFaza.Seeder
                             DishType = DishType.Pasta,
                             ProfileImg = ""
                         },
-                        new Dish() 
+                        new Dish()
                         {
                             Name = "Pasta with Tomato",
                             Description = "Tomato",
@@ -324,178 +190,6 @@ namespace GastroFaza.Seeder
                             DishType= DishType.Drinks,
                             ProfileImg = ""
                         },
-                    },
-                    Workers = new List<Worker>
-                    { 
-                        new Worker()
-                        {
-                            Email = "krzys@wp.pl",
-                            FirstName = "Krzysztof",
-                            LastName = "Góral",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 1,
-                            Rating = 5,
-                            PasswordHash = "123"
-                        },
-                         new Worker()
-                        {
-                            Email = "Luki@wp.pl",
-                            FirstName = "Łukasz",
-                            LastName = "Chad",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 2,
-                            Rating = 5,
-                            PasswordHash = "123"
-                        },
-                        new Worker()
-                        {
-                            Email = "kornisz@wp.pl",
-                            FirstName = "Kornel",
-                            LastName = "Gołebiewski",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 3,
-                            Rating = 5,
-                            PasswordHash = "123"
-                        },
-                        new Worker()
-                        {
-                            Email = "finGermayass@wp.pl",
-                            FirstName = "Fin",
-                            LastName = "Germayass",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 1,
-                            Rating = 5,
-                            PasswordHash = "123"
-                        },
-                        new Worker()
-                        {
-                            Email = "peteOphile@wp.pl",
-                            FirstName = "Pete",
-                            LastName = "Ophile",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 1,
-                            Rating = 5,
-                            PasswordHash = "123"
-                        }
-                    },
-                    Clients = new List<Client>()
-                    {
-                        new Client()
-                        {
-                            Email = "SlepyMichalek@wp.pl",
-                            FirstName = "Slepy",
-                            LastName = "Michalek",
-                            DateOfBirth = DateTime.Today,
-                            PasswordHash = "123"
-                        },
-                        new Client()
-                        {
-                            Email = "GrubyPaweł@wp.pl",
-                            FirstName = "Gruby",
-                            LastName = "Paweł",
-                            DateOfBirth = DateTime.Today,
-                            PasswordHash = "123"
-                        },
-                        new Client()
-                        {
-                            Email = "KingDavid@wp.pl",
-                            FirstName = "David",
-                            LastName = "King",
-                            DateOfBirth = DateTime.Today,
-                            PasswordHash = "123"
-                        }
-                    },
-                    Tables = new List<Tablee>()
-                    {
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 8,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 8,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 12,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 4,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 4,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 4,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = false,
-                            Seats = 2,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = true,
-                            Seats = 2,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = false,
-                            Seats = 2,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = true,
-                            Seats = 2,
-                            ClientId = 3
-                        }
-                    }
-                },
-
-
-                new Restaurant()
-                {
-                    Name="Ósemka",
-                    Description="Restaurant Ósemka",
-                    HasDelivery=false,
-                    ContactEmail="Ósemka.Contact@wp.pl",
-                    ContactNumber="213 713 372",
-                    Address = new Address()
-                    {
-                        City = "Sztabin",
-                        Street = "Augustowska 41",
-                        PostalCode = "16-310"
-                    },
-                    Menu = new List<Dish>
-                    {
                         new Dish()
                         {
                             Name = "Carpaccio z polędwicy wołowej",
@@ -584,600 +278,6 @@ namespace GastroFaza.Seeder
                             DishType= DishType.Dessert,
                             ProfileImg = ""
                         },
-                        new Dish()
-                        {
-                            Name = "Kozel",
-                            Description = "Drink",
-                            Price = 10,
-                            DishType= DishType.Alcohol,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Książęce",
-                            Description = "Drink",
-                            Price = 9,
-                            DishType= DishType.Alcohol,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Jagermeister",
-                            Description = "Drink",
-                            Price = 13,
-                            DishType= DishType.Alcohol,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Jack Daniels (burbon)",
-                            Description = "Drink",
-                            Price = 16,
-                            DishType= DishType.Alcohol,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Coca Cola",
-                            Description = "Napój",
-                            Price = 10,
-                            DishType= DishType.Drinks,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Fanta",
-                            Description = "Napój",
-                            Price = 10,
-                            DishType= DishType.Drinks,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Cappy",
-                            Description = "Napój",
-                            Price = 8,
-                            DishType= DishType.Drinks,
-                            ProfileImg = ""
-                        },
-                    },
-                    Workers = new List<Worker>
-                    {
-                        new Worker()
-                        {
-                            Email = "mikeOxlong@wp.pl",
-                            FirstName = "Mike",
-                            LastName = "Oxlong",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 3,
-                            Rating = 5,
-                            PasswordHash = "123"
-                        },
-                         new Worker()
-                        {
-                            Email = "adolfGazprom@wp.pl",
-                            FirstName = "Adolf",
-                            LastName = "Gazprom",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 2,
-                            Rating = 5,
-                            PasswordHash = "123"
-                        },
-                        new Worker()
-                        {
-                            Email = "isacNuts@wp.pl",
-                            FirstName = "Isac",
-                            LastName = "Nuts",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 3,
-                            Rating = 5,
-                            PasswordHash = "123"
-                        },
-                        new Worker()
-                        {
-                            Email = "johnBilon@wp.pl",
-                            FirstName = "Jhon",
-                            LastName = "Bilon",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 2,
-                            Rating = 5,
-                            PasswordHash = "123"
-                        },
-                        new Worker()
-                        {
-                            Email = "suzieGebels@wp.pl",
-                            FirstName = "Suzie",
-                            LastName = "Gebels",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 3,
-                            Rating = 5,
-                            PasswordHash = "123"
-                        }
-                    },
-                    Clients = new List<Client>()
-                    {
-                        new Client()
-                        {
-                            Email = "HornyOrny@wp.pl",
-                            FirstName = "Horny",
-                            LastName = "Orny",
-                            DateOfBirth = DateTime.Today,
-                            PasswordHash = "123"
-                        },
-                        new Client()
-                        {
-                            Email = "PawełG@wp.pl",
-                            FirstName = "Paweł",
-                            LastName = "Górniak",
-                            DateOfBirth = DateTime.Today,
-                            PasswordHash = "123"
-                        },
-                        new Client()
-                        {
-                            Email = "GawełG@wp.pl",
-                            FirstName = "Gaweł",
-                            LastName = "Górniak",
-                            DateOfBirth = DateTime.Today,
-                            PasswordHash = "123"
-                        },
-                    },
-                    Tables = new List<Tablee>()
-                    {
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 8,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 8,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 12,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 4,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 4,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 4,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = false,
-                            Seats = 2,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = true,
-                            Seats = 2,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = false,
-                            Seats = 2,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = true,
-                            Seats = 2,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = true,
-                            Seats = 14,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 20,
-                            ClientId = 3
-                        },
-                    }
-                },
-
-
-                new Restaurant()
-                {
-                    Name="Śniadaniownia",
-                    Description="Delikatesy u Teresy",
-                    HasDelivery=false,
-                    ContactEmail="Tereska.Contact@wp.pl",
-                    ContactNumber="211 507 009",
-                    Address = new Address()
-                    {
-                        City = "Białystok",
-                        Street = "Śniadaniowa 69",
-                        PostalCode = "30-032"
-                    },
-                    Menu = new List<Dish>
-                    {
-                        new Dish()
-                        {
-                            Name = "Naleśniki z syropem",
-                            Description = "Naleśnik",
-                            Price = 22,
-                            DishType = DishType.Cookies,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Gofry",
-                            Description = "Gofry",
-                            Price = 15,
-                            DishType = DishType.Cookies,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Jajecznica",
-                            Description = "Jajka",
-                            Price = 19,
-                            DishType = DishType.Egg,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Jajko sadzone",
-                            Description = "Jajko",
-                            Price = 19,
-                            DishType = DishType.Egg,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Pasztet jajeczny",
-                            Description = "Pasztet",
-                            Price = 33,
-                            DishType = DishType.Egg,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Placki czekoladowe",
-                            Description = "Placki",
-                            Price = 22,
-                            DishType= DishType.Dessert,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Pieczona Owsianka",
-                            Description = "Owsianka",
-                            Price = 22,
-                            DishType= DishType.Vegan,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Zawijasy z łososia",
-                            Description = "Ryba",
-                            Price = 35,
-                            DishType= DishType.Fish,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Sałatka",
-                            Description = "Sałatka",
-                            Price = 21,
-                            DishType= DishType.Vegan,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Spaghetti",
-                            Description = "Makaron",
-                            Price = 25,
-                            DishType= DishType.Pasta,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Kozel",
-                            Description = "Piwko",
-                            Price = 9,
-                            DishType= DishType.Alcohol,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Żóbrówka",
-                            Description = "Wudeczka",
-                            Price = 14,
-                            DishType= DishType.Alcohol,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Herbata ziomowa",
-                            Description = "Herbata",
-                            Price = 9,
-                            DishType= DishType.Drinks,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Herbata na zimno",
-                            Description = "Herbata",
-                            Price = 13,
-                            DishType= DishType.Drinks,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Kawa z anyżem",
-                            Description = "Kawa",
-                            Price = 13,
-                            DishType= DishType.Drinks,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Kawa latte z syropem ",
-                            Description = "Kawa",
-                            Price = 14,
-                            DishType= DishType.Drinks,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Kawa espresso",
-                            Description = "Kawa",
-                            Price = 9,
-                            DishType= DishType.Drinks,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Deser lodwy",
-                            Description = "Lody",
-                            Price = 15,
-                            DishType= DishType.Dessert,
-                            ProfileImg = ""
-                        },
-                        new Dish()
-                        {
-                            Name = "Ręcznie wyciskany sok",
-                            Description = "Napój",
-                            Price = 17,
-                            DishType= DishType.Drinks,
-                            ProfileImg = ""
-                        },
-                    },
-                    Workers = new List<Worker>
-                    {
-                        new Worker()
-                        {
-                            Email = "ronaldinioGauczo@wp.pl",
-                            FirstName = "Ronalidnio",
-                            LastName = "Gauczo",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 1,
-                            Rating = 5,
-                            PasswordHash = "123"
-                        },
-                         new Worker()
-                        {
-                            Email = "karimMbappe@wp.pl",
-                            FirstName = "Karim",
-                            LastName = "Mbappe",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 2,
-                            Rating = 5,
-                            PasswordHash = "123"
-                        },
-                        new Worker()
-                        {
-                            Email = "kylianBenzema@wp.pl",
-                            FirstName = "Kylian",
-                            LastName = "Benzema",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 3,
-                            Rating = 5,
-                            PasswordHash = "123"
-                        },
-                        new Worker()
-                        {
-                            Email = "mariuszT@wp.pl",
-                            FirstName = "Mariusz",
-                            LastName = "Tarantula",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 2,
-                            Rating = 5,
-                            PasswordHash = "123"
-                        },
-                        new Worker()
-                        {
-                            Email = "marlenkaOrzel@wp.pl",
-                            FirstName = "Marlenka",
-                            LastName = "Orzel",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 3,
-                            Rating = 5,
-                            PasswordHash = "123"
-                        }
-                    },
-                    Clients = new List<Client>()
-                    {
-                        new Client()
-                        {
-                            Email = "maciekLuj@wp.pl",
-                            FirstName = "Maciej",
-                            LastName = "Luj",
-                            DateOfBirth = DateTime.Today,
-                            PasswordHash = "123"
-                        },
-                        new Client()
-                        {
-                            Email = "jacekPasut@wp.pl",
-                            FirstName = "Jacek",
-                            LastName = "Pasut",
-                            DateOfBirth = DateTime.Today,
-                            PasswordHash = "123"
-                        },
-                        new Client()
-                        {
-                            Email = "JanŁborodo@wp.pl",
-                            FirstName = "Jan",
-                            LastName = "Łborodo",
-                            DateOfBirth = DateTime.Today,
-                            PasswordHash = "123"
-                        },
-                    },
-                    Tables = new List<Tablee>()
-                    {
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 8,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 8,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 12,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 4,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 4,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 4,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = false,
-                            Seats = 2,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = true,
-                            Seats = 2,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = false,
-                            Seats = 2,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = true,
-                            Seats = 2,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = true,
-                            Seats = 14,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 20,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = true,
-                            Seats = 4,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 4,
-                            ClientId = 3
-                        }
-                    }
-                },
-
-
-                new Restaurant()
-                {
-                    Name="Pizza prosto z pieca",
-                    Description="Pizza włoska",
-                    HasDelivery=false,
-                    ContactEmail="PizzaP.Contact@wp.pl",
-                    ContactNumber="697 880 540",
-                    Address = new Address()
-                    {
-                        City = "Białystok",
-                        Street = "Szkolna 17",
-                        PostalCode = "30-032"
-                    },
-                    Menu = new List<Dish>
-                    {
                         new Dish()
                         {
                             Name = "Crema Di Pomodoro",
@@ -1322,203 +422,113 @@ namespace GastroFaza.Seeder
                             DishType= DishType.Drinks,
                             ProfileImg = ""
                         },
-                    },
-                    Workers = new List<Worker>
-                    {
-                        new Worker()
+                        new Dish()
                         {
-                            Email = "patListonosz@wp.pl",
-                            FirstName = "Pat",
-                            LastName = "Listonosz",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 1,
-                            Rating = 5,
-                            PasswordHash = "123"
+                            Name = "Kozel",
+                            Description = "Drink",
+                            Price = 10,
+                            DishType= DishType.Alcohol,
+                            ProfileImg = ""
                         },
-                         new Worker()
+                        new Dish()
                         {
-                            Email = "kubusMaruda@wp.pl",
-                            FirstName = "Jakub",
-                            LastName = "Maruda",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 2,
-                            Rating = 5,
-                            PasswordHash = "123"
+                            Name = "Książęce",
+                            Description = "Drink",
+                            Price = 9,
+                            DishType= DishType.Alcohol,
+                            ProfileImg = ""
                         },
-                        new Worker()
+                        new Dish()
                         {
-                            Email = "maniekRadek@wp.pl",
-                            FirstName = "Maniek",
-                            LastName = "Radek",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 3,
-                            Rating = 5,
-                            PasswordHash = "123"
+                            Name = "Jagermeister",
+                            Description = "Drink",
+                            Price = 13,
+                            DishType= DishType.Alcohol,
+                            ProfileImg = ""
                         },
-                        new Worker()
+                        new Dish()
                         {
-                            Email = "royLewandowski@wp.pl",
-                            FirstName = "Roy",
-                            LastName = "Lewandowski",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 2,
-                            Rating = 5,
-                            PasswordHash = "123"
+                            Name = "Jack Daniels (burbon)",
+                            Description = "Drink",
+                            Price = 16,
+                            DishType= DishType.Alcohol,
+                            ProfileImg = ""
                         },
-                        new Worker()
+                        new Dish()
                         {
-                            Email = "wiktoriaSpocona@wp.pl",
-                            FirstName = "Wiktoria",
-                            LastName = "Spocona",
-                            DateOfBirth = DateTime.Today,
-                            RoleId = 3,
-                            Rating = 5,
-                            PasswordHash = "123"
-                        }
-                    },
-                    Clients = new List<Client>()
-                    {
-                        new Client()
-                        {
-                            Email = "barbaraHuda@wp.pl",
-                            FirstName = "Barbara",
-                            LastName = "Huda",
-                            DateOfBirth = DateTime.Today,
-                            PasswordHash = "123"
+                            Name = "Coca Cola",
+                            Description = "Napój",
+                            Price = 10,
+                            DishType= DishType.Drinks,
+                            ProfileImg = ""
                         },
-                        new Client()
+                        new Dish()
                         {
-                            Email = "maxMad@wp.pl",
-                            FirstName = "Mad",
-                            LastName = "Max",
-                            DateOfBirth = DateTime.Today,
-                            PasswordHash = "123"
+                            Name = "Fanta",
+                            Description = "Napój",
+                            Price = 10,
+                            DishType= DishType.Drinks,
+                            ProfileImg = ""
                         },
-                        new Client()
+                        new Dish()
                         {
-                            Email = "krzysztofSuchodolski@wp.pl",
-                            FirstName = "Krzysztof",
-                            LastName = "Suchodolski",
-                            DateOfBirth = DateTime.Today,
-                            PasswordHash = "123"
+                            Name = "Cappy",
+                            Description = "Napój",
+                            Price = 8,
+                            DishType= DishType.Drinks,
+                            ProfileImg = ""
                         },
-                    },
-                    Tables = new List<Tablee>()
-                    {
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 8,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 8,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 12,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 4,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 4,
-                            ClientId = 2
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 4,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = false,
-                            Seats = 2,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = true,
-                            Seats = 2,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = false,
-                            Seats = 2,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = true,
-                            Seats = 2,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = true,
-                            Seats = 14,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 20,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = false,
-                            Reserved = true,
-                            Seats = 4,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 4,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {   
-                            Busy = false,
-                            Reserved = true,
-                            Seats = 2,
-                            ClientId = 3
-                        },
-                        new Tablee()
-                        {
-                            Busy = true,
-                            Reserved = false,
-                            Seats = 2,
-                            ClientId = 3
-                        }
-                    }
+
+            };
+        }
+
+        private IEnumerable<Client> GetClients()
+        {
+            return new List<Client>()
+            {
+                new Client()
+                {
+                     Email = "JoeHeros@wp.pl",
+                     FirstName = "Joe",
+                     LastName = "Heros",
+                     DateOfBirth = new DateTime(),
+                     Nationality = "Poland",
                 }
+            };
+        }
+
+        private IEnumerable<Worker> GetWorkers()
+        {
+            return new List<Worker>()
+            {
+                new Worker()
+                {
+                     Email = "Krzys@wp.pl",
+                     FirstName = "Krzys",
+                     LastName = "Lulaj",
+                     DateOfBirth = new DateTime(),
+                     Nationality = "UK",
+                     RoleId = 3,
+                }
+            };
+        }
+
+        private IEnumerable<Role> GetRoles()
+        {
+            return new List<Role>()
+            {
+                new Role()
+                {
+                    Name ="Kelner"
+                },
+                new Role()
+                {
+                    Name ="Kucharz"
+                },
+                new Role()
+                {
+                    Name ="Menadżer"
+                },
             };
         }
     }

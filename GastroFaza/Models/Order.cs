@@ -4,8 +4,12 @@ namespace GastroFaza.Models
 {
     public class Order
     {
+        public Order()
+        {
+            this.Dishes = new HashSet<Dish>();
+        }
         public int Id { get; set; }
-        public List<Dish> Dishes { get; set; } = null!;
+        public virtual ICollection<Dish> Dishes { get; set; }
         public Status Status { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }

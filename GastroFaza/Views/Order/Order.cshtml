@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Dish>
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Order";
+}
+
+<style>
+    #table {
+        width ="150";
+        height ="250";
+    }
+</style>
+
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+</head>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Orders</h2>
+        </div>
+        <div class="col-6 text-end">
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<div style="float:left">
+    <div style="float:left">
+
+        @foreach (var obj in Model )
+        {
+            <table class="table table-bordered" id=table>
+                <tr>
+                    <th>
+                        @obj.Name
+                        <br />
+                        <br />
+                        @obj.Price
+                        <br />
+                        <br />
+                        <a href='@Url.Action("RemoveDishFromOrder", "Order", @obj, null)' class="btn btn-primary">Remove From Order</a>
+                    </th>
+                </tr>
+            </table>
+        }
+    </div>
+    <div style="float:left">
+        @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
+        {
+            <a href='@Url.Action("GetAll", "Dish")' class="btn btn-primary">Add To Order</a>
+        }
+        else
+        {
+            <a href='@Url.Action("Login", "Account")' class="btn btn-primary">Login To Order</a>
+        }
+    </div>
+    <div style="float:right">
+        <input type="submit" value="Pay for order" class="btn btn-primary" />
+    </div>
+</div>

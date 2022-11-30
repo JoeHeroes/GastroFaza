@@ -19,10 +19,6 @@ namespace GastroFaza.Models
         public DbSet<Reservation> Reservations { get; set; }
         
 
-
-
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -68,7 +64,6 @@ namespace GastroFaza.Models
             modelBuilder.Entity<Reservation>()
              .Property(r => r.ClientId)
              .IsRequired();
-
         }
     }
 }

@@ -13,7 +13,6 @@
         <div class="col-6">
             <h2 class="text-primary">Menu</h2>
         </div>
-      
             <div class="menu_buttons">@Html.ActionLink("Alcohol", "Search", "Dish", new { dish = DishType.Alcohol }, null)</div>
             <div class="menu_buttons">@Html.ActionLink("Bread", "Search", "Dish", new { dish = DishType.Bread }, null)</div>       
             <div class="menu_buttons">@Html.ActionLink("Burger", "Search", "Dish", new { dish = DishType.Burger }, null)</div> 
@@ -38,55 +37,16 @@
             <div class="menu_buttons">@Html.ActionLink("Stew", "Search", "Dish", new { dish = DishType.Stew}, null)</div>
             <div class="menu_buttons">@Html.ActionLink("Vegan", "Search", "Dish", new { dish = DishType.Vegan }, null)</div>       
             <div class="menu_buttons">@Html.ActionLink("Wrap", "Search", "Dish", new { dish = DishType.Wrap }, null)</div>
-
+        <div style="float:left">
+            <table class="table table-bordered" style="width:10%">
+                <tr>
+                    <th>
+                        <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Egg", "Search", "Dish", new { dish = DishType.Egg }, null)
+                    </th>
+                </tr>
+            </table>
         </div>
-
 
     </div>
 </div>
-<br />
-<br />
-<br />
-<table class="table table-bordered" style="width:100%">
-    <thead>
-        <tr>
-            <th>
-                Picture
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                Description
-            </th>
-            <th>
-                Price
-            </th>
-            <th>
-                DishType
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var obj in Model)
-        {
-            <tr>
-                <td width="10%">
-                    <img src="~/Images/@obj.ProfileImg" width="150" height="150" asp-append-version="true" />
-                </td>
-                <td width="20%">
-                    @obj.Name
-                </td>
-                <td width="50%">
-                    @obj.Description
-                </td>
-                <td width="10%">
-                    @obj.Price
-                </td>
-                <td width="10%">
-                    @obj.DishType
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>

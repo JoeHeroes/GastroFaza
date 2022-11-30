@@ -13,7 +13,6 @@ namespace GastroFaza.Controllers
     {
         private readonly RestaurantDbContext dbContext;
         private readonly IWebHostEnvironment webHost;
-
         public DishController(RestaurantDbContext dbContext, IWebHostEnvironment webHost)
         {
             this.dbContext = dbContext;
@@ -24,6 +23,30 @@ namespace GastroFaza.Controllers
             IEnumerable<Dish> dishs = this.dbContext.Dishs;
 
             return View(dishs);
+        }
+
+        public IActionResult AddToOrder(int dishId)
+        {
+            int id = int.Parse(HttpContext.Session.GetString("current order"));
+
+            var currentOrder = this.dbContext.Orders.FirstOrDefault(u => u.Id == id);
+
+            var dish = this.dbContext.Dishs.FirstOrDefault(u => u.Id == dishId);
+
+            currentOrder.Dishes.Add(dish);
+
+            currentOrder.Price += dish.Price;
+            this.dbContext.SaveChanges();
+
+            try
+            {
+                this.dbContext.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new DbUpdateException("Error DataBase", e);
+            }
+            return View("GetAll");
         }
 
         public IActionResult GetOne(int? id)
