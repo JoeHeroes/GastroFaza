@@ -7,7 +7,7 @@
 
 <div class="text-center">
     @if(@ViewBag.username!=null){
-        @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") != "isWorker")
+        @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") != "true")
         {
             <h2>Welcome @ViewBag.username</h2>
         } else
