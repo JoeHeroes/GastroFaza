@@ -33,6 +33,11 @@ namespace GastroFaza.Controllers
         {
             return View();
         }
+        [Route("CreateWorkerAccount")]      //for manager
+        public IActionResult CreateWorkerAccount()
+        {
+            return View();
+        }
 
         [Route("Logout")]
         public IActionResult Logout()
@@ -58,8 +63,6 @@ namespace GastroFaza.Controllers
         [Route("AccountSettings")]
         public IActionResult AccountSettings(EditClientDto dto)
         {
-
-            
             if (ModelState.IsValid)
             {
                 var account = dbContext.Clients.FirstOrDefault(x => x.Id == int.Parse(HttpContext.Session.GetString("id")));
@@ -73,7 +76,7 @@ namespace GastroFaza.Controllers
         }
 
         [HttpPost]
-        [Route("registerWorker")]
+        [Route("registerWorker")]         //for manager
         public IActionResult RegisterWorker(RegisterWorkerDto dto)
         {
             if (ModelState.IsValid)
@@ -87,7 +90,6 @@ namespace GastroFaza.Controllers
                     LastName = dto.LastName,
                     PasswordHash = dto.Password,
                     RoleId = dto.RoleId
-
                 };
 
                 var hashedPass = this.passwordHasherWorker.HashPassword(newWorker, dto.Password);
@@ -97,7 +99,12 @@ namespace GastroFaza.Controllers
                 this.dbContext.SaveChanges();
 
                 HttpContext.Session.SetString("email", dto.Email);
-                return RedirectToAction("WelcomeWorker");
+                HttpContext.Session.SetString("isWorker", "true");
+                if (dto.RoleId == 1)                                      //set worker role in session 
+                    HttpContext.Session.SetString("Role", "Waiter");
+                else
+                    HttpContext.Session.SetString("Role", "Cook");
+                return RedirectToAction("Welcome");
             }
             ViewBag.msg = "Invalid";
             return View("Login");
@@ -165,7 +172,7 @@ namespace GastroFaza.Controllers
                     }
                     HttpContext.Session.SetString("id", client.Id.ToString());
                     HttpContext.Session.SetString("email", dto.Email);
-                    HttpContext.Session.SetString("isWorker", "isClient");
+                    HttpContext.Session.SetString("isWorker", "false");
                     return RedirectToAction("Welcome");
                 }
                 //else check workers
@@ -177,7 +184,11 @@ namespace GastroFaza.Controllers
                 }
                 HttpContext.Session.SetString("id", worker.Id.ToString());
                 HttpContext.Session.SetString("email", dto.Email);
-                HttpContext.Session.SetString("isWorker", "isWorker");
+                HttpContext.Session.SetString("isWorker", "true");
+                if (worker.RoleId == 1)                                      //set worker role in session 
+                    HttpContext.Session.SetString("Role", "Waiter");
+                else
+                    HttpContext.Session.SetString("Role", "Cook");
                 return RedirectToAction("Welcome");
             }
             return View("Login");

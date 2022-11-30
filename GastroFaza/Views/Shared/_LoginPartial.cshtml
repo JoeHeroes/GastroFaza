@@ -5,9 +5,12 @@
 <ul class="navbar-nav">
     @if (@HttpContextAccessor.HttpContext.Session.GetString("email")!=null)
 {
-    <li class="nav-item">
-            <a class="nav-link text-light" asp-controller="Account" asp-action="accountSettings">Account settings</a>
-    </li>
+        @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") != "true") @* If user is not Worker *@
+        {
+            <li class="nav-item">
+                    <a class="nav-link text-light" asp-controller="Account" asp-action="accountSettings">Account settings</a>
+            </li>
+        }
     <li class="nav-item">
         <a class="nav-link text-light" asp-controller="Account" asp-action="Logout">Logout</a>
     </li>
@@ -20,5 +23,8 @@ else
     <li class="nav-item">
          <a class="nav-link text-light" asp-controller="Account" asp-action="Login">Login</a>
     </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-controller="Account" asp-action="CreateWorkerAccount">Register as Worker</a> @* Remove when manager is added *@
+        </li>
 }
 </ul>
