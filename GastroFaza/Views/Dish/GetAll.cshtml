@@ -13,40 +13,272 @@
         <div class="col-6">
             <h2 class="text-primary">Menu</h2>
         </div>
-            <div class="menu_buttons">@Html.ActionLink("Alcohol", "Search", "Dish", new { dish = DishType.Alcohol }, null)</div>
-            <div class="menu_buttons">@Html.ActionLink("Bread", "Search", "Dish", new { dish = DishType.Bread }, null)</div>       
-            <div class="menu_buttons">@Html.ActionLink("Burger", "Search", "Dish", new { dish = DishType.Burger }, null)</div> 
-            <div class="menu_buttons">@Html.ActionLink("Cake", "Search", "Dish", new { dish = DishType.Cake }, null)</div>
-            <div class="menu_buttons">@Html.ActionLink("Cookies", "Search", "Dish", new { dish = DishType.Cookies }, null)</div>    
-            <div class="menu_buttons">@Html.ActionLink("Curry", "Search", "Dish", new { dish = DishType.Curry }, null)</div>
-            <div class="menu_buttons">@Html.ActionLink("Dessert", "Search", "Dish", new { dish = DishType.Dessert }, null)</div>
-            <div class="menu_buttons">@Html.ActionLink("Drinks", "Search", "Dish", new { dish = DishType.Drinks }, null)</div>       
-            <div class="menu_buttons">@Html.ActionLink("Egg", "Search", "Dish", new { dish = DishType.Egg }, null)</div>
-            <div class="menu_buttons">@Html.ActionLink("Fish", "Search", "Dish", new { dish = DishType.Fish }, null)</div>
-            <div class="menu_buttons">@Html.ActionLink("Meat", "Search", "Dish", new { dish = DishType.Meat }, null)</div>        
-            <div class="menu_buttons">@Html.ActionLink("Meatballs", "Search", "Dish", new { dish = DishType.Meatballs }, null)</div>
-            <div class="menu_buttons">@Html.ActionLink("Pasta", "Search", "Dish", new { dish = DishType.Pasta}, null)</div>
-            <div class="menu_buttons">@Html.ActionLink("Pastabakes", "Search", "Dish", new { dish = DishType.Pastabakes }, null)</div>       
-            <div class="menu_buttons">@Html.ActionLink("Pizza", "Search", "Dish", new { dish = DishType.Pizza }, null)</div>
-            <div class="menu_buttons">@Html.ActionLink("Pudding", "Search", "Dish", new { dish = DishType.Pudding }, null)</div>        
-            <div class="menu_buttons">@Html.ActionLink("Salad", "Search", "Dish", new { dish = DishType.Salad }, null)</div>
-            <div class="menu_buttons">@Html.ActionLink("Sandwich", "Search", "Dish", new { dish = DishType.Sandwich}, null)</div>
-            <div class="menu_buttons">@Html.ActionLink("Souce", "Search", "Dish", new { dish = DishType.Souce }, null)</div>       
-            <div class="menu_buttons">@Html.ActionLink("Soup", "Search", "Dish", new { dish = DishType.Soup }, null)</div>
-            <div class="menu_buttons">@Html.ActionLink("Steak", "Search", "Dish", new { dish = DishType.Steak }, null)</div>
-            <div class="menu_buttons">@Html.ActionLink("Stew", "Search", "Dish", new { dish = DishType.Stew}, null)</div>
-            <div class="menu_buttons">@Html.ActionLink("Vegan", "Search", "Dish", new { dish = DishType.Vegan }, null)</div>       
-            <div class="menu_buttons">@Html.ActionLink("Wrap", "Search", "Dish", new { dish = DishType.Wrap }, null)</div>
         <div style="float:left">
-            <table class="table table-bordered" style="width:10%">
-                <tr>
-                    <th>
-                        <img src="~/Images" width="150" height="150" asp-append-version="true" />
-                            @Html.ActionLink("Egg", "Search", "Dish", new { dish = DishType.Egg }, null)
-                    </th>
-                </tr>
-            </table>
-        </div>
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Pasta", "Search", "Dish", new { dish = DishType.Pasta }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
 
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Salad", "Search", "Dish", new { dish = DishType.Salad }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Bread", "Search", "Dish", new { dish = DishType.Bread }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Curry", "Search", "Dish", new { dish = DishType.Curry }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Vegan", "Search", "Dish", new { dish = DishType.Vegan }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Soup", "Search", "Dish", new { dish = DishType.Soup }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Stew", "Search", "Dish", new { dish = DishType.Stew }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Pizza", "Search", "Dish", new { dish = DishType.Pizza }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Sandwich", "Search", "Dish", new { dish = DishType.Sandwich }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Wrap", "Search", "Dish", new { dish = DishType.Wrap }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Cake", "Search", "Dish", new { dish = DishType.Cake }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Souce", "Search", "Dish", new { dish = DishType.Souce }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Pudding", "Search", "Dish", new { dish = DishType.Pudding }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Dessert", "Search", "Dish", new { dish = DishType.Dessert }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Drinks", "Search", "Dish", new { dish = DishType.Drinks }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Alcohol", "Search", "Dish", new { dish = DishType.Alcohol }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Steak", "Search", "Dish", new { dish = DishType.Steak }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Cookies", "Search", "Dish", new { dish = DishType.Cookies }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Meatballs", "Search", "Dish", new { dish = DishType.Meatballs }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Pastabakes", "Search", "Dish", new { dish = DishType.Pastabakes }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Burger", "Search", "Dish", new { dish = DishType.Burger }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Fish", "Search", "Dish", new { dish = DishType.Fish }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Meat", "Search", "Dish", new { dish = DishType.Meat }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="float:left">
+                <table class="table table-bordered" style="width:10%">
+                    <tr>
+                        <th>
+                            <img src="~/Images" width="150" height="150" asp-append-version="true" />
+                            @Html.ActionLink("Egg", "Search", "Dish", new { dish = DishType.Egg }, null)
+                        </th>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
