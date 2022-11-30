@@ -42,11 +42,11 @@
                         <br />
                         Price: @obj.Price
                         <br />
-                        @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
-                        {       
+                        @if (@HttpContextAccessor.HttpContext.Session.GetString("email") == null)
+                        {
                             if (@HttpContextAccessor.HttpContext.Session.GetString("current order") != null)
                             {
-                                @Html.ActionLink("Złóż nowe zamówienie", "AddToOrder", "Dish", new { dishId = @obj.Id }, null)
+                                @Html.ActionLink("Add To Order", "AddToOrder", "Dish", new { dishId = @obj.Id }, null)
                             }
                         }
 

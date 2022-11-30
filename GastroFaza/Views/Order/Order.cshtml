@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Order>
+﻿@model Order
 @inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Order";
@@ -24,7 +24,7 @@
         </div>
     </div>
 </div>
-<br/>
+<br />
 <div>
     <a class="btn btn-primary" asp-area="" asp-controller="Order" asp-action="Create">Złóż nowe zamówienie</a>
 </div>
@@ -32,47 +32,38 @@
 <br />
 <br />
 <div style="float:left">
-    @foreach (var obj in Model)
-    {
-        <div style="float:left">
+    <div style="float:left">
+
+        @foreach (var obj in Model.Dishes)
+        {
             <table class="table table-bordered" id=table>
                 <tr>
                     <th>
-                        @if (obj.Dishes != null)
-                        {
-                            @foreach (var dish in obj.Dishes)
-                            {
-                                <li>
-                                    @dish.Name
-                                </li>
-                            }
-
-                            <br />
-                            <div>
-                                Price: @obj.Price
-                            </div>
-                            <br />
-                            @if (@HttpContextAccessor.HttpContext.Session.GetString(obj.Id.ToString() + "paid") != null)
-                            {
-                                <div>
-                                    This order is paid
-                                </div>
-                            }
-                            else
-                            {
-                                @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
-                                {
-                                    <input type="submit" value="Pay for Order" class="btn btn-primary" />
-                                }
-                                else
-                                {
-                                    <input type="submit" value="Add to order" class="btn btn-primary" asp-controller="Account" asp-action="Login" />
-                                }
-                            }
-                        }
+                        @obj.Name
+                        <br />
+                        <br />
+                        @obj.Price
+                        <br />
+                        <br />
+                        @Html.ActionLink("Remove From Order", "RemoveDishFromOrder", "Order", @obj, null)
                     </th>
                 </tr>
             </table>
-        </div>
-    }
+        }
+    </div>
+    <div style="float:left">
+        @if (@HttpContextAccessor.HttpContext.Session.GetString("email") == null)
+        {
+            @Html.ActionLink("Add To Order", "GetAll", "Dish", null)
+        }
+        else
+        {
+            
+            @Html.ActionLink("Add To Order", "Login", "Account", null)
+        }
+    </div>
+    <div style="float:right">
+        Price: @Model.Price
+        <input type="submit" value="Pay for order" class="btn btn-primary" />
+    </div>
 </div>
