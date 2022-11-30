@@ -4,6 +4,7 @@ using GastroFaza.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GastroFaza.Migrations
 {
     [DbContext(typeof(RestaurantDbContext))]
-    partial class RestaurantDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221129211333_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +23,6 @@ namespace GastroFaza.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("DishOrder", b =>
-                {
-                    b.Property<int>("DishesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrdersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DishesId", "OrdersId");
-
-                    b.HasIndex("OrdersId");
-
-                    b.ToTable("DishOrder");
-                });
 
             modelBuilder.Entity("GastroFaza.Models.Address", b =>
                 {
@@ -81,13 +68,23 @@ namespace GastroFaza.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
                     b.Property<string>("ProfileImg")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("RestaurantId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("RestaurantId");
 
                     b.ToTable("Dishs");
                 });
@@ -300,19 +297,15 @@ namespace GastroFaza.Migrations
                     b.HasDiscriminator().HasValue("Worker");
                 });
 
-            modelBuilder.Entity("DishOrder", b =>
+            modelBuilder.Entity("GastroFaza.Models.Dish", b =>
                 {
-                    b.HasOne("GastroFaza.Models.Dish", null)
-                        .WithMany()
-                        .HasForeignKey("DishesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("GastroFaza.Models.Order", null)
-                        .WithMany()
-                        .HasForeignKey("OrdersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Dishes")
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("GastroFaza.Models.Restaurant", null)
+                        .WithMany("Menu")
+                        .HasForeignKey("RestaurantId");
                 });
 
             modelBuilder.Entity("GastroFaza.Models.Restaurant", b =>
@@ -360,9 +353,16 @@ namespace GastroFaza.Migrations
                     b.Navigation("Restaurant");
                 });
 
+            modelBuilder.Entity("GastroFaza.Models.Order", b =>
+                {
+                    b.Navigation("Dishes");
+                });
+
             modelBuilder.Entity("GastroFaza.Models.Restaurant", b =>
                 {
                     b.Navigation("Clients");
+
+                    b.Navigation("Menu");
 
                     b.Navigation("Tables");
 

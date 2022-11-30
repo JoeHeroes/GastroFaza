@@ -1,0 +1,58 @@
+﻿@model Worker
+@{
+    ViewData["Title"] = "Register";
+}
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+</head>
+<body class="loginbody">
+    <form class="registerbox" method="post" action="@Url.Action("registerWorker", "Account")">
+
+        <h1>Register</h1>
+        <tr>
+            <div asp-validation-summary="All"></div>
+            <td><label class="text-light" asp-for="Email"></label></td>
+            <td><input asp-for="Email" class="form-control"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <div class="text-light">Password</div>
+            <td><input type="password" class="form-control" name="password"></td>
+        </tr>
+        <tr>
+            <div class="text-light">ConfirmPassword</div>
+            <td><input type="password" name="confirmPassword" class="form-control"></td>
+        </tr>
+
+
+        <tr>
+            <td><label class="text-light" asp-for="FirstName"></label></td>
+            <td><input asp-for="FirstName" class="form-control" /></td>
+
+        </tr>
+        <tr>
+            <td><label class="text-light" asp-for="LastName"></label></td>
+            <td><input asp-for="LastName" class="form-control" /></td>
+
+        </tr>
+
+        <tr>
+            <td><label class="text-light" asp-for="Nationality"></label></td>
+            <td><input asp-for="Nationality" class="form-control" /></td>
+
+        </tr>
+        <tr>
+            <td><label class="text-light" asp-for="DateOfBirth"></label></td>
+            <td><input asp-for="DateOfBirth" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td><label class="text-light" asp-for="RoleId"></label></td>
+            <td><input asp-for="RoleId" class="form-control"/></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td><input type="submit" value="Register"></td>
+        </tr>
+    </form>
+</body>
+
