@@ -1,4 +1,5 @@
 ﻿using GastroFaza.Models;
+using GastroFaza.Models.Enum;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,7 @@ namespace GastroFaza.Controllers
         {
             this.dbContext = dbContext;
         }
+        
         [Route("ClientsOrders")]
         public IActionResult ClientsOrders()
         {
@@ -37,7 +39,8 @@ namespace GastroFaza.Controllers
             dbContext.SaveChanges();
             return RedirectToAction("ClientsOrders", "Order");
         }
-         [Route("Order")]
+        
+        [Route("Order")]
         public IActionResult Order()
         {
             if (HttpContext.Session.GetString("current order") == null)
