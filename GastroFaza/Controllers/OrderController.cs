@@ -12,8 +12,32 @@ namespace GastroFaza.Controllers
         {
             this.dbContext = dbContext;
         }
-       
-        [Route("Order")]
+        [Route("ClientsOrders")]
+        public IActionResult ClientsOrders()
+        {
+            var orders = this.dbContext.Orders.Where(o => o.Status == Status.Przygotowywanie);
+            return View(orders);
+        }
+        [Route("OrderDetails")]
+        public IActionResult OrderDetails(int OrderId)
+        {
+            var dishes = this.dbContext.Orders.Where(o => o.Id == OrderId).SelectMany(o => o.Dishes);
+            HttpContext.Session.SetString("orderId", OrderId.ToString());
+            return View(dishes);
+        }
+        [Route("OrderIsReady")]
+        public IActionResult OrderIsReady(int OrderId)
+        {
+            Order order = this.dbContext.Orders.FirstOrDefault(o => o.Id == OrderId);
+            if (order == null)
+            {
+                throw new Exception("Order not found");
+            }
+            order.Status = Status.Gotowe;
+            dbContext.SaveChanges();
+            return RedirectToAction("ClientsOrders", "Order");
+        }
+         [Route("Order")]
         public IActionResult Order()
         {
             if (HttpContext.Session.GetString("current order") == null)
