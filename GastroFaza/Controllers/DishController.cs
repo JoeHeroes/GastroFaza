@@ -41,7 +41,7 @@ namespace GastroFaza.Controllers
                 OrderMany = currentOrder,
             };
 
-            currentOrder.Dishes.Add(dishOrder);
+            this.dbContext.DishOrders.Add(dishOrder);
 
             try
             {

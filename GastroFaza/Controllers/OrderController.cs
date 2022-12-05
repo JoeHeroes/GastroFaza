@@ -1,5 +1,4 @@
 ﻿using GastroFaza.Models;
-using GastroFaza.Models.Enum;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,56 +22,47 @@ namespace GastroFaza.Controllers
             }
             int id = int.Parse(HttpContext.Session.GetString("current order"));
 
-            var dishes = this.dbContext.Orders.Where(o => o.Id == id).SelectMany(o => o.Dishes);
+            var dishOrder = this.dbContext.DishOrders.Where(x => x.OrderId == id);
 
-            return View(dishes);
+            List<Dish> orders = new List<Dish>();
+
+            var dishList = this.dbContext.Dishs.ToList();
+
+            foreach (var x in dishOrder)
+            {
+                var dish = dishList.FirstOrDefault(d => d.Id == x.DishesId);
+                orders.Add(dish);
+            }
+
+            return View(orders);
         }
-        public IActionResult RemoveDishFromOrder(Order order, Dish dish)
+        public IActionResult RemoveDishFromOrder(Dish dish)
         {
-            //ToDo Zrobić usuwanie w relacji ManyToMany
-            //this.dbContext.Orders.FirstOrDefault(u=>u.Id==order.Id).Dishes.Remove(dish);
 
+            int id = int.Parse(HttpContext.Session.GetString("current order"));
 
+            var dishOrder = this.dbContext.DishOrders.SingleOrDefault( x => x.OrderId == id && x.DishesId == dish.Id);
 
-            //users N↔N groups
-            //dish  N↔N order
-            /*
-            var groupToUpdate = this.dbContext.Orders.Include(g => g.Dishes).Single(u => u.Id == userVm.groupsIds[0]);
-            var userToUpdate = this.dbContext.Users.Single(u => u.Id == userVm.user.Id);
+            this.dbContext.DishOrders.Remove(dishOrder);
+           
+            try
+            {
+                this.dbContext.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new DbUpdateException("Error DataBase", e);
+            }
 
-            groupToUpdate.UserGroups.Remove(groupToUpdate.UserGroups.Where(ugu => ugu.UserId == userToUpdate.Id).FirstOrDefault());
-            _userGroupsContext.SaveChanges();
-
-            */
-
-
-
-            var orderDb = this.dbContext.Orders.Where(o => o.Id == order.Id).SelectMany(o => o.Dishes);
-
-            var dishDb = this.dbContext.Dishs.Single(d => d.Id == dish.Id);
-
-            //orderDb.Dishes.Remove(dishDb);
-
-
-            //this.dbContext.SaveChanges();
-
-            return View();
+            return RedirectToAction("Order");
         }
 
         [Route("Create")]
         public IActionResult Create()
         {
-            //if(this.dbContext.Orders.ToList().Count > 0)
-            //this.dbContext.Orders.Remove(this.dbContext.Orders.FirstOrDefault(u=>u.Id==int.Parse(HttpContext.Session.GetString("current order"))));
+            var order = new Order();
 
-
-
-
-            var dishOrder = new DishOrder();
-
-
-
-            this.dbContext.Orders.Add(dishOrder);
+            this.dbContext.Orders.Add(order);
             try
             {
                 this.dbContext.SaveChanges();

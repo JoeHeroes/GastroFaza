@@ -13,7 +13,7 @@ namespace GastroFaza.Models
         public DbSet<Order> Orders { get; set; }
 
 
-        public DbSet<Order> DishOrders { get; set; }
+        public DbSet<DishOrder> DishOrders { get; set; }
 
 
         public DbSet<Client> Clients { get; set; }
