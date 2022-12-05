@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Dish>
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "OrderDetails";
+}
+
+<style>
+    #table {
+        width ="150";
+        height ="250";
+    }
+</style>
+
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+</head>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Orders</h2>
+        </div>
+        <div class="col-6 text-end">
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<div style="float:left">
+    <div style="float:left">
+
+        @foreach (var obj in Model)
+        {
+            <table class="table table-bordered" id=table>
+                <tr>
+                    <th>
+                        @obj.Name
+                        <br />
+                        <br />
+                        @obj.Price
+                        <br />
+                        <br />
+                        @obj.Description
+                    </th>
+                </tr>
+            </table>
+        }
+    </div>
+    <div style="float:right">
+        <a href='@Url.Action("OrderIsReady", "Order",new {OrderId=int.Parse(@HttpContextAccessor.HttpContext.Session.GetString("orderId"))})' class="btn btn-primary">Order Is Ready</a>
+    </div>
+</div>
