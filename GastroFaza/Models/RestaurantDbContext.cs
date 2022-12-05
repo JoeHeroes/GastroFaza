@@ -79,8 +79,6 @@ namespace GastroFaza.Models
             .Entity<DishOrder>()
             .HasKey(t => t.Id);
 
-
-
             modelBuilder
             .Entity<DishOrder>()
             .HasOne(c => c.DishMany)
@@ -92,10 +90,6 @@ namespace GastroFaza.Models
            .HasOne(c => c.OrderMany)
            .WithMany(c => c.Dishes)
            .HasForeignKey(cl => cl.OrderId);
-
-
-
-
         }
     }
 }

@@ -178,12 +178,6 @@ namespace GastroFaza.Controllers
                 var baseProducer = baseQuery.Where(x => x.DishType == option.Dish);
                 baseQuery = baseProducer;
             }
-
-
-
-
-
-
             return View(baseQuery);
         }
     }
