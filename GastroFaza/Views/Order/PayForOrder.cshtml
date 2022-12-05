@@ -1,0 +1,27 @@
+﻿@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "PayForOrder";
+}
+
+<style>
+    #table {
+        width ="150";
+        height ="250";
+    }
+</style>
+
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+</head>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Payment Successfull, your order is being prepared</h2>
+            <a href='@Url.Action("GetAll", "Dish")' class="btn btn-primary">Return to menu</a>
+        </div>
+        <div class="col-6 text-end">
+        </div>
+    </div>
+</div>
+
