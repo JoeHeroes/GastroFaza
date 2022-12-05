@@ -17,7 +17,7 @@ namespace GastroFaza.Controllers
         [Route("Order")]
         public IActionResult Order()
         {
-            if (HttpContext.Session.GetString("current order") == null)
+            if (HttpContext.Session.GetString("current order") == null || HttpContext.Session.GetString("current order")==String.Empty)
             {
                 return RedirectToAction("Create");
             }
@@ -26,6 +26,20 @@ namespace GastroFaza.Controllers
             var dishes = this.dbContext.Orders.Where(o => o.Id == id).SelectMany(o => o.Dishes);
 
             return View(dishes);
+        }
+        [Route("PayForOrder")]
+        public IActionResult PayForOrder()
+        {
+            int id = int.Parse(HttpContext.Session.GetString("current order"));
+            Order order = this.dbContext.Orders.FirstOrDefault(o => o.Id == id);
+            if(order== null)
+            {
+                throw new Exception("Order not found");
+            }
+            order.Status= Status.Przygotowywanie;
+            dbContext.SaveChanges();
+            HttpContext.Session.SetString("current order", String.Empty);
+            return View();
         }
         public IActionResult RemoveDishFromOrder(Order order, Dish dish)
         {
