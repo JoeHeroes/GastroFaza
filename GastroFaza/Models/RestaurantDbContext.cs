@@ -64,6 +64,22 @@ namespace GastroFaza.Models
             modelBuilder.Entity<Reservation>()
              .Property(r => r.ClientId)
              .IsRequired();
+
+
+
+
+
+
+            modelBuilder.Entity<DishOrder>()
+                .HasKey(x => new { x.OrderId, x.DishesId });
+
+        
+
+
+
+
+
+
         }
     }
 }
