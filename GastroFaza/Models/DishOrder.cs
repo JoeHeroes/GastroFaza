@@ -2,11 +2,15 @@
 {
     public class DishOrder
     {
+
+        public int Id { get; set; }
+
+
         public int DishesId { get; set; }
         public int OrderId { get; set; }
 
-        public Dish Dish { get; set; }
-        public Order Order { get; set; }
+        public Dish DishMany { get; set; }
+        public Order OrderMany { get; set; }
 
 
     }

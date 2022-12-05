@@ -68,29 +68,11 @@ namespace GastroFaza.Controllers
 
 
 
+            var dishOrder = new DishOrder();
 
 
 
-
-            ////
-            var order = new Order()
-            {
-                Description = "",
-                Price = 0,
-            };
-            var dishes = new Dish();
-            order.Dishes = new List<DishOrder>
-            {
-              new DishOrder {
-                Dish = dishes,
-                Order= order,
-              }
-            };
-
-            ////////
-
-
-            this.dbContext.Orders.Add(order);
+            this.dbContext.Orders.Add(dishOrder);
             try
             {
                 this.dbContext.SaveChanges();
