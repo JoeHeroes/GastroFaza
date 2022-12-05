@@ -10,12 +10,17 @@ namespace GastroFaza.Models
 
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Dish> Dishs { get; set; }
+        public DbSet<Order> Orders { get; set; }
+
+
+        public DbSet<DishOrder> DishOrders { get; set; }
+
+
         public DbSet<Client> Clients { get; set; }
         public DbSet<Worker> Workers { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Tablee> Tables { get; set; }
-        public DbSet<Order> Orders { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         
 
@@ -64,6 +69,27 @@ namespace GastroFaza.Models
             modelBuilder.Entity<Reservation>()
              .Property(r => r.ClientId)
              .IsRequired();
+
+
+
+
+
+
+            modelBuilder
+            .Entity<DishOrder>()
+            .HasKey(t => t.Id);
+
+            modelBuilder
+            .Entity<DishOrder>()
+            .HasOne(c => c.DishMany)
+            .WithMany(c => c.Orders)
+            .HasForeignKey(cl => cl.DishesId);
+
+            modelBuilder
+           .Entity<DishOrder>()
+           .HasOne(c => c.OrderMany)
+           .WithMany(c => c.Dishes)
+           .HasForeignKey(cl => cl.OrderId);
         }
     }
 }

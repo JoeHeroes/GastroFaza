@@ -1,5 +1,4 @@
 ﻿using GastroFaza.Models;
-using GastroFaza.Models.Enum;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,66 +37,55 @@ namespace GastroFaza.Controllers
             dbContext.SaveChanges();
             return RedirectToAction("ClientsOrders", "Order");
         }
-        [Route("Order")]
+         [Route("Order")]
         public IActionResult Order()
         {
-            if (HttpContext.Session.GetString("current order") == null || HttpContext.Session.GetString("current order")==String.Empty)
+            if (HttpContext.Session.GetString("current order") == null)
             {
                 return RedirectToAction("Create");
             }
             int id = int.Parse(HttpContext.Session.GetString("current order"));
 
-            var dishes = this.dbContext.Orders.Where(o => o.Id == id).SelectMany(o => o.Dishes);
+            var dishOrder = this.dbContext.DishOrders.Where(x => x.OrderId == id);
 
-            return View(dishes);
-        }
-        [Route("PayForOrder")]
-        public IActionResult PayForOrder()
-        {
-            int id = int.Parse(HttpContext.Session.GetString("current order"));
-            Order order = this.dbContext.Orders.FirstOrDefault(o => o.Id == id);
-            if(order== null)
+            List<Dish> orders = new List<Dish>();
+
+            var dishList = this.dbContext.Dishs.ToList();
+
+            foreach (var x in dishOrder)
             {
-                throw new Exception("Order not found");
+                var dish = dishList.FirstOrDefault(d => d.Id == x.DishesId);
+                orders.Add(dish);
             }
-            order.Status= Status.Przygotowywanie;
-            dbContext.SaveChanges();
-            HttpContext.Session.SetString("current order", String.Empty);
-            return View();
+
+            return View(orders);
         }
-        public IActionResult RemoveDishFromOrder(Order order, Dish dish)
+        public IActionResult RemoveDishFromOrder(Dish dish)
         {
-            //ToDo Zrobić usuwanie w relacji ManyToMany
-            //this.dbContext.Orders.FirstOrDefault(u=>u.Id==order.Id).Dishes.Remove(dish);
 
+            int id = int.Parse(HttpContext.Session.GetString("current order"));
 
-            var lol = this.dbContext.Orders.FirstOrDefault(u => u.Id == order.Id);
+            var dishOrder = this.dbContext.DishOrders.SingleOrDefault( x => x.OrderId == id && x.DishesId == dish.Id);
 
-            lol.Dishes.Remove(dish);
-
+            this.dbContext.DishOrders.Remove(dishOrder);
+           
             try
             {
                 this.dbContext.SaveChanges();
-                HttpContext.Session.SetString("current order", this.dbContext.Orders.FirstOrDefault(u => u == order).Id.ToString());
             }
             catch (DbUpdateException e)
             {
                 throw new DbUpdateException("Error DataBase", e);
             }
-            return View();
+
+            return RedirectToAction("Order");
         }
 
         [Route("Create")]
         public IActionResult Create()
         {
-            //if(this.dbContext.Orders.ToList().Count > 0)
-            //this.dbContext.Orders.Remove(this.dbContext.Orders.FirstOrDefault(u=>u.Id==int.Parse(HttpContext.Session.GetString("current order"))));
-            var order = new Order()
-            {
-                Description = "",
-                Price = 0,
-                Dishes = new List<Dish>()
-            };
+            var order = new Order();
+
             this.dbContext.Orders.Add(order);
             try
             {

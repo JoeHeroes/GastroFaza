@@ -33,10 +33,15 @@ namespace GastroFaza.Controllers
 
             var dish = this.dbContext.Dishs.FirstOrDefault(u => u.Id == dishId);
 
-            currentOrder.Dishes.Add(dish);
-
             currentOrder.Price += dish.Price;
-            this.dbContext.SaveChanges();
+
+            var dishOrder = new DishOrder()
+            {
+                DishMany = dish,
+                OrderMany = currentOrder,
+            };
+
+            this.dbContext.DishOrders.Add(dishOrder);
 
             try
             {
@@ -173,12 +178,6 @@ namespace GastroFaza.Controllers
                 var baseProducer = baseQuery.Where(x => x.DishType == option.Dish);
                 baseQuery = baseProducer;
             }
-
-
-
-
-
-
             return View(baseQuery);
         }
     }

@@ -110,24 +110,26 @@ namespace GastroFaza.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DishOrder",
+                name: "DishOrders",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     DishesId = table.Column<int>(type: "int", nullable: false),
-                    OrdersId = table.Column<int>(type: "int", nullable: false)
+                    OrderId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DishOrder", x => new { x.DishesId, x.OrdersId });
+                    table.PrimaryKey("PK_DishOrders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DishOrder_Dishs_DishesId",
+                        name: "FK_DishOrders_Dishs_DishesId",
                         column: x => x.DishesId,
                         principalTable: "Dishs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DishOrder_Orders_OrdersId",
-                        column: x => x.OrdersId,
+                        name: "FK_DishOrders_Orders_OrderId",
+                        column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -197,9 +199,14 @@ namespace GastroFaza.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_DishOrder_OrdersId",
-                table: "DishOrder",
-                column: "OrdersId");
+                name: "IX_DishOrders_DishesId",
+                table: "DishOrders",
+                column: "DishesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DishOrders_OrderId",
+                table: "DishOrders",
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Restaurants_AddressId",
@@ -231,7 +238,7 @@ namespace GastroFaza.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "DishOrder");
+                name: "DishOrders");
 
             migrationBuilder.DropTable(
                 name: "Reservations");
