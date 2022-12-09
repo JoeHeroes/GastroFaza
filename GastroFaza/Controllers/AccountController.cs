@@ -98,16 +98,10 @@ namespace GastroFaza.Controllers
                 this.dbContext.Workers.Add(newWorker);
                 this.dbContext.SaveChanges();
 
-                HttpContext.Session.SetString("email", dto.Email);
-                HttpContext.Session.SetString("isWorker", "true");
-                if (dto.RoleId == 1)                                      //set worker role in session 
-                    HttpContext.Session.SetString("Role", "Waiter");
-                else
-                    HttpContext.Session.SetString("Role", "Cook");
                 return RedirectToAction("Welcome");
             }
             ViewBag.msg = "Invalid";
-            return View("Login");
+            return View("Register");
         }
 
         [HttpPost]
