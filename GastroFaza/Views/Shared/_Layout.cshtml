@@ -35,21 +35,25 @@
                         {
                             <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Dish" asp-action="GetAll">Menu</a></li>
                             <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="Order">Your orders</a></li>
-                            <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Your reservations</a></li>
-                        } else
+                            if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
+                            {
+                                <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Reservation" asp-action="GetAll">Your reservations</a></li>
+                            }
+                        }
+                        else
                         {
                             <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="ClientsOrders">Clients Orders</a></li>
 
                             @if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Waiter") @* If worker is Waiter*@
                             {
-                                <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Clients Reservations</a></li>
+                                <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Reservation" asp-action="GetAll">Clients Reservations</a></li>
                             }
                         }
 
                     </ul>
 
                     <partial name="_LoginPartial" />
-                    
+
                 </div>
             </div>
         </nav>

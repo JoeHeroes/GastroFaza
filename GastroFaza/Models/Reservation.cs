@@ -3,8 +3,8 @@
     public class Reservation
     {
         public int Id { get; set; }
-        public string ClientId { get; set; }
-        public string TableId { get; set; }
+        public int ClientId { get; set; }
+        public int TableId { get; set; }
         public DateTime DataOfReservation{ get; set; }
     }
 }
