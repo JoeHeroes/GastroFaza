@@ -16,57 +16,59 @@ namespace GastroFaza.Controllers
 
         public IActionResult GetAll()
         {
-            IEnumerable<Reservation> reservations = this.dbContext.Reservations;
-    
-            if (HttpContext.Session.GetString("isWorker") != "true" && HttpContext.Session.GetString("email") != null)
+            if(HttpContext.Session.GetString("email") != null)
             {
-                string userEmail = HttpContext.Session.GetString("email");
-                var client = this.dbContext.Clients.FirstOrDefault(u => u.Email == userEmail);
-                IEnumerable<Reservation> clientReservations = reservations.Where(r => r.ClientId == client.Id);
-                return View(clientReservations);
-            }
-            else
-            {
-                return View(reservations);
-            }
+                IEnumerable<Reservation> reservations = this.dbContext.Reservations;
 
-
+                if (HttpContext.Session.GetString("isWorker") != "true")
+                {
+                    string userEmail = HttpContext.Session.GetString("email");
+                    var client = this.dbContext.Clients.FirstOrDefault(u => u.Email == userEmail);
+                    IEnumerable<Reservation> clientReservations = reservations.Where(r => r.ClientId == client.Id);
+                    return View(clientReservations);
+                }
+                else
+                {
+                    return View(reservations);
+                }
+            } else {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
-        public IActionResult GetOne(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            var reservation = this.dbContext.Reservations.Find(id);
-
-            return View(reservation);
-        }
         public IActionResult Delete(int? id)
         {
-            var reservation = this.dbContext.Reservations.Find(id);
-            if (reservation == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                return NotFound();
-            }
+                var reservation = this.dbContext.Reservations.Find(id);
+                if (reservation == null)
+                {
+                    return NotFound();
+                }
 
-            this.dbContext.Reservations.Remove(reservation);
-            try
-            {
-                this.dbContext.SaveChanges();
+                this.dbContext.Reservations.Remove(reservation);
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+                return RedirectToAction("GetAll");
+            } else {
+                return RedirectToAction("Login", "Account");
             }
-            catch (DbUpdateException e)
-            {
-                throw new DbUpdateException("Error DataBase", e);
-            }
-            return RedirectToAction("GetAll");
         }
 
         public IActionResult Edit()
         {
-            return View();
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                return View();
+            } else {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
         [HttpPost]
@@ -95,7 +97,13 @@ namespace GastroFaza.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                return View();
+            }
+            else {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
         [HttpPost]

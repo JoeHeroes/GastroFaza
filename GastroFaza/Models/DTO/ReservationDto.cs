@@ -2,7 +2,7 @@
 {
     public class ReservationDto
     {
-        public int TableId { get; set; }
+        public int[] TableId { get; set; }
         public DateTime DataOfReservation { get; set; }
     }
 }
