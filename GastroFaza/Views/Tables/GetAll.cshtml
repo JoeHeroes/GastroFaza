@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Tablee>
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "GetAll";
+}
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+</head>
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Tables</h2>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Busy
+            </th>
+            <th>
+                Reserved
+            </th>
+            <th>
+                Seats
+            </th>
+            <th>
+                ClientId
+            </th>
+            <th>
+                Modify
+            </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td width="10%">
+                        @obj.Id
+                    </td>
+                    <td width="10%">
+                        @obj.Busy
+                    </td>
+                    <td width="10%">
+                        @obj.Reserved
+                    </td>
+                    <td width="10%">
+                        @obj.Seats
+                    </td>
+                    <td width="10%">
+                        @obj.ClientId
+                    </td>
+                    <td width="50%">
+                        <a class="btn btn-secondary" asp-controller="Table" asp-action="SetBusy" asp-route-id="@obj.Id">SetBusy</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
