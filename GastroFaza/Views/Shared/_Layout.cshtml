@@ -26,9 +26,7 @@
                     <ul class="navbar-nav me-auto">
                         @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
+                            
                         }
 
                         @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") != "true") @* If user is not Worker *@
