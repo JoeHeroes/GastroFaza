@@ -13,6 +13,12 @@
         <div class="col-6">
             <h2 class="text-primary">Tables</h2>
         </div>
+        <div class="col-6 text-end">
+            @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
+            {
+                <a href='@Url.Action("Create", "Tablee")' class="btn btn-primary">Add Table</a>
+            }
+        </div>
     </div>
 </div>
 <br />
@@ -25,16 +31,10 @@
                 Id
             </th>
             <th>
-                Busy
-            </th>
-            <th>
-                Reserved
-            </th>
-            <th>
                 Seats
             </th>
             <th>
-                ClientId
+                Busy
             </th>
             <th>
                 Modify
@@ -52,19 +52,15 @@
                         @obj.Id
                     </td>
                     <td width="10%">
-                        @obj.Busy
-                    </td>
-                    <td width="10%">
-                        @obj.Reserved
-                    </td>
-                    <td width="10%">
                         @obj.Seats
                     </td>
-                    <td width="10%">
-                        @obj.ClientId
+                    <td width="30%">
+                        @obj.Busy
                     </td>
                     <td width="50%">
-                        <a class="btn btn-secondary" asp-controller="Table" asp-action="SetBusy" asp-route-id="@obj.Id">SetBusy</a>
+                        <a class="btn btn-secondary" asp-controller="Tablee" asp-action="SetBusy" asp-route-id="@obj.Id">SetBusy</a>
+                        <a class="btn btn-warning" asp-controller="Tablee" asp-action="Edit" asp-route-id="@obj.Id">Edit</a>
+                        <a class="btn btn-danger" asp-controller="Tablee" asp-action="Delete" asp-route-id="@obj.Id">Delete</a>
                     </td>
                 </tr>
             }

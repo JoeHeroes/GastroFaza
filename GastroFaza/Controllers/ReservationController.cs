@@ -16,7 +16,7 @@ namespace GastroFaza.Controllers
 
         public IActionResult GetAll()
         {
-            if(HttpContext.Session.GetString("email") != null)
+            if (HttpContext.Session.GetString("email") != null)
             {
                 IEnumerable<Reservation> reservations = this.dbContext.Reservations;
 
@@ -78,8 +78,12 @@ namespace GastroFaza.Controllers
             {
                 var model = this.dbContext.Reservations.Find(id);
                 model.TableId = modelDTO.TableId;
-                model.DataOfReservation = modelDTO.DataOfReservation;
-
+                model.DataOfReservation = new DateTime(modelDTO.DateOfReservation.Year,
+                    modelDTO.DateOfReservation.Month, 
+                    modelDTO.DateOfReservation.Day, 
+                    modelDTO.HourOfReservation.Hour, 
+                    modelDTO.HourOfReservation.Minute, 
+                    modelDTO.HourOfReservation.Second);
                 try
                 {
                     this.dbContext.SaveChanges();
@@ -119,7 +123,12 @@ namespace GastroFaza.Controllers
                 {
                     ClientId = idClient,
                     TableId = modelDTO.TableId,
-                    DataOfReservation = modelDTO.DataOfReservation
+                    DataOfReservation = new DateTime(modelDTO.DateOfReservation.Year,
+                    modelDTO.DateOfReservation.Month, 
+                    modelDTO.DateOfReservation.Day, 
+                    modelDTO.HourOfReservation.Hour, 
+                    modelDTO.HourOfReservation.Minute, 
+                    modelDTO.HourOfReservation.Second)
                 });
 
                 try
