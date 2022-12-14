@@ -17,6 +17,6 @@ namespace GastroFaza.Models
         public virtual Address Address { get; set; } 
         public virtual List<Worker> Workers { get; set; } = null!;
         public virtual List<Client> Clients { get; set; } = null!;
-        public virtual List<Tablee> Tables { get; set; } = null!;
+        public virtual List<DiningTable> Tables { get; set; } = null!;
     }
 }

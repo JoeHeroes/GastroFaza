@@ -48,6 +48,33 @@ namespace GastroFaza.Migrations
                     b.ToTable("Addresses");
                 });
 
+            modelBuilder.Entity("GastroFaza.Models.DiningTable", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Busy")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RestaurantId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Seats")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RestaurantId");
+
+                    b.ToTable("Tables");
+                });
+
             modelBuilder.Entity("GastroFaza.Models.Dish", b =>
                 {
                     b.Property<int>("Id")
@@ -201,36 +228,6 @@ namespace GastroFaza.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("GastroFaza.Models.Tablee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<bool>("Busy")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Reserved")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("RestaurantId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Seats")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RestaurantId");
-
-                    b.ToTable("Tables");
-                });
-
             modelBuilder.Entity("GastroFaza.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -308,6 +305,13 @@ namespace GastroFaza.Migrations
                     b.HasDiscriminator().HasValue("Worker");
                 });
 
+            modelBuilder.Entity("GastroFaza.Models.DiningTable", b =>
+                {
+                    b.HasOne("GastroFaza.Models.Restaurant", null)
+                        .WithMany("Tables")
+                        .HasForeignKey("RestaurantId");
+                });
+
             modelBuilder.Entity("GastroFaza.Models.DishOrder", b =>
                 {
                     b.HasOne("GastroFaza.Models.Dish", "DishMany")
@@ -336,13 +340,6 @@ namespace GastroFaza.Migrations
                         .IsRequired();
 
                     b.Navigation("Address");
-                });
-
-            modelBuilder.Entity("GastroFaza.Models.Tablee", b =>
-                {
-                    b.HasOne("GastroFaza.Models.Restaurant", null)
-                        .WithMany("Tables")
-                        .HasForeignKey("RestaurantId");
                 });
 
             modelBuilder.Entity("GastroFaza.Models.Client", b =>
