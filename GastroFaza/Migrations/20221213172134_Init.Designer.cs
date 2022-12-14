@@ -12,7 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GastroFaza.Migrations
 {
     [DbContext(typeof(RestaurantDbContext))]
+<<<<<<<< HEAD:GastroFaza/Migrations/20221213172134_Init.Designer.cs
     [Migration("20221213172134_Init")]
+========
+    [Migration("20221209094627_Init")]
+>>>>>>>> 3b25b434a4fd2beffe4edf526899a9534072d7ea:GastroFaza/Migrations/20221209094627_Init.Designer.cs
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
