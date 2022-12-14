@@ -36,17 +36,39 @@ namespace GastroFaza.Controllers
             }
         }
 
-        public IActionResult Delete(int? id)
+        public IActionResult Create()
         {
             if (HttpContext.Session.GetString("email") != null)
             {
-                var reservation = this.dbContext.Reservations.Find(id);
-                if (reservation == null)
-                {
-                    return NotFound();
-                }
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
 
-                this.dbContext.Reservations.Remove(reservation);
+        [HttpPost]
+        public IActionResult Create(ReservationDto modelDTO)
+        {
+            string userEmail = HttpContext.Session.GetString("email");
+            var client = this.dbContext.Clients.FirstOrDefault(u => u.Email == userEmail);
+            int idClient = client.Id;
+
+            if (ModelState.IsValid)
+            {
+                this.dbContext.Reservations.Add(new Reservation()
+                {
+                    ClientId = idClient,
+                    TableId = modelDTO.TableId,
+                    DataOfReservation = new DateTime(modelDTO.DateOfReservation.Year,
+                    modelDTO.DateOfReservation.Month,
+                    modelDTO.DateOfReservation.Day,
+                    modelDTO.HourOfReservation.Hour,
+                    modelDTO.HourOfReservation.Minute,
+                    modelDTO.HourOfReservation.Second)
+                });
+
                 try
                 {
                     this.dbContext.SaveChanges();
@@ -56,9 +78,9 @@ namespace GastroFaza.Controllers
                     throw new DbUpdateException("Error DataBase", e);
                 }
                 return RedirectToAction("GetAll");
-            } else {
-                return RedirectToAction("Login", "Account");
             }
+
+            return View(modelDTO);
         }
 
         public IActionResult Edit()
@@ -99,35 +121,33 @@ namespace GastroFaza.Controllers
             return View(modelDTO);
         }
 
-        public IActionResult Create()
+
+        public IActionResult WorkerCreate()
         {
             if (HttpContext.Session.GetString("email") != null)
             {
                 return View();
             }
-            else {
+            else
+            {
                 return RedirectToAction("Login", "Account");
             }
         }
 
         [HttpPost]
-        public IActionResult Create(ReservationDto modelDTO)
+        public IActionResult WorkerCreate(ReservationWorkerDto modelDTO)
         {
-            string userEmail = HttpContext.Session.GetString("email");
-            var client = this.dbContext.Clients.FirstOrDefault(u => u.Email == userEmail);
-            int idClient = client.Id;
-
             if (ModelState.IsValid)
             {
                 this.dbContext.Reservations.Add(new Reservation()
                 {
-                    ClientId = idClient,
+                    ClientId = modelDTO.ClientId,
                     TableId = modelDTO.TableId,
                     DataOfReservation = new DateTime(modelDTO.DateOfReservation.Year,
-                    modelDTO.DateOfReservation.Month, 
-                    modelDTO.DateOfReservation.Day, 
-                    modelDTO.HourOfReservation.Hour, 
-                    modelDTO.HourOfReservation.Minute, 
+                    modelDTO.DateOfReservation.Month,
+                    modelDTO.DateOfReservation.Day,
+                    modelDTO.HourOfReservation.Hour,
+                    modelDTO.HourOfReservation.Minute,
                     modelDTO.HourOfReservation.Second)
                 });
 
@@ -144,5 +164,76 @@ namespace GastroFaza.Controllers
 
             return View(modelDTO);
         }
+
+        public IActionResult WorkerEdit()
+        {
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult WorkerEdit(int? id, ReservationWorkerDto modelDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                var model = this.dbContext.Reservations.Find(id);
+                model.ClientId = modelDTO.ClientId;
+                model.TableId = modelDTO.TableId;
+                model.DataOfReservation = new DateTime(modelDTO.DateOfReservation.Year,
+                    modelDTO.DateOfReservation.Month,
+                    modelDTO.DateOfReservation.Day,
+                    modelDTO.HourOfReservation.Hour,
+                    modelDTO.HourOfReservation.Minute,
+                    modelDTO.HourOfReservation.Second);
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+
+                return RedirectToAction("GetAll");
+            }
+
+            return View(modelDTO);
+        }
+
+
+        public IActionResult Delete(int? id)
+        {
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                var reservation = this.dbContext.Reservations.Find(id);
+                if (reservation == null)
+                {
+                    return NotFound();
+                }
+
+                this.dbContext.Reservations.Remove(reservation);
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+                return RedirectToAction("GetAll");
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+
     }
 }

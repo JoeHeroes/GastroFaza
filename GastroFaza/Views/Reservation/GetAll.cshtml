@@ -16,7 +16,12 @@
         <div class="col-6 text-end">
             @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
             {
-                <a href='@Url.Action("Create", "Reservation")' class="btn btn-primary">Add Reservation</a>
+                @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") == "true")
+                {
+                    <a href='@Url.Action("WorkerCreate", "Reservation")' class="btn btn-primary">Add Reservation</a>
+                } else {
+                    <a href='@Url.Action("Create", "Reservation")' class="btn btn-primary">Add Reservation</a>
+                }
             }
         </div>
     </div>
@@ -30,7 +35,7 @@
             <th>
                 Id
             </th>
-            @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") == "true") @* If user is not Worker *@
+            @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") == "true")
             {
             <th>
                 ClientId
@@ -78,7 +83,12 @@
                             @obj.DataOfReservation
                         </td>
                         <td width="20%">
-                            <a class="btn btn-secondary" asp-controller="Reservation" asp-action="Edit" asp-route-id="@obj.Id">Edit</a>
+                            @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") == "true")
+                            {
+                                <a class="btn btn-secondary" asp-controller="Reservation" asp-action="WorkerEdit" asp-route-id="@obj.Id">Edit</a>
+                            } else {
+                                <a class="btn btn-secondary" asp-controller="Reservation" asp-action="Edit" asp-route-id="@obj.Id">Edit</a>
+                            }
                             <a class="btn btn-danger" asp-controller="Reservation" asp-action="Delete" asp-route-id="@obj.Id">Delete</a>
                         </td>
                     }
