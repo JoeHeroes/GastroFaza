@@ -53,6 +53,12 @@
             <td>&nbsp;</td>
             <td><input type="submit" value="Register"></td>
         </tr>
+         <tr> @using (Html.BeginForm("FormSubmit", "Captcha", FormMethod.Post))
+            {
+                <div class="g-recaptcha" data-sitekey="6LdjRX4jAAAAAF_Krubyw4vf0hmdaX0Hgx6mpYX8"></div>
+            }
+            </tr>
     </form>
 </body>
+<script src='https://www.google.com/recaptcha/api.js' type="text/javascript"></script>
 

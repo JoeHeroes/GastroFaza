@@ -20,7 +20,7 @@ namespace GastroFaza.Models
         public DbSet<Worker> Workers { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
-        public DbSet<Tablee> Tables { get; set; }
+        public DbSet<DiningTable> Tables { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         
 
@@ -54,11 +54,11 @@ namespace GastroFaza.Models
                .IsRequired()
                .HasMaxLength(25);
 
-            modelBuilder.Entity<Tablee>()
+            modelBuilder.Entity<DiningTable>()
               .Property(r => r.Busy)
               .IsRequired();
 
-            modelBuilder.Entity<Tablee>()
+            modelBuilder.Entity<DiningTable>()
              .Property(r => r.Seats)
              .IsRequired();
 

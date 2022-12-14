@@ -3,7 +3,9 @@ using GastroFaza.Models.DTO;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+using Newtonsoft.Json;
+using System.Net;
+using Newtonsoft.Json;
 
 namespace GastroFaza.Controllers
 {
@@ -79,6 +81,16 @@ namespace GastroFaza.Controllers
         [Route("registerWorker")]         //for manager
         public IActionResult RegisterWorker(RegisterWorkerDto dto)
         {
+            //captcha validation
+            var response = Request.Form["g-recaptcha-response"];
+            string secretKey = "6LdjRX4jAAAAAN0GPdgW5aHuwvu-8T-V_LFzeOr8";
+            bool IsCaptchaValid = (ReCaptchaClass.Validate(response) == "true" ? true : false);
+
+            if (!IsCaptchaValid)
+            {
+                return View("CreateWorkerAccount");
+            }
+
             if (ModelState.IsValid)
             {
                 var newWorker = new Worker()
@@ -101,13 +113,23 @@ namespace GastroFaza.Controllers
                 return RedirectToAction("Welcome");
             }
             ViewBag.msg = "Invalid";
-            return View("Register");
+            return View("CreateWorkerAccount");
         }
 
         [HttpPost]
         [Route("registerClient")]
         public IActionResult RegisterClient(RegisterClientDto dto)
         {
+            //captcha validation
+            var response = Request.Form["g-recaptcha-response"];
+            string secretKey = "6LdjRX4jAAAAAN0GPdgW5aHuwvu-8T-V_LFzeOr8";
+            bool IsCaptchaValid = (ReCaptchaClass.Validate(response) == "true" ? true : false);
+
+            if (!IsCaptchaValid)
+            {
+                return View("Register");
+            }
+
             if (ModelState.IsValid)
             {
                 var newClient = new Client()
@@ -137,6 +159,16 @@ namespace GastroFaza.Controllers
         [Route("Login")]
         public IActionResult Login(LoginDto dto)
         {
+            //captcha for login
+            var response = Request.Form["g-recaptcha-response"];
+            string secretKey = "6LdjRX4jAAAAAN0GPdgW5aHuwvu-8T-V_LFzeOr8";
+            bool IsCaptchaValid = (ReCaptchaClass.Validate(response) == "true" ? true : false);
+
+            if (!IsCaptchaValid)
+            {
+                return View("Login");
+            }
+
             if (ModelState.IsValid)
             {
                 var worker = this.dbContext
@@ -190,5 +222,41 @@ namespace GastroFaza.Controllers
 
 
     }
-    
+
+}
+
+
+//captcha validation
+    public class ReCaptchaClass
+{
+    public static string Validate(string EncodedResponse)
+    {
+        var client = new System.Net.WebClient();
+
+        string PrivateKey = "6LdjRX4jAAAAAN0GPdgW5aHuwvu-8T-V_LFzeOr8";
+
+        var GoogleReply = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", PrivateKey, EncodedResponse));
+
+        var captchaResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<ReCaptchaClass>(GoogleReply);
+
+        return captchaResponse.Success.ToLower();
+    }
+
+    [JsonProperty("success")]
+    public string Success
+    {
+        get { return m_Success; }
+        set { m_Success = value; }
+    }
+
+    private string m_Success;
+    [JsonProperty("error-codes")]
+    public List<string> ErrorCodes
+    {
+        get { return m_ErrorCodes; }
+        set { m_ErrorCodes = value; }
+    }
+
+
+    private List<string> m_ErrorCodes;
 }
