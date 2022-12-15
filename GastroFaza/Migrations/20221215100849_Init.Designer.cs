@@ -12,11 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GastroFaza.Migrations
 {
     [DbContext(typeof(RestaurantDbContext))]
-<<<<<<<< HEAD:GastroFaza/Migrations/20221213172134_Init.Designer.cs
-    [Migration("20221213172134_Init")]
-========
-    [Migration("20221209094627_Init")]
->>>>>>>> 3b25b434a4fd2beffe4edf526899a9534072d7ea:GastroFaza/Migrations/20221209094627_Init.Designer.cs
+    [Migration("20221215100849_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,9 +60,6 @@ namespace GastroFaza.Migrations
 
                     b.Property<bool>("Busy")
                         .HasColumnType("bit");
-
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
 
                     b.Property<int?>("RestaurantId")
                         .HasColumnType("int");
@@ -166,14 +159,13 @@ namespace GastroFaza.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("ClientId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DataOfReservation")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("TableId")
+                    b.Property<string>("TableIdContainer")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

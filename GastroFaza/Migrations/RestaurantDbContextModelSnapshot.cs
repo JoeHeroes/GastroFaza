@@ -59,9 +59,6 @@ namespace GastroFaza.Migrations
                     b.Property<bool>("Busy")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("RestaurantId")
                         .HasColumnType("int");
 
@@ -160,14 +157,13 @@ namespace GastroFaza.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("ClientId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DataOfReservation")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("TableId")
+                    b.Property<string>("TableIdContainer")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

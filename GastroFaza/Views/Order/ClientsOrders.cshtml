@@ -21,6 +21,11 @@
             <h2 class="text-primary">Orders</h2>
         </div>
         <div class="col-6 text-end">
+
+            @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
+            {
+                <a href='@Url.Action("Create", "Order")' class="btn btn-primary">Add Order</a>
+            }
         </div>
     </div>
 </div>
