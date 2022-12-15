@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GastroFaza.Controllers
 {
-    public class TableeController : Controller
+    public class DiningTableController : Controller
     {
         private readonly RestaurantDbContext dbContext;
 
-        public TableeController(RestaurantDbContext dbContext)
+        public DiningTableController(RestaurantDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
@@ -20,7 +20,7 @@ namespace GastroFaza.Controllers
             {
                 if (HttpContext.Session.GetString("isWorker") == "true")
                 {
-                    IEnumerable<Tablee> tables = this.dbContext.Tables;
+                    IEnumerable<DiningTable> tables = this.dbContext.Tables;
                     return View(tables);
                 }
                 else
@@ -84,7 +84,7 @@ namespace GastroFaza.Controllers
 
             if (ModelState.IsValid)
             {
-                this.dbContext.Tables.Add(new Tablee()
+                this.dbContext.Tables.Add(new DiningTable()
                 {
                     Busy = false,
                     Seats  = modelDTO.Seats,

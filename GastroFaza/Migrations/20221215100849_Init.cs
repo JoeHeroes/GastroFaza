@@ -63,8 +63,8 @@ namespace GastroFaza.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ClientId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TableId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClientId = table.Column<int>(type: "int", nullable: false),
+                    TableIdContainer = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DataOfReservation = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -143,7 +143,6 @@ namespace GastroFaza.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Busy = table.Column<bool>(type: "bit", nullable: false),
                     Seats = table.Column<int>(type: "int", nullable: false),
-                    ClientId = table.Column<int>(type: "int", nullable: false),
                     RestaurantId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
