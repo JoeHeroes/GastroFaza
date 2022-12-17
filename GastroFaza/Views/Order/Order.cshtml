@@ -47,17 +47,21 @@
             </table>
         }
     </div>
-    <div style="float:left">
-        @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
+
+
+     @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
         {
-            <a href='@Url.Action("GetAll", "Dish")' class="btn btn-primary">Add To Order</a>
+            <div style="float:left">
+                <a href='@Url.Action("GetAll", "Dish")' class="btn btn-primary">Add To Order</a>
+            </div>
+            <div style="float:right">
+                <a href='@Url.Action("PayForOrder", "Order")' class="btn btn-primary">Pay for order</a>
+            </div>
         }
         else
         {
-            <a href='@Url.Action("Login", "Account")' class="btn btn-primary">Login To Order</a>
+            <div style="float:left">
+                <a href='@Url.Action("Login", "Account")' class="btn btn-primary">Login To Order</a>
+            </div>
         }
-    </div>
-    <div style="float:right">
-        <a href='@Url.Action("PayForOrder", "Order")' class="btn btn-primary">Pay for order</a>
-    </div>
 </div>
