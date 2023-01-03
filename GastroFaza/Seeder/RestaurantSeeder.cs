@@ -39,9 +39,6 @@ namespace GastroFaza.Seeder
                 }
             }
         }
-
-
-
         private IEnumerable<Dish> GetDishes()
         {
             return new List<Dish>()

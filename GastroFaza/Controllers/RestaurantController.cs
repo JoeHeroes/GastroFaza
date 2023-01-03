@@ -50,7 +50,13 @@ namespace GastroFaza.Controllers
             }
             return RedirectToAction("Index");
         }
+        public IActionResult Edit(int Id)
+        {
+            var restaurant = this.dbContext.Restaurants.FirstOrDefault();
 
+            return View(restaurant);
+        }
+        [HttpPost]
         public IActionResult Edit(int? id, UpdateRestaurantDto modelDTO)
         {
             if (ModelState.IsValid)
@@ -59,6 +65,8 @@ namespace GastroFaza.Controllers
                 model.Name = modelDTO.Name;
                 model.HasDelivery = modelDTO.HasDelivery;
                 model.Description = modelDTO.Description;
+                model.ContactEmail = modelDTO.ContactEmail;
+                model.ContactNumber = modelDTO.ContactNumber;
 
                 try
                 {
@@ -69,12 +77,16 @@ namespace GastroFaza.Controllers
                     throw new DbUpdateException("Error DataBase", e);
                 }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("RestaurantDetails");
             }
 
             return View(modelDTO);
         }
-
+        public IActionResult RestaurantDetails(CreateRestaurantDto modelDTO)
+        {
+            var restaurant = this.dbContext.Restaurants.FirstOrDefault();
+            return View(restaurant);
+        }
         public IActionResult Create(CreateRestaurantDto modelDTO)
         {
             if (ModelState.IsValid)

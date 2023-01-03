@@ -108,7 +108,7 @@ namespace GastroFaza.Controllers
                 this.dbContext.Workers.Add(newWorker);
                 this.dbContext.SaveChanges();
 
-                return RedirectToAction("Welcome");
+                return RedirectToAction("GetAll","Worker");
             }
             ViewBag.msg = "Invalid";
             return View("CreateWorkerAccount");

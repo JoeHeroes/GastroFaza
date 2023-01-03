@@ -1,6 +1,7 @@
 ﻿using GastroFaza.Models;
 using GastroFaza.Models.DTO;
 using GastroFaza.Models.Enum;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -103,6 +104,8 @@ namespace GastroFaza.Controllers
         public IActionResult Create()
         {
             var order = new Order();
+            var user = this.dbContext.Clients.FirstOrDefault(u => u.Email == HttpContext.Session.GetString("email"));
+            order.AddedById = user.Id;
 
             this.dbContext.Orders.Add(order);
             try
