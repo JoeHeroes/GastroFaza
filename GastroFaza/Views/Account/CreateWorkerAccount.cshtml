@@ -1,4 +1,5 @@
-﻿@model Worker
+﻿@using GastroFaza.Models.DTO
+@model RegisterWorkerDto
 @{
     ViewData["Title"] = "Register";
 }
@@ -38,8 +39,7 @@
 
         <tr>
             <td><label class="text-light" asp-for="Nationality"></label></td>
-            <td><input asp-for="Nationality" class="form-control" /></td>
-
+            <td><select asp-items="Model.SelectedNations" asp-for="Nationality" class="form-select">option</select></td>
         </tr>
         <tr>
             <td><label class="text-light" asp-for="DateOfBirth"></label></td>
@@ -47,7 +47,7 @@
         </tr>
         <tr>
             <td><label class="text-light" asp-for="RoleId"></label></td>
-            <td><input asp-for="RoleId" class="form-control"/></td>
+            <td><select asp-items="Model.Roles" asp-for="RoleId" class="form-select">option</select></td>
         </tr>
         <tr>
             <td>&nbsp;</td>

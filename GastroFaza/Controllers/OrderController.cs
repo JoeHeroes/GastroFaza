@@ -43,7 +43,7 @@ namespace GastroFaza.Controllers
         [Route("Order")]
         public IActionResult Order()
         {
-            if (HttpContext.Session.GetString("current order") == null)
+            if (HttpContext.Session.GetString("current order") == null || HttpContext.Session.GetString("current order") == "")
             {
                 return RedirectToAction("Create");
             }
@@ -87,7 +87,10 @@ namespace GastroFaza.Controllers
         [Route("Create")]
         public IActionResult Create()
         {
-            var order = new Order();
+            var order = new Order()
+            {
+                AddedById = int.Parse(HttpContext.Session.GetString("id"))
+            };
 
             this.dbContext.Orders.Add(order);
             try
@@ -99,9 +102,26 @@ namespace GastroFaza.Controllers
             {
                 throw new DbUpdateException("Error DataBase", e);
             }
-            
             return RedirectToAction("GetAll","Dish");
         }
 
+        public IActionResult PayForOrder()
+        {
+            this.dbContext.Orders.FirstOrDefault(v=>v.Id==int.Parse(HttpContext.Session.GetString("current order"))).Status = Status.Przygotowywanie;
+
+            this.dbContext.SaveChanges();
+
+            HttpContext.Session.SetString("current order", "");
+
+            if (HttpContext.Session.GetString("isWorker") == "true")
+            {
+                return RedirectToAction("ClientsOrders");
+            }
+            else
+            {
+                return View();
+            }
+            
+        }
     }
 }

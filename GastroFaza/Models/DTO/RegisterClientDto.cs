@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace GastroFaza.Models.DTO
 {
@@ -14,6 +15,8 @@ namespace GastroFaza.Models.DTO
         public string FirstName { get; set; } 
 
         public string LastName { get; set; }
+
+        public List<SelectListItem> SelectedNations { get; set; }
 
         public string Nationality { get; set; }
 
