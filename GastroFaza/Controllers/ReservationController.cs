@@ -35,7 +35,12 @@ namespace GastroFaza.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
+        public IActionResult GetAllReservations()
+        {
+            IEnumerable<Reservation> reservations = this.dbContext.Reservations;
 
+            return View(reservations);
+        }
         public IActionResult Create()
         {
             if (HttpContext.Session.GetString("email") != null)

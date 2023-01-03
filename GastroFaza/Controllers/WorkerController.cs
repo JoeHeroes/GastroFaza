@@ -1,5 +1,6 @@
 using GastroFaza.Models;
 using GastroFaza.Models.DTO;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -49,9 +50,16 @@ namespace GastroFaza.Controllers
             {
                 throw new DbUpdateException("Error DataBase", e);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("GetAll");
         }
-
+        public IActionResult Edit(int Id)
+        {
+            var worker = this.dbContext.Workers.Where(s => s.Id == Id).FirstOrDefault();
+            IEnumerable<Role> roles = this.dbContext.Roles;
+            ViewBag.data = roles;
+            return View(worker);
+        }
+        [HttpPost]
         public IActionResult Edit(int? id, UpdateWorkerDto modelDTO)
         {
             if (ModelState.IsValid)
@@ -70,39 +78,11 @@ namespace GastroFaza.Controllers
                     throw new DbUpdateException("Error DataBase", e);
                 }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("GetAll");
             }
 
             return View(modelDTO);
         }
-        public IActionResult Create(CreateWorkerDto modelDTO)
-        {
-            if (ModelState.IsValid)
-            {
-                this.dbContext.Workers.Add(new Worker()
-                {
-                    Email = modelDTO.Email,
-                    FirstName = modelDTO.FirstName,
-                    LastName = modelDTO.LastName,
-                    DateOfBirth = modelDTO.DateOfBirth,
-                    Nationality = modelDTO.Nationality,
-                    PasswordHash = modelDTO.PasswordHash,
-                    Salary = modelDTO.Salary,
-                    Rating = modelDTO.Rating
-                });
-
-                try
-                {
-                    this.dbContext.SaveChanges();
-                }
-                catch (DbUpdateException e)
-                {
-                    throw new DbUpdateException("Error DataBase", e);
-                }
-                return RedirectToAction("Index");
-            }
-
-            return View(modelDTO);
-        }
+        
     }
 }

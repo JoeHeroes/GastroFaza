@@ -129,7 +129,7 @@ namespace GastroFaza.Controllers
                 this.dbContext.Workers.Add(newWorker);
                 this.dbContext.SaveChanges();
 
-                return RedirectToAction("Welcome");
+                return RedirectToAction("GetAll","Worker");
             }
             ViewBag.msg = "Invalid";
             return View("CreateWorkerAccount");
@@ -232,8 +232,10 @@ namespace GastroFaza.Controllers
                 HttpContext.Session.SetString("isWorker", "true");
                 if (worker.RoleId == 1)                                      //set worker role in session 
                     HttpContext.Session.SetString("Role", "Waiter");
-                else
+                else if (worker.RoleId == 2)
                     HttpContext.Session.SetString("Role", "Cook");
+                else
+                    HttpContext.Session.SetString("Role", "Manager");
                 return RedirectToAction("Welcome");
             }
             return View("Login");

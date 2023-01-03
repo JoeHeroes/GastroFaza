@@ -24,6 +24,7 @@ namespace GastroFaza.Controllers
 
             return View(dishs);
         }
+ 
 
         public IActionResult AddToOrder(int dishId)
         {
@@ -82,9 +83,21 @@ namespace GastroFaza.Controllers
             {
                 throw new DbUpdateException("Error DataBase", e);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("GetAllDishes");
         }
+        public IActionResult GetAllDishes()
+        {
+            IEnumerable<Dish> dishs = this.dbContext.Dishs;
 
+            return View(dishs);
+        }
+        public IActionResult Edit(int Id)
+        {
+            var dish = this.dbContext.Dishs.Where(s => s.Id == Id).FirstOrDefault();
+
+            return View(dish);
+        }
+        [HttpPost]
         public IActionResult Edit(int? id, DishDto modelDTO)
         {
             string stringFileName = UploadFile(modelDTO);
@@ -106,17 +119,17 @@ namespace GastroFaza.Controllers
                     throw new DbUpdateException("Error DataBase", e);
                 }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("GetAllDishes");
             }
 
             return View(modelDTO);
         }
 
-        public IActionResult Add()
+        public IActionResult Create()
         {
             return View();
         }
-
+        [HttpPost]
         public IActionResult Create(DishDto modelDTO)
         {
 
@@ -139,9 +152,9 @@ namespace GastroFaza.Controllers
                 {
                     throw new DbUpdateException("Error DataBase", e);
                 }
-          
 
-            return View("Add");
+
+            return RedirectToAction("GetAllDishes");
         }
 
 
