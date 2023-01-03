@@ -2,6 +2,7 @@
 using GastroFaza.Models.DTO;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
@@ -31,12 +32,32 @@ namespace GastroFaza.Controllers
         [Route("Register")]
         public IActionResult Register()
         {
-            return View();
+            var nationsList = new NationsList().GetNations();
+            var model = new RegisterClientDto();
+            model.SelectedNations = new List<SelectListItem>();
+            foreach (var nation in nationsList)
+            {
+                model.SelectedNations.Add(new SelectListItem() { Text = nation.Name, Value = nation.Name });
+            }
+            return View(model);
         }
         [Route("CreateWorkerAccount")]      //for manager
         public IActionResult CreateWorkerAccount()
         {
-            return View();
+            var nationsList = new NationsList().GetNations();
+            var model = new RegisterWorkerDto();
+            model.SelectedNations = new List<SelectListItem>();
+            model.Roles = new List<SelectListItem>();
+            foreach (var nation in nationsList)
+            {
+                model.SelectedNations.Add(new SelectListItem() { Text = nation.Name, Value = nation.Name });
+            }
+
+            foreach(var role in dbContext.Roles.ToList())
+            {
+                model.Roles.Add(new SelectListItem() { Text = role.Name, Value = role.Id.ToString() });
+            }
+            return View(model); ;
         }
 
         [Route("Logout")]
@@ -99,7 +120,7 @@ namespace GastroFaza.Controllers
                     FirstName = dto.FirstName,
                     LastName = dto.LastName,
                     PasswordHash = dto.Password,
-                    RoleId = dto.RoleId
+                    RoleId = int.Parse(dto.RoleId)
                 };
 
                 var hashedPass = this.passwordHasherWorker.HashPassword(newWorker, dto.Password);
