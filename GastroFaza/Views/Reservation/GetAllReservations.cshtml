@@ -1,0 +1,43 @@
+﻿@model IEnumerable<GastroFaza.Models.Reservation>
+
+@{
+    ViewData["Title"] = "GetAllReservations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>GetAllReservations</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TableIdContainer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataOfReservation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TableIdContainer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataOfReservation)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

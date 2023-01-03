@@ -211,8 +211,10 @@ namespace GastroFaza.Controllers
                 HttpContext.Session.SetString("isWorker", "true");
                 if (worker.RoleId == 1)                                      //set worker role in session 
                     HttpContext.Session.SetString("Role", "Waiter");
-                else
+                else if (worker.RoleId == 2)
                     HttpContext.Session.SetString("Role", "Cook");
+                else
+                    HttpContext.Session.SetString("Role", "Manager");
                 return RedirectToAction("Welcome");
             }
             return View("Login");

@@ -29,7 +29,7 @@
                             
                         }
 
-                        @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") != "true") @* If user is not Worker *@
+                        @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") != "true") @* If user is not a Worker *@
                         {
                             <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Dish" asp-action="GetAll">Menu</a></li>
                             <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="Order">Your orders</a></li>
@@ -40,14 +40,27 @@
                         }
                         else
                         {
-                            <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="ClientsOrders">Clients Orders</a></li>
-
-                            @if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Waiter") @* If worker is Waiter*@
+                            @if(HttpContextAccessor.HttpContext.Session.GetString("Role")=="Manager")@* If worker is a Manager*@
                             {
-                                <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Reservation" asp-action="GetAll">Clients Reservations</a></li>
-                            }
+                                <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Dish" asp-action="GetAllDishes">Manage Menu</a></li>
+                                <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="DiningTable" asp-action="GetAllTables">Manage Tables</a></li>
+                                <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Reservation" asp-action="GetAllReservations">Manage Reservations</a></li>
+                                <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="GetAllOrders">Manage Orders</a></li>
+                                <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Worker" asp-action="GetAllWorkers">Manage Workers</a></li>
+                                <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Restaurant" asp-action="RestaurantDetails">Manage Restaurant</a></li>
 
-                            <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="DiningTable" asp-action="GetAll">Tables</a></li>
+                            }
+                            else
+                            {
+                                <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="ClientsOrders">Clients Orders</a></li>
+
+                                @if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Waiter") @* If worker is a Waiter*@
+                                {
+                                    <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Reservation" asp-action="GetAll">Clients Reservations</a></li>
+                                }
+
+                                <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="DiningTable" asp-action="GetAll">Tables</a></li>
+                            }
                         }
 
                     </ul>
