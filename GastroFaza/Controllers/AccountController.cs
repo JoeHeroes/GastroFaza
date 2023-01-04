@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace GastroFaza.Controllers
 {
     [Route("Account")] 
-    public class AccountController : Controller 
+    public class AccountController : Controller  
     {
         private readonly RestaurantDbContext dbContext;
         private readonly IPasswordHasher<Client> passwordHasherClient;
