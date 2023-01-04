@@ -21,20 +21,14 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-
                 <div class="collapse navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav me-auto">
-                        @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
-                        {
-                            
-                        }
-
                         @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") != "true") @* If user is not a Worker *@
                         {
                             <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Dish" asp-action="GetAll">Menu</a></li>
-                            <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="Order">Your orders</a></li>
                             if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
                             {
+                                <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="Order">Your orders</a></li>
                                 <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Reservation" asp-action="GetAll">Your reservations</a></li>
                             }
                         }
@@ -51,14 +45,13 @@
                             }
                             else
                             {
-                                <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="ClientsOrders">Clients Orders</a></li>
 
                                 @if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Waiter") @* If worker is a Waiter*@
                                 {
                                     <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Reservation" asp-action="GetAll">Clients Reservations</a></li>
+                                    <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="ClientsOrders">Clients Orders</a></li>
+                                    <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="DiningTable" asp-action="GetAll">Tables</a></li>
                                 }
-
-                                <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="DiningTable" asp-action="GetAll">Tables</a></li>
                             }
                         }
 
@@ -75,7 +68,6 @@
             @RenderBody()
         </main>
     </div>
-
     
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

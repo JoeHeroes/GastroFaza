@@ -95,7 +95,17 @@ namespace GastroFaza.Controllers
         {
             var dish = this.dbContext.Dishs.Where(s => s.Id == Id).FirstOrDefault();
 
-            return View(dish);
+
+            var dishDto = new DishDto()
+            {
+                Id = dish.Id,
+                Name = dish.Name,
+                Description = dish.Description,
+                Price = dish.Price,
+                DishType = dish.DishType,
+            };
+
+            return View(dishDto);
         }
         [HttpPost]
         public IActionResult Edit(int? id, DishDto modelDTO)

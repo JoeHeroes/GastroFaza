@@ -5,7 +5,9 @@ namespace GastroFaza.Models.DTO
 {
 	public class DishDto
 	{
-		[Required]
+
+        public int Id { get; set; }
+        [Required]
 		[MaxLength(25)]
 		public string Name { get; set; } 
 		public string Description { get; set; } 
