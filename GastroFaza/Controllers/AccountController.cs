@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace GastroFaza.Controllers
 {
-    [Route("Account")]
+    [Route("Account")] 
     public class AccountController : Controller
     {
         private readonly RestaurantDbContext dbContext;
