@@ -2,6 +2,7 @@
 using GastroFaza.Models.Enum;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace GastroFaza.Seeder
 {
@@ -35,6 +36,14 @@ namespace GastroFaza.Seeder
                 {
                     var dishes = GetDishes();
                     dbContext.Dishs.AddRange(dishes);
+                    dbContext.SaveChanges();
+                }
+
+
+                if (!dbContext.Restaurants.Any())
+                {
+                    var restaurants = GetRestaurant();
+                    dbContext.Restaurants.AddRange(restaurants);
                     dbContext.SaveChanges();
                 }
             }
@@ -509,6 +518,32 @@ namespace GastroFaza.Seeder
                 }
             };
         }
+
+
+
+        private IEnumerable<Restaurant> GetRestaurant()
+        {
+            return new List<Restaurant>()
+            {
+                new Restaurant()
+                {
+                    Name = "ChujaCzita",
+                    Description="Niebo w gebie",
+                    HasDelivery= true,
+                    ContactEmail = "GastroFaza@wp.pl",
+                    ContactNumber= "667 676 776",
+                    Address= new Address()
+                    {
+                        City = "Gastro",
+                        PostalCode="11-100",
+                        Street ="Faza"
+                    }
+                },
+                
+            };
+        }
+       
+
 
         private IEnumerable<Role> GetRoles()
         {
