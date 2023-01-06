@@ -5,7 +5,6 @@ namespace GastroFaza.Models.Validators
 {
     public class EditDtoValidator : AbstractValidator<EditClientDto>
     {
-
         public EditDtoValidator(RestaurantDbContext dbContext)
         {
             RuleFor(x => x.FirstName)

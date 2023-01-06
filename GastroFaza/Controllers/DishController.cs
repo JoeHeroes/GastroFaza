@@ -2,13 +2,10 @@
 using GastroFaza.Models.DTO;
 using GastroFaza.Models.Enum;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
-using NuGet.Protocol.Core.Types;
 
 namespace GastroFaza.Controllers
 {
-
     public class DishController : Controller
     {
         private readonly RestaurantDbContext dbContext;
@@ -85,12 +82,7 @@ namespace GastroFaza.Controllers
             }
             return RedirectToAction("GetAllDishes");
         }
-        public IActionResult GetAllDishes()
-        {
-            IEnumerable<Dish> dishs = this.dbContext.Dishs;
-
-            return View(dishs);
-        }
+        
         public IActionResult Edit(int Id)
         {
             var dish = this.dbContext.Dishs.Where(s => s.Id == Id).FirstOrDefault();
@@ -203,5 +195,31 @@ namespace GastroFaza.Controllers
             }
             return View(baseQuery);
         }
+
+
+
+        [Route("SearchMenu")]
+        public IActionResult SearchMenu(string name)
+        {
+
+            if (String.IsNullOrEmpty(name))
+            {
+                IEnumerable<Dish> dishs = this.dbContext.Dishs;
+
+                return View(dishs);
+            }
+
+            var baseQuery = dbContext.Dishs.Where(x => x.Name == name);
+
+            if (baseQuery is null)
+            {
+                var baseProducer = baseQuery.Where(x => x.DishType.ToString() == name);
+                baseQuery = baseProducer;
+            }
+
+            return View(baseQuery);
+        }
+
+
     }
 }

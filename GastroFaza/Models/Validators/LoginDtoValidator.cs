@@ -5,7 +5,6 @@ namespace GastroFaza.Models.Validators
 {
     public class LoginDtoValidator : AbstractValidator<LoginDto>
     {
-
         public LoginDtoValidator(RestaurantDbContext dbContext)
         {
             RuleFor(x => x.Email)
@@ -14,7 +13,6 @@ namespace GastroFaza.Models.Validators
                 .EmailAddress().WithMessage("Email must be valid."); ;
             RuleFor(x => x.Password)
                 .MinimumLength(6).WithMessage("Password must contain minimum 6 characters.");
-
         }
     }
 }

@@ -5,11 +5,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>GetAllTables</h1>
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">All Tables</h2>
+        </div>
+        <div class="col-6 text-end">
+            <form class="d-flex" method="post" action="@Url.Action("SearchMenu", "Dish")">
+                <input class="form-control me-sm-2" type="text" name="id" placeholder="Search Index">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+
+
+
+
+
+
+
+
 <table class="table">
     <thead>
         <tr>

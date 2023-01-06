@@ -5,7 +5,6 @@ namespace GastroFaza.Models.Validators
 {
     public class RegisterWorkerDtoValidator : AbstractValidator<RegisterWorkerDto>
     {
-
         public RegisterWorkerDtoValidator(RestaurantDbContext dbContext)
         {
             RuleFor(x => x.Email)

@@ -1,8 +1,6 @@
 ﻿using GastroFaza.Models;
 using GastroFaza.Models.Enum;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 
 namespace GastroFaza.Seeder
 {
@@ -38,7 +36,6 @@ namespace GastroFaza.Seeder
                     dbContext.Dishs.AddRange(dishes);
                     dbContext.SaveChanges();
                 }
-
 
                 if (!dbContext.Restaurants.Any())
                 {

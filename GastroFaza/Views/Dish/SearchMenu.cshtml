@@ -1,0 +1,96 @@
+﻿@model IEnumerable<GastroFaza.Models.Dish>
+
+@{
+    ViewData["Title"] = "GetAllDishes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">All Dishes</h2>
+        </div>
+        <div class="col-6 text-end">
+            <form class="d-flex" method="post" action="@Url.Action("SearchMenu", "Dish")">
+                <input class="form-control me-sm-2" type="text" name="name" placeholder="Search Dish by Name, Description, Type">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+
+
+
+
+
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProfileImg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DishType)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+
+                <td>
+                    <img alt="Img" src='@Url.Content("~/Images/"+item.ProfileImg)' width="160" height="90" asp-append-version="true">
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DishType)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

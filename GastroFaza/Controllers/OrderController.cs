@@ -1,7 +1,6 @@
 ﻿using GastroFaza.Models;
 using GastroFaza.Models.DTO;
 using GastroFaza.Models.Enum;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
