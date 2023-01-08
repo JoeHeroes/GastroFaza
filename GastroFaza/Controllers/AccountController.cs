@@ -32,7 +32,7 @@ namespace GastroFaza.Controllers
         [Route("Register")]
         public IActionResult Register()
         {
-            var nationsList = new NationsList().GetNations();
+            var nationsList = NationsList.GetNations();
             var model = new RegisterClientDto();
             model.SelectedNations = new List<SelectListItem>();
             foreach (var nation in nationsList)
@@ -44,7 +44,7 @@ namespace GastroFaza.Controllers
         [Route("CreateWorkerAccount")]      //for manager
         public IActionResult CreateWorkerAccount()
         {
-            var nationsList = new NationsList().GetNations();
+            var nationsList = NationsList.GetNations();
             var model = new RegisterWorkerDto();
             model.SelectedNations = new List<SelectListItem>();
             model.Roles = new List<SelectListItem>();
