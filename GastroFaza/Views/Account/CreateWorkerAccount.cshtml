@@ -39,7 +39,8 @@
 
         <tr>
             <td><label class="text-light" asp-for="Nationality"></label></td>
-            <td><select asp-items="Model.SelectedNations" asp-for="Nationality" class="form-select">option</select></td>
+            @*<td><select asp-items="Model.SelectedNations" asp-for="Nationality" class="form-select">option</select></td>*@
+            <td><input asp-for="Nationality" class="form-control">option</input></td>
         </tr>
         <tr>
             <td><label class="text-light" asp-for="DateOfBirth"></label></td>

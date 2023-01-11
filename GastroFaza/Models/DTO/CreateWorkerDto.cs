@@ -30,7 +30,7 @@ namespace GastroFaza.Models.DTO
         public SelectListItem Role { get; set; }
 
         public List<SelectListItem> SelectedNations { get; set; }
-
+       
         public SelectListItem SelectedNation { get; set; }
 
     }
