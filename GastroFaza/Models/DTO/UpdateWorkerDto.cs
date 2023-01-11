@@ -6,11 +6,8 @@ namespace GastroFaza.Models.DTO
     {
         [EmailAddress]
         public string Email { get; set; }
-
         public float Salary { get; set; }
-
         public int Rating { get; set; }
-
         public int RoleId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

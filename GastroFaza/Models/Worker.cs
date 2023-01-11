@@ -1,6 +1,4 @@
-﻿using System.Data;
-
-namespace GastroFaza.Models
+﻿namespace GastroFaza.Models
 {
     public class Worker : User
     {

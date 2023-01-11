@@ -12,12 +12,23 @@ namespace GastroFaza.Controllers
         {
             this.dbContext = dbContext;
         }
-        public IActionResult GetAllTables()
-        {
-            IEnumerable<DiningTable> tables = this.dbContext.Tables;
 
-            return View(tables);
+
+        [Route("SearchTable")]
+        public IActionResult SearchTable(string id)
+        {
+            if (id == null)
+            {
+                IEnumerable<DiningTable> tables = this.dbContext.Tables;
+
+                return View(tables);
+            }
+
+            var baseQuery = dbContext.Tables.Where(x => x.Id == int.Parse(id));
+
+            return View(baseQuery);
         }
+
         public IActionResult Edit(int Id)
         {
             var table = this.dbContext.Tables.Where(s => s.Id == Id).FirstOrDefault();

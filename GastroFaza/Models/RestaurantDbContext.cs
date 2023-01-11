@@ -11,19 +11,13 @@ namespace GastroFaza.Models
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Dish> Dishs { get; set; }
         public DbSet<Order> Orders { get; set; }
-
-
         public DbSet<DishOrder> DishOrders { get; set; }
-
-
         public DbSet<Client> Clients { get; set; }
         public DbSet<Worker> Workers { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<DiningTable> Tables { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
-        
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -69,11 +63,6 @@ namespace GastroFaza.Models
             modelBuilder.Entity<Reservation>()
              .Property(r => r.ClientId)
              .IsRequired();
-
-
-
-
-
 
             modelBuilder
             .Entity<DishOrder>()

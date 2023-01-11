@@ -4,8 +4,6 @@ namespace GastroFaza.Models.Validators
 {
     public class RestaurantQueryValidator : AbstractValidator<MenuModel>
     {
-
-
         private int[] allowedPageSizes = new[] { 5, 10, 15 };
         private string[] allowedSortColumnNames = { nameof(Dish.Name), nameof(Dish.DishType), nameof(Dish.Price) };
         public RestaurantQueryValidator()
@@ -22,8 +20,6 @@ namespace GastroFaza.Models.Validators
             RuleFor(r => r.SortBy)
                 .Must(value => string.IsNullOrEmpty(value) || allowedSortColumnNames.Contains(value))
                 .WithMessage($"Sort by is optional, or must by in [{string.Join(",", allowedSortColumnNames)}]");
-        
-        
         }
     }
 }

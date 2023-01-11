@@ -1,7 +1,6 @@
 ﻿using GastroFaza.Models;
 using GastroFaza.Models.DTO;
 using GastroFaza.Models.Enum;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -174,25 +173,6 @@ namespace GastroFaza.Controllers
                 throw new DbUpdateException("Error DataBase", e);
             }
             return RedirectToAction("GetAllOrders");
-        }
-
-        public IActionResult PayForOrder()
-        {
-            this.dbContext.Orders.FirstOrDefault(v=>v.Id==int.Parse(HttpContext.Session.GetString("current order"))).Status = Status.Przygotowywanie;
-
-            this.dbContext.SaveChanges();
-
-            HttpContext.Session.SetString("current order", "");
-
-            if (HttpContext.Session.GetString("isWorker") == "true")
-            {
-                return RedirectToAction("ClientsOrders");
-            }
-            else
-            {
-                return View();
-            }
-            
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿@using GastroFaza.Models.DTO
-@model RegisterClientDto
+﻿@model GastroFaza.Models.DTO.RegisterClientDto
 @{
     ViewData["Title"] = "Register";
 }
@@ -40,11 +39,10 @@
             <tr>
                 <td><label class="text-light" asp-for="Nationality"></label></td>
                 <td><select asp-items="Model.SelectedNations" asp-for="Nationality" class="form-select">option</select></td>
-
             </tr>
             <tr>
                 <td><label class="text-light" asp-for="DateOfBirth"></label></td>
-                <td><input asp-for="DateOfBirth" class="form-control" /></td>
+                <td><input type="date" asp-for="DateOfBirth" class="form-control" /></td>
 
             </tr>
             <tr>

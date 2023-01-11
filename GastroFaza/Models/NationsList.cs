@@ -1,8 +1,8 @@
 ﻿namespace GastroFaza.Models
 {
-    public class NationsList
+    public static class NationsList
     {
-        public List<Nation> GetNations()
+        public static List<Nation> GetNations()
         {
             return new List<Nation>()
             {

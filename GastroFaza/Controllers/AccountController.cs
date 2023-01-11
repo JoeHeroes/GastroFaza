@@ -8,8 +8,8 @@ using Newtonsoft.Json;
 
 namespace GastroFaza.Controllers
 {
-    [Route("Account")]
-    public class AccountController : Controller
+    [Route("Account")] 
+    public class AccountController : Controller      
     {
         private readonly RestaurantDbContext dbContext;
         private readonly IPasswordHasher<Client> passwordHasherClient;
@@ -32,7 +32,7 @@ namespace GastroFaza.Controllers
         [Route("Register")]
         public IActionResult Register()
         {
-            var nationsList = new NationsList().GetNations();
+            var nationsList = NationsList.GetNations();
             var model = new RegisterClientDto();
             model.SelectedNations = new List<SelectListItem>();
             foreach (var nation in nationsList)
@@ -44,7 +44,7 @@ namespace GastroFaza.Controllers
         [Route("CreateWorkerAccount")]      //for manager
         public IActionResult CreateWorkerAccount()
         {
-            var nationsList = new NationsList().GetNations();
+            var nationsList = NationsList.GetNations();
             var model = new RegisterWorkerDto();
             model.SelectedNations = new List<SelectListItem>();
             model.Roles = new List<SelectListItem>();
@@ -63,6 +63,7 @@ namespace GastroFaza.Controllers
         [Route("Logout")]
         public IActionResult Logout()
         {
+            HttpContext.Session.Remove("Role");
             HttpContext.Session.Remove("email");
             return RedirectToAction("Login");
         }
@@ -90,11 +91,88 @@ namespace GastroFaza.Controllers
                 account.Nationality = dto.Nationality;
                 account.FirstName = dto.FirstName;
                 account.LastName = dto.LastName;
+                account.DateOfBirth = dto.DateOfBirth;
 
                 dbContext.SaveChanges();
             }
             return View("AccountSettings");
         }
+
+
+        
+
+
+
+        [Route("RestartPassword")]
+        public IActionResult RestartPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("RestartPassword")]
+        public IActionResult RestartPassword(RestartPasswordDto dto)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                if (dto.NewPassword != dto.ConfirmNewPassword)
+                {
+                    ViewBag.msg = "New Password must be the same.";
+                    return View("RestartPassword");
+                }
+
+
+                if (dto.OldPassword == dto.NewPassword)
+                {
+                    ViewBag.msg = "New and Old Password and couldn't be the same";
+                    return View("RestartPassword");
+                }
+
+
+                if (HttpContext.Session.GetString("isWorker") != "true")
+                {
+                    var client = this.dbContext
+                                 .Clients
+                                 .FirstOrDefault(u => u.Email == HttpContext.Session.GetString("email"));
+
+                    var result1 = this.passwordHasherClient.VerifyHashedPassword(client, client.PasswordHash, dto.OldPassword);
+                    if (result1 == PasswordVerificationResult.Failed)
+                    {
+                        ViewBag.msg = "Old password is invalid.";
+                        return View("RestartPassword");
+                    }
+
+                    client.PasswordHash = this.passwordHasherClient.HashPassword(client, dto.NewPassword); ;
+                    this.dbContext.SaveChanges();
+
+                    return RedirectToAction("Welcome");
+                }
+                else
+                {
+                    var worker = this.dbContext
+                                .Workers
+                                .Include(u => u.Role)
+                                .FirstOrDefault(u => u.Email == HttpContext.Session.GetString("email"));
+
+                    var result2 = this.passwordHasherWorker.VerifyHashedPassword(worker, worker.PasswordHash, dto.OldPassword);
+                    if (result2 == PasswordVerificationResult.Failed)
+                    {
+                        ViewBag.msg = "Old password is invalid.";
+                        return View("RestartPassword");
+                    }
+
+                    worker.PasswordHash = this.passwordHasherWorker.HashPassword(worker, dto.NewPassword); ;
+                    this.dbContext.SaveChanges();
+
+                    return RedirectToAction("Welcome");
+                }
+            }
+            return View("RestartPassword");
+        }
+
+
 
         [HttpPost]
         [Route("registerWorker")]         //for manager
@@ -107,6 +185,12 @@ namespace GastroFaza.Controllers
 
             if (!IsCaptchaValid)
             {
+                return View("CreateWorkerAccount");
+            }
+
+            if (dto.Password != dto.ConfirmPassword)
+            {
+                ViewBag.msg = "Invalid Password";
                 return View("CreateWorkerAccount");
             }
 
@@ -150,8 +234,15 @@ namespace GastroFaza.Controllers
                 return View("Register");
             }
 
+            if (dto.Password != dto.ConfirmPassword)
+            {
+                ViewBag.msg = "Invalid Password";
+                return View("Register");
+            }
+
             if (ModelState.IsValid)
             {
+
                 var newClient = new Client()
                 {
                     Email = dto.Email,

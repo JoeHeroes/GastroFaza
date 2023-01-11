@@ -37,11 +37,11 @@
                 @Html.DisplayFor(modelItem => item.TableIdContainer)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DataOfReservation)
+                    @Convert.ToDateTime(item.DataOfReservation).ToString("MM/dd/yyyy h:mm tt")
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary">Delete</a>
             </td>
         </tr>
 }
