@@ -103,7 +103,7 @@ namespace GastroFaza.Controllers
         public IActionResult Create()
         {
             var order = new Order();
-            var user = this.dbContext.Clients.FirstOrDefault(u => u.Email == HttpContext.Session.GetString("email"));
+            var user = this.dbContext.Workers.FirstOrDefault(u => u.Email == HttpContext.Session.GetString("email"));
             order.AddedById = user.Id;
 
             this.dbContext.Orders.Add(order);
