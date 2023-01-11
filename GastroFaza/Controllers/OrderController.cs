@@ -117,7 +117,6 @@ namespace GastroFaza.Controllers
             {
                 throw new DbUpdateException("Error DataBase", e);
             }
-            
             return RedirectToAction("GetAll","Dish");
         }
         public IActionResult GetAllOrders()
@@ -177,5 +176,23 @@ namespace GastroFaza.Controllers
             return RedirectToAction("GetAllOrders");
         }
 
+        public IActionResult PayForOrder()
+        {
+            this.dbContext.Orders.FirstOrDefault(v=>v.Id==int.Parse(HttpContext.Session.GetString("current order"))).Status = Status.Przygotowywanie;
+
+            this.dbContext.SaveChanges();
+
+            HttpContext.Session.SetString("current order", "");
+
+            if (HttpContext.Session.GetString("isWorker") == "true")
+            {
+                return RedirectToAction("ClientsOrders");
+            }
+            else
+            {
+                return View();
+            }
+            
+        }
     }
 }
