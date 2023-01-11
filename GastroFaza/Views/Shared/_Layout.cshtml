@@ -52,6 +52,11 @@
                                     <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="ClientsOrders">Clients Orders</a></li>
                                     <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="DiningTable" asp-action="GetAll">Tables</a></li>
                                 }
+
+                                @if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Cook") @* If worker is a Waiter*@
+                                {
+                                    <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="ClientsOrders">Clients Orders</a></li>
+                                }
                             }
                         }
 
