@@ -212,8 +212,9 @@ namespace GastroFaza.Controllers
                 newWorker.PasswordHash = hashedPass;
                 this.dbContext.Workers.Add(newWorker);
                 this.dbContext.SaveChanges();
-
-                return RedirectToAction("GetAll","Worker");
+                if (HttpContext.Session.GetString("email") != null && HttpContext.Session.GetString("Role") == "Manager")
+                    return RedirectToAction("GetAll","Worker");
+                else return View("CreateWorkerAccount");
             }
             ViewBag.msg = "Invalid";
             return View("CreateWorkerAccount");
