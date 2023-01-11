@@ -121,7 +121,7 @@ namespace GastroFaza.Controllers
                     throw new DbUpdateException("Error DataBase", e);
                 }
 
-                return RedirectToAction("GetAllDishes");
+                return RedirectToAction("SearchMenu");
             }
 
             return View(modelDTO);
