@@ -14,11 +14,12 @@ namespace GastroFaza.Controllers
         {
             this.dbContext = dbContext;
         }
-        
+
         [Route("ClientsOrders")]
         public IActionResult ClientsOrders()
         {
-            var orders = this.dbContext.Orders.Where(o => o.Status == Status.Przygotowywanie);
+            //var orders = this.dbContext.Orders.Where(o => o.Status == Status.Przyjete);
+            var orders = this.dbContext.Orders;
             return View(orders);
         }
         [Route("OrderDetails")]
@@ -28,6 +29,33 @@ namespace GastroFaza.Controllers
             HttpContext.Session.SetString("orderId", OrderId.ToString());
             return View(dishes);
         }
+
+        [Route("OrderIsReceived")]
+        public IActionResult OrderIsReceived(int OrderId)
+        {
+            Order order = this.dbContext.Orders.FirstOrDefault(o => o.Id == OrderId);
+            if (order == null)
+            {
+                throw new Exception("Order not found");
+            }
+            order.Status = Status.Odebrane;
+            dbContext.SaveChanges();
+            return RedirectToAction("ClientsOrders", "Order");
+        }
+
+        [Route("OrderIsInProgress")]
+        public IActionResult OrderIsInProgress(int OrderId)
+        {
+            Order order = this.dbContext.Orders.FirstOrDefault(o => o.Id == OrderId);
+            if (order == null)
+            {
+                throw new Exception("Order not found");
+            }
+            order.Status = Status.Przygotowywanie;
+            dbContext.SaveChanges();
+            return RedirectToAction("ClientsOrders", "Order");
+        }
+
         [Route("OrderIsReady")]
         public IActionResult OrderIsReady(int OrderId)
         {
@@ -40,10 +68,37 @@ namespace GastroFaza.Controllers
             dbContext.SaveChanges();
             return RedirectToAction("ClientsOrders", "Order");
         }
-        
+
+        [Route("OrderIsTaken")]
+        public IActionResult OrderIsTaken(int OrderId)
+        {
+            Order order = this.dbContext.Orders.FirstOrDefault(o => o.Id == OrderId);
+            if (order == null)
+            {
+                throw new Exception("Order not found");
+            }
+            order.Status = Status.Odebrane;
+            dbContext.SaveChanges();
+            return RedirectToAction("ClientsOrders", "Order");
+        }
+
+        [Route("OrderIsDelivered")]
+        public IActionResult OrderIsDelivered(int OrderId)
+        {
+            Order order = this.dbContext.Orders.FirstOrDefault(o => o.Id == OrderId);
+            if (order == null)
+            {
+                throw new Exception("Order not found");
+            }
+            order.Status = Status.Dostarczone;
+            dbContext.SaveChanges();
+            return RedirectToAction("ClientsOrders", "Order");
+        }
+
         [Route("Order")]
         public IActionResult Order()
         {
+
             if (HttpContext.Session.GetString("current order") == null || HttpContext.Session.GetString("current order") == String.Empty)
             {
                 return RedirectToAction("Create");
@@ -64,16 +119,17 @@ namespace GastroFaza.Controllers
 
             return View(orders);
         }
+
         [Route("PayForOrder")]
         public IActionResult PayForOrder()
         {
             int id = int.Parse(HttpContext.Session.GetString("current order"));
             Order order = this.dbContext.Orders.FirstOrDefault(o => o.Id == id);
-            if(order== null)
+            if (order == null)
             {
                 throw new Exception("Order not found");
             }
-            order.Status= Status.Przygotowywanie;
+            order.Status = Status.Przygotowywanie;
             dbContext.SaveChanges();
             HttpContext.Session.SetString("current order", String.Empty);
             return View();
@@ -83,10 +139,10 @@ namespace GastroFaza.Controllers
 
             int id = int.Parse(HttpContext.Session.GetString("current order"));
 
-            var dishOrder = this.dbContext.DishOrders.SingleOrDefault( x => x.OrderId == id && x.DishesId == dish.Id);
+            var dishOrder = this.dbContext.DishOrders.SingleOrDefault(x => x.OrderId == id && x.DishesId == dish.Id);
 
             this.dbContext.DishOrders.Remove(dishOrder);
-           
+
             try
             {
                 this.dbContext.SaveChanges();
@@ -103,20 +159,32 @@ namespace GastroFaza.Controllers
         public IActionResult Create()
         {
             var order = new Order();
-            var user = this.dbContext.Workers.FirstOrDefault(u => u.Email == HttpContext.Session.GetString("email"));
-            order.AddedById = user.Id;
+
+
+            if (this.dbContext.Clients.FirstOrDefault(u => u.Email == HttpContext.Session.GetString("email")) == null)
+            {
+                var user = this.dbContext.Workers.FirstOrDefault(u => u.Email == HttpContext.Session.GetString("email"));
+                order.AddedById = user.Id;
+            }
+            else
+            {
+                var user = this.dbContext.Clients.FirstOrDefault(u => u.Email == HttpContext.Session.GetString("email"));
+                order.AddedById = user.Id;
+            }
+
+            order.Status = Status.Przyjete;
 
             this.dbContext.Orders.Add(order);
             try
             {
                 this.dbContext.SaveChanges();
-                HttpContext.Session.SetString("current order", this.dbContext.Orders.FirstOrDefault(u=>u==order).Id.ToString());
+                HttpContext.Session.SetString("current order", this.dbContext.Orders.FirstOrDefault(u => u == order).Id.ToString());
             }
             catch (DbUpdateException e)
             {
                 throw new DbUpdateException("Error DataBase", e);
             }
-            return RedirectToAction("GetAll","Dish");
+            return RedirectToAction("GetAll", "Dish");
         }
         public IActionResult GetAllOrders()
         {
