@@ -22,7 +22,7 @@
         </div>
         <div class="col-6 text-end">
 
-            @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
+            @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null && @HttpContextAccessor.HttpContext.Session.GetString("Role") == "Waiter")
             {
                 <a href='@Url.Action("Create", "Order")' class="btn btn-primary">Add Order</a>
             }
