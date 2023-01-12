@@ -18,9 +18,17 @@ namespace GastroFaza.Controllers
         [Route("ClientsOrders")]
         public IActionResult ClientsOrders()
         {
-            //var orders = this.dbContext.Orders.Where(o => o.Status == Status.Przyjete);
-            var orders = this.dbContext.Orders;
-            return View(orders);
+            if (HttpContext.Session.GetString("Role") == "Cook")
+            {
+                var orders = this.dbContext.Orders.Where(o => o.Status == Status.Przyjete || o.Status == Status.Przygotowywanie);
+                return View(orders);
+            }
+            else if (HttpContext.Session.GetString("Role") == "Waiter")
+            {
+                var orders = this.dbContext.Orders.Where(o => o.Status == Status.Przyjete || o.Status == Status.Gotowe || o.Status == Status.Dostarczone || o.Status == Status.Odebrane);
+                return View(orders);
+            }
+            return View();
         }
         [Route("OrderDetails")]
         public IActionResult OrderDetails(int OrderId)
@@ -129,7 +137,7 @@ namespace GastroFaza.Controllers
             {
                 throw new Exception("Order not found");
             }
-            order.Status = Status.Przygotowywanie;
+            order.Status = Status.Przyjete;
             dbContext.SaveChanges();
             HttpContext.Session.SetString("current order", String.Empty);
             return View();

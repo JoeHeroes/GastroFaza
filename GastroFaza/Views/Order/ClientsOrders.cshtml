@@ -40,9 +40,11 @@
             <table class="table table-bordered" id=table>
                 <tr>
                     <th>
-                        @obj.Id
-                        @obj.Price
-                        @obj.Status
+
+                        <div class="text-light">Id: @obj.Id </div>
+                        <div class="text-light">Price: @obj.Price</div>
+                        <div class="text-light">Status: @obj.Status </div>
+                        <div class="text-light">Added by id: @obj.AddedById </div>
                         <a href='@Url.Action("OrderDetails", "Order", new { OrderId = obj.Id })' class="btn btn-primary">Order details</a>
                         @if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Cook")
                         {
