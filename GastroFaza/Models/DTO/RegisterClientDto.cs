@@ -16,8 +16,6 @@ namespace GastroFaza.Models.DTO
 
         public string LastName { get; set; }
 
-        public List<SelectListItem> SelectedNations { get; set; }
-
         public string Nationality { get; set; } = "Niemcy";
 
         public DateTime? DateOfBirth { get; set; }

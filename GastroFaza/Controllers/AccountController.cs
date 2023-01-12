@@ -32,26 +32,14 @@ namespace GastroFaza.Controllers
         [Route("Register")]
         public IActionResult Register()
         {
-            var nationsList = NationsList.GetNations();
-            var model = new RegisterClientDto();
-            model.SelectedNations = new List<SelectListItem>();
-            foreach (var nation in nationsList)
-            {
-                model.SelectedNations.Add(new SelectListItem() { Text = nation.Name, Value = nation.Name });
-            }
+            var model = new RegisterClientDto();           
             return View(model);
         }
         [Route("CreateWorkerAccount")]      //for manager
         public IActionResult CreateWorkerAccount()
         {
-            var nationsList = NationsList.GetNations();
             var model = new RegisterWorkerDto();
-            model.SelectedNations = new List<SelectListItem>();
-            model.Roles = new List<SelectListItem>();
-            foreach (var nation in nationsList)
-            {
-                model.SelectedNations.Add(new SelectListItem() { Text = nation.Name, Value = nation.Name });
-            }
+            model.Roles = new List<SelectListItem>();           
 
             foreach(var role in dbContext.Roles.ToList())
             {
