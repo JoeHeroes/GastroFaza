@@ -18,6 +18,8 @@ namespace GastroFaza.Controllers
         [Route("ClientsOrders")]
         public IActionResult ClientsOrders()
         {
+            HttpContext.Session.Remove("OrderStatus"); // usuwanie z sesji po tym jak wróci się z order details
+            HttpContext.Session.Remove("orderId");
             if (HttpContext.Session.GetString("Role") == "Cook")
             {
                 var orders = this.dbContext.Orders.Where(o => o.Status == Status.Przyjete || o.Status == Status.Przygotowywanie);
@@ -33,8 +35,23 @@ namespace GastroFaza.Controllers
         [Route("OrderDetails")]
         public IActionResult OrderDetails(int OrderId)
         {
-            var dishes = this.dbContext.Orders.Where(o => o.Id == OrderId).SelectMany(o => o.Dishes);
+            var order = this.dbContext.Orders.Where(x => x.Id == OrderId).FirstOrDefault(); //status potrzebny w sesji -> patrz OrderDetails linia 51
+            if(order.Status==Status.Przygotowywanie)
+                HttpContext.Session.SetString("OrderStatus", "Preparing");
+
             HttpContext.Session.SetString("orderId", OrderId.ToString());
+            var dishOrder = this.dbContext.DishOrders.Where(x => x.OrderId == OrderId);
+
+            List<Dish> dishes = new List<Dish>();
+
+            var dishList = this.dbContext.Dishs.ToList();
+
+            foreach (var x in dishOrder)
+            {
+                var dish = dishList.FirstOrDefault(d => d.Id == x.DishesId);
+                dishes.Add(dish);
+            }
+
             return View(dishes);
         }
 
@@ -67,6 +84,8 @@ namespace GastroFaza.Controllers
         [Route("OrderIsReady")]
         public IActionResult OrderIsReady(int OrderId)
         {
+            HttpContext.Session.Remove("OrderStatus"); // usuwanie z sesji po tym jak wróci się z order details
+            HttpContext.Session.Remove("orderId");
             Order order = this.dbContext.Orders.FirstOrDefault(o => o.Id == OrderId);
             if (order == null)
             {
