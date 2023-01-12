@@ -160,16 +160,19 @@ namespace GastroFaza.Controllers
         {
             var order = new Order();
 
-
-            if (this.dbContext.Clients.FirstOrDefault(u => u.Email == HttpContext.Session.GetString("email")) == null)
+            
+            if (this.dbContext.Workers.FirstOrDefault(u => u.Email == HttpContext.Session.GetString("email")) != null)
             {
                 var user = this.dbContext.Workers.FirstOrDefault(u => u.Email == HttpContext.Session.GetString("email"));
                 order.AddedById = user.Id;
             }
-            else
+            else if(this.dbContext.Clients.FirstOrDefault(u => u.Email == HttpContext.Session.GetString("email")) != null)
             {
                 var user = this.dbContext.Clients.FirstOrDefault(u => u.Email == HttpContext.Session.GetString("email"));
                 order.AddedById = user.Id;
+            } else
+            {
+                return RedirectToAction("Login", "Account");
             }
 
             order.Status = Status.Przyjete;

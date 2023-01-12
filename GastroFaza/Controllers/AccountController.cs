@@ -63,8 +63,11 @@ namespace GastroFaza.Controllers
         [Route("Logout")]
         public IActionResult Logout()
         {
-            HttpContext.Session.Remove("Role");
+            HttpContext.Session.Remove("id");
             HttpContext.Session.Remove("email");
+            HttpContext.Session.Remove("isWorker");
+            HttpContext.Session.Remove("Role");
+            HttpContext.Session.Remove("current order");
             return RedirectToAction("Login");
         }
 
