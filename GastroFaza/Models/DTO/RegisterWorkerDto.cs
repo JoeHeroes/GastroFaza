@@ -11,7 +11,6 @@ namespace GastroFaza.Models.DTO
         public string ConfirmPassword { get; set; } 
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public List<SelectListItem> SelectedNations { get; set; }
         public List<SelectListItem> Roles { get; set; }
         public string Nationality { get; set; } = "Niemcy";
         public DateTime? DateOfBirth { get; set; }
