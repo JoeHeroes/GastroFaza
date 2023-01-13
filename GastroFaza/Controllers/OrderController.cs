@@ -31,16 +31,17 @@ namespace GastroFaza.Controllers
             return View();
         }
         [Route("OrderDetails")]
-        public IActionResult OrderDetails(int OrderId)
+        public IActionResult OrderDetails(int orderId)
         {
             HttpContext.Session.Remove("OrderStatus"); // czyści zawartość sesji by wstawić nowe dane do szczegółów zamówienia
             HttpContext.Session.Remove("orderId");
-            var order = this.dbContext.Orders.Where(x => x.Id == OrderId).FirstOrDefault(); //status potrzebny w sesji -> patrz OrderDetails linia 51
-            if(order.Status==Status.Przygotowywanie)
+
+            var order = this.dbContext.Orders.Where(x => x.Id == orderId).FirstOrDefault(); //status potrzebny w sesji -> patrz OrderDetails linia 51
+            if (order.Status == Status.Przygotowywanie)
                 HttpContext.Session.SetString("OrderStatus", "Preparing");
 
-            HttpContext.Session.SetString("orderId", OrderId.ToString());
-            var dishOrder = this.dbContext.DishOrders.Where(x => x.OrderId == OrderId);
+            HttpContext.Session.SetString("orderId", orderId.ToString());
+            var dishOrder = this.dbContext.DishOrders.Where(x => x.OrderId == orderId);
 
             List<Dish> dishes = new List<Dish>();
 
@@ -51,8 +52,24 @@ namespace GastroFaza.Controllers
                 var dish = dishList.FirstOrDefault(d => d.Id == x.DishesId);
                 dishes.Add(dish);
             }
+            
+            User user = this.dbContext.Clients.FirstOrDefault(x => x.Id == order.AddedById);
+            if (user == null)
+                user = this.dbContext.Workers.FirstOrDefault(x => x.Id == order.AddedById);
+            OrderDetailsDto orderDetails = new OrderDetailsDto
+            {
+                ClientId = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                OrderId = orderId,
+                Dishes = dishes,
+                Status = order.Status,
+                Description = order.Description,
+                Price = order.Price,
+            };
 
-            return View(dishes);
+            return View(orderDetails);
         }
 
         [Route("OrderIsReceived")]

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Dish>
+﻿@model GastroFaza.Models.DTO.OrderDetailsDto
 @inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "OrderDetails";
@@ -20,6 +20,15 @@
         <div class="col-6">
             <h2 class="text-primary">Orders</h2>
         </div>
+        <div class="text-light"> User Id: @Model.ClientId
+        User Email: @Model.Email
+        User First Name: @Model.FirstName
+        User Last Name: @Model.LastName
+        Order Id: @Model.OrderId
+        Order Status: @Model.Status
+        Order Description: @Model.Description
+        Order Price: @Model.Price
+        </div>
         <div class="col-6 text-end">
         </div>
     </div>
@@ -30,7 +39,7 @@
 <div style="float:left">
     <div style="float:left">
 
-        @foreach (var obj in Model)
+        @foreach (var obj in Model.Dishes)
         {
             <table class="table table-bordered" id=table>
                 <tr>
