@@ -2,6 +2,7 @@
 {
     public enum Status
     {
+        Nowe,
         Przyjete,
         Przygotowywanie,
         Gotowe,

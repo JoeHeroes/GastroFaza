@@ -18,15 +18,40 @@ namespace GastroFaza.Controllers
         [Route("ClientsOrders")]
         public IActionResult ClientsOrders()
         {
-            //var orders = this.dbContext.Orders.Where(o => o.Status == Status.Przyjete);
-            var orders = this.dbContext.Orders;
-            return View(orders);
+            if (HttpContext.Session.GetString("Role") == "Cook")
+            {
+                var orders = this.dbContext.Orders.Where(o => o.Status == Status.Przyjete || o.Status == Status.Przygotowywanie);
+                return View(orders);
+            }
+            else if (HttpContext.Session.GetString("Role") == "Waiter")
+            {
+                var orders = this.dbContext.Orders.Where(o => o.Status == Status.Przyjete || o.Status == Status.Gotowe || o.Status == Status.Dostarczone || o.Status == Status.Odebrane);
+                return View(orders);
+            }
+            return View();
         }
         [Route("OrderDetails")]
         public IActionResult OrderDetails(int OrderId)
         {
-            var dishes = this.dbContext.Orders.Where(o => o.Id == OrderId).SelectMany(o => o.Dishes);
+            HttpContext.Session.Remove("OrderStatus"); // czyści zawartość sesji by wstawić nowe dane do szczegółów zamówienia
+            HttpContext.Session.Remove("orderId");
+            var order = this.dbContext.Orders.Where(x => x.Id == OrderId).FirstOrDefault(); //status potrzebny w sesji -> patrz OrderDetails linia 51
+            if(order.Status==Status.Przygotowywanie)
+                HttpContext.Session.SetString("OrderStatus", "Preparing");
+
             HttpContext.Session.SetString("orderId", OrderId.ToString());
+            var dishOrder = this.dbContext.DishOrders.Where(x => x.OrderId == OrderId);
+
+            List<Dish> dishes = new List<Dish>();
+
+            var dishList = this.dbContext.Dishs.ToList();
+
+            foreach (var x in dishOrder)
+            {
+                var dish = dishList.FirstOrDefault(d => d.Id == x.DishesId);
+                dishes.Add(dish);
+            }
+
             return View(dishes);
         }
 
@@ -116,7 +141,6 @@ namespace GastroFaza.Controllers
                 var dish = dishList.FirstOrDefault(d => d.Id == x.DishesId);
                 orders.Add(dish);
             }
-
             return View(orders);
         }
 
@@ -129,7 +153,7 @@ namespace GastroFaza.Controllers
             {
                 throw new Exception("Order not found");
             }
-            order.Status = Status.Przygotowywanie;
+            order.Status = Status.Przyjete;
             dbContext.SaveChanges();
             HttpContext.Session.SetString("current order", String.Empty);
             return View();
@@ -175,7 +199,7 @@ namespace GastroFaza.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            order.Status = Status.Przyjete;
+            order.Status = Status.Nowe;
 
             this.dbContext.Orders.Add(order);
             try
