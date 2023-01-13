@@ -1,19 +1,17 @@
 ﻿@model GastroFaza.Models.Client
 
 @{
-    ViewData["Title"] = "AccountSettings";
+    ViewData["Title"] = "ProfileEdit";
 }
 
 
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-primary">Account Settings</h2>
+            <h2 class="text-primary">ProfileEdit</h2>
         </div>
     </div>
 </div>
-
-
 
 
 <hr />
@@ -42,7 +40,7 @@
                 <input asp-for="Nationality" class="form-control" />
                 <span asp-validation-for="Nationality" class="text-danger"></span>
             </div>
- 
+            <br />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -52,9 +50,12 @@
 
 <br />
 
-
-<a href='@Url.Action("RestartPassword", "Account")' class="btn btn-primary">Restart password</a>
+<div>
+    <a href='@Url.Action("Profile", "Account")' class="btn btn-primary">Back</a>
+</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

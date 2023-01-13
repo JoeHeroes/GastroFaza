@@ -1,5 +1,6 @@
 ﻿using GastroFaza.Models;
 using GastroFaza.Models.DTO;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -15,12 +16,14 @@ namespace GastroFaza.Controllers
         private readonly IPasswordHasher<Client> passwordHasherClient;
         private readonly IPasswordHasher<Worker> passwordHasherWorker;
         private readonly AuthenticationSettings authenticationSetting;
-        public AccountController(RestaurantDbContext dbContext, IPasswordHasher<Client> passwordHasherClient, IPasswordHasher<Worker> passwordHasherWorker, AuthenticationSettings authenticationSetting)
+        private readonly IWebHostEnvironment webHost;
+        public AccountController(RestaurantDbContext dbContext, IPasswordHasher<Client> passwordHasherClient, IPasswordHasher<Worker> passwordHasherWorker, AuthenticationSettings authenticationSetting, IWebHostEnvironment webHost)
         {
             this.dbContext = dbContext;
             this.passwordHasherClient = passwordHasherClient;
             this.passwordHasherWorker = passwordHasherWorker;
             this.authenticationSetting = authenticationSetting;
+            this.webHost = webHost;
         }
 
         [Route("Login")]
@@ -77,16 +80,26 @@ namespace GastroFaza.Controllers
             ViewBag.username = HttpContext.Session.GetString("email");
             return View("Welcome");
         }
-        [Route("AccountSettings")]
-        public IActionResult AccountSettings()
+
+        [Route("Profile")]
+        public IActionResult Profile()
         {
             var account = dbContext.Clients.FirstOrDefault(x => x.Id == int.Parse(HttpContext.Session.GetString("id")));
             return View(account);
         }
 
+
+        [Route("ProfileEdit")]
+        public IActionResult ProfileEdit(int id)
+        {
+            var account = dbContext.Clients.FirstOrDefault(x => x.Id == id);
+
+            return View(account);
+        }
+
         [HttpPost]
-        [Route("AccountSettings")]
-        public IActionResult AccountSettings(EditClientDto dto)
+        [Route("ProfileEdit")]
+        public IActionResult ProfileEdit(EditClientDto dto)
         {
             if (ModelState.IsValid)
             {
@@ -98,11 +111,61 @@ namespace GastroFaza.Controllers
 
                 dbContext.SaveChanges();
             }
-            return View("AccountSettings");
+            return View("ProfileEdit");
+        }
+
+        [Route("SelectPicture")]
+        public IActionResult SelectPicture()
+        {
+            var dto = new PictureDto();
+
+            return View(dto);
+        }
+
+        [HttpPost]
+        [Route("SelectPicture")]
+        public IActionResult SelectPicture(PictureDto dto)
+        {
+
+
+            string stringFileName = UploadFile(dto);
+            if (ModelState.IsValid)
+            {
+                var model = this.dbContext.Clients.FirstOrDefault(x => x.Id == int.Parse(HttpContext.Session.GetString("id")));
+                model.ProfileImg = stringFileName;
+
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+
+                return RedirectToAction("Profile");
+            }
+
+            return View(dto);
+
         }
 
 
-        
+        private string UploadFile(PictureDto dto)
+        {
+            string fileName = null;
+            if (dto.PathPic != null)
+            {
+                string uploadDir = Path.Combine(webHost.WebRootPath, "Images");
+                fileName = Guid.NewGuid().ToString() + "-" + dto.PathPic.FileName;
+                string filePath = Path.Combine(uploadDir, fileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    dto.PathPic.CopyTo(fileStream);
+                }
+            }
+            return fileName;
+        }
 
 
 

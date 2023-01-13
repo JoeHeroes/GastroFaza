@@ -1,6 +1,7 @@
 ﻿using GastroFaza.Models;
 using GastroFaza.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace GastroFaza.Controllers
@@ -41,7 +42,13 @@ namespace GastroFaza.Controllers
 
             return View(reservations);
         }
-        public IActionResult Create()
+
+
+
+
+
+        [Route("Check")]
+        public IActionResult Check()
         {
             if (HttpContext.Session.GetString("email") != null)
             {
@@ -53,8 +60,34 @@ namespace GastroFaza.Controllers
             }
         }
 
+
         [HttpPost]
-        public IActionResult Create(ReservationDto modelDTO)
+        [Route("Choice")]
+        public IActionResult Choice(CheckReservationDto dto)
+        {
+            
+            //working in progres .....
+
+            var reservation = this.dbContext.Reservations;
+
+            var create = new ReservationDto();
+            var list = new List<SelectListItem>();
+
+            create.DateOfReservation = dto.DateOfReservation;
+            create.HourOfReservation = dto.HourOfReservation;
+
+            foreach(var res in reservation)
+            {
+                list.Add(new SelectListItem() { Text = res.Id.ToString(), Value = res.Id.ToString() });
+            }
+            create.TableSelect = list;
+
+            return View(create);
+        }
+
+        [HttpPost]
+        [Route("Create")]
+        public IActionResult Create(ReservationDto dto)
         {
             string userEmail = HttpContext.Session.GetString("email");
             var client = this.dbContext.Clients.FirstOrDefault(u => u.Email == userEmail);
@@ -65,13 +98,13 @@ namespace GastroFaza.Controllers
                 this.dbContext.Reservations.Add(new Reservation()
                 {
                     ClientId = idClient,
-                    TableId = modelDTO.TableId,
-                    DataOfReservation = new DateTime(modelDTO.DateOfReservation.Year,
-                    modelDTO.DateOfReservation.Month,
-                    modelDTO.DateOfReservation.Day,
-                    modelDTO.HourOfReservation.Hour,
-                    modelDTO.HourOfReservation.Minute,
-                    modelDTO.HourOfReservation.Second)
+                    TableId = dto.TableId,
+                    DataOfReservation = new DateTime(dto.DateOfReservation.Year,
+                    dto.DateOfReservation.Month,
+                    dto.DateOfReservation.Day,
+                    dto.HourOfReservation.Hour,
+                    dto.HourOfReservation.Minute,
+                    dto.HourOfReservation.Second)
                 });
 
                 try
@@ -85,7 +118,7 @@ namespace GastroFaza.Controllers
                 return RedirectToAction("GetAll");
             }
 
-            return View(modelDTO);
+            return View(dto);
         }
 
         public IActionResult Edit()
@@ -99,18 +132,18 @@ namespace GastroFaza.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int? id, ReservationDto modelDTO)
+        public IActionResult Edit(int? id, ReservationDto dto)
         {
             if (ModelState.IsValid)
             {
                 var model = this.dbContext.Reservations.Find(id);
-                model.TableId = modelDTO.TableId;
-                model.DataOfReservation = new DateTime(modelDTO.DateOfReservation.Year,
-                    modelDTO.DateOfReservation.Month, 
-                    modelDTO.DateOfReservation.Day, 
-                    modelDTO.HourOfReservation.Hour, 
-                    modelDTO.HourOfReservation.Minute, 
-                    modelDTO.HourOfReservation.Second);
+                model.TableId = dto.TableId;
+                model.DataOfReservation = new DateTime(dto.DateOfReservation.Year,
+                    dto.DateOfReservation.Month, 
+                    dto.DateOfReservation.Day, 
+                    dto.HourOfReservation.Hour, 
+                    dto.HourOfReservation.Minute, 
+                    dto.HourOfReservation.Second);
                 try
                 {
                     this.dbContext.SaveChanges();
@@ -123,7 +156,7 @@ namespace GastroFaza.Controllers
                 return RedirectToAction("GetAll");
             }
 
-            return View(modelDTO);
+            return View(dto);
         }
 
 
