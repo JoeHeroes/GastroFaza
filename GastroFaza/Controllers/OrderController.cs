@@ -18,8 +18,6 @@ namespace GastroFaza.Controllers
         [Route("ClientsOrders")]
         public IActionResult ClientsOrders()
         {
-            HttpContext.Session.Remove("OrderStatus"); // usuwanie z sesji po tym jak wróci się z order details
-            HttpContext.Session.Remove("orderId");
             if (HttpContext.Session.GetString("Role") == "Cook")
             {
                 var orders = this.dbContext.Orders.Where(o => o.Status == Status.Przyjete || o.Status == Status.Przygotowywanie);
@@ -35,6 +33,8 @@ namespace GastroFaza.Controllers
         [Route("OrderDetails")]
         public IActionResult OrderDetails(int OrderId)
         {
+            HttpContext.Session.Remove("OrderStatus"); // czyści zawartość sesji by wstawić nowe dane do szczegółów zamówienia
+            HttpContext.Session.Remove("orderId");
             var order = this.dbContext.Orders.Where(x => x.Id == OrderId).FirstOrDefault(); //status potrzebny w sesji -> patrz OrderDetails linia 51
             if(order.Status==Status.Przygotowywanie)
                 HttpContext.Session.SetString("OrderStatus", "Preparing");
@@ -84,8 +84,6 @@ namespace GastroFaza.Controllers
         [Route("OrderIsReady")]
         public IActionResult OrderIsReady(int OrderId)
         {
-            HttpContext.Session.Remove("OrderStatus"); // usuwanie z sesji po tym jak wróci się z order details
-            HttpContext.Session.Remove("orderId");
             Order order = this.dbContext.Orders.FirstOrDefault(o => o.Id == OrderId);
             if (order == null)
             {
@@ -143,7 +141,6 @@ namespace GastroFaza.Controllers
                 var dish = dishList.FirstOrDefault(d => d.Id == x.DishesId);
                 orders.Add(dish);
             }
-
             return View(orders);
         }
 
@@ -202,7 +199,7 @@ namespace GastroFaza.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            order.Status = Status.Przyjete;
+            order.Status = Status.Nowe;
 
             this.dbContext.Orders.Add(order);
             try
