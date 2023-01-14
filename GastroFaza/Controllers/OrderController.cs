@@ -36,7 +36,7 @@ namespace GastroFaza.Controllers
             HttpContext.Session.Remove("OrderStatus"); // czyści zawartość sesji by wstawić nowe dane do szczegółów zamówienia
             HttpContext.Session.Remove("orderId");
 
-            var order = this.dbContext.Orders.Where(x => x.Id == orderId).FirstOrDefault(); //status potrzebny w sesji -> patrz OrderDetails linia 51
+            var order = this.dbContext.Orders.FirstOrDefault(x => x.Id == orderId); //status potrzebny w sesji -> patrz OrderDetails linia 51
             if (order.Status == Status.Przygotowywanie)
                 HttpContext.Session.SetString("OrderStatus", "Preparing");
 

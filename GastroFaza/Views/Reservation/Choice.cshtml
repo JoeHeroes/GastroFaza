@@ -9,7 +9,12 @@
     <div class="col-md-4">
         <form method="post" action="@Url.Action("Create", "Reservation")" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+            <div class="form-group">
+                <input asp-for="DateOfReservation" type="hidden" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input asp-for="HourOfReservation" type="hidden" class="form-control" />
+            </div>
             <div class="form-group">
                 <label asp-for="TableId" class="control-label"></label>
                 <select asp-items=Model.TableSelect asp-for="TableId" class="form-select"></select>

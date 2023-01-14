@@ -43,8 +43,44 @@ namespace GastroFaza.Seeder
                     dbContext.Restaurants.AddRange(restaurants);
                     dbContext.SaveChanges();
                 }
+
+                if (!dbContext.Tables.Any())
+                {
+                    var tables = GetTables();
+                    dbContext.Tables.AddRange(tables);
+                    dbContext.SaveChanges();
+                }
             }
         }
+
+        private IEnumerable<DiningTable> GetTables()
+        {
+            return new List<DiningTable> ()
+            {
+                new DiningTable()
+                {
+                    Busy= true,
+                    Seats =6,
+                },
+                new DiningTable()
+                {
+                    Busy= true,
+                    Seats =2,
+                },
+                new DiningTable()
+                {
+                    Busy= true,
+                    Seats =3,
+                },
+                new DiningTable()
+                {
+                    Busy= true,
+                    Seats =3,
+                },
+            };
+        }
+
+
         private IEnumerable<Dish> GetDishes()
         {
             return new List<Dish>()

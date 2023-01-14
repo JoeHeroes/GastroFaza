@@ -65,21 +65,31 @@ namespace GastroFaza.Controllers
         [Route("Choice")]
         public IActionResult Choice(CheckReservationDto dto)
         {
-            
-            //working in progres .....
-
-            var reservation = this.dbContext.Reservations;
+            var reservation = this.dbContext.Reservations.Where(x => x.DataOfReservation.Date == dto.DateOfReservation.Date && x.DataOfReservation.TimeOfDay == dto.HourOfReservation.TimeOfDay);
 
             var create = new ReservationDto();
             var list = new List<SelectListItem>();
+            var resList = new List<int>();
 
+            foreach (var r in reservation)
+            {
+                resList.Add(r.TableId[0]);
+            }
+
+            var tabel = this.dbContext.Tables.ToList();
+
+            var res = 0;
+
+            for (int i = 1; i <= tabel.Count(); i++)
+            {
+                res = resList.Find(x => x == i);
+                if (res == 0)
+                {
+                    list.Add(new SelectListItem() { Text = i.ToString(), Value = i.ToString() });
+                }
+            }
             create.DateOfReservation = dto.DateOfReservation;
             create.HourOfReservation = dto.HourOfReservation;
-
-            foreach(var res in reservation)
-            {
-                list.Add(new SelectListItem() { Text = res.Id.ToString(), Value = res.Id.ToString() });
-            }
             create.TableSelect = list;
 
             return View(create);

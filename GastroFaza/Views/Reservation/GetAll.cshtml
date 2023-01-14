@@ -80,7 +80,7 @@
                     @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
                     {
                         <td width="40%">
-                            @obj.DataOfReservation.ToString("dddd, dd MMMM yyyy")
+                            @obj.DataOfReservation.ToString("MM/dd/yyyy HH:mm")
                         </td>
                         <td width="20%">
                             @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") == "true")
