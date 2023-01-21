@@ -242,6 +242,17 @@ namespace GastroFaza.Controllers
                 return View("CreateWorkerAccount");
             }
 
+            var worker = this.dbContext
+                                .Workers
+                                .Include(u => u.Role)
+                                .FirstOrDefault(u => u.Email == dto.Email);
+
+            if (worker != null)
+            {
+                ViewBag.msg = "Email is taken";
+                return View("Register");
+            }
+
             if (dto.Password != dto.ConfirmPassword)
             {
                 ViewBag.msg = "Invalid Password";
@@ -287,6 +298,18 @@ namespace GastroFaza.Controllers
             {
                 return View("Register");
             }
+
+            var client = this.dbContext
+                               .Clients
+                               .FirstOrDefault(u => u.Email == dto.Email);
+
+            if (client != null)
+            {
+                ViewBag.msg = "Email is taken";
+                return View("Register");
+            }
+
+
 
             if (dto.Password != dto.ConfirmPassword)
             {
