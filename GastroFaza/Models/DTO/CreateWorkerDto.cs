@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace GastroFaza.Models.DTO
@@ -9,10 +10,13 @@ namespace GastroFaza.Models.DTO
         [EmailAddress]
         public string Email { get; set; } 
         [Required]
+        [DisplayName("First Name")]
         public string FirstName { get; set; }
         [Required]
+        [DisplayName("Last Name")]
         public string LastName { get; set; }
         [Required]
+        [DisplayName("Date Of Birth")]
         public DateTime? DateOfBirth { get; set; }
         [Required]
         public string Nationality { get; set; }
@@ -22,7 +26,8 @@ namespace GastroFaza.Models.DTO
         public float Salary { get; set; }
         [Required]
         public int Rating { get; set; }
-        [Required] 
+        [Required]
+        [DisplayName("Role")]
         public int RoleId { get; set; }
 
         public List<SelectListItem> Roles { get; set; }

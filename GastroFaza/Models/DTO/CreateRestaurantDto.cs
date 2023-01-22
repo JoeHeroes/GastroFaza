@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace GastroFaza.Models.DTO
 {
@@ -12,8 +13,10 @@ namespace GastroFaza.Models.DTO
         [Required]
         public bool HasDelivery { get; set; }
         [Required]
+        [DisplayName("Contact Email")]
         public string ContactEmail { get; set; }
         [Required]
+        [DisplayName("Contact Number")]
         public string ContactNumber { get; set; }
         [Required]
         [MaxLength(50)]
@@ -22,6 +25,7 @@ namespace GastroFaza.Models.DTO
         [MaxLength(50)]
         public string Street { get; set; }
         [Required]
+        [DisplayName("Postal Code")]
         public string PostalCode { get; set; }
     }
 }

@@ -114,8 +114,6 @@ namespace GastroFaza.Controllers
         [Route("SelectPicture")]
         public IActionResult SelectPicture(PictureDto dto)
         {
-
-
             string stringFileName = UploadFile(dto);
             if (ModelState.IsValid)
             {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
-
+using System.ComponentModel;
 
 namespace GastroFaza.Models.DTO
 {
@@ -12,13 +12,13 @@ namespace GastroFaza.Models.DTO
 
         public string ConfirmPassword { get; set; }
 
-        public string FirstName { get; set; } 
-
+        [DisplayName("First Name")]
+        public string FirstName { get; set; }
+        [DisplayName("Last Name")]
         public string LastName { get; set; }
 
         public string Nationality { get; set; } = "Niemcy";
-
+        [DisplayName("Date Of Birth")]
         public DateTime? DateOfBirth { get; set; }
-
     }
 }

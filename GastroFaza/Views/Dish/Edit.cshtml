@@ -5,9 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
-
-<h4>Dish</h4>
+<h1>Edit Dish</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -34,20 +32,23 @@
                 <select asp-for="DishType" class="form-control" asp-items="Html.GetEnumSelectList<DishType>()"></select>
                 <span asp-validation-for="DishType" class="text-danger"></span>
             </div>
+            <br/>
              <div class="form-control">
                 <label asp-for="PathPic" class="control-label"></label>
                 <input asp-for="PathPic" class="form-control" />
                 <span asp-validation-for="PathPic" class="text-danger"></span>
              </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+          
+            <div class="btn-group">
+                <div class="form-group" style="padding: 10px;">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+                <div style="padding: 10px;">
+                    <a href='@Url.Action("SearchMenu", "Dish")' class="btn btn-primary">Back</a>
+                </div>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a href='@Url.Action("SearchMenu", "Dish")' class="btn btn-primary">Back to List</a>
 </div>
 
 @section Scripts {

@@ -11,10 +11,13 @@ namespace GastroFaza.Models.DTO
         [StringLength(254, ErrorMessage = "Maximum email address length exceeded")]
         public string Email { get; set; }
         [Required]
+        [DisplayName("First Name")]
         public string FirstName { get; set; }
         [Required]
+        [DisplayName("Last Name")]
         public string LastName { get; set; }
         [Required]
+        [DisplayName("Date Of Birth")]
         public DateTime? DateOfBirth { get; set; }
         [Required]
         public string Nationality { get; set; }

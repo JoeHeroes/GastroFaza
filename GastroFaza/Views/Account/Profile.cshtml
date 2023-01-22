@@ -17,7 +17,6 @@
     </div>
 
 
-
     <hr />
 
     @if (Model.ProfileImg != null)
@@ -25,8 +24,8 @@
         <div>
             <img src='@Url.Content("~/Images/"+ Model.ProfileImg)' width="400" height="400" asp-append-version="true">
         </div>
+        <hr />
     }
-    <hr />
 
     <div>
         <a href='@Url.Action("SelectPicture", "Account")' class="profile_button">Select Picture</a>

@@ -43,19 +43,20 @@
                     <span asp-validation-for="Nationality" class="text-danger"></span>
                 </div>
                 <br />
-                <div class="form-group">
-                    <input class="edit_profile_save_button" type="submit" value="Save" />
+
+                <div class="btn-group">
+                    <div class="form-group" style="padding: 10px;">
+                        <input class="edit_profile_save_button" type="submit" value="Save" />
+                    </div>
+                    <div style="padding: 10px;">
+                        <a href='@Url.Action("Profile", "Account")' class="edit_profile_back_button">Back</a>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
 
     <br />
-
-    <div>
-        <a href='@Url.Action("Profile", "Account")' class="edit_profile_back_button">Back</a>
-    </div>
-
     @section Scripts {
         @{
             await Html.RenderPartialAsync("_ValidationScriptsPartial");
