@@ -2,18 +2,19 @@
 @model RegisterWorkerDto
 @{
     ViewData["Title"] = "Create Worker Account";
+    var maxDate = DateTime.Now.ToString("yyyy-MM-dd");
 }
 <head>
     <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
 </head>
-<body class="loginbody">
+<body>
     <form class="registerbox" method="post" action="@Url.Action("registerWorker", "Account")">
 
         <h1>Register</h1>
         <tr>
             <div asp-validation-summary="All"></div>
             <td><label class="text-light" asp-for="Email"></label></td>
-            <td><input asp-for="Email" class="form-control"></td>
+            <td><input type="text" asp-for="Email" class="form-control"></td>
             <td></td>
         </tr>
         <tr>
@@ -39,16 +40,16 @@
 
         <tr>
             <td><label class="text-light" asp-for="Nationality"></label></td>
-            <td><select asp-items=@NationsList.GetSelectNations() asp-for="Nationality" class="form-select">option</select></input></td>
+            <td><select asp-items=@NationsList.GetSelectNations() asp-for="Nationality" class="select_list_nationality">option</select></input></td>
             @*<td><input asp-for="Nationality" class="form-control">option</input></td>*@
         </tr>
         <tr>
             <td><label class="text-light" asp-for="DateOfBirth"></label></td>
-            <td><input type="date" asp-for="DateOfBirth" class="form-control" /></td>
+            <td><input type="date" max=@maxDate asp-for="DateOfBirth" class="select_list_register" /></td>
         </tr>
         <tr>
             <td><label class="text-light" asp-for="RoleId"></label></td>
-            <td> <select asp-for="RoleId" class="form-control"><option>1</option><option>2</option><option>3</option></select></td>
+            <td> <select asp-for="RoleId" class="select_list_nationality"><option>1</option><option>2</option><option>3</option></select></td>
         </tr>
         <tr>
             <td>&nbsp;</td>

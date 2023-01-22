@@ -1,11 +1,13 @@
 ﻿@model GastroFaza.Models.DTO.RegisterClientDto
 @{
     ViewData["Title"] = "Register";
+
+    var maxDate = DateTime.Now.ToString("yyyy-MM-dd");
 }
 <head>
     <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
 </head>
-<body class="loginbody">
+<body>
     <form class="registerbox" method="post" action="@Url.Action("registerClient", "Account")">
         
             <h1>Register</h1>
@@ -38,11 +40,11 @@
 
             <tr>
                 <td><label class="text-light" asp-for="Nationality"></label></td>
-                <td><select asp-items=@NationsList.GetSelectNations() asp-for="Nationality" class="form-select">option</select></td>
+                <td><select asp-items=@NationsList.GetSelectNations() asp-for="Nationality" class="select_list_nationality">option</select></td>
             </tr>
             <tr>
                 <td><label class="text-light" asp-for="DateOfBirth"></label></td>
-                <td><input type="date" asp-for="DateOfBirth" class="form-control" /></td>
+            <td><input type="date" max=@maxDate asp-for="DateOfBirth" class="select_list_register" /></td>
 
             </tr>
             <tr>

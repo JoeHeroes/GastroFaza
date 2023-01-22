@@ -1,14 +1,18 @@
 ﻿body {
-    background-color: #71816D;
+    background-color: #AB8476;
     margin-bottom: 100px;
+}
+body h2{
+    font-size:xx-large;
+    color:whitesmoke;
 }
 .table {
     background-color: #ffa31a;
     font-family: Andele Mono, monospace;
     font-weight: 900;
     border: 2px solid white;
-    table-collapse: collapse;
-    border-radius: 10px 10px 10px 10px;
+    padding:10px;
+    border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0,0,0,0.15);
     width: 100%;
@@ -46,7 +50,7 @@ ul {
     left: 50%;
     transform: translate(-50%,-50%);
     border: 20px;
-    border-radius: 15px;
+    border-radius: 4px;
     background: #191919;
     text-align:center;
 }
@@ -54,12 +58,12 @@ ul {
     width: 500px;
     padding: 40px;
     position: absolute;
-    margin-top: 100px;
+    margin-top: 150px;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     border: 20px;
-    border-radius: 15px;
+    border-radius: 4px;
     background: #191919;
     text-align: center;
 }
@@ -73,77 +77,80 @@ ul {
     text-transform: uppercase;
     font-weight: 500;
 }
-    .loginbox input[type ="text"],
-    .loginbox input[type ="password"] {
-        border: 0;
-        background: none;
-        height: 30px;
-        display: block;
-        margin: 5px auto;
-        text-align: center;
-        border: 2px solid #ffa31a;
-        padding: 14px 10px;
-        width: 220px;
-        outline: none;
-        color: white;
-        border-radius: 24px;
-        transition: 0.25s;
-        cursor: pointer;
-    }
+.loginbox input[type ="text"],
+.loginbox input[type ="password"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 5px auto;
+    height:30px;
+    text-align: center;
+    border: 2px solid #216869;
+    padding: 14px 10px;
+    width: 220px;
+    outline: none;
+    color: white;
+    border-radius: 4px;
+    transition: 0.5s;
+    cursor: pointer;
+}
 .registerbox input[type ="text"],
 .registerbox input[type ="password"],
-.registerbox input[type ="datetime-local"]{
+.registerbox input[type ="datetime-local"],
+.registerbox select{
     border: 0;
     height: 30px;
     background: none;
     display: block;
     margin: 5px auto;
     text-align: center;
-    border: 2px solid #ffa31a;
+    border: 2px solid #216869;
     padding: 14px 10px;
-    width: 220px;
+    width: 280px;
     outline: none;
     color: white;
-    border-radius: 24px;
-    transition: 0.25s;
+    border-radius: 4px;
+    transition: 0.5s;
     cursor: pointer;
 }
-        .loginbox input[type ="text"]:hover,
-        .loginbox input[type ="password"]:hover {
-            background: #ffa31a
-        }
+
+.loginbox input[type ="text"]:hover,
+.loginbox input[type ="password"]:hover {
+    background-color: #216869;
+}
 .registerbox input[type ="text"]:hover,
 .registerbox input[type ="password"]:hover,
 .registerbox input[type ="datetime-local"]:hover {
-    background: #ffa31a
+    background: #216869;
+    background-color: #216869;
 }
-        .loginbox input[type ="text"]:focus,
-        .loginbox input[type ="password"]:focus {
-            width: 280px;
-            border-color: #ffa31a;
-        }
+.loginbox input[type ="text"]:focus,
+loginbox input[type ="password"]:focus {
+    border-color: #216869;
+    background-color: #216869;
+}
 .registerbox input[type ="text"]:focus,
 .registerbox input[type ="password"]:focus,
 .registerbox input[type ="datetime-local"] {
     width: 280px;
-    border-color: #ffa31a;
+    border-color: #216869;
 }
-    .loginbox input[type = "submit"] {
-        border: 0;
-        background: none;
-        height: 50px;
-        display: block;
-        margin: 90px auto;
-        text-align: center;
-        border: 2px solid #2ecc71;
-        padding: 14px 40px;
-        outline: none;
-        color: white;
-        border-radius: 24px;
-        transition: 0.25s;
-        width: 200px;
-        cursor: pointer;
-    }
+.loginbox input[type = "submit"] {
+    border: 0;
+    background: none;
+    height: 30px;
+    display: block;
+    margin: 30px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 3px 20px;
+    outline: none;
+    color: white;
+    border-radius: 4px;
+    transition: 0.5s;
+    width: 220px;
+    cursor: pointer;
+}   
 .registerbox input[type = "submit"] {
     border: 0;
     background: none;
@@ -155,9 +162,9 @@ ul {
     padding: 14px 40px;
     outline: none;
     color: white;
-    border-radius: 24px;
-    transition: 0.25s;
-    width: 200px;
+    border-radius: 4px;
+    transition: 0.5s;
+    width: 280px;
     cursor: pointer;
 }
 .loginbox input[type = "submit"]:hover {
@@ -181,7 +188,238 @@ ul {
     outline: none;
     color: white;
     border-radius: 24px;
-    transition: 0.25s;
+    transition: 0.5s;
     width: 100px;
     cursor: pointer;
+}
+.profile div {
+    color:#FDFFFC;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size:small;
+}
+.profile_h2 {
+    color: #FDFFFC;
+    font-size:xx-large;
+}
+.profile_button {
+    border-radius: 5px;
+    border-color: #216869;
+    background-color: #63595C;
+    text-decoration: none;
+    display: inline-block;
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    padding: 8px;
+    color: #FDFFFC;
+}
+.profile_button:hover{
+    background-color: #216869;
+    transition:0.5s;
+    color:#FDFFFC;
+}
+.edit_profile_input {
+    background-color: #63595C;
+    height:40px;
+    display: block;
+    text-align: center;
+    border: 2px solid #216869;
+    padding: 14px 10px;
+    width: 280px;
+    outline: none;
+    color: white;
+    border-radius: 4px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.edit_profile input[type ="text"]:hover,
+.edit_profile input[type ="password"]:hover,
+.edit_profile input[type ="datetime-local"]:hover {
+    transition:0.5s;
+    background: #216869;
+    background-color: #216869;
+}
+.edit_profile_save_button {
+    border-radius: 5px;
+    border:hidden;
+    background-color: #63595C;
+    text-decoration: none;
+    display: inline-block;
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    padding: 8px;
+    color: #FDFFFC;
+}
+.edit_profile_save_button:hover{
+    background-color:#2ecc71;
+    transition:0.5s;
+}
+.edit_profile_back_button {
+    border-radius: 5px;
+    background-color: #63595C;
+    text-decoration: none;
+    display: inline-block;
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    padding: 8px;
+    color: #FDFFFC;
+}
+.edit_profile_back_button:hover {
+    background-color: red;
+    transition: 0.5s;
+}
+.add_to_order_button {
+    width: 100px;
+    height: 100px;
+    background-color: #63595C;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px;
+    text-decoration: none;
+}
+.confirm_order_button {
+    width: 100px;
+    height: 100px;
+    background-color: #63595C;
+    border-radius:4px;
+    padding: 10px;
+    text-decoration: none;
+}
+.add_to_order_button:hover {
+    transition: 0.5s;
+    background-color: #216869;
+}
+
+.confirm_order_button:hover {
+    transition: 0.5s;
+    background-color: #216869;
+}
+.remove_from_order_button{
+    text-decoration:none;
+    width:auto;
+    height:auto;
+    border: solid 1px black;
+    border-radius: 4px;
+    color:white;
+}
+.remove_from_order_button:hover {
+    transition:0.5s;
+    background-color:red;
+    color:black;
+}
+.meal_button{
+    background-color:aquamarine;
+}
+.main {
+    height: 100vh;
+    position: relative;
+    padding: 1%;
+}
+.backwideo {
+    width:100%;
+    height: auto;
+    position: absolute;
+    margin-left:-1%;
+    z-index: -1;
+}
+.content{
+    text-align:center;
+}
+.content h1{
+    width:100%;
+    margin-top:100px;
+    font-size:xx-large;
+    font-size:70px;
+    color: #fff;
+    font-weight:600;
+}
+.indexbody {
+    background-color: #2D3A3A;
+}
+.indexbutton{
+    width:100px;
+    height:50px;
+    text-decoration:none;
+    background:none;
+    border: solid 3px;
+    border-radius: 24px;
+    border-color:white;    
+    color:white;
+}
+.indexbutton:hover {
+    transition:0.5s;
+    background-color:white;
+    border-color:#2D3A3A;
+    color:#2D3A3A;
+}
+.selectpicture {
+    background-color: #AB8476;
+}
+.select_list {
+    background-color: #63595C;
+    height: 40px;
+    display: block;
+    text-align: center;
+    border: 2px solid #216869;
+    width: 280px;
+    outline: none;
+    color: white;
+    border-radius: 4px;
+    transition: 0.5s;
+    cursor: pointer;
+    display:contents;
+    color:white;
+}
+.registerbox .select_list_nationality option {   
+    color:black;
+    cursor:pointer;
+}
+.registerbox .select_list_register {
+    background-color: #63595C;
+    height: 40px;
+    display: block;
+    text-align: center;
+    border: 2px solid #216869;
+    width: 280px;
+    outline: none;
+    color: white;
+    border-radius: 4px;
+    transition: 0.5s;
+    cursor: pointer;
+    margin-left:70px;
+}
+.select_list {
+    background-color: #63595C;
+    height: 40px;
+    display: block;
+    text-align: center;
+    border: 2px solid #216869;
+    width: 280px;
+    outline: none;
+    color: white;
+    border-radius: 4px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.add_reservation_button {
+    border-radius: 5px;
+    border-color: #216869;
+    background-color: #63595C;
+    text-decoration: none;
+    display: inline-block;
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    padding: 8px;
+    color: #FDFFFC;
+    height:70px;
+    text-align:center;
+}
+
+.add_reservation_button:hover {
+    background-color: #216869;
+    transition: 0.5s;
+    color: #FDFFFC;
 }

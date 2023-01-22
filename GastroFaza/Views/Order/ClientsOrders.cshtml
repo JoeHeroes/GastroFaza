@@ -14,66 +14,67 @@
 <head>
     <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
 </head>
+<body>
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 style="font-size:xx-large; color:whitesmoke;">Orders</h2>
+            </div>
+            <div class="col-6 text-end">
 
-<div class="container p-3">
-    <div class="row pt-4">
-        <div class="col-6">
-            <h2 class="text-primary">Orders</h2>
+                @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null && @HttpContextAccessor.HttpContext.Session.GetString("Role") == "Waiter")
+                {
+                    <a href='@Url.Action("Create", "Order")' class="btn btn-primary">Add Order</a>
+                }
+            </div>
         </div>
-        <div class="col-6 text-end">
+    </div>
+    <br />
+    <br />
+    <br />
+    <div style="float:left">
+        <div style="float:left">
 
-            @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null && @HttpContextAccessor.HttpContext.Session.GetString("Role") == "Waiter")
+            @foreach (var obj in Model)
             {
-                <a href='@Url.Action("Create", "Order")' class="btn btn-primary">Add Order</a>
+                <table class="table table-bordered" id=table>
+                    <tr>
+                        <th>
+
+                            <div class="text-light">Order Id: @obj.Id </div>
+                            <div class="text-light">Price: @obj.Price</div>
+                            <div class="text-light">Status: @obj.Status </div>
+                            <div class="text-light">Added by id: @obj.AddedById </div>
+                            <a href='@Url.Action("OrderDetails", "Order", new { OrderId = obj.Id })' class="btn btn-primary">Order details</a>
+                            @if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Cook")
+                            {
+                                @if (@obj.Status == GastroFaza.Models.Enum.Status.Przyjete)
+                                {
+                                    <a href='@Url.Action("OrderIsInProgress", "Order", new {OrderId=obj.Id})' class="btn btn-primary">Order Is In Progress</a>
+                                }
+                                else if (@obj.Status == GastroFaza.Models.Enum.Status.Przygotowywanie)
+                                {
+                                    <a href='@Url.Action("OrderIsReady", "Order", new {OrderId=obj.Id})' class="btn btn-primary">Order Is Ready</a>
+                                }
+
+                            }
+                            else if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Waiter")
+                            {
+                                @if (@obj.Status == GastroFaza.Models.Enum.Status.Gotowe)
+                                {
+                                    <a href='@Url.Action("OrderIsTaken", "Order", new {OrderId=obj.Id})' class="btn btn-primary">Order Is Taken</a>
+                                }
+                                else if (@obj.Status == GastroFaza.Models.Enum.Status.Odebrane)
+                                {
+                                    <a href='@Url.Action("OrderIsDelivered", "Order", new {OrderId=obj.Id})' class="btn btn-primary">Order Is Delivered</a>
+                                }
+
+                            }
+                        </th>
+                    </tr>
+                </table>
             }
         </div>
+
     </div>
-</div>
-<br />
-<br />
-<br />
-<div style="float:left">
-    <div style="float:left">
-
-        @foreach (var obj in Model)
-        {
-            <table class="table table-bordered" id=table>
-                <tr>
-                    <th>
-
-                        <div class="text-light">Order Id: @obj.Id </div>
-                        <div class="text-light">Price: @obj.Price</div>
-                        <div class="text-light">Status: @obj.Status </div>
-                        <div class="text-light">Added by id: @obj.AddedById </div>
-                        <a href='@Url.Action("OrderDetails", "Order", new { OrderId = obj.Id })' class="btn btn-primary">Order details</a>
-                        @if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Cook")
-                        {
-                            @if (@obj.Status == GastroFaza.Models.Enum.Status.Przyjete)
-                            {
-                                <a href='@Url.Action("OrderIsInProgress", "Order", new {OrderId=obj.Id})' class="btn btn-primary">Order Is In Progress</a>
-                            }
-                            else if (@obj.Status == GastroFaza.Models.Enum.Status.Przygotowywanie)
-                            {
-                                <a href='@Url.Action("OrderIsReady", "Order", new {OrderId=obj.Id})' class="btn btn-primary">Order Is Ready</a>
-                            }
-
-                        }
-                        else if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Waiter")
-                        {
-                            @if (@obj.Status == GastroFaza.Models.Enum.Status.Gotowe)
-                            {
-                                <a href='@Url.Action("OrderIsTaken", "Order", new {OrderId=obj.Id})' class="btn btn-primary">Order Is Taken</a>
-                            }
-                            else if (@obj.Status == GastroFaza.Models.Enum.Status.Odebrane)
-                            {
-                                <a href='@Url.Action("OrderIsDelivered", "Order", new {OrderId=obj.Id})' class="btn btn-primary">Order Is Delivered</a>
-                            }
-
-                        }
-                    </th>
-                </tr>
-            </table>
-        }
-    </div>
-
-</div>
+</body>

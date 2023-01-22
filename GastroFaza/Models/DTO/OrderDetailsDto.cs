@@ -1,4 +1,5 @@
 ﻿using GastroFaza.Models.Enum;
+using System.ComponentModel;
 
 namespace GastroFaza.Models.DTO
 {
@@ -6,7 +7,9 @@ namespace GastroFaza.Models.DTO
     {
         public int ClientId { get; set; }
         public string Email { get; set; }
+        [DisplayName("First Name")]
         public string FirstName { get; set; }
+        [DisplayName("Last Name")]
         public string LastName { get; set; }
 
         public int OrderId { get; set; }

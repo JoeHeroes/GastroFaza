@@ -4,13 +4,6 @@
     ViewData["Title"] = "Search";
 }
 
-<style>
-    #table {
-        width ="150";
-        height ="250";
-    }
-</style>
-
 <head>
     <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
 </head>
@@ -32,10 +25,10 @@
     @foreach (var obj in Model)
     {
         <div style="float:left">
-            <table class="table table-bordered" id=table>
+            <table class="table table-bordered" style="margin:2px;">
                 <tr>
                     <th>
-                        <img src="~/Images/@obj.ProfileImg" width="150" height="150" asp-append-version="true" />
+                        <img src="~/Images/@obj.ProfileImg" width="200" height="200" asp-append-version="true" />
                         <br />
                         @obj.Name
                         <br />

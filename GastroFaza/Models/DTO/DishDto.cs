@@ -1,4 +1,5 @@
 ﻿using GastroFaza.Models.Enum;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace GastroFaza.Models.DTO
@@ -12,7 +13,8 @@ namespace GastroFaza.Models.DTO
 		public string Name { get; set; } 
 		public string Description { get; set; } 
 		public double Price { get; set; }
-		public DishType DishType { get; set; }
+        [DisplayName("Dish Type")]
+        public DishType DishType { get; set; }
         public IFormFile PathPic { get; set; }
     }
 }

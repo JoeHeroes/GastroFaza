@@ -57,8 +57,14 @@
                 <span asp-validation-for="TableId" class="text-danger"></span>
             </div>
             <br /> <br />
-            <div class="form-group">
-                <input type="submit" value="Edit" class="btn btn-primary" />
+            
+            <div class="btn-group">
+                <div class="form-group"style="padding: 10px;">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+                <div style="padding: 10px;">
+                    <a href='@Url.Action("GetAllReservations", "Reservation")' class="btn btn-primary">Back</a>
+                </div>
             </div>
         </form>
     </div>

@@ -114,8 +114,6 @@ namespace GastroFaza.Controllers
         [Route("SelectPicture")]
         public IActionResult SelectPicture(PictureDto dto)
         {
-
-
             string stringFileName = UploadFile(dto);
             if (ModelState.IsValid)
             {
@@ -250,7 +248,7 @@ namespace GastroFaza.Controllers
             if (worker != null)
             {
                 ViewBag.msg = "Email is taken";
-                return View("Register");
+                return View("CreateWorkerAccount");
             }
 
             if (dto.Password != dto.ConfirmPassword)
