@@ -248,7 +248,7 @@ namespace GastroFaza.Controllers
             if (worker != null)
             {
                 ViewBag.msg = "Email is taken";
-                return View("Register");
+                return View("CreateWorkerAccount");
             }
 
             if (dto.Password != dto.ConfirmPassword)
