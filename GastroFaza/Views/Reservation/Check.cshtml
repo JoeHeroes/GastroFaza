@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Choice Data";
+    var minDate = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
 }
 
 <h1>Choice Data</h1>
@@ -13,7 +14,7 @@
 
             <div class="form-group">
                 <label asp-for="DateOfReservation" class="control-label">Data rezerwacji:</label>
-                <input asp-for="DateOfReservation" class="form-control" type="date" />
+                <input asp-for="DateOfReservation" class="form-control" type="date" min=@minDate />
                 <span asp-validation-for="DateOfReservation" class="text-danger"></span>
             </div>
             <div class="form-group">

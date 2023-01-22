@@ -2,6 +2,7 @@
 @model RegisterWorkerDto
 @{
     ViewData["Title"] = "Create Worker Account";
+    var maxDate = DateTime.Now.ToString("yyyy-MM-dd");
 }
 <head>
     <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
@@ -44,7 +45,7 @@
         </tr>
         <tr>
             <td><label class="text-light" asp-for="DateOfBirth"></label></td>
-            <td><input type="date" asp-for="DateOfBirth" class="form-control" /></td>
+            <td><input type="date" max=@maxDate asp-for="DateOfBirth" class="form-control" /></td>
         </tr>
         <tr>
             <td><label class="text-light" asp-for="RoleId"></label></td>
