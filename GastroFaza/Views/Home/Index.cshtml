@@ -1,8 +1,17 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="text-center"> 
-    <h1 class="display-4">Welcome to Hell!!!!</h1>
-    <p>Only Thing They Fear Is You :OPRST </p>
-</div>
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+</head>
+<body class="indexbody">
+    <div class="main">
+        <video autoplay loop muted class="backwideo">
+            <source src="~/Images/video.mp4" type="video/mp4" />
+        </video> 
+        <div class="content">
+            <h1>GastroFaza</h1>
+            <a asp-area="" asp-controller="Dish" asp-action="GetAll"><button class="indexbutton">Menu</button></a>
+        </div>
+    </div>
+</body>

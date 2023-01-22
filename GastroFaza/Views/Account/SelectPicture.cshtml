@@ -3,30 +3,35 @@
     ViewData["Title"] = "SelectPicture";
 }
 
-<h1>SelectPicture</h1>
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+</head>
+<body>
+    <h2 class="profile_h2">SelectPicture</h2>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-controller="Account" asp-action="SelectPicture" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form class="edit_profile" asp-controller="Account" asp-action="SelectPicture" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-control">
-                <label asp-for="PathPic" class="control-label"></label>
-                <input asp-for="PathPic" class="form-control" />
-                <span asp-validation-for="PathPic" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="form-control">
+                    <label asp-for="PathPic" class="control-label text-light"></label>
+                    <input asp-for="PathPic" class="edit_profile_input" style="align-content:center; align-items:center;align-self:center;" />
+                    <span asp-validation-for="PathPic" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Save" class="edit_profile_save_button" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a href='@Url.Action("Profile", "Account")' class="btn btn-primary">Back</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    <br />
+    <div>
+        <a href='@Url.Action("Profile", "Account")' class="edit_profile_back_button">Back</a>
+    </div>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</body>

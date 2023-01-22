@@ -3,78 +3,79 @@
 @{
     ViewData["Title"] = "Profile";
 }
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+</head>
 
-
-
-<div class="container p-3">
-    <div class="row pt-4">
-        <div class="col-6">
-            <h2 class="text-primary">Profile</h2>
+<body class="profile">
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="profile_h2">Profile</h2>
+            </div>
         </div>
     </div>
-</div>
 
 
 
-<hr />
+    <hr />
 
-@if (Model.ProfileImg != null)
-{
-    <div>
-        <img src='@Url.Content("~/Images/"+ Model.ProfileImg)' width="400" height="400" asp-append-version="true">
-    </div>
-}
-<hr />
-
-<div>
-    <a href='@Url.Action("SelectPicture", "Account")' class="btn btn-primary">Select Picture</a>
-</div>
-<hr />
-<div class="row">
-    <dl class="row">
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DateOfBirth)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DateOfBirth)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Nationality)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nationality)
-        </dd>
-    </dl>
-</div>
-
-
-<a href='@Url.Action("ProfileEdit", "Account", new { id = Model.Id})' class="btn btn-primary">Edit</a>
-
-<a href='@Url.Action("RestartPassword", "Account")' class="btn btn-primary">Restart password</a>
-
-
-<br />
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    @if (Model.ProfileImg != null)
+    {
+        <div>
+            <img src='@Url.Content("~/Images/"+ Model.ProfileImg)' width="400" height="400" asp-append-version="true">
+        </div>
     }
-}
+    <hr />
+
+    <div>
+        <a href='@Url.Action("SelectPicture", "Account")' class="profile_button">Select Picture</a>
+    </div>
+    <hr />
+    <div class="row">
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DateOfBirth)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Nationality)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Nationality)
+            </dd>
+        </dl>
+    </div>
+
+   
+    <a href='@Url.Action("ProfileEdit", "Account", new { id = Model.Id})' class="profile_button">Edit</a>
+    <a href='@Url.Action("RestartPassword", "Account")' class="profile_button">Restart password</a>
+
+
+    <br />
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</body>

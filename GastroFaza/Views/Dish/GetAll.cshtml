@@ -7,326 +7,327 @@
 <head>
     <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
 </head>
-
-<div class="container p-3">
-    <div class="row pt-4">
-        <div class="col-6">
-            <h2 class="text-primary">Menu</h2>
-        </div>
-        <div style="float:left">
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                            <a href="@Url.Action("Search", "Dish", new { dish = DishType.Pasta}, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/Pasta.jpg")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Pasta", "Search", "Dish", new { dish = DishType.Pasta }, null)
-                        </th>
-                    </tr>
-                </table>
+<body>
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="text-primary">Menu</h2>  
             </div>
-
             <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                            <a href="@Url.Action("Search", "Dish", new { dish = DishType.Salad }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Salad", "Search", "Dish", new { dish = DishType.Salad }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Pasta}, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Makarony/Pasta_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                                <center>@Html.ActionLink("Pasta", "Search", "Dish", new { dish = DishType.Pasta }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                            <a href="@Url.Action("Search", "Dish", new { dish = DishType.Bread }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Bread", "Search", "Dish", new { dish = DishType.Bread }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Salad }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Salatki/Salad_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                                <center>@Html.ActionLink("Salad", "Search", "Dish", new { dish = DishType.Salad }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                            <a href="@Url.Action("Search", "Dish", new { dish = DishType.Curry }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Curry", "Search", "Dish", new { dish = DishType.Curry }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Bread }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Chleby/Bread_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                                <center>@Html.ActionLink("Bread", "Search", "Dish", new { dish = DishType.Bread }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                            <a href="@Url.Action("Search", "Dish", new { dish = DishType.Vegan }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Vegan", "Search", "Dish", new { dish = DishType.Vegan }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Curry }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Curry/Curry_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                               <center>@Html.ActionLink("Curry", "Search", "Dish", new { dish = DishType.Curry }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                            <a href="@Url.Action("Search", "Dish", new { dish = DishType.Soup }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Soup", "Search", "Dish", new { dish = DishType.Soup }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Vegan }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Vegan/Vegan_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                                <center>@Html.ActionLink("Vegan", "Search", "Dish", new { dish = DishType.Vegan }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                            <a href="@Url.Action("Search", "Dish", new { dish = DishType.Stew }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Stew", "Search", "Dish", new { dish = DishType.Stew }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Soup }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Zupy/Soup_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                                <center>@Html.ActionLink("Soup", "Search", "Dish", new { dish = DishType.Soup }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Stew }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Gulasz/Stew_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                                <center>@Html.ActionLink("Stew", "Search", "Dish", new { dish = DishType.Stew }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
 
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                             <a href="@Url.Action("Search", "Dish", new { dish = DishType.Pizza }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Pizza", "Search", "Dish", new { dish = DishType.Pizza }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                 <a href="@Url.Action("Search", "Dish", new { dish = DishType.Pizza }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Pizza/Pizza_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                               <center>@Html.ActionLink("Pizza", "Search", "Dish", new { dish = DishType.Pizza }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                            <a href="@Url.Action("Search", "Dish", new { dish = DishType.Sandwich }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Sandwich", "Search", "Dish", new { dish = DishType.Sandwich }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Sandwich }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Kanapki/Sandwich_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                                <center>@Html.ActionLink("Sandwich", "Search", "Dish", new { dish = DishType.Sandwich }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                            <a href="@Url.Action("Search", "Dish", new { dish = DishType.Wrap }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Wrap", "Search", "Dish", new { dish = DishType.Wrap }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Wrap }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Wrapy/Wrap_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                                <center>@Html.ActionLink("Wrap", "Search", "Dish", new { dish = DishType.Wrap }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                             <a href="@Url.Action("Search", "Dish", new { dish = DishType.Cake }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Cake", "Search", "Dish", new { dish = DishType.Cake }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                 <a href="@Url.Action("Search", "Dish", new { dish = DishType.Cake }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Ciasta/Cake_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                                <center>@Html.ActionLink("Cake", "Search", "Dish", new { dish = DishType.Cake }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                            <a href="@Url.Action("Search", "Dish", new { dish = DishType.Souce }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Souce", "Search", "Dish", new { dish = DishType.Souce }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Souce }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Sosy/Souce_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                               <center>@Html.ActionLink("Souce", "Search", "Dish", new { dish = DishType.Souce }, null)</center> 
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                            <a href="@Url.Action("Search", "Dish", new { dish = DishType.Pudding }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Pudding", "Search", "Dish", new { dish = DishType.Pudding }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Pudding }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Puddingi/Pudding_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                               <center>@Html.ActionLink("Pudding", "Search", "Dish", new { dish = DishType.Pudding }, null)</center> 
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                            <a href="@Url.Action("Search", "Dish", new { dish = DishType.Dessert }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Dessert", "Search", "Dish", new { dish = DishType.Dessert }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Dessert }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Desery/Dessert_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                                <center>@Html.ActionLink("Dessert", "Search", "Dish", new { dish = DishType.Dessert }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                            <a href="@Url.Action("Search", "Dish", new { dish = DishType.Drinks }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Drinks", "Search", "Dish", new { dish = DishType.Drinks }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Drinks }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Napoje/Drinks_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                               <center>@Html.ActionLink("Drinks", "Search", "Dish", new { dish = DishType.Drinks }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                            <a href="@Url.Action("Search", "Dish", new { dish = DishType.Alcohol }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Alcohol", "Search", "Dish", new { dish = DishType.Alcohol }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Alcohol }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Alkohole/Alcohol_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                                <center>@Html.ActionLink("Alcohol", "Search", "Dish", new { dish = DishType.Alcohol }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                             <a href="@Url.Action("Search", "Dish", new { dish = DishType.Steak }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Steak", "Search", "Dish", new { dish = DishType.Steak }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                 <a href="@Url.Action("Search", "Dish", new { dish = DishType.Steak }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Steki/Steak_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                                <center>@Html.ActionLink("Steak", "Search", "Dish", new { dish = DishType.Steak }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                             <a href="@Url.Action("Search", "Dish", new { dish = DishType.Cookies }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Cookies", "Search", "Dish", new { dish = DishType.Cookies }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                 <a href="@Url.Action("Search", "Dish", new { dish = DishType.Cookies }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Ciasteczka/Cookies_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                                <center>@Html.ActionLink("Cookies", "Search", "Dish", new { dish = DishType.Cookies }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                            <a href="@Url.Action("Search", "Dish", new { dish = DishType.Meatballs }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Meatballs", "Search", "Dish", new { dish = DishType.Meatballs }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Meatballs }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Pulpety/Meatballs_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                                <center>@Html.ActionLink("Meatballs", "Search", "Dish", new { dish = DishType.Meatballs }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                            <a href="@Url.Action("Search", "Dish", new { dish = DishType.Pastabakes }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Pastabakes", "Search", "Dish", new { dish = DishType.Pastabakes }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Pastabakes }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Zapiekanki/Pastabakes_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                                <center>@Html.ActionLink("Pastabakes", "Search", "Dish", new { dish = DishType.Pastabakes }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                            <a href="@Url.Action("Search", "Dish", new { dish = DishType.Burger }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Burger", "Search", "Dish", new { dish = DishType.Burger }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Burger }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Burgery/Burger_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                                <center>@Html.ActionLink("Burger", "Search", "Dish", new { dish = DishType.Burger }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                            <a href="@Url.Action("Search", "Dish", new { dish = DishType.Fish }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Fish", "Search", "Dish", new { dish = DishType.Fish }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Fish }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Ryby/Fish_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                                <center>@Html.ActionLink("Fish", "Search", "Dish", new { dish = DishType.Fish }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                             <a href="@Url.Action("Search", "Dish", new { dish = DishType.Meat }, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Meat", "Search", "Dish", new { dish = DishType.Meat }, null)
-                        </th>
-                    </tr>
-                </table>
-            </div>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                 <a href="@Url.Action("Search", "Dish", new { dish = DishType.Meat }, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Mieso/Meat_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                                <center>@Html.ActionLink("Meat", "Search", "Dish", new { dish = DishType.Meat }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
 
-            <div style="float:left">
-                <table class="table table-bordered" style="width:10%">
-                    <tr>
-                        <th>
-                            <a href="@Url.Action("Search", "Dish", new { dish = DishType.Egg}, null)" title="Widget View" class="links">
-                                <img alt="Widget View" src='@Url.Content("~/Images/")' width="150" height="150" asp-append-version="true">
-                            </a>
-                            @Html.ActionLink("Egg", "Search", "Dish", new { dish = DishType.Egg }, null)
-                        </th>
-                    </tr>
-                </table>
+                <div style="float:left">
+                    <table class="table table-bordered" style="width:10%; margin:10px;">
+                        <tr>
+                            <th>
+                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Egg}, null)" title="Widget View" class="links">
+                                    <img alt="Widget View" src='@Url.Content("~/Images/Jajka/Egg_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                                </a>
+                                <center>@Html.ActionLink("Egg", "Search", "Dish", new { dish = DishType.Egg }, null)</center>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</body>

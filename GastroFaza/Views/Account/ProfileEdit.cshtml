@@ -3,59 +3,62 @@
 @{
     ViewData["Title"] = "ProfileEdit";
 }
-
-
-<div class="container p-3">
-    <div class="row pt-4">
-        <div class="col-6">
-            <h2 class="text-primary">ProfileEdit</h2>
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="profile_h2">ProfileEdit</h2>
+            </div>
         </div>
     </div>
-</div>
 
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" action="@Url.Action("AccountSettings", "Account")">
-            @ViewBag.msg
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateOfBirth" class="control-label"></label>
-                <input asp-for="DateOfBirth" type="date" class="form-control" />
-                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nationality" class="control-label"></label>
-                <input asp-for="Nationality" class="form-control" />
-                <span asp-validation-for="Nationality" class="text-danger"></span>
-            </div>
-            <br />
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <hr />
+    <div class="row"> 
+        <div class="col-md-4">
+            <form class="edit_profile" method="post" action="@Url.Action("AccountSettings", "Account")">
+                @ViewBag.msg
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label text-light"></label>
+                    <input asp-for="FirstName" class="edit_profile_input" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label text-light"></label>
+                    <input asp-for="LastName" class="edit_profile_input" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateOfBirth" class="control-label text-light"></label>
+                    <input asp-for="DateOfBirth" type="date" class="edit_profile_input" />
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Nationality" class="control-label text-light"></label>
+                    <input asp-for="Nationality" class="edit_profile_input" />
+                    <span asp-validation-for="Nationality" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <input class="edit_profile_save_button" type="submit" value="Save" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<br />
+    <br />
 
-<div>
-    <a href='@Url.Action("Profile", "Account")' class="btn btn-primary">Back</a>
-</div>
+    <div>
+        <a href='@Url.Action("Profile", "Account")' class="edit_profile_back_button">Back</a>
+    </div>
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
     }
-}
+</body>

@@ -4,13 +4,6 @@
     ViewData["Title"] = "Order";
 }
 
-<style>
-    #table {
-        width ="150";
-        height ="250";
-    }
-</style>
-
 <head>
     <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
 </head>
@@ -29,33 +22,33 @@
 <br />
 <div style="float:left">
     <div style="float:left">
-
-        @foreach (var obj in Model )
-        {
-            <table class="table table-bordered" id=table>
-                <tr>
-                    <th>
-                        @obj.Name
-                        <br />
-                        <br />
-                        @obj.Price
-                        <br />
-                        <br />
-                        <a href='@Url.Action("RemoveDishFromOrder", "Order", @obj, null)' class="btn btn-primary">Remove From Order</a>
-                    </th>
-                </tr>
-            </table>
-        }
+            @foreach (var obj in Model )
+            {
+                <table class="table table-bordered" style="margin-left:10px">
+                    <tr>
+                        <th>
+                            @obj.Name
+                            <br />
+                            <br />
+                            @obj.Price
+                            <br />
+                            <br />
+                            <a href='@Url.Action("RemoveDishFromOrder", "Order", @obj, null)' class="remove_from_order_button">Remove From Order</a>
+                        </th>
+                    </tr>
+                </table>
+            }
     </div>
+    <br /><br /><br />
 
 
      @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
         {
             <div style="float:left">
-                <a href='@Url.Action("GetAll", "Dish")' class="btn btn-primary">Add To Order</a>
+                <a href='@Url.Action("GetAll", "Dish")' class="add_to_order_button">Add To Order</a>
             </div>
             <div style="float:right">
-                <a href='@Url.Action("PayForOrder", "Order")' class="btn btn-primary">Confirm Order</a>
+                <a href='@Url.Action("PayForOrder", "Order")' class="confirm_order_button">Confirm Order</a>
             </div>
         }
         else
