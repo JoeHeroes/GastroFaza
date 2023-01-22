@@ -390,6 +390,19 @@ loginbox input[type ="password"]:focus {
     cursor: pointer;
     margin-left:70px;
 }
+.select_list {
+    background-color: #63595C;
+    height: 40px;
+    display: block;
+    text-align: center;
+    border: 2px solid #216869;
+    width: 280px;
+    outline: none;
+    color: white;
+    border-radius: 4px;
+    transition: 0.5s;
+    cursor: pointer;
+}
 .add_reservation_button {
     border-radius: 5px;
     border-color: #216869;
