@@ -39,16 +39,16 @@
 
         <tr>
             <td><label class="text-light" asp-for="Nationality"></label></td>
-            <td><select asp-items=@NationsList.GetSelectNations() asp-for="Nationality" class="form-select">option</select></input></td>
+            <td><select asp-items=@NationsList.GetSelectNations() asp-for="Nationality" class="select_list_nationality">option</select></input></td>
             @*<td><input asp-for="Nationality" class="form-control">option</input></td>*@
         </tr>
         <tr>
             <td><label class="text-light" asp-for="DateOfBirth"></label></td>
-            <td><input type="date" asp-for="DateOfBirth" class="form-control" /></td>
+            <td><input type="date" asp-for="DateOfBirth" class="select_list_register" /></td>
         </tr>
         <tr>
             <td><label class="text-light" asp-for="RoleId"></label></td>
-            <td> <select asp-for="RoleId" class="form-control"><option>1</option><option>2</option><option>3</option></select></td>
+            <td> <select asp-for="RoleId" class="select_list_nationality"><option>1</option><option>2</option><option>3</option></select></td>
         </tr>
         <tr>
             <td>&nbsp;</td>

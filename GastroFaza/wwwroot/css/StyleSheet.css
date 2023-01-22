@@ -354,3 +354,59 @@ loginbox input[type ="password"]:focus {
     border-color:#2D3A3A;
     color:#2D3A3A;
 }
+.selectpicture {
+    background-color: #AB8476;
+}
+.select_list {
+    background-color: #63595C;
+    height: 40px;
+    display: block;
+    text-align: center;
+    border: 2px solid #216869;
+    width: 280px;
+    outline: none;
+    color: white;
+    border-radius: 4px;
+    transition: 0.5s;
+    cursor: pointer;
+    display:contents;
+    color:white;
+}
+.registerbox .select_list_nationality option {   
+    color:black;
+    cursor:pointer;
+}
+.registerbox .select_list_register {
+    background-color: #63595C;
+    height: 40px;
+    display: block;
+    text-align: center;
+    border: 2px solid #216869;
+    width: 280px;
+    outline: none;
+    color: white;
+    border-radius: 4px;
+    transition: 0.5s;
+    cursor: pointer;
+    margin-left:70px;
+}
+.add_reservation_button {
+    border-radius: 5px;
+    border-color: #216869;
+    background-color: #63595C;
+    text-decoration: none;
+    display: inline-block;
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    padding: 8px;
+    color: #FDFFFC;
+    height:70px;
+    text-align:center;
+}
+
+.add_reservation_button:hover {
+    background-color: #216869;
+    transition: 0.5s;
+    color: #FDFFFC;
+}

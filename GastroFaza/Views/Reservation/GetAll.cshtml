@@ -11,16 +11,16 @@
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-primary">Reservations</h2>
+            <h2>Reservations</h2>
         </div>
         <div class="col-6 text-end">
             @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
             {
                 @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") == "true")
                 {
-                    <a href='@Url.Action("WorkerCreate", "Reservation")' class="btn btn-primary">Add Reservation</a>
+                    <a href='@Url.Action("WorkerCreate", "Reservation")' class="add_reservation_button">Add Reservation</a>
                 } else {
-                    <a href='@Url.Action("Check", "Reservation")' class="btn btn-primary">Add Reservation</a>
+                    <a href='@Url.Action("Check", "Reservation")' class="add_reservation_button">Add Reservation</a>
                 }
             }
         </div>
