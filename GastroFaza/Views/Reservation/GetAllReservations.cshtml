@@ -4,46 +4,52 @@
     ViewData["Title"] = "GetAllReservations";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Reservations</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClientId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TableIdContainer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataOfReservation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TableIdContainer)
-            </td>
-            <td>
-                    @Convert.ToDateTime(item.DataOfReservation).ToString("MM/dd/yyyy h:mm tt")
-            </td>
-            <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+</head>
+<body>
+    <h2>Reservations</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ClientId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TableIdContainer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataOfReservation)
+                </th>
+                <th style="text-align:center;">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TableIdContainer)
+                </td>
+                <td>
+                        @Convert.ToDateTime(item.DataOfReservation).ToString("MM/dd/yyyy h:mm tt")
+                </td>
+                <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="profile_button">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="edit_profile_back_button">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+</body>

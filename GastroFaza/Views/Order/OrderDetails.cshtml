@@ -4,62 +4,56 @@
     ViewData["Title"] = "OrderDetails";
 }
 
-<style>
-    #table {
-        width ="150";
-        height ="250";
-    }
-</style>
-
 <head>
     <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
 </head>
-
-<div class="container p-3">
-    <div class="row pt-4">
-        <div class="col-6">
-            <h2 class="text-primary">Orders</h2>
-        </div>
-        <div class="text-light"> User Id: @Model.ClientId
-        User Email: @Model.Email
-        User First Name: @Model.FirstName
-        User Last Name: @Model.LastName
-        Order Id: @Model.OrderId
-        Order Status: @Model.Status
-        Order Description: @Model.Description
-        Order Price: @Model.Price
-        </div>
-        <div class="col-6 text-end">
+<body>
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2>Orders</h2>
+            </div>
+            <div class="text-light"> User Id: @Model.ClientId <br />
+            User Email: @Model.Email <br />
+            User First Name: @Model.FirstName <br />
+            User Last Name: @Model.LastName <br />
+            Order Id: @Model.OrderId <br />
+            Order Status: @Model.Status <br />
+            Order Description: @Model.Description <br />
+            Order Price: @Model.Price <br />
+            </div>
+            <div class="col-6 text-end">
+            </div>
         </div>
     </div>
-</div>
-<br />
-<br />
-<br />
-<div style="float:left">
+    <br />
+    <br />
+    <br />
     <div style="float:left">
+        <div style="float:left">
 
-        @foreach (var obj in Model.Dishes)
-        {
-            <table class="table table-bordered" id=table>
-                <tr>
-                    <th>
-                        <div class="text-light"> Dish Name: @obj.Name </div>
-                        <br />
-                        <br />
-                        <div class="text-light"> Dish Price: @obj.Price </div>
-                        <br />
-                        <br />
-                        <div class="text-light"> Dish Description: @obj.Description </div>
-                    </th>
-                </tr>
-            </table>
-        }
-    </div>
-    <div style="float:right">
-        @if (@HttpContextAccessor.HttpContext.Session.GetString("OrderStatus") == "Preparing") @* Sprawdzenie czy order jest przygotowywany -> wtedy wyświetla guzik "oznacz jako gotowe do odebrania"  *@
+            @foreach (var obj in Model.Dishes)
             {
-                <a href='@Url.Action("OrderIsReady", "Order",new {OrderId=int.Parse(@HttpContextAccessor.HttpContext.Session.GetString("orderId"))})' class="btn btn-primary">Order Is Ready</a>
+                <table class="table table-bordered" id=table>
+                    <tr>
+                        <th>
+                            <div class="text-light"> Dish Name: @obj.Name </div>
+                            <br />
+                            <br />
+                            <div class="text-light"> Dish Price: @obj.Price </div>
+                            <br />
+                            <br />
+                            <div class="text-light"> Dish Description: @obj.Description </div>
+                        </th>
+                    </tr>
+                </table>
             }
         </div>
-</div>
+        <div style="float:right">
+            @if (@HttpContextAccessor.HttpContext.Session.GetString("OrderStatus") == "Preparing") @* Sprawdzenie czy order jest przygotowywany -> wtedy wyświetla guzik "oznacz jako gotowe do odebrania"  *@
+                {
+                    <a href='@Url.Action("OrderIsReady", "Order",new {OrderId=int.Parse(@HttpContextAccessor.HttpContext.Session.GetString("orderId"))})' class="btn btn-primary">Order Is Ready</a>
+                }
+            </div>
+    </div>
+</body>
