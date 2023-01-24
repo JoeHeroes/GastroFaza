@@ -40,7 +40,7 @@
 
         <tr>
             <td><label class="text-light" asp-for="Nationality"></label></td>
-            <td><select asp-items=@NationsList.GetSelectNations() asp-for="Nationality" class="select_list_nationality">option</select></input></td>
+            <td><select asp-items=@NationsList.GetSelectNations() asp-for="Nationality" class="select_list_register" style="padding:11px;">option</select></input></td>
             @*<td><input asp-for="Nationality" class="form-control">option</input></td>*@
         </tr>
         <tr>
@@ -49,7 +49,7 @@
         </tr>
         <tr>
             <td><label class="text-light" asp-for="RoleId"></label></td>
-            <td> <select asp-for="RoleId" class="select_list_nationality"><option>1</option><option>2</option><option>3</option></select></td>
+            <td> <select asp-for="RoleId" class="select_list_register" style="padding:11px;" ><option>1</option><option>2</option><option>3</option></select></td>
         </tr>
         <tr>
             <td>&nbsp;</td>

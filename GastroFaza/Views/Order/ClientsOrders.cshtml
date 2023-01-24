@@ -43,7 +43,7 @@
                             {
                                 @if (@obj.Status == GastroFaza.Models.Enum.Status.Przyjete)
                                 {
-                                    <a href='@Url.Action("OrderIsInProgress", "Order", new {OrderId=obj.Id})' class="profile_button">Order Is In Progress</a>
+                                    <a href='@Url.Action("OrderIsInProgress", "Order", new {OrderId=obj.Id})' class="profile_button" style="text-align:center;">Order Is In Progress</a>
                                 }
                                 else if (@obj.Status == GastroFaza.Models.Enum.Status.Przygotowywanie)
                                 {
@@ -55,7 +55,7 @@
                             {
                                 @if (@obj.Status == GastroFaza.Models.Enum.Status.Gotowe)
                                 {
-                                    <a href='@Url.Action("OrderIsTaken", "Order", new {OrderId=obj.Id})' class="profile_button">Order Is Taken</a>
+                                    <a href='@Url.Action("OrderIsTaken", "Order", new {OrderId=obj.Id})' class="profile_button" style="text-align:center;">Order Is Taken</a>
                                 }
                                 else if (@obj.Status == GastroFaza.Models.Enum.Status.Odebrane)
                                 {
