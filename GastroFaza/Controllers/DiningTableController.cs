@@ -33,7 +33,7 @@ namespace GastroFaza.Controllers
             }
         }
 
-        /*
+
         [Route("SearchTable")]
         public IActionResult SearchTable(string id)
         {
@@ -47,7 +47,7 @@ namespace GastroFaza.Controllers
             var baseQuery = dbContext.Tables.Where(x => x.Id == int.Parse(id));
 
             return View(baseQuery);
-        }*/
+        }
 
         public IActionResult Edit(int Id)
         {
