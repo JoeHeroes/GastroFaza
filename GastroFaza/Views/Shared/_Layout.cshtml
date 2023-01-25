@@ -37,7 +37,7 @@
                             @if(HttpContextAccessor.HttpContext.Session.GetString("Role")=="Manager")@* If worker is a Manager*@
                             {
                                 <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Dish" asp-action="SearchMenu">Manage Menu</a></li>
-                                <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Table" asp-action="SearchTable">Manage Tables</a></li>
+                                <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="DiningTable" asp-action="GetAll">Manage Tables</a></li>
                                 <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Reservation" asp-action="GetAllReservations">Manage Reservations</a></li>
                                 <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="GetAllOrders">Manage Orders</a></li>
                                 <li class="nav-item"> <a class="nav-link text-light" asp-area="" asp-controller="Worker" asp-action="GetAll">Manage Workers</a></li>
