@@ -233,12 +233,12 @@ namespace GastroFaza.Controllers
             //captcha validation
             var response = Request.Form["g-recaptcha-response"];
             string secretKey = "6LdjRX4jAAAAAN0GPdgW5aHuwvu-8T-V_LFzeOr8";
-            bool IsCaptchaValid = (ReCaptchaClass.Validate(response) == "true" ? true : false);
+            /*bool IsCaptchaValid = (ReCaptchaClass.Validate(response) == "true" ? true : false);
 
             if (!IsCaptchaValid)
             {
                 return View("CreateWorkerAccount");
-            }
+            }*/
 
             var worker = this.dbContext
                                 .Workers
@@ -290,12 +290,12 @@ namespace GastroFaza.Controllers
             //captcha validation
             var response = Request.Form["g-recaptcha-response"];
             string secretKey = "6LdjRX4jAAAAAN0GPdgW5aHuwvu-8T-V_LFzeOr8";
-            bool IsCaptchaValid = (ReCaptchaClass.Validate(response) == "true" ? true : false);
+            /*bool IsCaptchaValid = (ReCaptchaClass.Validate(response) == "true" ? true : false);
 
             if (!IsCaptchaValid)
             {
                 return View("Register");
-            }
+            }*/
 
             var client = this.dbContext
                                .Clients
@@ -348,12 +348,12 @@ namespace GastroFaza.Controllers
             //captcha for login
             var response = Request.Form["g-recaptcha-response"];
             string secretKey = "6LdjRX4jAAAAAN0GPdgW5aHuwvu-8T-V_LFzeOr8";
-            bool IsCaptchaValid = (ReCaptchaClass.Validate(response) == "true" ? true : false);
+            /*bool IsCaptchaValid = (ReCaptchaClass.Validate(response) == "true" ? true : false);
 
             if (!IsCaptchaValid)
             {
                 return View("Login");
-            }
+            }*/
 
             if (ModelState.IsValid)
             {
@@ -413,7 +413,7 @@ namespace GastroFaza.Controllers
 
 }
 
-
+/*
 //captcha validation
     public class ReCaptchaClass
 {
@@ -447,4 +447,4 @@ namespace GastroFaza.Controllers
 
 
     private List<string> m_ErrorCodes;
-}
+}*/

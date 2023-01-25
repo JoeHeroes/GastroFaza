@@ -33,7 +33,7 @@ namespace GastroFaza.Controllers
             }
         }
 
-
+        /*
         [Route("SearchTable")]
         public IActionResult SearchTable(string id)
         {
@@ -47,73 +47,107 @@ namespace GastroFaza.Controllers
             var baseQuery = dbContext.Tables.Where(x => x.Id == int.Parse(id));
 
             return View(baseQuery);
-        }
+        }*/
 
         public IActionResult Edit(int Id)
         {
-            if (HttpContext.Session.GetString("Role") == "Manager")
+            if (HttpContext.Session.GetString("email") != null)
             {
-                var table = this.dbContext.Tables.Where(s => s.Id == Id).FirstOrDefault();
+                if (HttpContext.Session.GetString("Role") == "Manager")
+                {
+                    var table = this.dbContext.Tables.Where(s => s.Id == Id).FirstOrDefault();
 
-                return View(table);
+                    return View(table);
+                }
+                else
+                {
+                    return Forbid();
+                }
             } else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
         }
         [HttpPost]
         public IActionResult Edit(int? id, TableDto modelDTO)
         {
-            if (ModelState.IsValid)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                var model = this.dbContext.Tables.Find(id);
-                model.Seats = modelDTO.Seats;
-
-                try
+                if (HttpContext.Session.GetString("Role") == "Manager")
                 {
-                    this.dbContext.SaveChanges();
-                }
-                catch (DbUpdateException e)
-                {
-                    throw new DbUpdateException("Error DataBase", e);
-                }
+                    if (ModelState.IsValid)
+                    {
+                        var model = this.dbContext.Tables.Find(id);
+                        model.Seats = modelDTO.Seats;
 
-                return RedirectToAction("SearchTable");
+                        try
+                        {
+                            this.dbContext.SaveChanges();
+                        }
+                        catch (DbUpdateException e)
+                        {
+                            throw new DbUpdateException("Error DataBase", e);
+                        }
+                    }
+                    return RedirectToAction("GetAll");
+                }
+                else
+                {
+                    return Forbid();
+                }
             }
-
-            return View(modelDTO);
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
         }
         public IActionResult Delete(int? id)
         {
-            if (HttpContext.Session.GetString("Role") == "Manager")
+            if (HttpContext.Session.GetString("email") != null)
             {
-                var table = this.dbContext.Tables.Find(id);
-                if (table == null)
+                if (HttpContext.Session.GetString("Role") == "Manager")
                 {
-                    return NotFound();
-                }
+                    var table = this.dbContext.Tables.Find(id);
+                    if (table == null)
+                    {
+                        return NotFound();
+                    }
 
-                this.dbContext.Tables.Remove(table);
-                try
+                    this.dbContext.Tables.Remove(table);
+                    try
+                    {
+                        this.dbContext.SaveChanges();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+                    return RedirectToAction("GetAll");
+                } else
                 {
-                    this.dbContext.SaveChanges();
+                    return Forbid();
                 }
-                catch (DbUpdateException e)
-                {
-                    throw new DbUpdateException("Error DataBase", e);
-                }
+            } else
+            {
+                return RedirectToAction("Login", "Account");
             }
-            return RedirectToAction("GetAll");
+            
         }
         public IActionResult Create()
         {
-            if (HttpContext.Session.GetString("Role") == "Manager")
+            if (HttpContext.Session.GetString("email") != null)
             {
-                return View();
+                if (HttpContext.Session.GetString("Role") == "Manager")
+                {
+                    return View();
+                }
+                else
+                {
+                    return Forbid();
+                }
             } else
             {
-                //return RedirectToAction("Index", "Home");
-                return Forbid();
+                return RedirectToAction("Login", "Account");
             }
         
         }
@@ -121,25 +155,36 @@ namespace GastroFaza.Controllers
         [HttpPost]
         public IActionResult Create(TableDto modelDTO)
         {
-            if (HttpContext.Session.GetString("Role") == "Manager")
+            if (HttpContext.Session.GetString("email") != null)
             {
-                this.dbContext.Tables.Add(new DiningTable()
+                if (HttpContext.Session.GetString("Role") == "Manager")
                 {
-                    Busy = false,
-                    Seats = modelDTO.Seats,
-                });
+                    this.dbContext.Tables.Add(new DiningTable()
+                    {
+                        Busy = false,
+                        Seats = modelDTO.Seats,
+                    });
 
-                try
-                {
-                    this.dbContext.SaveChanges();
+                    try
+                    {
+                        this.dbContext.SaveChanges();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+                    return RedirectToAction("GetAll");
                 }
-                catch (DbUpdateException e)
+                else
                 {
-                    throw new DbUpdateException("Error DataBase", e);
+                    return Forbid();
                 }
+            } else
+            {
+                return RedirectToAction("Login", "Account");
             }
 
-            return RedirectToAction("GetAll");
+            
         }
 
 
