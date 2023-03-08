@@ -1,5 +1,6 @@
 ﻿@using GastroFaza.Models.Enum
 @model IEnumerable<Dish>
+@inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "GetAll";
 }
@@ -13,6 +14,14 @@
             <div class="col-6">
                 <h2>Menu</h2>  
             </div>
+
+            <div class="col-6 text-end">
+                @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
+                {
+                    <a href='@Url.Action("Order", "Order")' class="add_reservation_button">Order</a>
+                }
+            </div>
+
             <div style="float:left">
                 <div style="float:left">
                     <table class="table table-bordered" style="width:10%; margin:10px;">

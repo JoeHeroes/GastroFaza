@@ -91,7 +91,7 @@ namespace GastroFaza.Seeder
                             Description = "Margarita",
                             Price = 15.5,
                             DishType = DishType.Pizza,
-                            ProfileImg = ""
+                            ProfileImg = "Pizza/Margharita.png"
                         },
                         new Dish()
                         {
@@ -99,7 +99,7 @@ namespace GastroFaza.Seeder
                             Description = "Tomato",
                             Price = 24.5,
                             DishType = DishType.Pasta,
-                            ProfileImg = ""
+                            ProfileImg = "Makarony/PastaWithTomatoe.png"
                         },
                         new Dish()
                         {
@@ -107,7 +107,7 @@ namespace GastroFaza.Seeder
                             Description = "Tomato",
                             Price = 24.5,
                             DishType = DishType.Pasta,
-                            ProfileImg = ""
+                            ProfileImg = "Makarony/PastaWithTomatoe.png"
                         },
                         new Dish()
                         {
@@ -115,7 +115,7 @@ namespace GastroFaza.Seeder
                             Description = "Burger",
                             Price = 29,
                             DishType = DishType.Burger,
-                            ProfileImg = ""
+                            ProfileImg = "Burgery/CheeseBurger.png"
                         },
                         new Dish()
                         {
@@ -123,7 +123,7 @@ namespace GastroFaza.Seeder
                             Description = "Burger",
                             Price = 36,
                             DishType = DishType.Burger,
-                            ProfileImg = ""
+                            ProfileImg = "Burgery/BurgerKimchi.png"
                         },
                         new Dish()
                         {
@@ -131,7 +131,7 @@ namespace GastroFaza.Seeder
                             Description = "Sałatka",
                             Price = 33,
                             DishType= DishType.Salad,
-                            ProfileImg = ""
+                            ProfileImg = "Salatki/Cezar.png"
                         },
                         new Dish()
                         {
@@ -139,7 +139,7 @@ namespace GastroFaza.Seeder
                             Description = "Makaron",
                             Price = 34,
                             DishType= DishType.Pasta,
-                            ProfileImg = ""
+                            ProfileImg = "Makarony/Leczo.png"
                         },
                         new Dish()
                         {
@@ -147,7 +147,7 @@ namespace GastroFaza.Seeder
                             Description = "Zupa",
                             Price = 29,
                             DishType= DishType.Soup,
-                            ProfileImg = ""
+                            ProfileImg = "Zupy/TomYum.png"
                         },
                         new Dish()
                         {
@@ -155,7 +155,7 @@ namespace GastroFaza.Seeder
                             Description = "Makaron",
                             Price = 55,
                             DishType= DishType.Pasta,
-                            ProfileImg = ""
+                            ProfileImg = "Makarony/PadThai.png"
                         },
                         new Dish()
                         {
@@ -163,7 +163,7 @@ namespace GastroFaza.Seeder
                             Description = "Makaron",
                             Price = 37,
                             DishType= DishType.Pasta,
-                            ProfileImg = ""
+                            ProfileImg = "Makarony/Ramen.png"
                         },
                         new Dish()
                         {
@@ -171,7 +171,7 @@ namespace GastroFaza.Seeder
                             Description = "Deser",
                             Price = 22,
                             DishType= DishType.Dessert,
-                            ProfileImg = ""
+                            ProfileImg = "Desery/LavaCake.png"
                         },
                         new Dish()
                         {
@@ -179,7 +179,7 @@ namespace GastroFaza.Seeder
                             Description = "Drink",
                             Price = 26,
                             DishType= DishType.Alcohol,
-                            ProfileImg = ""
+                            ProfileImg = "Alkohole/OldFashioned.png"
                         },
                         new Dish()
                         {
@@ -187,7 +187,7 @@ namespace GastroFaza.Seeder
                             Description = "Drink",
                             Price = 27,
                             DishType= DishType.Alcohol,
-                            ProfileImg = ""
+                            ProfileImg = "Alkohole/AperolSpritz.png"
                         },
                         new Dish()
                         {
@@ -195,7 +195,7 @@ namespace GastroFaza.Seeder
                             Description = "Drink",
                             Price = 23,
                             DishType= DishType.Alcohol,
-                            ProfileImg = ""
+                            ProfileImg = "Alkohole/CubaLibre.png"
                         },
                         new Dish()
                         {
@@ -203,7 +203,7 @@ namespace GastroFaza.Seeder
                             Description = "Drink",
                             Price = 27,
                             DishType= DishType.Alcohol,
-                            ProfileImg = ""
+                            ProfileImg = "Alkohole/Negroni.png"
                         },
                         new Dish()
                         {
@@ -211,7 +211,7 @@ namespace GastroFaza.Seeder
                             Description = "Napój",
                             Price = 10,
                             DishType= DishType.Drinks,
-                            ProfileImg = ""
+                            ProfileImg = "Napoje/CocaCola.png"
                         },
                         new Dish()
                         {
@@ -219,7 +219,7 @@ namespace GastroFaza.Seeder
                             Description = "Napój",
                             Price = 10,
                             DishType= DishType.Drinks,
-                            ProfileImg = ""
+                            ProfileImg = "Napoje/Fanta.png"
                         },
                         new Dish()
                         {
@@ -227,7 +227,7 @@ namespace GastroFaza.Seeder
                             Description = "Napój",
                             Price = 8,
                             DishType= DishType.Drinks,
-                            ProfileImg = ""
+                            ProfileImg = "Napoje/Cappy.png"
                         },
                         new Dish()
                         {
@@ -235,7 +235,7 @@ namespace GastroFaza.Seeder
                             Description = "Carpaccio",
                             Price = 42,
                             DishType = DishType.Pasta,
-                            ProfileImg = ""
+                            ProfileImg = "Makarony/Carpaccio.png"
                         },
                         new Dish()
                         {
@@ -243,7 +243,7 @@ namespace GastroFaza.Seeder
                             Description = "Tatar",
                             Price = 52,
                             DishType = DishType.Meat,
-                            ProfileImg = ""
+                            ProfileImg = "Mieso/Tatar.png"
                         },
                         new Dish()
                         {
@@ -251,7 +251,7 @@ namespace GastroFaza.Seeder
                             Description = "Rosół",
                             Price = 19,
                             DishType = DishType.Soup,
-                            ProfileImg = ""
+                            ProfileImg = "Zupy/Rosol.png"
                         },
                         new Dish()
                         {
@@ -259,7 +259,7 @@ namespace GastroFaza.Seeder
                             Description = "sałatka",
                             Price = 46,
                             DishType = DishType.Salad,
-                            ProfileImg = ""
+                            ProfileImg = "Salatki/CezarZLososiem.png"
                         },
                         new Dish()
                         {
@@ -267,7 +267,7 @@ namespace GastroFaza.Seeder
                             Description = "Kurczak",
                             Price = 42,
                             DishType = DishType.Meat,
-                            ProfileImg = ""
+                            ProfileImg = "Mieso/BlackenedChicken.png"
                         },
                         new Dish()
                         {
@@ -275,7 +275,7 @@ namespace GastroFaza.Seeder
                             Description = "Żeberka",
                             Price = 47,
                             DishType= DishType.Meat,
-                            ProfileImg = ""
+                            ProfileImg = "Mieso/ZeberkaBBQ.png"
                         },
                         new Dish()
                         {
@@ -283,7 +283,7 @@ namespace GastroFaza.Seeder
                             Description = "Polędwiczka",
                             Price = 47,
                             DishType= DishType.Meat,
-                            ProfileImg = ""
+                            ProfileImg = "Mieso/PoledwiczkaWieprzowa.png"
                         },
                         new Dish()
                         {
@@ -291,7 +291,7 @@ namespace GastroFaza.Seeder
                             Description = "Tarta",
                             Price = 30,
                             DishType= DishType.Dessert,
-                            ProfileImg = ""
+                            ProfileImg = "Desery/TartaZJabłkami.png"
                         },
                         new Dish()
                         {
@@ -299,7 +299,7 @@ namespace GastroFaza.Seeder
                             Description = "Ciasto z malinami",
                             Price = 21,
                             DishType= DishType.Dessert,
-                            ProfileImg = ""
+                            ProfileImg = "Ciasta/MalinowaChmurka.png"
                         },
                         new Dish()
                         {
@@ -307,7 +307,7 @@ namespace GastroFaza.Seeder
                             Description = "Makaron",
                             Price = 25,
                             DishType= DishType.Pasta,
-                            ProfileImg = ""
+                            ProfileImg = "Makarony/SpaghettiBolognese.png"
                         },
                         new Dish()
                         {
@@ -315,7 +315,7 @@ namespace GastroFaza.Seeder
                             Description = "Sernik",
                             Price = 19,
                             DishType= DishType.Dessert,
-                            ProfileImg = ""
+                            ProfileImg = "Ciasta/Sernik.png"
                         },
                         new Dish()
                         {
@@ -323,7 +323,7 @@ namespace GastroFaza.Seeder
                             Description = "Pizza pomidorowa",
                             Price = 16,
                             DishType = DishType.Pizza,
-                            ProfileImg = ""
+                            ProfileImg = "Zupy/CremaDiPomodoro.png"
                         },
                         new Dish()
                         {
@@ -331,7 +331,7 @@ namespace GastroFaza.Seeder
                             Description = "Pizza vegańska",
                             Price = 16,
                             DishType = DishType.Vegan,
-                            ProfileImg = ""
+                            ProfileImg = "Vegan/Focaccia.png"
                         },
                         new Dish()
                         {
@@ -339,7 +339,7 @@ namespace GastroFaza.Seeder
                             Description = "Pizza",
                             Price = 35,
                             DishType = DishType.Pizza,
-                            ProfileImg = ""
+                            ProfileImg = "Pizza/Pancetta.png"
                         },
                         new Dish()
                         {
@@ -347,7 +347,7 @@ namespace GastroFaza.Seeder
                             Description = "Pizza z pieczarkami",
                             Price = 39,
                             DishType = DishType.Pizza,
-                            ProfileImg = ""
+                            ProfileImg = "Pizza/Capricciosa.png"
                         },
                         new Dish()
                         {
@@ -355,7 +355,7 @@ namespace GastroFaza.Seeder
                             Description = "Pizza ostra",
                             Price = 35,
                             DishType = DishType.Pizza,
-                            ProfileImg = ""
+                            ProfileImg = "Pizza/Diavolo.png"
                         },
                         new Dish()
                         {
@@ -363,7 +363,7 @@ namespace GastroFaza.Seeder
                             Description = "Pizza z łososiem",
                             Price = 42,
                             DishType= DishType.Pizza,
-                            ProfileImg = ""
+                            ProfileImg = "Pizza/Salmone.png"
                         },
                         new Dish()
                         {
@@ -371,7 +371,7 @@ namespace GastroFaza.Seeder
                             Description = "Pizza z chipsami",
                             Price = 22,
                             DishType= DishType.Pizza,
-                            ProfileImg = ""
+                            ProfileImg = "Pizza/Cheetos.png"
                         },
                         new Dish()
                         {
@@ -379,7 +379,7 @@ namespace GastroFaza.Seeder
                             Description = "Ryba",
                             Price = 35,
                             DishType= DishType.Fish,
-                            ProfileImg = ""
+                            ProfileImg = "Ryby/SalmonRool.png"
                         },
                         new Dish()
                         {
@@ -387,7 +387,7 @@ namespace GastroFaza.Seeder
                             Description = "Pizza",
                             Price = 38,
                             DishType= DishType.Pizza,
-                            ProfileImg = ""
+                            ProfileImg = "Pizza/SanDaniele.png"
                         },
                         new Dish()
                         {
@@ -395,7 +395,7 @@ namespace GastroFaza.Seeder
                             Description = "Pizza 4 mięsa",
                             Price = 45,
                             DishType= DishType.Pizza,
-                            ProfileImg = ""
+                            ProfileImg = "Pizza/Miesna.png"
                         },
                         new Dish()
                         {
@@ -403,7 +403,7 @@ namespace GastroFaza.Seeder
                             Description = "Pizza 4 sery",
                             Price = 38,
                             DishType= DishType.Pizza,
-                            ProfileImg = ""
+                            ProfileImg = "Pizza/Serowa.png"
                         },
                         new Dish()
                         {
@@ -411,7 +411,7 @@ namespace GastroFaza.Seeder
                             Description = "Wudeczka",
                             Price = 14,
                             DishType= DishType.Alcohol,
-                            ProfileImg = ""
+                            ProfileImg = "Alkohole/Zobrowka.png"
                         },
                         new Dish()
                         {
@@ -419,7 +419,7 @@ namespace GastroFaza.Seeder
                             Description = "Piwo",
                             Price = 9,
                             DishType= DishType.Alcohol,
-                            ProfileImg = ""
+                            ProfileImg = "Alkohole/KozelJasny.png"
                         },
                         new Dish()
                         {
@@ -427,7 +427,7 @@ namespace GastroFaza.Seeder
                             Description = "Piwo",
                             Price = 11,
                             DishType= DishType.Alcohol,
-                            ProfileImg = ""
+                            ProfileImg = "Alkohole/KozelCiemny.png"
                         },
                         new Dish()
                         {
@@ -435,7 +435,7 @@ namespace GastroFaza.Seeder
                             Description = "Piwo",
                             Price = 13,
                             DishType= DishType.Alcohol,
-                            ProfileImg = ""
+                            ProfileImg = "Alkohole/Ksiazece.png"
                         },
                         new Dish()
                         {
@@ -443,7 +443,7 @@ namespace GastroFaza.Seeder
                             Description = "Napój",
                             Price = 9,
                             DishType= DishType.Drinks,
-                            ProfileImg = ""
+                            ProfileImg = "Napoje/CocaCola.png"
                         },
                         new Dish()
                         {
@@ -451,7 +451,7 @@ namespace GastroFaza.Seeder
                             Description = "Napój",
                             Price = 8,
                             DishType= DishType.Drinks,
-                            ProfileImg = ""
+                            ProfileImg = "Napoje/Fuztea.png"
                         },
                         new Dish()
                         {
@@ -459,7 +459,7 @@ namespace GastroFaza.Seeder
                             Description = "Napój",
                             Price = 18,
                             DishType= DishType.Drinks,
-                            ProfileImg = ""
+                            ProfileImg = "Napoje/DzbanekLemoniady.png"
                         },
                         new Dish()
                         {
@@ -467,7 +467,7 @@ namespace GastroFaza.Seeder
                             Description = "Drink",
                             Price = 10,
                             DishType= DishType.Alcohol,
-                            ProfileImg = ""
+                            ProfileImg = "Alkohole/KozelJasny.png"
                         },
                         new Dish()
                         {
@@ -475,7 +475,7 @@ namespace GastroFaza.Seeder
                             Description = "Drink",
                             Price = 9,
                             DishType= DishType.Alcohol,
-                            ProfileImg = ""
+                            ProfileImg = "Alkohole/Ksiazece.png"
                         },
                         new Dish()
                         {
@@ -483,7 +483,7 @@ namespace GastroFaza.Seeder
                             Description = "Drink",
                             Price = 13,
                             DishType= DishType.Alcohol,
-                            ProfileImg = ""
+                            ProfileImg = "Alkohole/Jagermaister.png"
                         },
                         new Dish()
                         {
@@ -491,7 +491,7 @@ namespace GastroFaza.Seeder
                             Description = "Drink",
                             Price = 16,
                             DishType= DishType.Alcohol,
-                            ProfileImg = ""
+                            ProfileImg = "Alkohole/JackDaniels.png"
                         },
                         new Dish()
                         {
@@ -499,7 +499,7 @@ namespace GastroFaza.Seeder
                             Description = "Napój",
                             Price = 10,
                             DishType= DishType.Drinks,
-                            ProfileImg = ""
+                            ProfileImg = "Napoje/CocaCola.png"
                         },
                         new Dish()
                         {
@@ -507,7 +507,7 @@ namespace GastroFaza.Seeder
                             Description = "Napój",
                             Price = 10,
                             DishType= DishType.Drinks,
-                            ProfileImg = ""
+                            ProfileImg = "Napoje/Fanta.png"
                         },
                         new Dish()
                         {
@@ -515,7 +515,7 @@ namespace GastroFaza.Seeder
                             Description = "Napój",
                             Price = 8,
                             DishType= DishType.Drinks,
-                            ProfileImg = ""
+                            ProfileImg = "Napoje/Cappy.png"
                         },
 
             };

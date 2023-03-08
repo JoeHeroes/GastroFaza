@@ -171,6 +171,27 @@ namespace GastroFaza.Controllers
                 throw new Exception("Order not found");
             }
             order.Status = Status.Przyjete;
+
+            string userEmail = HttpContext.Session.GetString("email");
+            var client = this.dbContext.Clients.FirstOrDefault(u => u.Email == userEmail);
+
+
+            var dishOrder = this.dbContext.DishOrders.Where(x => x.OrderId == id);
+            var dishList = this.dbContext.Dishs.ToList();
+
+            History historyOrder = new History();
+            historyOrder.Date = DateTime.Now;
+
+            foreach (var x in dishOrder)
+            {
+                var dish = dishList.FirstOrDefault(d => d.Id == x.DishesId);
+                historyOrder.Dishes += dish.Name.ToString() + ", ";
+            }
+
+            historyOrder.AddedById = client.Id;
+
+            this.dbContext.Histories.Add(historyOrder);
+
             dbContext.SaveChanges();
             HttpContext.Session.SetString("current order", String.Empty);
             return View();
@@ -286,5 +307,67 @@ namespace GastroFaza.Controllers
             }
             return RedirectToAction("GetAllOrders");
         }
+
+
+
+        [Route("History")]
+        public IActionResult History()
+        {
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                IEnumerable<History> histories = this.dbContext.Histories;
+
+                if (HttpContext.Session.GetString("isWorker") != "true")
+                {
+                    string userEmail = HttpContext.Session.GetString("email");
+                    var client = this.dbContext.Clients.FirstOrDefault(u => u.Email == userEmail);
+                    IEnumerable<History> clientHistories = histories.Where(r => r.AddedById == client.Id);
+                    return View(clientHistories);
+                }
+                else
+                {
+                    return View(histories);
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+        public IActionResult ClearHistory()
+        {
+            if (HttpContext.Session.GetString("email") != null)
+            {
+
+
+                string userEmail = HttpContext.Session.GetString("email");
+                var client = this.dbContext.Clients.FirstOrDefault(u => u.Email == userEmail);
+
+
+                var clientHist = this.dbContext.Histories.Where(x => x.AddedById == client.Id);
+
+                foreach (var del in clientHist)
+                {
+                    this.dbContext.Histories.Remove(del);
+                }
+
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+                return RedirectToAction("History");
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+
     }
 }
