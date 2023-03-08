@@ -286,5 +286,18 @@ namespace GastroFaza.Controllers
             }
             return RedirectToAction("GetAllOrders");
         }
+
+
+
+        [Route("History")]
+        public IActionResult History()
+        {
+
+            string userEmail = HttpContext.Session.GetString("email");
+            var client = this.dbContext.Clients.FirstOrDefault(u => u.Email == userEmail);
+            var order = this.dbContext.Orders.Where(s => s.AddedById == client.Id).ToList();
+
+            return View(order);
+        }
     }
 }
