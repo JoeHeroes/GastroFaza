@@ -1,7 +1,60 @@
-﻿
+﻿@model IEnumerable<History>
+@inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "History";
 }
 
-<h1>History</h1>
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+</head>
+
+<body>
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2>History</h2>
+            </div>
+            <div class="col-6 text-end">
+                <a class="btn btn-danger" asp-controller="Order" asp-action="ClearHistory">Clear history</a>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Dishes
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td width="10%">
+                            @obj.Id
+                        </td>
+                        <td width="80%">
+                            @obj.Dishes
+                        </td>
+                        <td width="10%">
+                            @obj.Date
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</body>
 

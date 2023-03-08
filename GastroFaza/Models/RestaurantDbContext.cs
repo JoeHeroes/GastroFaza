@@ -18,6 +18,8 @@ namespace GastroFaza.Models
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<DiningTable> Tables { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<History> Histories { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 

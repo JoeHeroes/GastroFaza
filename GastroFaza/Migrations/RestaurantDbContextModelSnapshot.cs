@@ -124,6 +124,28 @@ namespace GastroFaza.Migrations
                     b.ToTable("DishOrders");
                 });
 
+            modelBuilder.Entity("GastroFaza.Models.History", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AddedById")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Dishes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Histories");
+                });
+
             modelBuilder.Entity("GastroFaza.Models.Order", b =>
                 {
                     b.Property<int>("Id")

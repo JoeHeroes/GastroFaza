@@ -42,6 +42,21 @@ namespace GastroFaza.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Histories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Dishes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AddedById = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Histories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -238,6 +253,9 @@ namespace GastroFaza.Migrations
         {
             migrationBuilder.DropTable(
                 name: "DishOrders");
+
+            migrationBuilder.DropTable(
+                name: "Histories");
 
             migrationBuilder.DropTable(
                 name: "Reservations");
