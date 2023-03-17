@@ -6,6 +6,8 @@
 
 <head>
     <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/rating.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -29,10 +31,16 @@
                     Id
                 </th>
                 <th>
+                    Dishes
+                </th>
+                <th>
                     Date
                 </th>
                 <th>
-                    Dishes
+                    Stars
+                </th>
+                <th>
+                    Rate
                 </th>
             </tr>
         </thead>
@@ -45,11 +53,26 @@
                         <td width="10%">
                             @obj.Id
                         </td>
-                        <td width="80%">
+                        <td width="45%">
                             @obj.Dishes
                         </td>
-                        <td width="10%">
+                        <td width="25%">
                             @obj.Date
+                        </td>
+                        <td width="15%">
+                            <ul>
+                                @for (var i = 0; i < @obj.Stars; i++)
+                                {
+                                    <li class="rating_full">-----</li>
+                                }
+                                @for (var i = 0; i < (5 - @obj.Stars); i++)
+                                {
+                                    <li class="rating_empty">.</li>
+                                }
+                            </ul>
+                            
+                        </td>
+                        <td width="5%">
                         </td>
                     </tr>
                 }

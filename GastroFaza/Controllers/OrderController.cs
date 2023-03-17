@@ -181,6 +181,7 @@ namespace GastroFaza.Controllers
 
             History historyOrder = new History();
             historyOrder.Date = DateTime.Now;
+            historyOrder.Stars = 2;
 
             foreach (var x in dishOrder)
             {
