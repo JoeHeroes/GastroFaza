@@ -39,9 +39,13 @@
                 <th>
                     Stars
                 </th>
-                <th>
-                    
-                </th>
+                @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") != "true")
+                {
+                    <th>
+
+                    </th>
+                }
+                
             </tr>
         </thead>
         <tbody>
@@ -71,9 +75,12 @@
                                 </span>   
                             } 
                         </td>
-                        <td width="5%">
-                            <a asp-action="RateOrder" asp-route-id="@obj.Id" class="profile_button">Rate</a>
-                        </td>
+                        @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") != "true")
+                        {
+                            <td width="5%">
+                                <a asp-action="RateOrder" asp-route-id="@obj.Id" class="profile_button">Rate</a>
+                            </td>
+                        }
                     </tr>
                 }
             }
