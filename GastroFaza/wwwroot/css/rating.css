@@ -1,5 +1,5 @@
 ﻿.rating {
-    transform: rotateY(180deg);
+    //transform:  rotateY(180deg);
     display: flex;
 }
 
@@ -36,22 +36,4 @@
 .rating input:checked ~ label:after
 {
     opacity: 1
-}
-
-.rating_full {
-    font-family: fontAwesome;
-    position: absolute;
-    display: flex;
-    font-size: 50px;
-    color: #919aa1;
-    top: 0;
-    opacity: 0;
-}
-
-
-.rating_empty {
-    content: '\f005';
-    font-family: fontAwesome;
-    font-size: 50px;
-    color: #101010;
 }

@@ -1,0 +1,36 @@
+﻿@model GastroFaza.Models.History
+@{
+    ViewData["Title"] = "Rate Order";
+    
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/rating.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <h1>Rate Order</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post" action="@Url.Action("RateOrder", "Order")" enctype="multipart/form-data">
+                <div class="form-group rating">
+                    <input type="radio" name="newStars" id="1" value=5 ><label for="1"></label>
+                    <input type="radio" name="newStars" id="2" value=4><label for="2"></label>
+                    <input type="radio" name="newStars" id="3" value=3><label for="3"></label>
+                    <input type="radio" name="newStars" id="4" value=2><label for="4"></label>
+                    <input type="radio" name="newStars" id="5" value=1><label for="5"></label>
+                </div>
+
+                <div class="btn-group">
+                    <div class="form-group" style="padding: 10px;">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                    <div style="padding: 10px;">
+                        <a href='@Url.Action("History", "Order")' class="btn btn-primary">Back</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
