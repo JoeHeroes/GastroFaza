@@ -13,6 +13,22 @@
     width: 50px;
 }
 
+.rating_res {
+    content: '\f005';
+    font-family: fontAwesome;
+    font-size: 20px;
+    color: #919aa1;
+    opacity: 1;
+}
+
+.rating_empty {
+    content: '\f005';
+    font-family: fontAwesome;
+    font-size: 20px;
+    color: #101010;
+    opacity: 1;
+}
+
 .rating label:before {
     content: '\f005';
     font-family: fontAwesome;
@@ -21,7 +37,7 @@
     
 }
 .rating label:after {
-    content: '\f005';
+        content: '\f005';
         font-family: fontAwesome;
         position: absolute;
         display: block;
@@ -30,7 +46,7 @@
         top: 0;
         opacity: 0;
         transition: .5s;
-    }
+   }
 .rating label:hover:after,
 .rating label:hover ~ label:after,
 .rating input:checked ~ label:after
