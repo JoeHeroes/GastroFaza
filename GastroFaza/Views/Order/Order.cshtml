@@ -24,37 +24,36 @@
         <div style="float:left">
                 @foreach (var obj in Model )
                 {
-                    <table class="table table-bordered" style="margin-left:10px">
-                        <tr>
-                            <th>
-                                @obj.Name
-                                <br />
-                                <br />
-                                @obj.Price
-                                <br />
-                                <br />
-                                <a href='@Url.Action("RemoveDishFromOrder", "Order", @obj, null)' class="remove_from_order_button">Remove From Order</a>
-                            </th>
-                        </tr>
-                    </table>
+                <div class="menuDishBoxOut">
+                    <div class="menuDishBoxIn">
+                        <div style="display:block">
+                            <h3 class="menuDishDescryptionHeadline">@obj.Name</h3> <br/>
+                            <h4 class="menuDishDescryptionBody">
+                                @obj.Description
+                            </h4> <br/>
+                            <h4 class="menuDishDescryptionBody">
+                                Price: @obj.Price
+                            </h4> <br/>
+                            <a href='@Url.Action("RemoveDishFromOrder", "Order", @obj, null)' class="removeFromOrderButton">Remove From Order</a>
+                        </div>
+                    </div><br/><br/>
+                    <div style="width:100%; height:2px; background-color:white;"></div>             
+                </div>            
                 }
-        </div>
-        <br /><br /><br />
-
-
+        </div><br /><br />
          @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
             {
-                <div style="float:left">
-                    <a href='@Url.Action("GetAll", "Dish")' class="add_to_order_button">Add To Order</a>
+                <div style="float:left"> <br/> <br/>
+                    <a href='@Url.Action("GetAll", "Dish")' class="addToOrderButton">Add To Order</a>
                 </div>
-                <div style="float:right">
-                    <a href='@Url.Action("PayForOrder", "Order")' class="confirm_order_button">Confirm Order</a>
+                <div style="float:right"><br/> <br/>
+                    <a href='@Url.Action("PayForOrder", "Order")' class="confirmOrderButton">Confirm Order</a>
                 </div>
             }
             else
             {
-                <div style="float:left">
-                    <a href='@Url.Action("Login", "Account")' class="btn btn-primary">Login To Order</a>
+                <div style="float:left"><br/> <br/>
+                    <a href='@Url.Action("Login", "Account")' class="confirmOrderButton">Login To Order</a>
                 </div>
             }
     </div>

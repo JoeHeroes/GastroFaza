@@ -18,7 +18,7 @@
             <div class="col-6 text-end">
                 <form class="d-flex" method="post" action="@Url.Action("SearchMenu", "Dish")">
                     <input class="form-control me-sm-2" type="text" name="name" placeholder="Search Dish by Name, Description, Type">
-                    <button class="profile_button" type="submit">Search</button>
+                    <button class="addOrderButton" type="submit">Search</button>
                 </form>
             </div>
         </div>
@@ -26,17 +26,8 @@
 
 
     <p>
-        <a asp-action="Create" class="profile_button">Create New</a>
+        <a asp-action="Create" class="addOrderButton">Create New</a>
     </p>
-
-
-
-
-
-
-
-
-
 
     <table class="table">
         <thead>
@@ -89,8 +80,8 @@
                         @Html.DisplayFor(modelItem => item.DishType)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="profile_button" style="width:auto;">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="edit_profile_back_button" style="width:auto;">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="editButton" style="width:auto;">Edit</a> 
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="deleteButton" style="width:auto;">Delete</a>
                     </td>
                 </tr>
             }

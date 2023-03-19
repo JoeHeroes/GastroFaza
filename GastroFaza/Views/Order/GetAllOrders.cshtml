@@ -10,6 +10,7 @@
 </head>
 <body>
     <h2>Orders</h2>
+    <br/><br/><br/>
     <table class="table">
         <thead>
             <tr>
@@ -52,8 +53,8 @@
                     @Html.DisplayFor(modelItem => item.AddedById)
                 </td>
                 <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="profile_button">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id"class="edit_profile_back_button">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="editButton">Edit</a> 
+                        <a asp-action="Delete" asp-route-id="@item.Id"class="deleteButton">Delete</a>
                 </td>
             </tr>
     }

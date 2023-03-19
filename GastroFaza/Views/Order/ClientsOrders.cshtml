@@ -17,7 +17,7 @@
 
                 @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null && @HttpContextAccessor.HttpContext.Session.GetString("Role") == "Waiter")
                 {
-                    <a href='@Url.Action("Create", "Order")' class="profile_button">Add Order</a>
+                    <a href='@Url.Action("Create", "Order")' class="addOrderButton">Add Order</a>
                 }
             </div>
         </div>
@@ -30,39 +30,41 @@
 
             @foreach (var obj in Model)
             {
-                <table class="table table-bordered" id=table>
+                <table >
                     <tr>
                         <th>
+                            <div class="clientsOrderBox"> 
+                                <div class="text-light">Order Id: @obj.Id </div>
+                                <div class="text-light">Price: @obj.Price</div>
+                                <div class="text-light">Status: @obj.Status </div>
+                                <div class="text-light">Added by id: @obj.AddedById </div><br/><br/>
+                                <a href='@Url.Action("OrderDetails", "Order", new { OrderId = obj.Id })' class="addToOrderButton">Order details</a>
+                                @if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Cook")
+                                {
+                                    @if (@obj.Status == GastroFaza.Models.Enum.Status.Przyjete)
+                                    {
+                                        <a href='@Url.Action("OrderIsInProgress", "Order", new {OrderId=obj.Id})' class="addToOrderButton" style="text-align:center;">Order Is In Progress</a>
+                                    }
+                                    else if (@obj.Status == GastroFaza.Models.Enum.Status.Przygotowywanie)
+                                    {
+                                        <a href='@Url.Action("OrderIsReady", "Order", new {OrderId=obj.Id})' class="addToOrderButton">Order Is Ready</a>
+                                    }
 
-                            <div class="text-light">Order Id: @obj.Id </div>
-                            <div class="text-light">Price: @obj.Price</div>
-                            <div class="text-light">Status: @obj.Status </div>
-                            <div class="text-light">Added by id: @obj.AddedById </div>
-                            <a href='@Url.Action("OrderDetails", "Order", new { OrderId = obj.Id })' class="profile_button">Order details</a>
-                            @if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Cook")
-                            {
-                                @if (@obj.Status == GastroFaza.Models.Enum.Status.Przyjete)
-                                {
-                                    <a href='@Url.Action("OrderIsInProgress", "Order", new {OrderId=obj.Id})' class="profile_button" style="text-align:center;">Order Is In Progress</a>
                                 }
-                                else if (@obj.Status == GastroFaza.Models.Enum.Status.Przygotowywanie)
+                                else if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Waiter")
                                 {
-                                    <a href='@Url.Action("OrderIsReady", "Order", new {OrderId=obj.Id})' class="profile_button">Order Is Ready</a>
-                                }
+                                    @if (@obj.Status == GastroFaza.Models.Enum.Status.Gotowe)
+                                    {
+                                        <a href='@Url.Action("OrderIsTaken", "Order", new {OrderId=obj.Id})' class="addToOrderButton" style="text-align:center;">Order Is Taken</a>
+                                    }
+                                    else if (@obj.Status == GastroFaza.Models.Enum.Status.Odebrane)
+                                    {
+                                        <a href='@Url.Action("OrderIsDelivered", "Order", new {OrderId=obj.Id})' class="addToOrderButton">Order Is Delivered</a>
+                                    }
 
-                            }
-                            else if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Waiter")
-                            {
-                                @if (@obj.Status == GastroFaza.Models.Enum.Status.Gotowe)
-                                {
-                                    <a href='@Url.Action("OrderIsTaken", "Order", new {OrderId=obj.Id})' class="profile_button" style="text-align:center;">Order Is Taken</a>
                                 }
-                                else if (@obj.Status == GastroFaza.Models.Enum.Status.Odebrane)
-                                {
-                                    <a href='@Url.Action("OrderIsDelivered", "Order", new {OrderId=obj.Id})' class="profile_button">Order Is Delivered</a>
-                                }
-
-                            }
+                            </div>
+                            <div style="width:100%; height:2px; background-color:white;"></div>
                         </th>
                     </tr>
                 </table>
