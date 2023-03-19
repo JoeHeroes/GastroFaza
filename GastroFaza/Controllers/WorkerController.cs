@@ -68,6 +68,10 @@ namespace GastroFaza.Controllers
                 model.Salary = modelDTO.Salary;
                 model.Rating = modelDTO.Rating;
                 model.Email = modelDTO.Email;
+                model.FirstName = modelDTO.FirstName;
+                model.LastName = modelDTO.LastName;
+                model.DateOfBirth = modelDTO.DateOfBirth;
+                model.Nationality = modelDTO.Nationality;
 
                 try
                 {
