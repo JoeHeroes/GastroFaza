@@ -157,6 +157,12 @@ namespace GastroFaza.Migrations
                     b.Property<int>("AddedById")
                         .HasColumnType("int");
 
+                    b.Property<int>("AddresId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Delivery")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 

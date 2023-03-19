@@ -65,7 +65,9 @@ namespace GastroFaza.Migrations
                     Status = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    AddedById = table.Column<int>(type: "int", nullable: false)
+                    AddedById = table.Column<int>(type: "int", nullable: false),
+                    Delivery = table.Column<bool>(type: "bit", nullable: false),
+                    AddresId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
