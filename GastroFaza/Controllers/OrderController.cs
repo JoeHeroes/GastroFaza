@@ -239,12 +239,12 @@ namespace GastroFaza.Controllers
             string userEmail = HttpContext.Session.GetString("email");
             var client = this.dbContext.Clients.FirstOrDefault(u => u.Email == userEmail);
 
-
             var dishOrder = this.dbContext.DishOrders.Where(x => x.OrderId == id);
             var dishList = this.dbContext.Dishs.ToList();
 
             History historyOrder = new History();
             historyOrder.Date = DateTime.Now;
+            historyOrder.Stars = 0;
 
             foreach (var x in dishOrder)
             {
@@ -260,6 +260,8 @@ namespace GastroFaza.Controllers
             HttpContext.Session.SetString("current order", String.Empty);
             return View();
         }
+
+
         public IActionResult RemoveDishFromOrder(Dish dish)
         {
 
@@ -433,5 +435,39 @@ namespace GastroFaza.Controllers
         }
 
 
+        public IActionResult RateOrder(int? id)
+        {
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                if(HttpContext.Session.GetString("isWorker") != "true")
+                {
+                    return View();
+                }
+                return Forbid();            
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult RateOrder(int? id, int newStars)
+        {
+            if (ModelState.IsValid)
+            {
+                var model = this.dbContext.Histories.Find(id);
+                model.Stars = newStars;
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+            }
+            return RedirectToAction("History");
+        }
     }
 }

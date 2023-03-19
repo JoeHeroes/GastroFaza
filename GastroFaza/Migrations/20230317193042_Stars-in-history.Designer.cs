@@ -4,6 +4,7 @@ using GastroFaza.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GastroFaza.Migrations
 {
     [DbContext(typeof(RestaurantDbContext))]
-    partial class RestaurantDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230317193042_Stars-in-history")]
+    partial class Starsinhistory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,7 +143,7 @@ namespace GastroFaza.Migrations
                     b.Property<string>("Dishes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Stars")
+                    b.Property<int?>("Stars")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -159,12 +161,6 @@ namespace GastroFaza.Migrations
 
                     b.Property<int>("AddedById")
                         .HasColumnType("int");
-
-                    b.Property<int>("AddresId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Delivery")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
