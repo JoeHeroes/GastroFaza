@@ -10,5 +10,8 @@ namespace GastroFaza.Models
         public string Description { get; set; }
         public double Price { get; set; }
         public int AddedById { get; set; }
+        public bool Delivery { get; set; } = false;
+        public int AddresId { get; set; } = 0;
+
     }
 }

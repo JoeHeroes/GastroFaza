@@ -1,0 +1,40 @@
+﻿@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "ChooseOption";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2>Choose Option</h2>
+            </div>
+            <div class="col-6 text-end">
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div style="float:left">
+
+        @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
+        {
+            <div style="float:left">
+                <a href='@Url.Action("PayForOrder", "Order")' class="add_to_order_button">Restaurant</a>
+            </div>
+            <div style="float:right">
+                <a href='@Url.Action("Delivery", "Order")' class="confirm_order_button">Delivery</a>
+            </div>
+        }
+        else
+        {
+            <div style="float:left">
+                <a href='@Url.Action("Login", "Account")' class="btn btn-primary">Login To Order</a>
+            </div>
+        }
+    </div>
+</body>

@@ -1,0 +1,52 @@
+﻿@model GastroFaza.Models.DTO.AddressDto
+@{
+    ViewData["Title"] = "Delivery";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+</head>
+<body>
+    <h2>Address</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post" action="@Url.Action("XXX", "Order")" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="City" class="control-label text-light">Miasto:</label>
+                    <input asp-for="City" class="edit_profile_input" type="text" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+
+                 <div class="form-group">
+                    <label asp-for="Street" class="control-label text-light">Ulica:</label>
+                    <input asp-for="Street" class="edit_profile_input" type="text" />
+                    <span asp-validation-for="Street" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PostalCode" class="control-label text-light">Kod pocztowy:</label>
+                    <input asp-for="PostalCode" class="edit_profile_input" type="text" />
+                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                </div>
+               
+                <br /> <br />
+                <div class="form-group">
+                </div>
+
+
+                <div class="btn-group">
+                    <div class="form-group" style="padding: 10px;">
+                        <input type="submit" value="Confirm" class="edit_profile_save_button" />
+                    </div>
+                    <div style="padding: 10px;">
+                        <a href='@Url.Action("ChooseOption", "Order")' class="edit_profile_back_button">Back</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</body>
