@@ -6,6 +6,8 @@
 
 <head>
     <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/rating.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -25,7 +27,7 @@
     <table class="table table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
-                <th>
+               <th>
                     Id
                 </th>
                 <th>
@@ -34,6 +36,13 @@
                 <th>
                     Date
                 </th>
+                @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") != "true")
+                {
+                    <th>
+
+                    </th>
+                }
+                
             </tr>
         </thead>
         <tbody>
@@ -45,12 +54,30 @@
                         <td width="10%">
                             @obj.Id
                         </td>
-                        <td width="80%">
+                        <td width="45%">
                             @obj.Dishes
                         </td>
-                        <td width="10%">
+                        <td width="25%">
                             @obj.Date
                         </td>
+                        <td width="15%">
+                            @for(var i=0; i < @obj.Stars; i++)
+                            {
+                                <span class="rating_res fas fa-star">
+                                </span>   
+                            }
+                            @for(var i=0; i < 5 - @obj.Stars; i++)
+                            {
+                                <span class="rating_empty fas fa-star">
+                                </span>   
+                            } 
+                        </td>
+                        @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") != "true")
+                        {
+                            <td width="5%">
+                                <a asp-action="RateOrder" asp-route-id="@obj.Id" class="profile_button">Rate</a>
+                            </td>
+                        }
                     </tr>
                 }
             }

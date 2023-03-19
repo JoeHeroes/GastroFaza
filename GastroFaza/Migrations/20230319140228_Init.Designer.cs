@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GastroFaza.Migrations
 {
     [DbContext(typeof(RestaurantDbContext))]
-    [Migration("20230308171651_Init")]
+    [Migration("20230319140228_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -158,6 +158,12 @@ namespace GastroFaza.Migrations
 
                     b.Property<int>("AddedById")
                         .HasColumnType("int");
+
+                    b.Property<int>("AddresId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Delivery")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
