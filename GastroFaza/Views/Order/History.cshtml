@@ -36,11 +36,15 @@
                 <th>
                     Date
                 </th>
+                <th>
+
+                </th>
                 @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") != "true")
                 {
                     <th>
 
                     </th>
+
                 }
                 
             </tr>
