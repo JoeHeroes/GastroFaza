@@ -1,5 +1,5 @@
 ﻿body {
-    background-color: #AB8476;
+    background-color: #211A1D;
     margin-bottom: 100px;
 }
 body h2{
@@ -7,12 +7,12 @@ body h2{
     color:whitesmoke;
 }
 .table {
-    background-color: #ffa31a;
+    background-color: white;
     font-family: Andele Mono, monospace;
     font-weight: 900;
     border: 2px solid white;
-    padding:10px;
-    border-radius: 10px;
+    padding: 10px;
+    border-radius: 2px;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0,0,0,0.15);
     width: 100%;
@@ -20,9 +20,11 @@ body h2{
 }
 thead {
     color: white;
-    background-color: #292929;
+    background-color: #211A1D;
+    border-color: white;
 }
 tbody {
+    color: #211A1D;
 }
 ul {
     list-style: none;
@@ -219,11 +221,11 @@ loginbox input[type ="password"]:focus {
     color:#FDFFFC;
 }
 .edit_profile_input {
-    background-color: #63595C;
-    height:40px;
+    background-color: #211A1D;
+    height: 40px;
     display: block;
     text-align: center;
-    border: 2px solid #216869;
+    border: 2px solid #FF7F27;
     padding: 14px 10px;
     width: 280px;
     outline: none;
@@ -235,9 +237,9 @@ loginbox input[type ="password"]:focus {
 .edit_profile input[type ="text"]:hover,
 .edit_profile input[type ="password"]:hover,
 .edit_profile input[type ="datetime-local"]:hover {
-    transition:0.5s;
-    background: #216869;
-    background-color: #216869;
+    transition: 0.5s;
+    background: #FF7F27;
+    background-color: #FF7F27;
 }
 .edit_profile_save_button {
     border-radius: 5px;
@@ -358,7 +360,7 @@ loginbox input[type ="password"]:focus {
     background-color: #AB8476;
 }
 .select_list {
-    background-color: #63595C;
+    background-color: #211A1D;
     height: 40px;
     display: block;
     text-align: center;
@@ -369,8 +371,8 @@ loginbox input[type ="password"]:focus {
     border-radius: 4px;
     transition: 0.5s;
     cursor: pointer;
-    display:contents;
-    color:white;
+    display: contents;
+    color: white;
 }
 .registerbox .select_list_nationality option {   
     color:black;
@@ -391,11 +393,11 @@ loginbox input[type ="password"]:focus {
     margin-left:70px;
 }
 .select_list {
-    background-color: #63595C;
+    background-color: #211A1D;
     height: 40px;
     display: block;
     text-align: center;
-    border: 2px solid #216869;
+    border: 2px solid #FF7F27;
     width: 280px;
     outline: none;
     color: white;
@@ -422,4 +424,206 @@ loginbox input[type ="password"]:focus {
     background-color: #216869;
     transition: 0.5s;
     color: #FDFFFC;
+}
+
+/***************************************************/
+.menuDishBoxOut{
+    width: 100%;
+    margin-top:2vw;
+}
+.menuDishBoxIn{
+    display:flex;
+}
+.menuPictureBox {
+    padding: 2vw;
+    border-radius: 2px;
+    background-color: #FF7F27;
+}
+.menuPictureBox:hover {
+    transition:0.5s;
+    box-shadow:0 0 3px 3px white;
+}
+.menuDishDescryptionHeadline{
+    color: white;
+    margin-left:1vw;
+}
+.menuDishDescryptionBody {
+    color: white;
+    margin-left: 1vw;
+}
+.backButton {
+    background-color: #FF7F27;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    text-decoration: none;
+    font-size: large;
+    color: white;
+}
+.backButton:hover{
+    background-color:white;
+    color:#211A1D;
+    transition:0.5s;
+    box-shadow:0 0 5px 5px #FF7F27;
+}
+.addToOrderButton {
+    color: white;
+    text-decoration: none;
+    margin: 1vw;
+    background-color: #211A1D;
+    border: solid 2px #FF7F27;
+    padding: 10px;
+    margin-top: 20px;
+}
+.addToOrderButton:hover {
+    background-color:#FF7F27;
+    color:white;
+    transition:0.5s;
+}
+.addOrderButton {
+    background-color: #FF7F27;
+    color: white;
+    text-decoration: none;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    margin-left: 1vw;
+    font-size: large;
+}
+.addOrderButton:hover {
+    background-color:white;
+    color:#211A1D;
+    transition:0.5s;
+    box-shadow:0 0 5px 5px #FF7F27;
+}
+.confirmOrderButton {
+    color: white;
+    text-decoration: none;
+    margin: 1vw;
+    border: solid 2px #FF7F27;
+    padding: 10px;    
+}
+.confirmOrderButton:hover {
+    background-color:#FF7F27;
+    color:white;
+    transition:0.5s;
+}
+.removeFromOrderButton {
+    color: white;
+    text-decoration: none;
+    margin: 1vw;
+    border: solid 2px #941408;
+    padding: 10px;
+}
+.removeFromOrderButton:hover{
+    background-color:#941408;
+    color:white;
+    transition:0.5s;
+}
+.editButton {
+    color: white;
+    text-decoration: none;
+    border: solid 2px #211A1D;
+    background-color: #211A1D;
+    margin: 1vw;
+    border-radius: 2px;
+}
+.editButton:hover{
+    background-color:white;
+    color:#211A1D;
+    transition:0.5s;
+}
+.deleteButton {
+    color: white;
+    text-decoration: none;
+    background-color: #941408;
+    border: solid 2px #941408;
+    padding: 1px;
+    border-radius: 2px;
+}
+.deleteButton:hover{
+    background-color:white;
+    color:#941408;
+    transition:0.5s;
+}
+.editProfileButton {
+    background-color: #211A1D;
+    color: white;
+    text-decoration: none;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    font-size: large;
+    border: solid 2px #FF7F27;
+}
+.editProfileButton:hover{
+    background-color:#FF7F27;
+    color:white;
+    transition:0.5s;
+}
+.resetPasswordButton {
+    background-color: #211A1D;
+    color: white;
+    text-decoration: none;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    font-size: large;
+    border: solid 2px #FF7F27;
+}
+.resetPasswordButton:hover{
+    background-color:#FF7F27;
+    color:white;
+    transition:0.5s;
+}
+.selectPictureButton {
+    background-color: #211A1D;
+    color: white;
+    text-decoration: none;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    font-size: large;
+    border: solid 2px #FF7F27;
+}
+.selectPictureButton:hover {
+    background-color: #FF7F27;
+    color: white;
+    transition: 0.5s;
+}
+.clearHistoryButton {
+    background-color: #941408;
+    color: white;
+    text-decoration: none;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    margin-left: 1vw;
+    font-size: large;
+}
+.clearHistoryButton:hover {
+    background-color:white;
+    color:#941408;
+    transition:0.5s;
+    box-shadow:0 0 5px 5px #941408;
+}
+.selectpicture {
+    background-color: #211A1D;
+}
+.clientsOrderBox {
+    background-color: #211A1D;
+    margin:2vw;
+}
+.setBusyButton {
+    color: white;
+    text-decoration: none;
+    background-color: #FF7F27;
+    border: solid 2px #FF7F27;
+    padding: 1px;
+    border-radius: 2px;
+}
+.setBusyButton:hover {
+    background-color:white;
+    color:#FF7F27;
+    transition:0.5s;
 }

@@ -4,54 +4,57 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+</head>
+<body>
+    <h2>Edit Restaurant</h2>
 
-<h1>Edit Restaurant</h1>
-
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="HasDelivery" /> @Html.DisplayNameFor(model => model.HasDelivery)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="ContactEmail" class="control-label"></label>
-                <input asp-for="ContactEmail" class="form-control" />
-                <span asp-validation-for="ContactEmail" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ContactNumber" class="control-label"></label>
-                <input asp-for="ContactNumber" class="form-control" />
-                <span asp-validation-for="ContactNumber" class="text-danger"></span>
-            </div>
-            <div class="btn-group">
-                <div class="form-group"style="padding: 10px;">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label text-light"></label>
+                    <input asp-for="Name" class="edit_profile_input" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
-                <div style="padding: 10px;">
-                    <a href='@Url.Action("RestaurantDetails", "Restaurant")' class="btn btn-primary">Back</a>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label text-light"></label>
+                    <input asp-for="Description" class="edit_profile_input" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div><br/>
+                <div class="form-group form-check">
+                    <label class="form-check-label text-light">
+                        <input class="form-check-input" asp-for="HasDelivery" /> @Html.DisplayNameFor(model => model.HasDelivery)
+                    </label>
+                </div><br/>
+                <div class="form-group">
+                    <label asp-for="ContactEmail" class="control-label text-light"></label>
+                    <input asp-for="ContactEmail" class="edit_profile_input " />
+                    <span asp-validation-for="ContactEmail" class="text-danger"></span>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label asp-for="ContactNumber" class="control-label text-light"></label>
+                    <input asp-for="ContactNumber" class="edit_profile_input" />
+                    <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                </div>
+                <div class="btn-group">
+                    <div class="form-group"style="padding: 10px;">
+                        <input type="submit" value="Save" class="addToOrderButton" />
+                    </div>
+                    <div style="padding: 10px; margin:30px;">
+                        <a href='@Url.Action("RestaurantDetails", "Restaurant")' class="addToOrderButton">Back</a>
+                    </div>
+                </div>
 
 
-        </form>
+            </form>
+        </div>
     </div>
-</div>
-
+</body>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

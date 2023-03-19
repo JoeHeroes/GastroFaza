@@ -4,52 +4,55 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Create Dish</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DishType" class="control-label"></label>
-                <select asp-for="DishType" class="form-control" asp-items="Html.GetEnumSelectList<DishType>()"></select>
-                <span asp-validation-for="DishType" class="text-danger"></span>
-            </div>
-            <br/>
-            <div class="form-control">
-                <label asp-for="PathPic" class="control-label"></label>
-                <input asp-for="PathPic" class="form-control" />
-                <span asp-validation-for="PathPic" class="text-danger"></span>
-            </div>
-
-            <div class="btn-group">
-                <div class="form-group" style="padding: 10px;">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+</head>
+<body>
+    <h2>Create Dish</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label text-light"></label>
+                    <input asp-for="Name" class="edit_profile_input" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
-                <div style="padding: 10px;">
-                    <a href='@Url.Action("SearchMenu", "Dish")' class="btn btn-primary">Back</a>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label text-light"></label>
+                    <input asp-for="Description" class="edit_profile_input" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
-            </div>
-        </form>
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label text-light"></label>
+                    <input asp-for="Price" class="edit_profile_input" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DishType" class="control-label text-light"></label>
+                    <select asp-for="DishType" class="select_list" asp-items="Html.GetEnumSelectList<DishType>()"></select>
+                    <span asp-validation-for="DishType" class="text-danger"></span>
+                </div>
+                <br/>
+                <div class="form-group" style="background-color:#211A1D;">
+                    <label asp-for="PathPic" class="control-label text-light"></label>
+                    <input asp-for="PathPic" class="edit_profile_input" style="border-color:#211A1D" />
+                    <span asp-validation-for="PathPic" class="text-danger"></span>
+                </div>
+
+                <div class="btn-group">
+                    <div class="form-group" style="padding: 10px;">
+                        <input type="submit" value="Create" class="addToOrderButton" />
+                    </div>
+                    <div style="padding: 10px; margin:30px;">
+                        <a href='@Url.Action("SearchMenu", "Dish")' class="addToOrderButton">Back</a>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
+</body>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

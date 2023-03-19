@@ -34,9 +34,10 @@
 
             @foreach (var obj in Model.Dishes)
             {
-                <table class="table table-bordered" id=table>
+                <table>
                     <tr>
                         <th>
+                            <div class="clientsOrderBox">
                             <div class="text-light"> Dish Name: @obj.Name </div>
                             <br />
                             <br />
@@ -44,6 +45,8 @@
                             <br />
                             <br />
                             <div class="text-light"> Dish Description: @obj.Description </div>
+                            </div>
+                            <div style="width:100%; height:2px; background-color:white;"></div>
                         </th>
                     </tr>
                 </table>

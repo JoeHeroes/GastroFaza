@@ -7,46 +7,46 @@
 <head>
     <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
 </head>
-
-<div class="container p-3">
-    <div class="row pt-4">
-        <div class="col-6">
-            <h2 class="text-primary">Menu</h2>
-        </div>
-        <div class="col-6 text-end">
-            <a href='@Url.Action("GetAll", "Dish")' class="btn btn-primary">Back</a>
+<body style="background-color:#211A1D">
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 style="color:white; font-size:xx-large">Menu</h2>
+            </div>
+            <div class="col-6 text-end">
+                <a href='@Url.Action("GetAll", "Dish")' class="backButton">Back</a>
+            </div>
         </div>
     </div>
-</div>
-<br />
-<br />
-<br />
-<div style="float:left">
-    @foreach (var obj in Model)
-    {
-        <div style="float:left">
-            <table class="table table-bordered" style="margin:2px;">
-                <tr>
-                    <th>
+    <br />
+    <div style="float:left">
+        @foreach (var obj in Model)
+        {
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
                         <img src="~/Images/@obj.ProfileImg" width="200" height="200" asp-append-version="true" />
-                        <br />
-                        @obj.Name
-                        <br />
-                        @obj.Description
-                        <br />
-                        Price: @obj.Price
-                        <br />
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">@obj.Name</h3> <br/>
+                        <h4 class="menuDishDescryptionBody">
+                            @obj.Description
+                        </h4> <br/>
+                        <h4 class="menuDishDescryptionBody">
+                            Price: @obj.Price
+                        </h4> <br/> <br/> <br/>
                         @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
                         {
                             if (@HttpContextAccessor.HttpContext.Session.GetString("current order") != null)
                             {
-                                <a href='@Url.Action("AddToOrder", "Dish", new { dishId = @obj.Id }, null)' class="btn btn-primary">Add To Order</a>
+                                <a href='@Url.Action("AddToOrder", "Dish", new { dishId = @obj.Id }, null)' class="addToOrderButton">Add To Order</a>
                             }
                         }
-
-                    </th>
-                </tr>
-            </table>
-        </div>
-    }
-</div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+<br />
+<br />

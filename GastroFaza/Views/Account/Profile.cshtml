@@ -28,7 +28,7 @@
     }
 
     <div>
-        <a href='@Url.Action("SelectPicture", "Account")' class="profile_button">Select Picture</a>
+        <a href='@Url.Action("SelectPicture", "Account")' class="selectPictureButton">Select Picture</a>
     </div>
     <hr />
     <div class="row">
@@ -67,8 +67,8 @@
     </div>
 
    
-    <a href='@Url.Action("ProfileEdit", "Account", new { id = Model.Id})' class="profile_button">Edit</a>
-    <a href='@Url.Action("RestartPassword", "Account")' class="profile_button">Restart password</a>
+    <a href='@Url.Action("ProfileEdit", "Account", new { id = Model.Id})' class="editProfileButton">Edit</a>
+    <a href='@Url.Action("RestartPassword", "Account")' class="resetPasswordButton">Reset password</a>
 
 
     <br />

@@ -18,9 +18,9 @@
                 {
                     @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") == "true")
                     {
-                        <a href='@Url.Action("WorkerCreate", "Reservation")' class="add_reservation_button">Add Reservation</a>
+                        <a href='@Url.Action("WorkerCreate", "Reservation")' class="addOrderButton">Add Reservation</a>
                     } else {
-                        <a href='@Url.Action("Check", "Reservation")' class="add_reservation_button">Add Reservation</a>
+                        <a href='@Url.Action("Check", "Reservation")' class="addOrderButton">Add Reservation</a>
                     }
                 }
             </div>
@@ -85,11 +85,11 @@
                             <td width="20%">
                                 @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") == "true")
                                 {
-                                    <a class="btn btn-secondary" asp-controller="Reservation" asp-action="WorkerEdit" asp-route-id="@obj.Id">Edit</a>
+                                    <a class="editButton" asp-controller="Reservation" asp-action="WorkerEdit" asp-route-id="@obj.Id">Edit</a>
                                 } else {
-                                    <a class="btn btn-secondary" asp-controller="Reservation" asp-action="Edit" asp-route-id="@obj.Id">Edit</a>
+                                    <a class="editButton" asp-controller="Reservation" asp-action="Edit" asp-route-id="@obj.Id">Edit</a>
                                 }
-                                <a class="btn btn-danger" asp-controller="Reservation" asp-action="Delete" asp-route-id="@obj.Id">Delete</a>
+                                <a class="deleteButton" asp-controller="Reservation" asp-action="Delete" asp-route-id="@obj.Id">Delete</a>
                             </td>
                         }
                         else

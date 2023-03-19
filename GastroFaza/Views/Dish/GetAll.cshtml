@@ -8,333 +8,381 @@
 <head>
     <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
 </head>
-<body>
+<body style="background-color:#211A1D">
     <div class="container p-3">
         <div class="row pt-4">
             <div class="col-6">
-                <h2>Menu</h2>  
+                <h2 style="color:white; font-size:xx-large">Menu</h2>
             </div>
 
             <div class="col-6 text-end">
                 @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
                 {
-                    <a href='@Url.Action("Order", "Order")' class="add_reservation_button">Order</a>
+                    <a href='@Url.Action("Order", "Order")' class="addOrderButton">Order</a>
                 }
             </div>
 
-            <div style="float:left">
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Pasta}, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Makarony/Pasta_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                                <center>@Html.ActionLink("Pasta", "Search", "Dish", new { dish = DishType.Pasta }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Pasta}, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Makarony/Pasta_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Pasta</h3>
+                        <h5 class="menuDishDescryptionBody">
+                            Our Pasta is obtained from the old founder's recipe of high-gluten flour / porridge, water and eggs. The pasta also includes milk or skimmed cottage cheese, soy flour, dried gluten, dried yeast.
+                        </h5>
+                    </div>
                 </div>
+            </div>
 
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Salad }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Salatki/Salad_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                                <center>@Html.ActionLink("Salad", "Search", "Dish", new { dish = DishType.Salad }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Salad }, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Salatki/Salad_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Salad</h3>
+                        <h5 class="menuDishDescryptionBody">
+                            You can eat, among other things, great, large portions of crispy salads, based on green salads with various vegetable, meat and dairy additives from fresh and natural ingredients.
+                        </h5>
+                    </div>
                 </div>
+            </div>
 
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Bread }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Chleby/Bread_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                                <center>@Html.ActionLink("Bread", "Search", "Dish", new { dish = DishType.Bread }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Bread }, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Chleby/Bread_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Bread</h3>
+                        <h5 class="menuDishDescryptionBody">
+                            Our bread is a unique product that is made on the basis of traditional recipes. It is baked in a ceramic coal oven and its production uses natural sourdough. The bread is made and shaped by hand.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Curry }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Curry/Curry_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                               <center>@Html.ActionLink("Curry", "Search", "Dish", new { dish = DishType.Curry }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Curry }, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Curry/Curry_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Curry</h3>
+                        <h5 class="menuDishDescryptionBody">
+                            Curry is a delicious dish of oriental cuisine that will delight all lovers of unusual flavors. One of the ingredients of the dish is curry paste, which includes chili, onion, lemongrass or coriander root.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Vegan }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Vegan/Vegan_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                                <center>@Html.ActionLink("Vegan", "Search", "Dish", new { dish = DishType.Vegan }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Vegan }, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Vegan/Vegan_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Vegan</h3>
+                        <h5 class="menuDishDescryptionBody">
+                            It means the abandonment of all animal products, including meat, fish, poultry, eggs, milk derived from animals derived from them.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Soup }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Zupy/Soup_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                                <center>@Html.ActionLink("Soup", "Search", "Dish", new { dish = DishType.Soup }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Soup }, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Zupy/Soup_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Soup</h3>
+                        <h5 class="menuDishDescryptionBody">
+                            Soup is a dish created by cooking various products. The main ingredient is responsible for the characteristic taste, smell and colour of this dish.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Stew }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Gulasz/Stew_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                                <center>@Html.ActionLink("Stew", "Search", "Dish", new { dish = DishType.Stew }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Stew }, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Gulasz/Stew_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Stew</h3>
+                        <h5 class="menuDishDescryptionBody">
+                            Hungarian national dish, which consists of meat, onions and peppers.
+                        </h5>
+                    </div>
                 </div>
-
-
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                 <a href="@Url.Action("Search", "Dish", new { dish = DishType.Pizza }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Pizza/Pizza_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                               <center>@Html.ActionLink("Pizza", "Search", "Dish", new { dish = DishType.Pizza }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Pizza }, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Pizza/Pizza_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Pizza</h3>
+                        <h5 class="menuDishDescryptionBody">
+                            It is a flat cake of yeast dough (focaccia), with tomato sauce, sprinkled with grated cheese (most often mozzarella) and herbs, baked in a very hot oven, on a stone floor.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Sandwich }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Kanapki/Sandwich_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                                <center>@Html.ActionLink("Sandwich", "Search", "Dish", new { dish = DishType.Sandwich }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Sandwich }, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Kanapki/Sandwich_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Sandwich</h3>
+                        <h5 class="menuDishDescryptionBody">
+                           Delicious, Italian sandwiches prepared on the basis of rye or wheat ciabatta and served hot.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Wrap }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Wrapy/Wrap_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                                <center>@Html.ActionLink("Wrap", "Search", "Dish", new { dish = DishType.Wrap }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Wrap }, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Wrapy/Wrap_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Wrap</h3>
+                        <h5 class="menuDishDescryptionBody">
+                            A type of sandwich made from round flat bread (e. g. Mexican tortilla, Arabic pita or Armenian lavash) with a filling wrapped in the middle.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                 <a href="@Url.Action("Search", "Dish", new { dish = DishType.Cake }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Ciasta/Cake_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                                <center>@Html.ActionLink("Cake", "Search", "Dish", new { dish = DishType.Cake }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Cake }, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Ciasta/Cake_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Cake</h3>
+                        <h5 class="menuDishDescryptionBody">
+                            Our cakes are confectionery products of various shapes, flavors, sizes and methods of preparation. They are handled by excellent confectioner Krzysztof Góral.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Souce }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Sosy/Souce_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                               <center>@Html.ActionLink("Souce", "Search", "Dish", new { dish = DishType.Souce }, null)</center> 
-                            </th>
-                        </tr>
-                    </table>
+            </div>            
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Pudding }, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Puddingi/Pudding_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Pudding</h3>
+                        <h5 class="menuDishDescryptionBody">
+                            Homemade pudding is a better version of ready-made pudding. From a popular dessert you can make a really exquisite dish, which you will successfully serve at every party.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Pudding }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Puddingi/Pudding_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                               <center>@Html.ActionLink("Pudding", "Search", "Dish", new { dish = DishType.Pudding }, null)</center> 
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+  
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Steak }, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Steki/Steak_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Steak</h3>
+                        <h5 class="menuDishDescryptionBody">
+                           Excellent dish of fried, roasted or grilled beef, mainly tenderloin or neck, cut across muscle fibers. Prepared by the best chef in his profession.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Dessert }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Desery/Dessert_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                                <center>@Html.ActionLink("Dessert", "Search", "Dish", new { dish = DishType.Dessert }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Cookies }, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Ciasteczka/Cookies_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Cookies</h3>
+                        <h5 class="menuDishDescryptionBody">
+                            Small dessert usually from crumbling pastry, baked in oven, usually for one person.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Drinks }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Napoje/Drinks_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                               <center>@Html.ActionLink("Drinks", "Search", "Dish", new { dish = DishType.Drinks }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Meatballs }, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Pulpety/Meatballs_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Meatballs</h3>
+                        <h5 class="menuDishDescryptionBody">
+                           Ground meat rolled into a ball, sometimes along with other ingredients, such as bread crumbs, minced onion, eggs, butter, and seasoning.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Alcohol }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Alkohole/Alcohol_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                                <center>@Html.ActionLink("Alcohol", "Search", "Dish", new { dish = DishType.Alcohol }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Pastabakes }, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Zapiekanki/Pastabakes_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Pastabakes</h3>
+                        <h5 class="menuDishDescryptionBody">
+                            Baked pasta, or pasta al forno, was adopted all over Italy. Today, baked pasta is a staple dish of Southern Italy, where it's usually made on Sundays, holidays and special occasions.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                 <a href="@Url.Action("Search", "Dish", new { dish = DishType.Steak }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Steki/Steak_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                                <center>@Html.ActionLink("Steak", "Search", "Dish", new { dish = DishType.Steak }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Burger }, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Burgery/Burger_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Burger</h3>
+                        <h5 class="menuDishDescryptionBody">
+                            It is excellent quality beef with vegetables, located in the middle of a self-baked bread, baked every morning.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                 <a href="@Url.Action("Search", "Dish", new { dish = DishType.Cookies }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Ciasteczka/Cookies_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                                <center>@Html.ActionLink("Cookies", "Search", "Dish", new { dish = DishType.Cookies }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Fish }, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Ryby/Fish_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Fish</h3>
+                        <h5 class="menuDishDescryptionBody">
+                           Our suppliers bring freshly caught fish every morning so that our chefs can prepare a delicious and light dish for you.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Meatballs }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Pulpety/Meatballs_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                                <center>@Html.ActionLink("Meatballs", "Search", "Dish", new { dish = DishType.Meatballs }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Meat }, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Mieso/Meat_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Meat</h3>
+                        <h5 class="menuDishDescryptionBody">
+                           The highest quality meat, prepared by the best in their profession chefs with many years of experience and excellent sense of taste.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Pastabakes }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Zapiekanki/Pastabakes_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                                <center>@Html.ActionLink("Pastabakes", "Search", "Dish", new { dish = DishType.Pastabakes }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Egg}, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Jajka/Egg_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Egg</h3>
+                        <h5 class="menuDishDescryptionBody">
+                            Excellent choice has breakfast. Poultry eggs have accompanied man since the beginning of his existence. Which is why we can make them in so many ways without losing their nutritional value.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Burger }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Burgery/Burger_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                                <center>@Html.ActionLink("Burger", "Search", "Dish", new { dish = DishType.Burger }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Souce }, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Sosy/Souce_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Souce</h3>
+                        <h5 class="menuDishDescryptionBody">
+                            Aromatic sauces, made according to your own recipe.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Fish }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Ryby/Fish_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                                <center>@Html.ActionLink("Fish", "Search", "Dish", new { dish = DishType.Fish }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Dessert}, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Desery/Dessert_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Dessert</h3>
+                        <h5 class="menuDishDescryptionBody">
+                           A wide selection of desserts, among which everyone will find something for themselves.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                 <a href="@Url.Action("Search", "Dish", new { dish = DishType.Meat }, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Mieso/Meat_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                                <center>@Html.ActionLink("Meat", "Search", "Dish", new { dish = DishType.Meat }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+            <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Drinks}, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Napoje/Drinks_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Drinks</h3>
+                        <h5 class="menuDishDescryptionBody">
+                            A wide selection of drinks, among which there is its own hand-squeezed lemonade.
+                        </h5>
+                    </div>
                 </div>
-
-                <div style="float:left">
-                    <table class="table table-bordered" style="width:10%; margin:10px;">
-                        <tr>
-                            <th>
-                                <a href="@Url.Action("Search", "Dish", new { dish = DishType.Egg}, null)" title="Widget View" class="links">
-                                    <img alt="Widget View" src='@Url.Content("~/Images/Jajka/Egg_podstawowy.png")' width="200" height="200" asp-append-version="true">
-                                </a>
-                                <center>@Html.ActionLink("Egg", "Search", "Dish", new { dish = DishType.Egg }, null)</center>
-                            </th>
-                        </tr>
-                    </table>
+            </div>
+             <div class="menuDishBoxOut">
+                <div class="menuDishBoxIn">
+                    <div class="menuPictureBox">
+                        <a href="@Url.Action("Search", "Dish", new { dish = DishType.Alcohol}, null)" title="Widget View" class="links">
+                            <img alt="Widget View" src='@Url.Content("~/Images/Alkohole/Alcohol_podstawowy.png")' width="200" height="200" asp-append-version="true">
+                        </a>
+                    </div>
+                    <div style="display:block">
+                        <h3 class="menuDishDescryptionHeadline">Alcohol</h3>
+                        <h5 class="menuDishDescryptionBody">
+                            A wide selection of alcoholic drinks, there are world classics such as OldFashion, but there will also be something for lovers of new flavors.
+                        </h5>
+                    </div>
                 </div>
             </div>
         </div>
