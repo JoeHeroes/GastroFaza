@@ -24,11 +24,14 @@
         @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
         {
             <div style="float:left">
-                <a href='@Url.Action("PayForOrder", "Order")' class="add_to_order_button">Restaurant</a>
+                 <div style="float:left">
+                <a href='@Url.Action("PayForOrder", "Order")' class="addToOrderButton">Restaurant</a>
+                </div>
+                <div style="float:right">
+                    <a href='@Url.Action("Delivery", "Order")' class="addToOrderButton">Delivery</a>
+                </div>
             </div>
-            <div style="float:right">
-                <a href='@Url.Action("Delivery", "Order")' class="confirm_order_button">Delivery</a>
-            </div>
+           
         }
         else
         {
