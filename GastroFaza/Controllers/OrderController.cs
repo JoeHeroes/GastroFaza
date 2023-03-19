@@ -3,6 +3,7 @@ using GastroFaza.Models.DTO;
 using GastroFaza.Models.Enum;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace GastroFaza.Controllers
 {
@@ -160,6 +161,69 @@ namespace GastroFaza.Controllers
             }
             return View(orders);
         }
+
+
+        [Route("ChooseOption")]
+        public IActionResult ChooseOption()
+        {
+            return View();
+        }
+
+
+
+        [Route("Delivery")]
+        public IActionResult Delivery()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [Route("XXX")]
+        public IActionResult XXX(AddressDto modelDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                var newAddress = new Address()
+                {
+                    City = modelDTO.City,
+                    Street = modelDTO.Street,
+                    PostalCode = modelDTO.PostalCode,
+                };
+                
+                this.dbContext.Addresses.Add(newAddress);
+
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+
+
+                int idOrder = int.Parse(HttpContext.Session.GetString("current order"));
+                Order order = this.dbContext.Orders.FirstOrDefault(o => o.Id == idOrder);
+                Address address = this.dbContext.Addresses.FirstOrDefault(x => x.Street == newAddress.Street && x.City == newAddress.City);
+                if (order == null)
+                {
+                    throw new Exception("Order not found");
+                }
+
+                order.Delivery = true;
+                order.AddresId = address.AddressId;
+
+
+                return RedirectToAction("PayForOrder");
+            }
+
+            return View(modelDTO);
+        }
+
+
+
+
 
         [Route("PayForOrder")]
         public IActionResult PayForOrder()
