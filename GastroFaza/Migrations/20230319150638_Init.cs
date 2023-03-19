@@ -49,7 +49,8 @@ namespace GastroFaza.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Dishes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AddedById = table.Column<int>(type: "int", nullable: false)
+                    AddedById = table.Column<int>(type: "int", nullable: false),
+                    Stars = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
