@@ -11,7 +11,20 @@
                 <a class="nav-link text-light" asp-controller="Account" asp-action="Profile">Profile</a>
             </li>
         }
-    <li class="nav-item">
+        else
+        {
+                @for (var i = 0; i < Convert.ToInt32(@HttpContextAccessor.HttpContext.Session.GetString("Rating")); i++)
+                    {
+                        <span class="rating_res fas fa-star">
+                        </span>
+                    }
+                @for (var i = 0; i < 5 - Convert.ToInt32(@HttpContextAccessor.HttpContext.Session.GetString("Rating")); i++)
+                    {
+                        <span class="rating_empty fas fa-star">
+                        </span>
+                    }
+        }
+        <li class="nav-item">
         <a class="nav-link text-light" asp-controller="Account" asp-action="Logout">Logout</a>
     </li>
 }

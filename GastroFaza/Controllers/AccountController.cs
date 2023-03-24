@@ -59,6 +59,7 @@ namespace GastroFaza.Controllers
             HttpContext.Session.Remove("isWorker");
             HttpContext.Session.Remove("Role");
             HttpContext.Session.Remove("current order");
+            HttpContext.Session.Remove("Rating");
             return RedirectToAction("Login");
         }
 
@@ -397,6 +398,7 @@ namespace GastroFaza.Controllers
                 HttpContext.Session.SetString("id", worker.Id.ToString());
                 HttpContext.Session.SetString("email", dto.Email);
                 HttpContext.Session.SetString("isWorker", "true");
+                HttpContext.Session.SetString("Rating",worker.Rating.ToString());
                 if (worker.RoleId == 1)                                      //set worker role in session 
                     HttpContext.Session.SetString("Role", "Waiter");
                 else if (worker.RoleId == 2)

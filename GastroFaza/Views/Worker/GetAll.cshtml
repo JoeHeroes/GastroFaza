@@ -7,6 +7,8 @@
 
 <head>
     <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/rating.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <h2>Workers</h2>
@@ -38,6 +40,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Nationality)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Rating)
+                </th>
                 <th style="text-align:center;">
                     Action
                 </th>
@@ -67,8 +72,21 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Nationality)
                 </td>
+                <td width="15%">
+                        @for (var i = 0; i < item.Rating; i++)
+                        {
+                            <span class="rating_res fas fa-star">
+                            </span>
+                        }
+                        @for (var i = 0; i < 5 - item.Rating; i++)
+                        {
+                            <span class="rating_empty fas fa-star">
+                            </span>
+                        }
+                </td>
                 <td>
                         <a asp-action="Edit" asp-route-id="@item.Id" class="editButton" style="width:auto;">Edit</a> 
+                        <a asp-action="RateWorker" asp-route-id="@item.Id" class="editButton" style="width:auto;">Rate</a> 
                         <a asp-action="Delete" asp-route-id="@item.Id" class="deleteButton" style="width:auto;">Delete</a>
                 </td>
             </tr>

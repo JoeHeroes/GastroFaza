@@ -1,4 +1,5 @@
 ﻿using GastroFaza.Models;
+using GastroFaza.Models;
 using GastroFaza.Models.DTO;
 using GastroFaza.Models.Enum;
 using Microsoft.AspNetCore.Mvc;
