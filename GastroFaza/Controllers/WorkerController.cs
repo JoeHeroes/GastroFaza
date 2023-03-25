@@ -87,6 +87,41 @@ namespace GastroFaza.Controllers
 
             return View(modelDTO);
         }
-        
+
+        public IActionResult RateWorker(int? id)
+        {
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                if (HttpContext.Session.GetString("isWorker") == "true")
+                {
+                    return View();
+                }
+                return Forbid();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult RateWorker(int? id, int newRating)
+        {
+            if (ModelState.IsValid)
+            {
+                var model = this.dbContext.Workers.Find(id);
+                model.Rating = newRating;
+                try
+                {
+                    this.dbContext.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
+            }
+            return RedirectToAction("GetAll");
+        }
+
     }
 }
