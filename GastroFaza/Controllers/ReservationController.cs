@@ -15,16 +15,16 @@ namespace GastroFaza.Controllers
             this.dbContext = dbContext;
         }
 
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
             if (HttpContext.Session.GetString("email") != null)
             {
-                IEnumerable<Reservation> reservations = this.dbContext.Reservations;
+                var reservations = await this.dbContext.Reservations.ToListAsync();
 
                 if (HttpContext.Session.GetString("isWorker") != "true")
                 {
                     string userEmail = HttpContext.Session.GetString("email");
-                    var client = this.dbContext.Clients.FirstOrDefault(u => u.Email == userEmail);
+                    var client = await this.dbContext.Clients.FirstOrDefaultAsync(u => u.Email == userEmail);
                     IEnumerable<Reservation> clientReservations = reservations.Where(r => r.ClientId == client.Id);
                     return View(clientReservations);
                 }
@@ -36,9 +36,9 @@ namespace GastroFaza.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
-        public IActionResult GetAllReservations()
+        public async Task<IActionResult> GetAllReservations()
         {
-            IEnumerable<Reservation> reservations = this.dbContext.Reservations;
+            var reservations = await this.dbContext.Reservations.ToListAsync();
 
             return View(reservations);
         }
@@ -63,7 +63,7 @@ namespace GastroFaza.Controllers
 
         [HttpPost]
         [Route("Choice")]
-        public IActionResult Choice(CheckReservationDto dto)
+        public async Task<IActionResult> Choice(CheckReservationDto dto)
         {
             var reservation = this.dbContext.Reservations.Where(x => x.DataOfReservation.Date == dto.DateOfReservation.Date && x.DataOfReservation.TimeOfDay == dto.HourOfReservation.TimeOfDay);
 
@@ -76,7 +76,7 @@ namespace GastroFaza.Controllers
                 resList.Add(r.TableId[0]);
             }
 
-            var tabel = this.dbContext.Tables.ToList();
+            var tabel = await this.dbContext.Tables.ToListAsync();
 
             var res = 0;
 
@@ -97,10 +97,10 @@ namespace GastroFaza.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public IActionResult Create(ReservationDto dto)
+        public async Task<IActionResult> Create(ReservationDto dto)
         {
             string userEmail = HttpContext.Session.GetString("email");
-            var client = this.dbContext.Clients.FirstOrDefault(u => u.Email == userEmail);
+            var client = await this.dbContext.Clients.FirstOrDefaultAsync(u => u.Email == userEmail);
             int idClient = client.Id;
 
             if (ModelState.IsValid)
@@ -119,7 +119,7 @@ namespace GastroFaza.Controllers
 
                 try
                 {
-                    this.dbContext.SaveChanges();
+                    await this.dbContext.SaveChangesAsync();
                 }
                 catch (DbUpdateException e)
                 {
@@ -142,11 +142,11 @@ namespace GastroFaza.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int? id, ReservationDto dto)
+        public async Task<IActionResult> Edit(int? id, ReservationDto dto)
         {
             if (ModelState.IsValid)
             {
-                var model = this.dbContext.Reservations.Find(id);
+                var model = await this.dbContext.Reservations.FindAsync(id);
                 model.TableId = dto.TableId;
                 model.DataOfReservation = new DateTime(dto.DateOfReservation.Year,
                     dto.DateOfReservation.Month, 
@@ -156,7 +156,7 @@ namespace GastroFaza.Controllers
                     dto.HourOfReservation.Second);
                 try
                 {
-                    this.dbContext.SaveChanges();
+                    await this.dbContext.SaveChangesAsync();
                 }
                 catch (DbUpdateException e)
                 {
@@ -183,7 +183,7 @@ namespace GastroFaza.Controllers
         }
 
         [HttpPost]
-        public IActionResult WorkerCreate(ReservationWorkerDto modelDTO)
+        public async Task<IActionResult> WorkerCreate(ReservationWorkerDto modelDTO)
         {
             if (ModelState.IsValid)
             {
@@ -201,7 +201,7 @@ namespace GastroFaza.Controllers
 
                 try
                 {
-                    this.dbContext.SaveChanges();
+                    await this.dbContext.SaveChangesAsync();
                 }
                 catch (DbUpdateException e)
                 {
@@ -226,11 +226,11 @@ namespace GastroFaza.Controllers
         }
 
         [HttpPost]
-        public IActionResult WorkerEdit(int? id, ReservationWorkerDto modelDTO)
+        public async Task<IActionResult> WorkerEdit(int? id, ReservationWorkerDto modelDTO)
         {
             if (ModelState.IsValid)
             {
-                var model = this.dbContext.Reservations.Find(id);
+                var model = await this.dbContext.Reservations.FindAsync(id);
                 model.ClientId = modelDTO.ClientId;
                 model.TableId = modelDTO.TableId;
                 model.DataOfReservation = new DateTime(modelDTO.DateOfReservation.Year,
@@ -241,7 +241,7 @@ namespace GastroFaza.Controllers
                     modelDTO.HourOfReservation.Second);
                 try
                 {
-                    this.dbContext.SaveChanges();
+                    await this.dbContext.SaveChangesAsync();
                 }
                 catch (DbUpdateException e)
                 {
@@ -255,11 +255,11 @@ namespace GastroFaza.Controllers
         }
 
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (HttpContext.Session.GetString("email") != null)
             {
-                var reservation = this.dbContext.Reservations.Find(id);
+                var reservation = await this.dbContext.Reservations.FindAsync(id);
                 if (reservation == null)
                 {
                     return NotFound();
@@ -268,7 +268,7 @@ namespace GastroFaza.Controllers
                 this.dbContext.Reservations.Remove(reservation);
                 try
                 {
-                    this.dbContext.SaveChanges();
+                    await this.dbContext.SaveChangesAsync();
                 }
                 catch (DbUpdateException e)
                 {
@@ -281,7 +281,5 @@ namespace GastroFaza.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
-
-
     }
 }

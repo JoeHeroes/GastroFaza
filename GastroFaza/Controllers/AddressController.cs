@@ -15,7 +15,7 @@ namespace GastroFaza.Controllers
 
         public async Task<IActionResult> GetAll()
         {
-            IEnumerable<Address> addresses = this.dbContext.Addresses;
+            var addresses = await this.dbContext.Addresses.ToListAsync();
 
             return View(addresses);
         }
@@ -32,7 +32,7 @@ namespace GastroFaza.Controllers
         }
         public async Task<IActionResult> Delete(int? id)
         {
-            var address = this.dbContext.Addresses.FindAsync(id);
+            var address = await this.dbContext.Addresses.FindAsync(id);
             if (address == null)
             {
                 
@@ -55,7 +55,7 @@ namespace GastroFaza.Controllers
         {
             if (ModelState.IsValid)
             {
-                var model = this.dbContext.Addresses.Find(id);
+                var model = await this.dbContext.Addresses.FindAsync(id);
                 model.City = modelDTO.City;
                 model.Street = modelDTO.Street;
                 model.PostalCode = modelDTO.PostalCode;

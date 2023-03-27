@@ -14,28 +14,28 @@ namespace GastroFaza.Controllers
         {
             this.dbContext = dbContext;
         }
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            IEnumerable<Worker> workers = this.dbContext.Workers;
+            var workers = await this.dbContext.Workers.ToListAsync();
 
             return View(workers);
         }
 
-        public IActionResult GetOne(int? id)
+        public async Task<IActionResult> GetOne(int? id)
         {
             if (id == null || id == 0)
             {
                 return NotFound();
             }
 
-            var worker = this.dbContext.Workers.Find(id);
+            var worker = await this.dbContext.Workers.FindAsync(id);
 
             return View(worker);
         }
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            var worker = this.dbContext.Workers.Find(id);
+            var worker = await this.dbContext.Workers.FindAsync(id);
             if (worker == null)
             {
                 return NotFound();
@@ -44,7 +44,7 @@ namespace GastroFaza.Controllers
             this.dbContext.Workers.Remove(worker);
             try
             {
-                this.dbContext.SaveChanges();
+                await this.dbContext.SaveChangesAsync();
             }
             catch (DbUpdateException e)
             {
@@ -52,19 +52,19 @@ namespace GastroFaza.Controllers
             }
             return RedirectToAction("GetAll");
         }
-        public IActionResult Edit(int Id)
+        public async Task<IActionResult> Edit(int Id)
         {
-            var worker = this.dbContext.Workers.Where(s => s.Id == Id).FirstOrDefault();
-            IEnumerable<Role> roles = this.dbContext.Roles;
+            var worker = await this.dbContext.Workers.FirstOrDefaultAsync(s => s.Id == Id);
+            var roles = await this.dbContext.Roles.ToListAsync();
             ViewBag.data = roles;
             return View(worker);
         }
         [HttpPost]
-        public IActionResult Edit(int? id, UpdateWorkerDto modelDTO)
+        public async Task<IActionResult> Edit(int? id, UpdateWorkerDto modelDTO)
         {
             if (ModelState.IsValid)
             {
-                var model = this.dbContext.Workers.Find(id);
+                var model = await this.dbContext.Workers.FindAsync(id);
                 model.Salary = modelDTO.Salary;
                 model.Rating = modelDTO.Rating;
                 model.Email = modelDTO.Email;
@@ -75,7 +75,7 @@ namespace GastroFaza.Controllers
 
                 try
                 {
-                    this.dbContext.SaveChanges();
+                    await this.dbContext.SaveChangesAsync();
                 }
                 catch (DbUpdateException e)
                 {

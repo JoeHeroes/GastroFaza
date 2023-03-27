@@ -63,7 +63,7 @@ namespace GastroFaza.Controllers
         }
 
         [Route("Welcome")]
-        public async Task<IActionResult> Welcome()
+        public IActionResult Welcome()
         {
             ViewBag.username = HttpContext.Session.GetString("email");
             return View("Welcome");
@@ -72,7 +72,7 @@ namespace GastroFaza.Controllers
         [Route("Profile")]
         public async Task<IActionResult> Profile()
         {
-            var account = this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == int.Parse(HttpContext.Session.GetString("id")));
+            var account =  await this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == int.Parse(HttpContext.Session.GetString("id")));
             return View(account);
         }
 
@@ -80,7 +80,7 @@ namespace GastroFaza.Controllers
         [Route("ProfileEdit")]
         public async Task<IActionResult> ProfileEdit(int id)
         {
-            var account = this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == id);
+            var account = await this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == id);
 
             return View(account);
         }
@@ -163,7 +163,7 @@ namespace GastroFaza.Controllers
 
 
         [Route("RestartPassword")]
-        public async Task<IActionResult> RestartPassword()
+        public IActionResult RestartPassword()
         {
             return View();
         }
@@ -217,10 +217,10 @@ namespace GastroFaza.Controllers
                 }
                 else
                 {
-                    var worker = this.dbContext
+                    var worker = await this.dbContext
                                 .Workers
                                 .Include(u => u.Role)
-                                .FirstOrDefault(u => u.Email == HttpContext.Session.GetString("email"));
+                                .FirstOrDefaultAsync(u => u.Email == HttpContext.Session.GetString("email"));
 
                     var result2 = this.passwordHasherWorker.VerifyHashedPassword(worker, worker.PasswordHash, dto.OldPassword);
                     if (result2 == PasswordVerificationResult.Failed)
@@ -230,7 +230,14 @@ namespace GastroFaza.Controllers
                     }
 
                     worker.PasswordHash = this.passwordHasherWorker.HashPassword(worker, dto.NewPassword); ;
-                    this.dbContext.SaveChanges();
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
 
                     return RedirectToAction("Welcome");
                 }
@@ -328,8 +335,6 @@ namespace GastroFaza.Controllers
                 return View("Register");
             }
 
-
-
             if (dto.Password != dto.ConfirmPassword)
             {
                 ViewBag.msg = "Invalid Password";
@@ -338,7 +343,6 @@ namespace GastroFaza.Controllers
 
             if (ModelState.IsValid)
             {
-
                 var newClient = new Client()
                 {
                     Email = dto.Email,
@@ -391,8 +395,8 @@ namespace GastroFaza.Controllers
                                 .FirstOrDefaultAsync(u => u.Email == dto.Email);
                 
                 var client = await this.dbContext
-                 .Clients
-                 .FirstOrDefaultAsync(u => u.Email == dto.Email);
+                             .Clients
+                             .FirstOrDefaultAsync(u => u.Email == dto.Email);
 
                 //If there is no such worker or client in database
                 if (worker is null && client is null)

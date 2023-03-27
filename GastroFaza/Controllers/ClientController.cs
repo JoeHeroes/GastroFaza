@@ -13,9 +13,9 @@ namespace GastroFaza.Controllers
         {
             this.dbContext = dbContext;
         }
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            IEnumerable<Client> clients = this.dbContext.Clients;
+            var clients = await this.dbContext.Clients.ToListAsync();
 
             return View(clients);
         }
