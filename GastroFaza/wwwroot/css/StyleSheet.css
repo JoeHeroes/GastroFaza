@@ -44,38 +44,38 @@ ul {
     font-family: sans-serif;
 }
 .loginbox {
-    width: 400px;
-    padding: 40px;
+    width: auto;
+    padding: 10px;
     position: absolute;
-    margin-top: 50px;
+    margin-top: 10px;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+    border-radius: 2px;
     border: 20px;
-    border-radius: 4px;
-    background: #191919;
-    text-align:center;
+    background: white;
+    text-align: center;
 }
 .registerbox {
-    width: 500px;
-    padding: 40px;
+    width: auto;
+    padding: 10px;
     position: absolute;
-    margin-top: 150px;
+    margin-top: 100px;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     border: 20px;
-    border-radius: 4px;
-    background: #191919;
+    border-radius: 2px;
+    background: white;
     text-align: center;
 }
 .loginbox h1{
-    color: white;
+    color: black;
     text-transform:uppercase;
     font-weight: 500;
 }
 .registerbox h1 {
-    color: white;
+    color: black;
     text-transform: uppercase;
     font-weight: 500;
 }
@@ -85,13 +85,13 @@ ul {
     background: none;
     display: block;
     margin: 5px auto;
-    height:30px;
+    height: 30px;
     text-align: center;
-    border: 2px solid #216869;
+    border: 2px solid #FF7F27;
     padding: 14px 10px;
     width: 220px;
     outline: none;
-    color: white;
+    color: black;
     border-radius: 4px;
     transition: 0.5s;
     cursor: pointer;
@@ -99,18 +99,18 @@ ul {
 .registerbox input[type ="text"],
 .registerbox input[type ="password"],
 .registerbox input[type ="datetime-local"],
-.registerbox select{
+.registerbox select {
     border: 0;
     height: 30px;
     background: none;
     display: block;
     margin: 5px auto;
     text-align: center;
-    border: 2px solid #216869;
+    border: 2px solid #FF7F27;
     padding: 14px 10px;
     width: 280px;
     outline: none;
-    color: white;
+    color: black;
     border-radius: 4px;
     transition: 0.5s;
     cursor: pointer;
@@ -118,24 +118,23 @@ ul {
 
 .loginbox input[type ="text"]:hover,
 .loginbox input[type ="password"]:hover {
-    background-color: #216869;
+    background-color: #FF7F27;
 }
 .registerbox input[type ="text"]:hover,
 .registerbox input[type ="password"]:hover,
 .registerbox input[type ="datetime-local"]:hover {
-    background: #216869;
-    background-color: #216869;
+    background: #FF7F27;
+    background-color: #FF7F27;
 }
 .loginbox input[type ="text"]:focus,
 loginbox input[type ="password"]:focus {
-    border-color: #216869;
-    background-color: #216869;
+    border-color: #FF7F27;
+    background-color: #FF7F27;
 }
 .registerbox input[type ="text"]:focus,
 .registerbox input[type ="password"]:focus,
 .registerbox input[type ="datetime-local"] {
-    width: 280px;
-    border-color: #216869;
+    border-color: #FF7F27;
 }
 .loginbox input[type = "submit"] {
     border: 0;
@@ -147,33 +146,41 @@ loginbox input[type ="password"]:focus {
     border: 2px solid #2ecc71;
     padding: 3px 20px;
     outline: none;
-    color: white;
+    color: black;
     border-radius: 4px;
     transition: 0.5s;
     width: 220px;
-    cursor: pointer;
-}   
+    cursor: pointer;    
+}
 .registerbox input[type = "submit"] {
     border: 0;
     background: none;
-    height: 50px;
+    height: 30px;
     display: block;
-    margin: 5px auto;
+    margin: 10px auto;
     text-align: center;
     border: 2px solid #2ecc71;
-    padding: 14px 40px;
+    padding: 3px 20px;
     outline: none;
-    color: white;
+    color: black;
     border-radius: 4px;
     transition: 0.5s;
     width: 280px;
     cursor: pointer;
 }
+.recaptch {
+    display: block;
+    margin-left:60px;
+}
 .loginbox input[type = "submit"]:hover {
     background: #2ecc71;
+    box-shadow: 0 0 5px 5px #2ecc71;
+    color: white;
 }
 .registerbox input[type = "submit"]:hover {
     background: #2ecc71;
+    box-shadow: 0 0 5px 5px #2ecc71;
+    color: white;
 }
 .menu_buttons {
     border: 2px;
@@ -374,23 +381,39 @@ loginbox input[type ="password"]:focus {
     display: contents;
     color: white;
 }
+.registerbox .select_list_nationality {
+    background-color: white;
+    height: 30px;
+    display: block;
+    margin-right: 67px;
+    text-align: center;
+    border: 2px solid #FF7F27;
+    width: 280px;
+    outline: none;
+    color: black;
+    border-radius: 4px;
+    transition: 0.5s;
+    cursor: pointer;
+    margin-left: 70px;
+}
 .registerbox .select_list_nationality option {   
     color:black;
     cursor:pointer;
 }
 .registerbox .select_list_register {
-    background-color: #63595C;
-    height: 40px;
+    background-color: white;
+    height: 30px;
     display: block;
+    margin-right:67px;
     text-align: center;
-    border: 2px solid #216869;
+    border: 2px solid #FF7F27;
     width: 280px;
     outline: none;
-    color: white;
+    color: black;
     border-radius: 4px;
     transition: 0.5s;
     cursor: pointer;
-    margin-left:70px;
+    margin-left: 70px;
 }
 .select_list {
     background-color: #211A1D;

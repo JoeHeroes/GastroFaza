@@ -11,25 +11,20 @@
         <h1>Login</h1>
         <tr>     
             <div asp-validation-summary="All"></div>            
-            <div class="text-light">Email</div>
+            <div style="color:black">Email</div>
             <td><input asp-for="Email" class="form-control"></td>
             <td></td>
         </tr>
         <tr>
-            <div class="text-light">Password</div>
+            <div style="color:black">Password</div>
             <td><input type="password" class="form-control" name="password"></td>
         </tr>
-        <br />
         <br />
         <br />
         <tr>
             <td>&nbsp;</td>
             <td><input class="loginbox" type="submit" value="Login"></td>           
         </tr>
-        <br />
-        <br />
-        <br />
-        <br />
         <br />
         <br />
         <tr> @using (Html.BeginForm("FormSubmit", "Captcha", FormMethod.Post))
