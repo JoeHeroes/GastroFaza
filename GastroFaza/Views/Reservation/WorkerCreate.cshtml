@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Add Reservation";
     //ViewData["Now"] = DateTime.Now;
+    var minDate = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
 }
 <head>
     <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
@@ -17,7 +18,7 @@
 
                 <div class="form-group">
                     <label asp-for="DateOfReservation" class="control-label text-light">Data rezerwacji:</label>
-                    <input asp-for="DateOfReservation" class="edit_profile_input" type="date" />
+                    <input asp-for="DateOfReservation" type="date" min=@minDate class="edit_profile_input"/>
                     <span asp-validation-for="DateOfReservation" class="text-danger"></span>
                 </div>
 

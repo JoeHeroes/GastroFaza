@@ -45,11 +45,16 @@
         </tr>
         <tr>
             <td><label class="text-light" asp-for="DateOfBirth"></label></td>
-            <td><input type="date" max=@maxDate asp-for="DateOfBirth" class="select_list_register" /></td>
+            <td><input asp-for="DateOfBirth" type="date" max=@maxDate class="select_list_register" /></td>
         </tr>
         <tr>
             <td><label class="text-light" asp-for="RoleId"></label></td>
-            <td> <select asp-for="RoleId" class="select_list_register" style="padding:11px;" ><option>1</option><option>2</option><option>3</option></select></td>
+            <td> <select asp-for="RoleId" class="select_list_register" style="padding:11px;" >
+                    <option value="1">Kelner</option>
+                    <option value="2">Kuchar</option>
+                    <option value="3">Menadżer</option>
+            </select>
+            </td>
         </tr>
         <tr>
             <td>&nbsp;</td>

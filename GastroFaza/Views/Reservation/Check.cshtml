@@ -17,7 +17,7 @@
 
                 <div class="form-group">
                     <label asp-for="DateOfReservation" class="control-label text-light">Data rezerwacji:</label>
-                    <input asp-for="DateOfReservation" class="edit_profile_input" type="date" min=@minDate/>
+                    <input asp-for="DateOfReservation" type="date" min=@minDate class="edit_profile_input"/>
                     <span asp-validation-for="DateOfReservation" class="text-danger"></span>
                 </div>
                 <div class="form-group">
