@@ -39,12 +39,12 @@ namespace GastroFaza.Controllers
             return View(model);
         }
         [Route("CreateWorkerAccount")]      //for manager
-        public IActionResult CreateWorkerAccount()
+        public async Task<IActionResult> CreateWorkerAccount()
         {
             var model = new RegisterWorkerDto();
             model.Roles = new List<SelectListItem>();           
 
-            foreach(var role in dbContext.Roles.ToList())
+            foreach(var role in await this.dbContext.Roles.ToListAsync())
             {
                 model.Roles.Add(new SelectListItem() { Text = role.Name, Value = role.Id.ToString() });
             }
@@ -63,41 +63,48 @@ namespace GastroFaza.Controllers
         }
 
         [Route("Welcome")]
-        public IActionResult Welcome()
+        public async Task<IActionResult> Welcome()
         {
             ViewBag.username = HttpContext.Session.GetString("email");
             return View("Welcome");
         }
 
         [Route("Profile")]
-        public IActionResult Profile()
+        public async Task<IActionResult> Profile()
         {
-            var account = dbContext.Clients.FirstOrDefault(x => x.Id == int.Parse(HttpContext.Session.GetString("id")));
+            var account = this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == int.Parse(HttpContext.Session.GetString("id")));
             return View(account);
         }
 
 
         [Route("ProfileEdit")]
-        public IActionResult ProfileEdit(int id)
+        public async Task<IActionResult> ProfileEdit(int id)
         {
-            var account = dbContext.Clients.FirstOrDefault(x => x.Id == id);
+            var account = this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == id);
 
             return View(account);
         }
 
         [HttpPost]
         [Route("ProfileEdit")]
-        public IActionResult ProfileEdit(EditClientDto dto)
+        public async Task<IActionResult> ProfileEdit(EditClientDto dto)
         {
             if (ModelState.IsValid)
             {
-                var account = dbContext.Clients.FirstOrDefault(x => x.Id == int.Parse(HttpContext.Session.GetString("id")));
+                var account = await this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == int.Parse(HttpContext.Session.GetString("id")));
                 account.Nationality = dto.Nationality;
                 account.FirstName = dto.FirstName;
                 account.LastName = dto.LastName;
                 account.DateOfBirth = dto.DateOfBirth;
 
-                dbContext.SaveChanges();
+                try
+                {
+                    await this.dbContext.SaveChangesAsync();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
             }
             return View("ProfileEdit");
         }
@@ -112,12 +119,12 @@ namespace GastroFaza.Controllers
 
         [HttpPost]
         [Route("SelectPicture")]
-        public IActionResult SelectPicture(PictureDto dto)
+        public async Task<IActionResult> SelectPicture(PictureDto dto)
         {
             string stringFileName = UploadFile(dto);
             if (ModelState.IsValid)
             {
-                var model = this.dbContext.Clients.FirstOrDefault(x => x.Id == int.Parse(HttpContext.Session.GetString("id")));
+                var model =  await this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == int.Parse(HttpContext.Session.GetString("id")));
                 model.ProfileImg = stringFileName;
 
                 try
@@ -156,14 +163,14 @@ namespace GastroFaza.Controllers
 
 
         [Route("RestartPassword")]
-        public IActionResult RestartPassword()
+        public async Task<IActionResult> RestartPassword()
         {
             return View();
         }
 
         [HttpPost]
         [Route("RestartPassword")]
-        public IActionResult RestartPassword(RestartPasswordDto dto)
+        public async Task<IActionResult> RestartPassword(RestartPasswordDto dto)
         {
 
             if (ModelState.IsValid)
@@ -185,9 +192,9 @@ namespace GastroFaza.Controllers
 
                 if (HttpContext.Session.GetString("isWorker") != "true")
                 {
-                    var client = this.dbContext
+                    var client = await this.dbContext
                                  .Clients
-                                 .FirstOrDefault(u => u.Email == HttpContext.Session.GetString("email"));
+                                 .FirstOrDefaultAsync(u => u.Email == HttpContext.Session.GetString("email"));
 
                     var result1 = this.passwordHasherClient.VerifyHashedPassword(client, client.PasswordHash, dto.OldPassword);
                     if (result1 == PasswordVerificationResult.Failed)
@@ -197,7 +204,14 @@ namespace GastroFaza.Controllers
                     }
 
                     client.PasswordHash = this.passwordHasherClient.HashPassword(client, dto.NewPassword); ;
-                    this.dbContext.SaveChanges();
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
 
                     return RedirectToAction("Welcome");
                 }
@@ -228,7 +242,7 @@ namespace GastroFaza.Controllers
 
         [HttpPost]
         [Route("registerWorker")]         //for manager
-        public IActionResult RegisterWorker(RegisterWorkerDto dto)
+        public async Task<IActionResult> RegisterWorker(RegisterWorkerDto dto)
         {
             //captcha validation
             var response = Request.Form["g-recaptcha-response"];
@@ -240,10 +254,10 @@ namespace GastroFaza.Controllers
                 return View("CreateWorkerAccount");
             }*/
 
-            var worker = this.dbContext
+            var worker = await this.dbContext
                                 .Workers
                                 .Include(u => u.Role)
-                                .FirstOrDefault(u => u.Email == dto.Email);
+                                .FirstOrDefaultAsync(u => u.Email == dto.Email);
 
             if (worker != null)
             {
@@ -274,7 +288,14 @@ namespace GastroFaza.Controllers
 
                 newWorker.PasswordHash = hashedPass;
                 this.dbContext.Workers.Add(newWorker);
-                this.dbContext.SaveChanges();
+                try
+                {
+                    await this.dbContext.SaveChangesAsync();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
                 if (HttpContext.Session.GetString("email") != null && HttpContext.Session.GetString("Role") == "Manager")
                     return RedirectToAction("GetAll","Worker");
                 else return View("CreateWorkerAccount");
@@ -285,7 +306,7 @@ namespace GastroFaza.Controllers
 
         [HttpPost]
         [Route("registerClient")]
-        public IActionResult RegisterClient(RegisterClientDto dto)
+        public async Task<IActionResult> RegisterClient(RegisterClientDto dto)
         {
             //captcha validation
             var response = Request.Form["g-recaptcha-response"];
@@ -297,9 +318,9 @@ namespace GastroFaza.Controllers
                 return View("Register");
             }*/
 
-            var client = this.dbContext
+            var client = await this.dbContext
                                .Clients
-                               .FirstOrDefault(u => u.Email == dto.Email);
+                               .FirstOrDefaultAsync(u => u.Email == dto.Email);
 
             if (client != null)
             {
@@ -333,7 +354,14 @@ namespace GastroFaza.Controllers
 
                 newClient.PasswordHash = hashedPass;
                 this.dbContext.Clients.Add(newClient);
-                this.dbContext.SaveChanges();
+                try
+                {
+                    await this.dbContext.SaveChangesAsync();
+                }
+                catch (DbUpdateException e)
+                {
+                    throw new DbUpdateException("Error DataBase", e);
+                }
 
                 return RedirectToAction("Welcome");
             }
@@ -343,7 +371,7 @@ namespace GastroFaza.Controllers
 
         [HttpPost]
         [Route("Login")]
-        public IActionResult Login(LoginDto dto)
+        public async Task<IActionResult> Login(LoginDto dto)
         {
             //captcha for login
             var response = Request.Form["g-recaptcha-response"];
@@ -357,14 +385,14 @@ namespace GastroFaza.Controllers
 
             if (ModelState.IsValid)
             {
-                var worker = this.dbContext
+                var worker = await this.dbContext
                                 .Workers
                                 .Include(u => u.Role)
-                                .FirstOrDefault(u => u.Email == dto.Email);
+                                .FirstOrDefaultAsync(u => u.Email == dto.Email);
                 
-                var client = this.dbContext
+                var client = await this.dbContext
                  .Clients
-                 .FirstOrDefault(u => u.Email == dto.Email);
+                 .FirstOrDefaultAsync(u => u.Email == dto.Email);
 
                 //If there is no such worker or client in database
                 if (worker is null && client is null)

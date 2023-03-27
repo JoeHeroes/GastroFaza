@@ -20,20 +20,21 @@ namespace GastroFaza.Controllers
             return View(clients);
         }
 
-        public IActionResult GetOne(int? id)
+        public async Task<IActionResult> GetOne(int? id)
         {
             if (id == null || id == 0)
             {
                 return NotFound();
             }
 
-            var client = this.dbContext.Clients.Find(id);
+            var client = await this.dbContext.Clients.FindAsync(id);
+
 
             return View(client);
         }
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            var client = this.dbContext.Clients.Find(id);
+            var client = await this.dbContext.Clients.FindAsync(id);
             if (client == null)
             {
                 return NotFound();
@@ -42,7 +43,7 @@ namespace GastroFaza.Controllers
             this.dbContext.Clients.Remove(client);
             try
             {
-                this.dbContext.SaveChanges();
+                await this.dbContext.SaveChangesAsync();
             }
             catch (DbUpdateException e)
             {
@@ -51,17 +52,17 @@ namespace GastroFaza.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Edit(int? id, UpdateClientDto modelDTO)
+        public async Task<IActionResult> Edit(int? id, UpdateClientDto modelDTO)
         {
             if (ModelState.IsValid)
             {
-                var model = this.dbContext.Clients.Find(id);
+                var model = await this.dbContext.Clients.FindAsync(id);
                 model.OrderID = modelDTO.OrderID;
                 model.Email = modelDTO.Email;
 
                 try
                 {
-                    this.dbContext.SaveChanges();
+                    await this.dbContext.SaveChangesAsync();
                 }
                 catch (DbUpdateException e)
                 {
@@ -74,7 +75,7 @@ namespace GastroFaza.Controllers
             return View(modelDTO);
         }
 
-        public IActionResult Create(CreateClientDto modelDTO)
+        public async Task<IActionResult> Create(CreateClientDto modelDTO)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +92,7 @@ namespace GastroFaza.Controllers
 
                 try
                 {
-                    this.dbContext.SaveChanges();
+                    await this.dbContext.SaveChangesAsync();
                 }
                 catch (DbUpdateException e)
                 {
