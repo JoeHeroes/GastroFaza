@@ -15,12 +15,12 @@
         {
                 @for (var i = 0; i < Convert.ToInt32(@HttpContextAccessor.HttpContext.Session.GetString("Rating")); i++)
                     {
-                        <span class="rating_res fas fa-star">
+                        <span class="rating_res fas fa-star gwiazdki" style="color:yellow;">
                         </span>
                     }
                 @for (var i = 0; i < 5 - Convert.ToInt32(@HttpContextAccessor.HttpContext.Session.GetString("Rating")); i++)
                     {
-                        <span class="rating_empty fas fa-star">
+                        <span class="rating_empty fas fa-star gwiazdki" style="color:#49450A;">
                         </span>
                     }
         }

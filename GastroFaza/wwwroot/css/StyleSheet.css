@@ -627,3 +627,6 @@ loginbox input[type ="password"]:focus {
     color:#FF7F27;
     transition:0.5s;
 }
+.gwiazdki{
+    margin-top:7px;
+}
