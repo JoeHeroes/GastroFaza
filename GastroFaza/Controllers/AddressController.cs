@@ -13,26 +13,26 @@ namespace GastroFaza.Controllers
             this.dbContext = dbContext;
         }
 
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            IEnumerable<Address> addresses = this.dbContext.Addresses;
+            var addresses = await this.dbContext.Addresses.ToListAsync();
 
             return View(addresses);
         }
-        public IActionResult GetOne(int? id)
+        public async Task<IActionResult> GetOne(int? id)
         {
             if (id == null || id == 0)
             {
                 return NotFound();
             }
 
-            var address = this.dbContext.Addresses.Find(id);
+            var address = await this.dbContext.Addresses.FindAsync(id);
 
             return View(address);
         }
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            var address = this.dbContext.Addresses.Find(id);
+            var address = await this.dbContext.Addresses.FindAsync(id);
             if (address == null)
             {
                 
@@ -42,7 +42,7 @@ namespace GastroFaza.Controllers
             this.dbContext.Addresses.Remove(address);
             try
             {
-                this.dbContext.SaveChanges();
+                await this.dbContext.SaveChangesAsync();
             }
             catch (DbUpdateException e)
             {
@@ -51,31 +51,31 @@ namespace GastroFaza.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Edit(int? id, AddressDto modelDTO)
+        public async Task<IActionResult> Edit(int? id, AddressDto modelDTO)
         {
             if (ModelState.IsValid)
             {
-                var model = this.dbContext.Addresses.Find(id);
+                var model = await this.dbContext.Addresses.FindAsync(id);
                 model.City = modelDTO.City;
                 model.Street = modelDTO.Street;
                 model.PostalCode = modelDTO.PostalCode;
 
                 try
                 {
-                    this.dbContext.SaveChanges();
+                    await this.dbContext.SaveChangesAsync();
                 }
                 catch (DbUpdateException e)
                 {
                     throw new DbUpdateException("Error DataBase", e);
                 }
-                
+
                 return RedirectToAction("Index");
             }
 
             return View(modelDTO);
         }
 
-        public IActionResult Create(AddressDto modelDTO)
+        public async Task<IActionResult> Create(AddressDto modelDTO)
         {
             if (ModelState.IsValid)
             {
@@ -86,10 +86,9 @@ namespace GastroFaza.Controllers
                     PostalCode = modelDTO.PostalCode,
                 });
 
-
                 try
                 {
-                    this.dbContext.SaveChanges();
+                    await this.dbContext.SaveChangesAsync();
                 }
                 catch (DbUpdateException e)
                 {

@@ -15,21 +15,21 @@ namespace GastroFaza.Controllers
             this.dbContext = dbContext;
             this.webHost = webHost;
         }
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            IEnumerable<Dish> dishs = this.dbContext.Dishs;
+            var dishs = await this.dbContext.Dishs.ToListAsync();
 
             return View(dishs);
         }
  
 
-        public IActionResult AddToOrder(int dishId)
+        public async Task<IActionResult> AddToOrder(int dishId)
         {
             int id = int.Parse(HttpContext.Session.GetString("current order"));
 
-            var currentOrder = this.dbContext.Orders.FirstOrDefault(u => u.Id == id);
+            var currentOrder = await this.dbContext.Orders.FirstOrDefaultAsync(u => u.Id == id);
 
-            var dish = this.dbContext.Dishs.FirstOrDefault(u => u.Id == dishId);
+            var dish =  await this.dbContext.Dishs.FirstOrDefaultAsync(u => u.Id == dishId);
 
             currentOrder.Price += dish.Price;
 
@@ -43,7 +43,7 @@ namespace GastroFaza.Controllers
 
             try
             {
-                this.dbContext.SaveChanges();
+                await this.dbContext.SaveChangesAsync();
             }
             catch (DbUpdateException e)
             {
@@ -52,20 +52,20 @@ namespace GastroFaza.Controllers
             return View("GetAll");
         }
 
-        public IActionResult GetOne(int? id)
+        public async Task<IActionResult> GetOne(int? id)
         {
             if (id == null || id == 0)
             {
                 return NotFound();
             }
 
-            var dish = this.dbContext.Dishs.Find(id);
+            var dish = await this.dbContext.Dishs.FindAsync(id);
 
             return View(dish);
         }
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            var dish = this.dbContext.Dishs.Find(id);
+            var dish = await this.dbContext.Dishs.FindAsync(id);
             if (dish == null)
             {
                 return NotFound();
@@ -74,7 +74,7 @@ namespace GastroFaza.Controllers
             this.dbContext.Dishs.Remove(dish);
             try
             {
-                this.dbContext.SaveChanges();
+                await this.dbContext.SaveChangesAsync();
             }
             catch (DbUpdateException e)
             {
@@ -83,10 +83,9 @@ namespace GastroFaza.Controllers
             return RedirectToAction("GetAllDishes");
         }
         
-        public IActionResult Edit(int Id)
+        public async Task<IActionResult> Edit(int Id)
         {
-            var dish = this.dbContext.Dishs.Where(s => s.Id == Id).FirstOrDefault();
-
+            var dish = await this.dbContext.Dishs.FirstOrDefaultAsync(s => s.Id == Id);
 
             var dishDto = new DishDto()
             {
@@ -100,12 +99,12 @@ namespace GastroFaza.Controllers
             return View(dishDto);
         }
         [HttpPost]
-        public IActionResult Edit(int? id, DishDto modelDTO)
+        public async Task<IActionResult> Edit(int? id, DishDto modelDTO)
         {
             string stringFileName = UploadFile(modelDTO);
             if (ModelState.IsValid)
             {
-                var model = this.dbContext.Dishs.Find(id);
+                var model = await this.dbContext.Dishs.FindAsync(id);
                 model.Name = modelDTO.Name;
                 model.Description = modelDTO.Description;
                 model.Price = modelDTO.Price;
@@ -114,7 +113,7 @@ namespace GastroFaza.Controllers
 
                 try
                 {
-                    this.dbContext.SaveChanges();
+                    await this.dbContext.SaveChangesAsync();
                 }
                 catch (DbUpdateException e)
                 {
@@ -132,7 +131,7 @@ namespace GastroFaza.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(DishDto modelDTO)
+        public async Task<IActionResult> Create(DishDto modelDTO)
         {
 
             string stringFileName = UploadFile(modelDTO);
@@ -148,7 +147,7 @@ namespace GastroFaza.Controllers
 
                 try
                 {
-                    this.dbContext.SaveChanges();
+                    await this.dbContext.SaveChangesAsync();
                 }
                 catch (DbUpdateException e)
                 {
@@ -180,7 +179,7 @@ namespace GastroFaza.Controllers
         [Route("Search")]
         public IActionResult Search(OptionFilterDto option)
         {
-            var baseQuery = dbContext.Dishs.Where(x => x.Price >= option.MinPrice && x.Price <= option.MaxPrice); ;
+            var baseQuery = this.dbContext.Dishs.Where(x => x.Price >= option.MinPrice && x.Price <= option.MaxPrice); ;
 
             if (option.SearchString != "")
             {
@@ -199,17 +198,17 @@ namespace GastroFaza.Controllers
 
 
         [Route("SearchMenu")]
-        public IActionResult SearchMenu(string name)
+        public async Task<IActionResult> SearchMenu(string name)
         {
 
             if (String.IsNullOrEmpty(name))
             {
-                IEnumerable<Dish> dishs = this.dbContext.Dishs;
+                var dishs = await this.dbContext.Dishs.ToListAsync();
 
                 return View(dishs);
             }
 
-            var baseQuery = dbContext.Dishs.Where(x => x.Name == name);
+            var baseQuery = this.dbContext.Dishs.Where(x => x.Name == name);
 
             if (baseQuery is null)
             {

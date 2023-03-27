@@ -13,27 +13,27 @@ namespace GastroFaza.Controllers
         {
             this.dbContext = dbContext;
         }
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            IEnumerable<Restaurant> restaurants = this.dbContext.Restaurants;
+            var restaurants = await this.dbContext.Restaurants.ToListAsync();
 
             return View(restaurants);
         }
 
-        public IActionResult GetOne(int? id)
+        public async Task<IActionResult> GetOne(int? id)
         {
             if (id == null || id == 0)
             {
                 return NotFound();
             }
 
-            var restaurant = this.dbContext.Restaurants.Find(id);
+            var restaurant = await this.dbContext.Restaurants.FindAsync(id);
 
             return View(restaurant);
         }
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            var restaurant = this.dbContext.Restaurants.Find(id);
+            var restaurant = await this.dbContext.Restaurants.FindAsync(id);
             if (restaurant == null)
             {
                 return NotFound();
@@ -42,7 +42,7 @@ namespace GastroFaza.Controllers
             this.dbContext.Restaurants.Remove(restaurant);
             try
             {
-                this.dbContext.SaveChanges();
+                await this.dbContext.SaveChangesAsync();
             }
             catch (DbUpdateException e)
             {
@@ -50,18 +50,18 @@ namespace GastroFaza.Controllers
             }
             return RedirectToAction("Index");
         }
-        public IActionResult Edit(int Id)
+        public async Task<IActionResult> Edit(int Id)
         {
-            var restaurant = this.dbContext.Restaurants.FirstOrDefault();
+            var restaurant = await this.dbContext.Restaurants.FirstOrDefaultAsync();
 
             return View(restaurant);
         }
         [HttpPost]
-        public IActionResult Edit(int? id, UpdateRestaurantDto modelDTO)
+        public async Task<IActionResult> Edit(int? id, UpdateRestaurantDto modelDTO)
         {
             if (ModelState.IsValid)
             {
-                var model = this.dbContext.Restaurants.Find(id);
+                var model = await this.dbContext.Restaurants.FindAsync(id);
                 model.Name = modelDTO.Name;
                 model.HasDelivery = modelDTO.HasDelivery;
                 model.Description = modelDTO.Description;
@@ -70,7 +70,7 @@ namespace GastroFaza.Controllers
 
                 try
                 {
-                    this.dbContext.SaveChanges();
+                    await this.dbContext.SaveChangesAsync();
                 }
                 catch (DbUpdateException e)
                 {
@@ -82,12 +82,12 @@ namespace GastroFaza.Controllers
 
             return View(modelDTO);
         }
-        public IActionResult RestaurantDetails(CreateRestaurantDto modelDTO)
+        public async Task<IActionResult> RestaurantDetails(CreateRestaurantDto modelDTO)
         {
-            var restaurant = this.dbContext.Restaurants.FirstOrDefault();
+            var restaurant = await this.dbContext.Restaurants.FirstOrDefaultAsync();
             return View(restaurant);
         }
-        public IActionResult Create(CreateRestaurantDto modelDTO)
+        public async Task<IActionResult> Create(CreateRestaurantDto modelDTO)
         {
             if (ModelState.IsValid)
             {
@@ -108,7 +108,7 @@ namespace GastroFaza.Controllers
 
                 try
                 {
-                    this.dbContext.SaveChanges();
+                    await this.dbContext.SaveChangesAsync();
                 }
                 catch (DbUpdateException e)
                 {

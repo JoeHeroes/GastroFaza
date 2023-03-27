@@ -13,13 +13,13 @@ namespace GastroFaza.Controllers
             this.dbContext = dbContext;
         }
 
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
             if (HttpContext.Session.GetString("email") != null)
             {
                 if (HttpContext.Session.GetString("isWorker") == "true" && HttpContext.Session.GetString("Role") != "Cook")
                 {
-                    IEnumerable<DiningTable> tables = this.dbContext.Tables;
+                    var tables = await this.dbContext.Tables.ToListAsync();
 
                     return View(tables);
                 }
@@ -35,29 +35,35 @@ namespace GastroFaza.Controllers
 
 
         [Route("SearchTable")]
-        public IActionResult SearchTable(string id)
+        public async Task<IActionResult> SearchTable(string id)
         {
             if (id == null)
             {
-                IEnumerable<DiningTable> tables = this.dbContext.Tables;
+                var tables  = await this.dbContext.Tables.ToListAsync();
 
                 return View(tables);
             }
 
-            var baseQuery = dbContext.Tables.Where(x => x.Id == int.Parse(id));
+            var baseQuery = this.dbContext.Tables.Where(x => x.Id == int.Parse(id));
 
             return View(baseQuery);
         }
 
-        public IActionResult Edit(int Id)
+        public async Task<IActionResult> Edit(int Id)
         {
             if (HttpContext.Session.GetString("email") != null)
             {
                 if (HttpContext.Session.GetString("Role") == "Manager")
                 {
-                    var table = this.dbContext.Tables.Where(s => s.Id == Id).FirstOrDefault();
+                    var table = await this.dbContext.Tables.FirstOrDefaultAsync(s => s.Id == Id);
 
-                    return View(table);
+
+                    var tableDto = new TableDto()
+                    {
+                        Seats = table.Seats
+                    };
+
+                    return View(tableDto);
                 }
                 else
                 {
@@ -69,7 +75,7 @@ namespace GastroFaza.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Edit(int? id, TableDto modelDTO)
+        public async Task<IActionResult> Edit(int? id, TableDto modelDTO)
         {
             if (HttpContext.Session.GetString("email") != null)
             {
@@ -77,12 +83,12 @@ namespace GastroFaza.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        var model = this.dbContext.Tables.Find(id);
+                        var model =  await this.dbContext.Tables.FindAsync(id);
                         model.Seats = modelDTO.Seats;
 
                         try
                         {
-                            this.dbContext.SaveChanges();
+                            await this.dbContext.SaveChangesAsync();
                         }
                         catch (DbUpdateException e)
                         {
@@ -101,13 +107,13 @@ namespace GastroFaza.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (HttpContext.Session.GetString("email") != null)
             {
                 if (HttpContext.Session.GetString("Role") == "Manager")
                 {
-                    var table = this.dbContext.Tables.Find(id);
+                    var table = await this.dbContext.Tables.FindAsync(id);
                     if (table == null)
                     {
                         return NotFound();
@@ -116,7 +122,7 @@ namespace GastroFaza.Controllers
                     this.dbContext.Tables.Remove(table);
                     try
                     {
-                        this.dbContext.SaveChanges();
+                        await this.dbContext.SaveChangesAsync();
                     }
                     catch (DbUpdateException e)
                     {
@@ -153,7 +159,7 @@ namespace GastroFaza.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(TableDto modelDTO)
+        public async Task<IActionResult> Create(TableDto modelDTO)
         {
             if (HttpContext.Session.GetString("email") != null)
             {
@@ -167,7 +173,7 @@ namespace GastroFaza.Controllers
 
                     try
                     {
-                        this.dbContext.SaveChanges();
+                        await this.dbContext.SaveChangesAsync();
                     }
                     catch (DbUpdateException e)
                     {
@@ -183,22 +189,20 @@ namespace GastroFaza.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-
-            
         }
 
 
-        public IActionResult SetBusy(int id)
+        public async Task<IActionResult> SetBusy(int id)
         {
             if (HttpContext.Session.GetString("email") != null)
             {
                 if (HttpContext.Session.GetString("isWorker") == "true" && HttpContext.Session.GetString("Role") != "Cook")
                 {
-                    var table = this.dbContext.Tables.Find(id);
+                    var table = await this.dbContext.Tables.FindAsync(id);
                     table.Busy = !table.Busy;
                     try
                     {
-                        this.dbContext.SaveChanges();
+                        await this.dbContext.SaveChangesAsync();
                     }
                     catch (DbUpdateException e)
                     {
@@ -215,8 +219,6 @@ namespace GastroFaza.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-
         }
-
     }
 }
