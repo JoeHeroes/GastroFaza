@@ -13,42 +13,42 @@
         <h1>Register</h1>
         <tr>
             <div asp-validation-summary="All"></div>
-            <td><label class="text-light" asp-for="Email"></label></td>
+            <td><label class="text-dark" asp-for="Email"></label></td>
             <td><input type="text" asp-for="Email" class="form-control"></td>
             <td></td>
         </tr>
         <tr>
-            <div class="text-light">Password</div>
+            <div class="text-dark">Password</div>
             <td><input type="password" class="form-control" name="password"></td>
         </tr>
         <tr>
-            <div class="text-light">ConfirmPassword</div>
+            <div class="text-dark">ConfirmPassword</div>
             <td><input type="password" name="confirmPassword" class="form-control"></td>
         </tr>
 
 
         <tr>
-            <td><label class="text-light" asp-for="FirstName"></label></td>
+            <td><label class="text-dark" asp-for="FirstName"></label></td>
             <td><input asp-for="FirstName" class="form-control" /></td>
 
         </tr>
         <tr>
-            <td><label class="text-light" asp-for="LastName"></label></td>
+            <td><label class="text-dark" asp-for="LastName"></label></td>
             <td><input asp-for="LastName" class="form-control" /></td>
 
         </tr>
 
         <tr>
-            <td><label class="text-light" asp-for="Nationality"></label></td>
+            <td><label class="text-dark" asp-for="Nationality"></label></td>
             <td><select asp-items=@NationsList.GetSelectNations() asp-for="Nationality" class="select_list_register" style="padding:11px;">option</select></input></td>
             @*<td><input asp-for="Nationality" class="form-control">option</input></td>*@
         </tr>
         <tr>
-            <td><label class="text-light" asp-for="DateOfBirth"></label></td>
+            <td><label class="text-dark" asp-for="DateOfBirth"></label></td>
             <td><input asp-for="DateOfBirth" type="date" max=@maxDate class="select_list_register" /></td>
         </tr>
         <tr>
-            <td><label class="text-light" asp-for="RoleId"></label></td>
+            <td><label class="text-dark" asp-for="RoleId"></label></td>
             <td> <select asp-for="RoleId" class="select_list_register" style="padding:11px;" >
                     <option value="1">Kelner</option>
                     <option value="2">Kuchar</option>
@@ -62,7 +62,7 @@
         </tr>
          <tr> @using (Html.BeginForm("FormSubmit", "Captcha", FormMethod.Post))
             {
-                <div class="g-recaptcha" data-sitekey="6LdjRX4jAAAAAF_Krubyw4vf0hmdaX0Hgx6mpYX8"></div>
+                <div class="g-recaptcha recaptch" data-sitekey="6LdjRX4jAAAAAF_Krubyw4vf0hmdaX0Hgx6mpYX8"></div>
             }
             </tr>
     </form>
