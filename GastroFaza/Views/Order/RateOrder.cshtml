@@ -7,9 +7,10 @@
 <head>
     <link rel="stylesheet" href="~/css/rating.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
 </head>
 <body>
-    <h1>Rate Order</h1>
+    <h2>Rate Order</h2>
     <hr />
     <div class="row">
         <div class="col-md-4">
@@ -24,10 +25,10 @@
 
                 <div class="btn-group">
                     <div class="form-group" style="padding: 10px;">
-                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <input type="submit" value="Save" class="btn btn-primary editProfileButton" />
                     </div>
                     <div style="padding: 10px;">
-                        <a href='@Url.Action("History", "Order")' class="btn btn-primary">Back</a>
+                        <a href='@Url.Action("History", "Order")' class="btn btn-primary editProfileButton">Back</a>
                     </div>
                 </div>
             </form>

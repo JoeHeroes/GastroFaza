@@ -512,6 +512,7 @@ loginbox input[type ="password"]:focus {
     padding: 10px;
     margin-left: 1vw;
     font-size: large;
+    border:none;
 }
 .addOrderButton:hover {
     background-color:white;
