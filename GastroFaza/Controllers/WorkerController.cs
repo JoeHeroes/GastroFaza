@@ -18,7 +18,28 @@ namespace GastroFaza.Controllers
         {
             var workers = await this.dbContext.Workers.ToListAsync();
 
-            return View(workers);
+            var workersDto = new List<WorkerDTO>();
+
+            foreach(var worker in workers)
+            {
+
+                var role = this.dbContext.Roles.FirstOrDefault(x => x.Id== worker.RoleId);
+
+                workersDto.Add(new WorkerDTO()
+                {
+                    Id= worker.Id,
+                    Email= worker.Email,
+                    FirstName= worker.FirstName,
+                    LastName= worker.LastName,
+                    DateOfBirth = worker.DateOfBirth,
+                    Nationality= worker.Nationality,    
+                    Rating= worker.Rating,
+                    Role = role.Name
+                });
+            }
+           
+
+            return View(workersDto);
         }
 
         public async Task<IActionResult> GetOne(int? id)

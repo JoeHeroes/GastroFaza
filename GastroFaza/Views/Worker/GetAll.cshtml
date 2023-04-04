@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GastroFaza.Models.Worker>
+﻿@model IEnumerable<GastroFaza.Models.DTO.WorkerDTO>
 
 @{
     ViewData["Title"] = "GetAll";
@@ -11,11 +11,23 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <h2>Workers</h2>
-    <hr />
-    <p>
-        <a asp-action="CreateWorkerAccount" asp-controller="Account" class="addOrderButton">Create New</a>
-    </p>
+
+
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2>Workers</h2>
+            </div>
+            <div class="col-6 text-end">
+                <p>
+                    <a asp-action="CreateWorkerAccount" asp-controller="Account" class="addOrderButton">Create New</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
     <table class="table">
         <thead>
             <tr>
@@ -55,7 +67,7 @@
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Role.Name)
+                    @Html.DisplayFor(modelItem => item.Role)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)

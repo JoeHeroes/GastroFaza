@@ -16,19 +16,20 @@
                 <h2>All Dishes</h2>
             </div>
             <div class="col-6 text-end">
-                <form class="d-flex" method="post" action="@Url.Action("SearchMenu", "Dish")">
-                    <input class="form-control me-sm-2" type="text" name="name" placeholder="Search Dish by Name, Description, Type">
-                    <button class="addOrderButton" type="submit">Search</button>
-                </form>
+                <p>
+                    <a asp-action="Create" class="addOrderButton">Create New</a>
+                </p>
             </div>
         </div>
     </div>
-
-
-    <p>
-        <a asp-action="Create" class="addOrderButton">Create New</a>
-    </p>
-
+    <div class="col-6 text-end">
+        <form class="d-flex" method="post" action="@Url.Action("SearchMenu", "Dish")">
+            <input class="form-control me-sm-2" type="text" name="name" placeholder="Search Dish by Name, Description, Type">
+            <button class="addOrderButton" type="submit">Search</button>
+        </form>
+       
+    </div>
+    <br />
     <table class="table">
         <thead>
             <tr>
