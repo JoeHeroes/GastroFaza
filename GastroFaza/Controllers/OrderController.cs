@@ -35,144 +35,193 @@ namespace GastroFaza.Controllers
         [Route("OrderDetails")]
         public async Task<IActionResult> OrderDetails(int orderId)
         {
-            HttpContext.Session.Remove("OrderStatus"); // czyści zawartość sesji by wstawić nowe dane do szczegółów zamówienia
-            HttpContext.Session.Remove("orderId");
-
-            var order = await this.dbContext.Orders.FirstOrDefaultAsync(x => x.Id == orderId); //status potrzebny w sesji -> patrz OrderDetails linia 51
-            if (order.Status == Status.Przygotowywanie)
-                HttpContext.Session.SetString("OrderStatus", "Preparing");
-
-            HttpContext.Session.SetString("orderId", orderId.ToString());
-            var dishOrder = this.dbContext.DishOrders.Where(x => x.OrderId == orderId);
-
-            List<Dish> dishes = new List<Dish>();
-
-            var dishList = await this.dbContext.Dishs.ToListAsync();
-
-            foreach (var x in dishOrder)
+            if(HttpContext.Session.GetString("email") != null)
             {
-                var dish = dishList.FirstOrDefault(d => d.Id == x.DishesId);
-                dishes.Add(dish);
+                if (HttpContext.Session.GetString("isWorker") == "true")
+                {
+                    HttpContext.Session.Remove("OrderStatus"); // czyści zawartość sesji by wstawić nowe dane do szczegółów zamówienia
+                    HttpContext.Session.Remove("orderId");
+
+                    var order = await this.dbContext.Orders.FirstOrDefaultAsync(x => x.Id == orderId); //status potrzebny w sesji -> patrz OrderDetails linia 51
+                    if (order.Status == Status.Przygotowywanie)
+                        HttpContext.Session.SetString("OrderStatus", "Preparing");
+
+                    HttpContext.Session.SetString("orderId", orderId.ToString());
+                    var dishOrder = this.dbContext.DishOrders.Where(x => x.OrderId == orderId);
+
+                    List<Dish> dishes = new List<Dish>();
+
+                    var dishList = await this.dbContext.Dishs.ToListAsync();
+
+                    foreach (var x in dishOrder)
+                    {
+                        var dish = dishList.FirstOrDefault(d => d.Id == x.DishesId);
+                        dishes.Add(dish);
+                    }
+
+                    User user = await this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == order.AddedById);
+                    if (user == null)
+                        user = await this.dbContext.Workers.FirstOrDefaultAsync(x => x.Id == order.AddedById);
+                    OrderDetailsDto orderDetails = new OrderDetailsDto
+                    {
+                        ClientId = user.Id,
+                        Email = user.Email,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        OrderId = orderId,
+                        Dishes = dishes,
+                        Status = order.Status,
+                        Description = order.Description,
+                        Price = order.Price,
+                    };
+
+                    return View(orderDetails);
+                }
+                return Forbid();
             }
-            
-            User user =  await this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == order.AddedById);
-            if (user == null)
-                user = await this.dbContext.Workers.FirstOrDefaultAsync(x => x.Id == order.AddedById);
-            OrderDetailsDto orderDetails = new OrderDetailsDto
-            {
-                ClientId = user.Id,
-                Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                OrderId = orderId,
-                Dishes = dishes,
-                Status = order.Status,
-                Description = order.Description,
-                Price = order.Price,
-            };
+            return RedirectToAction("Login", "Account");
 
-            return View(orderDetails);
         }
 
         [Route("OrderIsReceived")]
         public async Task<IActionResult> OrderIsReceived(int OrderId)
         {
-            Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
-            if (order == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                throw new Exception("Order not found");
+                if (HttpContext.Session.GetString("Role") == "Cook")
+                {
+                    Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
+                    if (order == null)
+                    {
+                        throw new Exception("Order not found");
+                    }
+                    order.Status = Status.Odebrane;
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+                    return RedirectToAction("ClientsOrders", "Order");
+                }
+                return Forbid();
             }
-            order.Status = Status.Odebrane;
-            try
-            {
-                await this.dbContext.SaveChangesAsync();
-            }
-            catch (DbUpdateException e)
-            {
-                throw new DbUpdateException("Error DataBase", e);
-            }
-            return RedirectToAction("ClientsOrders", "Order");
+            return RedirectToAction("Login", "Account");
         }
 
         [Route("OrderIsInProgress")]
         public async Task<IActionResult> OrderIsInProgress(int OrderId)
         {
-            Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
-            if (order == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                throw new Exception("Order not found");
+                if (HttpContext.Session.GetString("Role") == "Cook")
+                {
+                    Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
+                    if (order == null)
+                    {
+                        throw new Exception("Order not found");
+                    }
+                    order.Status = Status.Przygotowywanie;
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+                    return RedirectToAction("ClientsOrders", "Order");
+                }
+                return Forbid();
             }
-            order.Status = Status.Przygotowywanie;
-            try
-            {
-                await this.dbContext.SaveChangesAsync();
-            }
-            catch (DbUpdateException e)
-            {
-                throw new DbUpdateException("Error DataBase", e);
-            }
-            return RedirectToAction("ClientsOrders", "Order");
+            return RedirectToAction("Login", "Account");
         }
 
         [Route("OrderIsReady")]
         public async Task<IActionResult> OrderIsReady(int OrderId)
         {
-            Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
-            if (order == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                throw new Exception("Order not found");
+                if (HttpContext.Session.GetString("Role") == "Cook")
+                {
+                    Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
+                    if (order == null)
+                    {
+                        throw new Exception("Order not found");
+                    }
+                    order.Status = Status.Gotowe;
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+                    return RedirectToAction("ClientsOrders", "Order");
+                }
+                return Forbid();
             }
-            order.Status = Status.Gotowe;
-            try
-            {
-                await this.dbContext.SaveChangesAsync();
-            }
-            catch (DbUpdateException e)
-            {
-                throw new DbUpdateException("Error DataBase", e);
-            }
-            return RedirectToAction("ClientsOrders", "Order");
+            return RedirectToAction("Login", "Account");
         }
 
         [Route("OrderIsTaken")]
         public async Task<IActionResult> OrderIsTaken(int OrderId)
         {
-            Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
-            if (order == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                throw new Exception("Order not found");
+                if (HttpContext.Session.GetString("Role") == "Cook")
+                {
+                    Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
+                    if (order == null)
+                    {
+                        throw new Exception("Order not found");
+                    }
+                    order.Status = Status.Odebrane;
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+                    return RedirectToAction("ClientsOrders", "Order");
+                }
+                return Forbid();
             }
-            order.Status = Status.Odebrane;
-            try
-            {
-                await this.dbContext.SaveChangesAsync();
-            }
-            catch (DbUpdateException e)
-            {
-                throw new DbUpdateException("Error DataBase", e);
-            }
-            return RedirectToAction("ClientsOrders", "Order");
-        }
+            return RedirectToAction("Login", "Account");
+    }
 
         [Route("OrderIsDelivered")]
         public async Task<IActionResult> OrderIsDelivered(int OrderId)
         {
-            Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
-            if (order == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                throw new Exception("Order not found");
+                if (HttpContext.Session.GetString("Role") == "Cook")
+                {
+                    Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
+                    if (order == null)
+                    {
+                        throw new Exception("Order not found");
+                    }
+                    order.Status = Status.Dostarczone;
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+                    return RedirectToAction("ClientsOrders", "Order");
+                }
+                return Forbid();
             }
-            order.Status = Status.Dostarczone;
-            try
-            {
-                await this.dbContext.SaveChangesAsync();
-            }
-            catch (DbUpdateException e)
-            {
-                throw new DbUpdateException("Error DataBase", e);
-            }
-            return RedirectToAction("ClientsOrders", "Order");
-        }
+            return RedirectToAction("Login", "Account");
+    }
 
         [Route("Order")]
         public async Task<IActionResult> Order()

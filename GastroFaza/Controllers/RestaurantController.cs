@@ -30,32 +30,50 @@ namespace GastroFaza.Controllers
             var restaurant = await this.dbContext.Restaurants.FindAsync(id);
 
             return View(restaurant);
+
         }
         public async Task<IActionResult> Delete(int? id)
         {
-            var restaurant = await this.dbContext.Restaurants.FindAsync(id);
-            if (restaurant == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                return NotFound();
-            }
+                if (HttpContext.Session.GetString("Role") == "Manager")
+                {
+                    var restaurant = await this.dbContext.Restaurants.FindAsync(id);
+                    if (restaurant == null)
+                    {
+                        return NotFound();
+                    }
 
-            this.dbContext.Restaurants.Remove(restaurant);
-            try
-            {
-                await this.dbContext.SaveChangesAsync();
+                    this.dbContext.Restaurants.Remove(restaurant);
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+                    return RedirectToAction("Index");
+                }
+                return Forbid();
             }
-            catch (DbUpdateException e)
-            {
-                throw new DbUpdateException("Error DataBase", e);
-            }
-            return RedirectToAction("Index");
+            return RedirectToAction("Login", "Account");
         }
         public async Task<IActionResult> Edit(int Id)
         {
-            var restaurant = await this.dbContext.Restaurants.FirstOrDefaultAsync();
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                if (HttpContext.Session.GetString("Role") == "Manager")
+                {
+                    var restaurant = await this.dbContext.Restaurants.FirstOrDefaultAsync();
 
-            return View(restaurant);
+                    return View(restaurant);
+                }
+                return Forbid();
+            }
+            return RedirectToAction("Login", "Account");
         }
+    
         [HttpPost]
         public async Task<IActionResult> Edit(int? id, UpdateRestaurantDto modelDTO)
         {
@@ -89,35 +107,44 @@ namespace GastroFaza.Controllers
         }
         public async Task<IActionResult> Create(CreateRestaurantDto modelDTO)
         {
-            if (ModelState.IsValid)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                this.dbContext.Restaurants.Add(new Restaurant()
+                if (HttpContext.Session.GetString("Role") == "Manager")
                 {
-                    Name = modelDTO.Name,
-                    Description = modelDTO.Description,
-                    HasDelivery = modelDTO.HasDelivery,
-                    ContactEmail = modelDTO.ContactEmail,
-                    ContactNumber = modelDTO.ContactNumber,
-                    Address = new Address()
+                    if (ModelState.IsValid)
                     {
-                        City = modelDTO.City,
-                        Street = modelDTO.Street,
-                        PostalCode = modelDTO.PostalCode
+                        this.dbContext.Restaurants.Add(new Restaurant()
+                        {
+                            Name = modelDTO.Name,
+                            Description = modelDTO.Description,
+                            HasDelivery = modelDTO.HasDelivery,
+                            ContactEmail = modelDTO.ContactEmail,
+                            ContactNumber = modelDTO.ContactNumber,
+                            Address = new Address()
+                            {
+                                City = modelDTO.City,
+                                Street = modelDTO.Street,
+                                PostalCode = modelDTO.PostalCode
+                            }
+                        });
+
+                        try
+                        {
+                            await this.dbContext.SaveChangesAsync();
+                        }
+                        catch (DbUpdateException e)
+                        {
+                            throw new DbUpdateException("Error DataBase", e);
+                        }
+                        return RedirectToAction("Index");
                     }
-                });
 
-                try
-                {
-                    await this.dbContext.SaveChangesAsync();
+                    return View(modelDTO);
                 }
-                catch (DbUpdateException e)
-                {
-                    throw new DbUpdateException("Error DataBase", e);
-                }
-                return RedirectToAction("Index");
+                        return Forbid();
             }
-
-            return View(modelDTO);
+            return RedirectToAction("Login", "Account");
         }
+
     }
 }

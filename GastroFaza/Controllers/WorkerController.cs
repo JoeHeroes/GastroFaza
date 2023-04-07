@@ -16,69 +16,101 @@ namespace GastroFaza.Controllers
         }
         public async Task<IActionResult> GetAll()
         {
-            var workers = await this.dbContext.Workers.ToListAsync();
-
-            var workersDto = new List<WorkerDTO>();
-
-            foreach(var worker in workers)
+            if (HttpContext.Session.GetString("email") != null)
             {
-
-                var role = this.dbContext.Roles.FirstOrDefault(x => x.Id== worker.RoleId);
-
-                workersDto.Add(new WorkerDTO()
+                if (HttpContext.Session.GetString("Role") == "Manager")
                 {
-                    Id= worker.Id,
-                    Email= worker.Email,
-                    FirstName= worker.FirstName,
-                    LastName= worker.LastName,
-                    DateOfBirth = worker.DateOfBirth,
-                    Nationality= worker.Nationality,    
-                    Rating= worker.Rating,
-                    Role = role.Name
-                });
-            }
+                    var workers = await this.dbContext.Workers.ToListAsync();
+
+                    var workersDto = new List<WorkerDTO>();
+
+                    foreach(var worker in workers)
+                    {
+
+                        var role = this.dbContext.Roles.FirstOrDefault(x => x.Id== worker.RoleId);
+
+                        workersDto.Add(new WorkerDTO()
+                        {
+                            Id= worker.Id,
+                            Email= worker.Email,
+                            FirstName= worker.FirstName,
+                            LastName= worker.LastName,
+                            DateOfBirth = worker.DateOfBirth,
+                            Nationality= worker.Nationality,    
+                            Rating= worker.Rating,
+                            Role = role.Name
+                        });
+                    }
            
 
-            return View(workersDto);
+                    return View(workersDto);
+                }
+                return Forbid();
+            }
+            return RedirectToAction("Login", "Account");
         }
 
         public async Task<IActionResult> GetOne(int? id)
         {
-            if (id == null || id == 0)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                return NotFound();
+                if (HttpContext.Session.GetString("Role") == "Manager")
+                {
+                    if (id == null || id == 0)
+                    {
+                        return NotFound();
+                    }
+
+                    var worker = await this.dbContext.Workers.FindAsync(id);
+
+                    return View(worker);
+                }
+                return Forbid();
             }
-
-            var worker = await this.dbContext.Workers.FindAsync(id);
-
-            return View(worker);
+            return RedirectToAction("Login", "Account");
         }
 
         public async Task<IActionResult> Delete(int? id)
         {
-            var worker = await this.dbContext.Workers.FindAsync(id);
-            if (worker == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                return NotFound();
-            }
+                if (HttpContext.Session.GetString("Role") == "Manager")
+                {
+                    var worker = await this.dbContext.Workers.FindAsync(id);
+                    if (worker == null)
+                    {
+                        return NotFound();
+                    }
 
-            this.dbContext.Workers.Remove(worker);
-            try
-            {
-                await this.dbContext.SaveChangesAsync();
+                    this.dbContext.Workers.Remove(worker);
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+                    return RedirectToAction("GetAll");
+                }
+                return Forbid();
             }
-            catch (DbUpdateException e)
-            {
-                throw new DbUpdateException("Error DataBase", e);
-            }
-            return RedirectToAction("GetAll");
+            return RedirectToAction("Login", "Account");
         }
         public async Task<IActionResult> Edit(int Id)
         {
-            var worker = await this.dbContext.Workers.FirstOrDefaultAsync(s => s.Id == Id);
-            var roles = await this.dbContext.Roles.ToListAsync();
-            ViewBag.data = roles;
-            return View(worker);
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                if (HttpContext.Session.GetString("Role") == "Manager")
+                {
+                    var worker = await this.dbContext.Workers.FirstOrDefaultAsync(s => s.Id == Id);
+                    var roles = await this.dbContext.Roles.ToListAsync();
+                    ViewBag.data = roles;
+                    return View(worker);
+                }
+                return Forbid();
+            }
+            return RedirectToAction("Login", "Account");
         }
         [HttpPost]
         public async Task<IActionResult> Edit(int? id, UpdateWorkerDto modelDTO)
@@ -113,7 +145,7 @@ namespace GastroFaza.Controllers
         {
             if (HttpContext.Session.GetString("email") != null)
             {
-                if (HttpContext.Session.GetString("isWorker") == "true")
+                if (HttpContext.Session.GetString("Role") == "Manager")
                 {
                     return View();
                 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
@@ -29,7 +30,13 @@ namespace GastroFaza.Controllers
         [Route("Login")]
         public IActionResult Login()
         {
-            return View();
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return View();
+            } else
+            {
+                return RedirectToAction("Welcome");
+            }
         }
 
         [Route("Register")]
@@ -38,17 +45,29 @@ namespace GastroFaza.Controllers
             var model = new RegisterClientDto();           
             return View(model);
         }
+
         [Route("CreateWorkerAccount")]      //for manager
         public async Task<IActionResult> CreateWorkerAccount()
         {
-            var model = new RegisterWorkerDto();
-            model.Roles = new List<SelectListItem>();           
-
-            foreach(var role in await this.dbContext.Roles.ToListAsync())
+            if (HttpContext.Session.GetString("email") != null)
             {
-                model.Roles.Add(new SelectListItem() { Text = role.Name, Value = role.Id.ToString() });
+                if (HttpContext.Session.GetString("Role") == "Manager")
+                {
+                    var model = new RegisterWorkerDto();
+                    model.Roles = new List<SelectListItem>();           
+
+                    foreach(var role in await this.dbContext.Roles.ToListAsync())
+                    {
+                        model.Roles.Add(new SelectListItem() { Text = role.Name, Value = role.Id.ToString() });
+                    }
+                    return View(model);
+                }
+                return Forbid();
             }
-            return View(model); ;
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
         [Route("Logout")]
@@ -73,17 +92,33 @@ namespace GastroFaza.Controllers
         [Route("Profile")]
         public async Task<IActionResult> Profile()
         {
-            var account =  await this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == int.Parse(HttpContext.Session.GetString("id")));
-            return View(account);
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                if (HttpContext.Session.GetString("isWorker") == "false")
+                {
+                    var account = await this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == int.Parse(HttpContext.Session.GetString("id")));
+                    return View(account);
+                }
+                return Forbid();
+            }
+            return RedirectToAction("Login", "Account");
         }
 
 
         [Route("ProfileEdit")]
         public async Task<IActionResult> ProfileEdit(int id)
         {
-            var account = await this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == id);
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                if (HttpContext.Session.GetString("isWorker") == "false")
+                {
+                    var account = await this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == id);
 
-            return View(account);
+                    return View(account);
+                }
+                return Forbid();
+            }
+            return RedirectToAction("Login", "Account");
         }
 
         [HttpPost]
@@ -113,9 +148,17 @@ namespace GastroFaza.Controllers
         [Route("SelectPicture")]
         public IActionResult SelectPicture()
         {
-            var dto = new PictureDto();
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                if (HttpContext.Session.GetString("isWorker") == "false")
+                {
+                    var dto = new PictureDto();
 
-            return View(dto);
+                    return View(dto);
+                }
+                return Forbid();
+            }
+            return RedirectToAction("Login", "Account");
         }
 
         [HttpPost]
@@ -166,7 +209,15 @@ namespace GastroFaza.Controllers
         [Route("RestartPassword")]
         public IActionResult RestartPassword()
         {
-            return View();
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                if (HttpContext.Session.GetString("isWorker") == "false")
+                {
+                    return View();
+                }
+                return Forbid();
+            }
+            return RedirectToAction("Login", "Account");
         }
 
         [HttpPost]
