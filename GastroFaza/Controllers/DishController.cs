@@ -65,39 +65,57 @@ namespace GastroFaza.Controllers
         }
         public async Task<IActionResult> Delete(int? id)
         {
-            var dish = await this.dbContext.Dishs.FindAsync(id);
-            if (dish == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                return NotFound();
-            }
+                if (HttpContext.Session.GetString("Role") == "Manager")
+                {
+                    var dish = await this.dbContext.Dishs.FindAsync(id);
+                    if (dish == null)
+                    {
+                        return NotFound();
+                    }
 
-            this.dbContext.Dishs.Remove(dish);
-            try
-            {
-                await this.dbContext.SaveChangesAsync();
+                    this.dbContext.Dishs.Remove(dish);
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+                    return RedirectToAction("GetAllDishes");
+                }
+                return Forbid();
             }
-            catch (DbUpdateException e)
-            {
-                throw new DbUpdateException("Error DataBase", e);
-            }
-            return RedirectToAction("GetAllDishes");
+            return RedirectToAction("Login", "Account");
         }
         
         public async Task<IActionResult> Edit(int Id)
         {
-            var dish = await this.dbContext.Dishs.FirstOrDefaultAsync(s => s.Id == Id);
-
-            var dishDto = new DishDto()
+            if (HttpContext.Session.GetString("email") != null)
             {
-                Id = dish.Id,
-                Name = dish.Name,
-                Description = dish.Description,
-                Price = dish.Price,
-                DishType = dish.DishType,
-            };
+                if (HttpContext.Session.GetString("Role") == "Manager")
+                {
+                    var dish = await this.dbContext.Dishs.FirstOrDefaultAsync(s => s.Id == Id);
 
-            return View(dishDto);
+                    var dishDto = new DishDto()
+                    {
+                        Id = dish.Id,
+                        Name = dish.Name,
+                        Description = dish.Description,
+                        Price = dish.Price,
+                        DishType = dish.DishType,
+                    };
+
+                    return View(dishDto);
+                }
+                return Forbid();
+            }
+            return RedirectToAction("Login", "Account");
         }
+
+
         [HttpPost]
         public async Task<IActionResult> Edit(int? id, DishDto modelDTO)
         {
@@ -128,8 +146,18 @@ namespace GastroFaza.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                if (HttpContext.Session.GetString("Role") == "Manager")
+                {
+                    return View();
+                }
+                return Forbid();
+            }
+            return RedirectToAction("Login", "Account");
         }
+
+
         [HttpPost]
         public async Task<IActionResult> Create(DishDto modelDTO)
         {

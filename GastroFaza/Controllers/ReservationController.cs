@@ -38,14 +38,18 @@ namespace GastroFaza.Controllers
         }
         public async Task<IActionResult> GetAllReservations()
         {
-            var reservations = await this.dbContext.Reservations.ToListAsync();
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                if (HttpContext.Session.GetString("isWorker") == "true" && HttpContext.Session.GetString("Role") != "Cook")
+                {
+                    var reservations = await this.dbContext.Reservations.ToListAsync();
 
-            return View(reservations);
+                    return View(reservations);
+                }
+                return Forbid();
+            }
+            return RedirectToAction("Login", "Account");
         }
-
-
-
-
 
         [Route("Check")]
         public IActionResult Check()
@@ -135,7 +139,22 @@ namespace GastroFaza.Controllers
         {
             if (HttpContext.Session.GetString("email") != null)
             {
-                return View();
+                var model = this.dbContext.Reservations.Find(id);
+                if (model == null)
+                {
+                    return NotFound();
+                }
+
+                if (model.ClientId.ToString() != HttpContext.Session.GetString("id"))
+                {
+                    return Forbid();
+                }
+
+                if (HttpContext.Session.GetString("isWorker") != "true")
+                {
+                    return View();
+                }
+                return Forbid();
             } else {
                 return RedirectToAction("Login", "Account");
             }
@@ -147,6 +166,7 @@ namespace GastroFaza.Controllers
             if (ModelState.IsValid)
             {
                 var model = await this.dbContext.Reservations.FindAsync(id);
+
                 model.TableId = dto.TableId;
                 model.DataOfReservation = new DateTime(dto.DateOfReservation.Year,
                     dto.DateOfReservation.Month, 
@@ -174,7 +194,11 @@ namespace GastroFaza.Controllers
         {
             if (HttpContext.Session.GetString("email") != null)
             {
-                return View();
+                if(HttpContext.Session.GetString("isWorker") == "true" && HttpContext.Session.GetString("Role") != "Cook")
+                {
+                    return View();
+                }
+                return Forbid();
             }
             else
             {
@@ -217,7 +241,11 @@ namespace GastroFaza.Controllers
         {
             if (HttpContext.Session.GetString("email") != null)
             {
-                return View();
+                if (HttpContext.Session.GetString("isWorker") == "true" && HttpContext.Session.GetString("Role") != "Cook")
+                {
+                    return View();
+                }
+                return Forbid();
             }
             else
             {
@@ -257,12 +285,18 @@ namespace GastroFaza.Controllers
 
         public async Task<IActionResult> Delete(int? id)
         {
-            if (HttpContext.Session.GetString("email") != null)
+            if (HttpContext.Session.GetString("email") != null && HttpContext.Session.GetString("Role") != "true")
             {
                 var reservation = await this.dbContext.Reservations.FindAsync(id);
+
                 if (reservation == null)
                 {
                     return NotFound();
+                }
+
+                if(reservation.ClientId.ToString() != HttpContext.Session.GetString("id"))
+                {
+                    return Forbid();
                 }
 
                 this.dbContext.Reservations.Remove(reservation);

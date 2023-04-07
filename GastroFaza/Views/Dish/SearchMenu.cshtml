@@ -19,7 +19,10 @@
             </div>
             <div class="col-6 text-end">
                 <p>
-                    <a asp-action="Create" class="addOrderButton">Create New</a>
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("Role") == "Manager")
+                    {
+                        <a asp-action="Create" class="addOrderButton">Create New</a>
+                    }
                 </p>
             </div>
         </div>
