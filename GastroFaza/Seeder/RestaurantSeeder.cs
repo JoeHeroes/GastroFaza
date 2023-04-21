@@ -1,6 +1,7 @@
 ﻿using GastroFaza.Models;
 using GastroFaza.Models.Enum;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace GastroFaza.Seeder
 {
@@ -582,18 +583,18 @@ namespace GastroFaza.Seeder
         {
             return new List<Role>()
             {
-                new Role()
-                {
-                    Name ="Kelner"
-                },
-                new Role()
-                {
-                    Name ="Kucharz"
-                },
-                new Role()
-                {
-                    Name ="Menadżer"
-                },
+                 new Role()
+                 {
+                     Name = "Waiter"
+                 },
+                 new Role()
+                 {
+                     Name = "Cook"
+                 },
+                 new Role()
+                 {
+                     Name = "Manager"
+                 },
             };
         }
     }

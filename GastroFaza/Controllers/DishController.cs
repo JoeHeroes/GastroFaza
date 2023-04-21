@@ -3,6 +3,7 @@ using GastroFaza.Models.DTO;
 using GastroFaza.Models.Enum;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace GastroFaza.Controllers
 {
@@ -208,17 +209,9 @@ namespace GastroFaza.Controllers
                 return View(dishs);
             }
 
-            var baseQuery = this.dbContext.Dishs.Where(x => x.Name == name);
-
-            if (baseQuery is null)
-            {
-                var baseProducer = baseQuery.Where(x => x.DishType.ToString() == name);
-                baseQuery = baseProducer;
-            }
+            var baseQuery = this.dbContext.Dishs.Where(x => x.Name.Contains(name)).ToList();
 
             return View(baseQuery);
         }
-
-
     }
 }
