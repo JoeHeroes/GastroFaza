@@ -214,8 +214,8 @@ namespace GastroFaza.Controllers
 
 
         [HttpPost]
-        [Route("XXX")]
-        public async Task<IActionResult> XXX(AddressDto modelDTO)
+        [Route("Delivery")]
+        public async Task<IActionResult> Delivery(AddressDto modelDTO)
         {
             if (ModelState.IsValid)
             {
