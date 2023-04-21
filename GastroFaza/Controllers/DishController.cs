@@ -155,7 +155,7 @@ namespace GastroFaza.Controllers
                 }
 
 
-            return RedirectToAction("GetAllDishes");
+            return RedirectToAction("SearchMenu");
         }
 
 
