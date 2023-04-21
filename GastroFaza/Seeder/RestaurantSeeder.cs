@@ -561,15 +561,15 @@ namespace GastroFaza.Seeder
             {
                 new Restaurant()
                 {
-                    Name = "ChujaCzita",
-                    Description="Niebo w gebie",
+                    Name = "GastroFaza",
+                    Description="Niebo w gebie, piekło w d*pie",
                     HasDelivery= true,
                     ContactEmail = "GastroFaza@wp.pl",
                     ContactNumber= "667 676 776",
                     Address= new Address()
                     {
-                        City = "Gastro",
-                        PostalCode="11-100",
+                        City = "Białystok",
+                        PostalCode="11-420",
                         Street ="Faza"
                     }
                 },
