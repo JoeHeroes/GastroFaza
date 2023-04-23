@@ -698,3 +698,17 @@ loginbox input[type ="password"]:focus {
 .pathPic{
     width:280px;
 }
+.register_phone {
+    background-color: white;
+    height: 40px;
+    display: block;
+    text-align: center;
+    margin:auto;
+    border: 2px solid #FF7F27;
+    width: 280px;
+    outline: none;
+    color: black;
+    border-radius: 4px;
+    transition: 0.5s;
+    cursor: pointer;
+}
