@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace GastroFaza.Models.DTO
 {
