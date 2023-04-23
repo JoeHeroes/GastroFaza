@@ -381,7 +381,41 @@ loginbox input[type ="password"]:focus {
     display: contents;
     color: white;
 }
+.registerbox .select_list {
+    background-color: white;
+    height: 55px;
+    display: block;
+    border: 2px solid #FF7F27;
+    width: 280px;
+    border-radius: 4px;
+    transition: 0.5s;
+    cursor: pointer;
+    color: black;
+}
+.registerbox .select_list option {
+    color: black;
+    cursor: pointer;
+}
 .registerbox .select_list_nationality {
+    background-color: white;
+    height: 30px;
+    display: block;
+    text-align: center;
+    border: 2px solid #FF7F27;
+    width: 280px;
+    outline: none;
+    color: black;
+    border-radius: 4px;
+    transition: 0.5s;
+    cursor: pointer;
+    margin-left: 70px;
+    margin-right: 67px;
+}
+.registerbox .select_list_nationality option {   
+    color:black;
+    cursor:pointer;
+}
+.registerbox .select_list_register {
     background-color: white;
     height: 30px;
     display: block;
@@ -396,25 +430,7 @@ loginbox input[type ="password"]:focus {
     cursor: pointer;
     margin-left: 70px;
 }
-.registerbox .select_list_nationality option {   
-    color:black;
-    cursor:pointer;
-}
-.registerbox .select_list_register {
-    background-color: white;
-    height: 30px;
-    display: block;
-    margin-right:67px;
-    text-align: center;
-    border: 2px solid #FF7F27;
-    width: 280px;
-    outline: none;
-    color: black;
-    border-radius: 4px;
-    transition: 0.5s;
-    cursor: pointer;
-    margin-left: 70px;
-}
+
 .select_list {
     background-color: #211A1D;
     height: 40px;
@@ -653,4 +669,14 @@ loginbox input[type ="password"]:focus {
 }
 .gwiazdki{
     margin-top:7px;
+}
+.restaurantDetailclass  {
+    padding-left:50px;
+}
+.restaurantDetailclass a {
+    color:white;
+    text-decoration:none;
+}
+.pathPic{
+    width:280px;
 }

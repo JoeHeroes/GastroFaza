@@ -37,16 +37,16 @@
                 <br/>
                 <div class="form-group" style="background-color:#211A1D;">
                     <label asp-for="PathPic" class="control-label text-light"></label>
-                    <input asp-for="PathPic" class="form-control"  style="border-color:#211A1D" />
+                    <input asp-for="PathPic" class="form-control pathPic"  style="border-color:#211A1D" />
                     <span asp-validation-for="PathPic" class="text-danger"></span>
                 </div>
 
                 <div class="btn-group">
                     <div class="form-group" style="padding: 10px;">
-                        <input type="submit" value="Create" class="addToOrderButton" />
+                        <input type="submit" value="Create" class="btn btn-primary addToOrderButton" />
                     </div>
-                    <div style="padding: 10px; margin:30px;">
-                        <a href='@Url.Action("SearchMenu", "Dish")' class="addToOrderButton">Back</a>
+                    <div style="padding: 10px;">
+                        <a href='@Url.Action("SearchMenu", "Dish")' class="btn btn-primary addToOrderButton">Back</a>
                     </div>
                 </div>
             </form>
