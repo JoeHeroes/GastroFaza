@@ -25,8 +25,6 @@
                 <div class="text-dark">ConfirmPassword</div>
                 <td><input type="password" name="confirmPassword" class="form-control"></td>
             </tr>
-
-
             <tr>
                 <td><label class="text-dark" asp-for="FirstName"></label></td>
                 <td><input asp-for="FirstName" class="form-control" /></td>
@@ -37,17 +35,18 @@
                 <td><input asp-for="LastName" class="form-control" /></td>
 
             </tr>
-
             <tr>
                 <td><label class="text-dark" asp-for="Nationality"></label></td>
                 <td><select asp-items=@NationsList.GetSelectNations() asp-for="Nationality" class="select_list_nationality">option</select></td>
             </tr>
             <tr>
                 <td><label class="text-dark" asp-for="DateOfBirth"></label></td>
-            <td><input asp-for="DateOfBirth" type="date" max=@maxDate class="select_list_register" /></td>
-
+                <td><input asp-for="DateOfBirth" type="date" max=@maxDate class="select_list_register" /></td>
             </tr>
-            <tr>
+             <tr>
+                <td><label class="text-dark" asp-for="PhoneNumber"></label></td>
+                <td><input asp-for="PhoneNumber" class="register_phone" /></td>
+            </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td><input type="submit" value="Register"></td>
@@ -58,7 +57,7 @@
                 {
                     <div class="g-recaptcha recaptch" data-sitekey="6LdjRX4jAAAAAF_Krubyw4vf0hmdaX0Hgx6mpYX8"></div>
                 }
-                </tr>
+            </tr>
     </form>
 </body>
 <script src='https://www.google.com/recaptcha/api.js' type="text/javascript"></script>

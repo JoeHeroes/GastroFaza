@@ -110,7 +110,10 @@ namespace GastroFaza.Controllers
                 model.Description = modelDTO.Description;
                 model.Price = modelDTO.Price;
                 model.DishType = modelDTO.DishType;
-                model.ProfileImg = stringFileName;
+                if(modelDTO.PathPic != null)
+                {
+                    model.ProfileImg = stringFileName;
+                }
 
                 try
                 {

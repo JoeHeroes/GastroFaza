@@ -20,6 +20,9 @@ namespace GastroFaza.Models.DTO
         [DisplayName("Date Of Birth")]
         public DateTime? DateOfBirth { get; set; }
         [Required]
+        [DisplayName("Phone Number")]
+        public int PhoneNumber { get; set; }
+        [Required]
         public string Nationality { get; set; }
         [Required]
         public string PasswordHash { get; set; }

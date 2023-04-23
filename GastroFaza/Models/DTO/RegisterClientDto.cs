@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
 
 namespace GastroFaza.Models.DTO
 {
     public class RegisterClientDto
     {
-
         public string Email { get; set; }
 
         public string Password { get; set; }
@@ -17,9 +14,10 @@ namespace GastroFaza.Models.DTO
         public string FirstName { get; set; }
         [DisplayName("Last Name")]
         public string LastName { get; set; }
-
         public string Nationality { get; set; } = "Niemcy";
         [DisplayName("Date Of Birth")]
         public DateTime? DateOfBirth { get; set; }
+        [DisplayName("Phone Number")]
+        public int PhoneNumber { get; set; }
     }
 }

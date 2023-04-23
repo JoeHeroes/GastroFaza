@@ -11,7 +11,7 @@ namespace GastroFaza.Models.DTO
         public string FirstName { get; set; }
         [DisplayName("Last Name")]
         public string LastName { get; set; }
-
+        public int PhoneNumber { get; set; }
         public int OrderId { get; set; }
         public List<Dish> Dishes { get; set; }
         public Status Status { get; set; }

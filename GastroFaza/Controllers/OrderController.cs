@@ -55,15 +55,34 @@ namespace GastroFaza.Controllers
                 dishes.Add(dish);
             }
             
-            User user =  await this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == order.AddedById);
-            if (user == null)
-                user = await this.dbContext.Workers.FirstOrDefaultAsync(x => x.Id == order.AddedById);
+            Client client =  await this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == order.AddedById);
+
+
+            if (client == null)
+            {
+                Worker worker = await this.dbContext.Workers.FirstOrDefaultAsync(x => x.Id == order.AddedById);
+                OrderDetailsDto orderDetailsWorker = new OrderDetailsDto
+                {
+                    ClientId = worker.Id,
+                    Email = worker.Email,
+                    FirstName = worker.FirstName,
+                    LastName = worker.LastName,
+                    OrderId = orderId,
+                    Dishes = dishes,
+                    Status = order.Status,
+                    Description = order.Description,
+                    Price = order.Price,
+                };
+                return View(orderDetailsWorker);
+            }
+
             OrderDetailsDto orderDetails = new OrderDetailsDto
             {
-                ClientId = user.Id,
-                Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
+                ClientId = client.Id,
+                Email = client.Email,
+                FirstName = client.FirstName,
+                LastName = client.LastName,
+                PhoneNumber = client.PhoneNumber,
                 OrderId = orderId,
                 Dishes = dishes,
                 Status = order.Status,
