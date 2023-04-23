@@ -5,11 +5,12 @@
 }
 
 <head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/rating.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <h1>Rate Worker</h1>
+    <h2>Rate Worker</h2>
     <hr />
     <div class="row">
         <div class="col-md-4">
@@ -24,10 +25,10 @@
 
                 <div class="btn-group">
                     <div class="form-group" style="padding: 10px;">
-                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <input type="submit" value="Save" class="btn btn-primary addToOrderButton" />
                     </div>
                     <div style="padding: 10px;">
-                        <a href='@Url.Action("GetAll", "Worker")' class="btn btn-primary">Back</a>
+                        <a href='@Url.Action("GetAll", "Worker")' class="btn btn-primary addToOrderButton">Back</a>
                     </div>
                 </div>
             </form>

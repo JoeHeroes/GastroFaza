@@ -27,15 +27,22 @@
                 <div class="menuDishBoxOut">
                     <div class="menuDishBoxIn">
                         <div style="display:block">
-                            <h3 class="menuDishDescryptionHeadline">@obj.Name</h3> <br/>
-                            <h4 class="menuDishDescryptionBody">
-                                @obj.Description
-                            </h4> <br/>
-                            <h4 class="menuDishDescryptionBody">
-                                Price: @obj.Price
-                            </h4> <br/>
-                            <a href='@Url.Action("RemoveDishFromOrder", "Order", @obj, null)' class="removeFromOrderButton">Remove From Order</a>
-                        </div>
+                            <div style="display:flex;">
+                                <div class="menuPictureBox" width="170" height="170">
+                                    <img src="~/Images/@obj.ProfileImg" width="150" height="150" asp-append-version="true" />
+                                </div>
+                                <div>
+                                    <h3 class="menuDishDescryptionHeadline">@obj.Name</h3> <br/>
+                                    <h4 class="menuDishDescryptionBody">
+                                        @obj.Description
+                                    </h4> <br/>
+                                    <h4 class="menuDishDescryptionBody">
+                                        Price: @obj.Price
+                                    </h4> <br/>
+                                    <a href='@Url.Action("RemoveDishFromOrder", "Order", @obj, null)' class="removeFromOrderButton">Remove From Order</a>
+                                </div>                                            
+                            </div>
+                         </div>
                     </div>
                     <br /><br />
                     <div style="width:100%; height:2px; background-color:white;"></div>
