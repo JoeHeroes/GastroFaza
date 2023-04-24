@@ -139,17 +139,7 @@ namespace GastroFaza.Controllers
         {
             if (HttpContext.Session.GetString("email") != null)
             {
-                var model = this.dbContext.Reservations.Find(id);
-                if (model == null)
-                {
-                    return NotFound();
-                }
-
-                if (model.ClientId.ToString() != HttpContext.Session.GetString("id"))
-                {
-                    return Forbid();
-                }
-
+               
                 if (HttpContext.Session.GetString("isWorker") != "true")
                 {
                     return View();
@@ -163,9 +153,21 @@ namespace GastroFaza.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int? id, ReservationDto dto)
         {
+            
             if (ModelState.IsValid)
             {
                 var model = await this.dbContext.Reservations.FindAsync(id);
+                if (model == null)
+                {
+                    return NotFound();
+                }
+
+
+                if (model.ClientId.ToString() != HttpContext.Session.GetString("id"))
+                {
+                    return Forbid();
+                }
+
 
                 model.TableId = dto.TableId;
                 model.DataOfReservation = new DateTime(dto.DateOfReservation.Year,
@@ -259,6 +261,12 @@ namespace GastroFaza.Controllers
             if (ModelState.IsValid)
             {
                 var model = await this.dbContext.Reservations.FindAsync(id);
+
+                if (model == null)
+                {
+                    return NotFound();
+                }
+
                 model.ClientId = modelDTO.ClientId;
                 model.TableId = modelDTO.TableId;
                 model.DataOfReservation = new DateTime(modelDTO.DateOfReservation.Year,

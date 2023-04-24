@@ -172,7 +172,7 @@ namespace GastroFaza.Controllers
         {
             if (HttpContext.Session.GetString("email") != null)
             {
-                if (HttpContext.Session.GetString("Role") == "Cook")
+                if (HttpContext.Session.GetString("Role") == "Waiter")
                 {
                     Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
                     if (order == null)
@@ -200,7 +200,7 @@ namespace GastroFaza.Controllers
         {
             if (HttpContext.Session.GetString("email") != null)
             {
-                if (HttpContext.Session.GetString("Role") == "Cook")
+                if (HttpContext.Session.GetString("Role") == "Waiter")
                 {
                     Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
                     if (order == null)
@@ -353,7 +353,7 @@ namespace GastroFaza.Controllers
                 return Forbid();
             }
             return RedirectToAction("Login", "Account");
-}
+        }
 
 
         public async Task<IActionResult> RemoveDishFromOrder(Dish dish)

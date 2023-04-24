@@ -25,32 +25,42 @@ namespace GastroFaza.Controllers
 
         public async Task<IActionResult> AddToOrder(int dishId)
         {
-            int id = int.Parse(HttpContext.Session.GetString("current order"));
-
-            var currentOrder = await this.dbContext.Orders.FirstOrDefaultAsync(u => u.Id == id);
-
-            var dish =  await this.dbContext.Dishs.FirstOrDefaultAsync(u => u.Id == dishId);
-
-            currentOrder.Price += dish.Price;
-
-            var dishOrder = new DishOrder()
+            if (HttpContext.Session.GetString("email") != null)
             {
-                DishMany = dish,
-                OrderMany = currentOrder,
-            };
+                if (HttpContext.Session.GetString("IsWorker") == "false" || HttpContext.Session.GetString("Role") != "Cook")
+                {
 
-            this.dbContext.DishOrders.Add(dishOrder);
+                    int id = int.Parse(HttpContext.Session.GetString("current order"));
 
-            try
-            {
-                await this.dbContext.SaveChangesAsync();
+                    var currentOrder = await this.dbContext.Orders.FirstOrDefaultAsync(u => u.Id == id);
+
+                    var dish = await this.dbContext.Dishs.FirstOrDefaultAsync(u => u.Id == dishId);
+
+                    currentOrder.Price += dish.Price;
+
+                    var dishOrder = new DishOrder()
+                    {
+                        DishMany = dish,
+                        OrderMany = currentOrder,
+                    };
+
+                    this.dbContext.DishOrders.Add(dishOrder);
+
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+                    return View("GetAll");
+                }
+                return Forbid();
+
             }
-            catch (DbUpdateException e)
-            {
-                throw new DbUpdateException("Error DataBase", e);
-            }
-            return View("GetAll");
-        }
+            return RedirectToAction("Login", "Account");
+    }
 
         public async Task<IActionResult> GetOne(int? id)
         {
