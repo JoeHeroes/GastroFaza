@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "RestaurantDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    @inject IHttpContextAccessor HttpContextAccessor;
 }
 <head>
     <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
@@ -51,9 +52,12 @@
             </dd>
         </dl>
     </div>
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model?.Id" class="addToOrderButton">Edit</a>
-    </div>
+    @if (HttpContextAccessor.HttpContext.Session.GetString("Role") == "Manager")
+    {
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="addToOrderButton">Edit</a>
+        </div>
+    }
 </body>
 
 

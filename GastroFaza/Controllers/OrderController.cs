@@ -35,27 +35,51 @@ namespace GastroFaza.Controllers
         [Route("OrderDetails")]
         public async Task<IActionResult> OrderDetails(int orderId)
         {
-            HttpContext.Session.Remove("OrderStatus"); // czyści zawartość sesji by wstawić nowe dane do szczegółów zamówienia
-            HttpContext.Session.Remove("orderId");
-
-            var order = await this.dbContext.Orders.FirstOrDefaultAsync(x => x.Id == orderId); //status potrzebny w sesji -> patrz OrderDetails linia 51
-            if (order.Status == Status.Przygotowywanie)
-                HttpContext.Session.SetString("OrderStatus", "Preparing");
-
-            HttpContext.Session.SetString("orderId", orderId.ToString());
-            var dishOrder = this.dbContext.DishOrders.Where(x => x.OrderId == orderId);
-
-            List<Dish> dishes = new List<Dish>();
-
-            var dishList = await this.dbContext.Dishs.ToListAsync();
-
-            foreach (var x in dishOrder)
+            if(HttpContext.Session.GetString("email") != null)
             {
-                var dish = dishList.FirstOrDefault(d => d.Id == x.DishesId);
-                dishes.Add(dish);
+                if (HttpContext.Session.GetString("isWorker") == "true")
+                {
+                    HttpContext.Session.Remove("OrderStatus"); // czyści zawartość sesji by wstawić nowe dane do szczegółów zamówienia
+                    HttpContext.Session.Remove("orderId");
+
+                    var order = await this.dbContext.Orders.FirstOrDefaultAsync(x => x.Id == orderId); //status potrzebny w sesji -> patrz OrderDetails linia 51
+                    if (order.Status == Status.Przygotowywanie)
+                        HttpContext.Session.SetString("OrderStatus", "Preparing");
+
+                    HttpContext.Session.SetString("orderId", orderId.ToString());
+                    var dishOrder = this.dbContext.DishOrders.Where(x => x.OrderId == orderId);
+
+                    List<Dish> dishes = new List<Dish>();
+
+                    var dishList = await this.dbContext.Dishs.ToListAsync();
+
+                    foreach (var x in dishOrder)
+                    {
+                        var dish = dishList.FirstOrDefault(d => d.Id == x.DishesId);
+                        dishes.Add(dish);
+                    }
+
+                    User user = await this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == order.AddedById);
+                    if (user == null)
+                        user = await this.dbContext.Workers.FirstOrDefaultAsync(x => x.Id == order.AddedById);
+                    OrderDetailsDto orderDetails = new OrderDetailsDto
+                    {
+                        ClientId = user.Id,
+                        Email = user.Email,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        OrderId = orderId,
+                        Dishes = dishes,
+                        Status = order.Status,
+                        Description = order.Description,
+                        Price = order.Price,
+                    };
+
+                    return View(orderDetails);
+                }
+                return Forbid();
             }
-            
-            Client client =  await this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == order.AddedById);
+        Client client =  await this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == order.AddedById);
 
 
             if (client == null)
@@ -96,102 +120,142 @@ namespace GastroFaza.Controllers
         [Route("OrderIsReceived")]
         public async Task<IActionResult> OrderIsReceived(int OrderId)
         {
-            Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
-            if (order == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                throw new Exception("Order not found");
+                if (HttpContext.Session.GetString("Role") == "Cook")
+                {
+                    Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
+                    if (order == null)
+                    {
+                        throw new Exception("Order not found");
+                    }
+                    order.Status = Status.Odebrane;
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+                    return RedirectToAction("ClientsOrders", "Order");
+                }
+                return Forbid();
             }
-            order.Status = Status.Odebrane;
-            try
-            {
-                await this.dbContext.SaveChangesAsync();
-            }
-            catch (DbUpdateException e)
-            {
-                throw new DbUpdateException("Error DataBase", e);
-            }
-            return RedirectToAction("ClientsOrders", "Order");
+            return RedirectToAction("Login", "Account");
         }
 
         [Route("OrderIsInProgress")]
         public async Task<IActionResult> OrderIsInProgress(int OrderId)
         {
-            Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
-            if (order == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                throw new Exception("Order not found");
+                if (HttpContext.Session.GetString("Role") == "Cook")
+                {
+                    Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
+                    if (order == null)
+                    {
+                        throw new Exception("Order not found");
+                    }
+                    order.Status = Status.Przygotowywanie;
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+                    return RedirectToAction("ClientsOrders", "Order");
+                }
+                return Forbid();
             }
-            order.Status = Status.Przygotowywanie;
-            try
-            {
-                await this.dbContext.SaveChangesAsync();
-            }
-            catch (DbUpdateException e)
-            {
-                throw new DbUpdateException("Error DataBase", e);
-            }
-            return RedirectToAction("ClientsOrders", "Order");
+            return RedirectToAction("Login", "Account");
         }
 
         [Route("OrderIsReady")]
         public async Task<IActionResult> OrderIsReady(int OrderId)
         {
-            Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
-            if (order == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                throw new Exception("Order not found");
+                if (HttpContext.Session.GetString("Role") == "Cook")
+                {
+                    Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
+                    if (order == null)
+                    {
+                        throw new Exception("Order not found");
+                    }
+                    order.Status = Status.Gotowe;
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+                    return RedirectToAction("ClientsOrders", "Order");
+                }
+                return Forbid();
             }
-            order.Status = Status.Gotowe;
-            try
-            {
-                await this.dbContext.SaveChangesAsync();
-            }
-            catch (DbUpdateException e)
-            {
-                throw new DbUpdateException("Error DataBase", e);
-            }
-            return RedirectToAction("ClientsOrders", "Order");
+            return RedirectToAction("Login", "Account");
         }
 
         [Route("OrderIsTaken")]
         public async Task<IActionResult> OrderIsTaken(int OrderId)
         {
-            Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
-            if (order == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                throw new Exception("Order not found");
+                if (HttpContext.Session.GetString("Role") == "Waiter")
+                {
+                    Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
+                    if (order == null)
+                    {
+                        throw new Exception("Order not found");
+                    }
+                    order.Status = Status.Odebrane;
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+                    return RedirectToAction("ClientsOrders", "Order");
+                }
+                return Forbid();
             }
-            order.Status = Status.Odebrane;
-            try
-            {
-                await this.dbContext.SaveChangesAsync();
-            }
-            catch (DbUpdateException e)
-            {
-                throw new DbUpdateException("Error DataBase", e);
-            }
-            return RedirectToAction("ClientsOrders", "Order");
-        }
+            return RedirectToAction("Login", "Account");
+    }
 
         [Route("OrderIsDelivered")]
         public async Task<IActionResult> OrderIsDelivered(int OrderId)
         {
-            Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
-            if (order == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                throw new Exception("Order not found");
+                if (HttpContext.Session.GetString("Role") == "Waiter")
+                {
+                    Order order = await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
+                    if (order == null)
+                    {
+                        throw new Exception("Order not found");
+                    }
+                    order.Status = Status.Dostarczone;
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+                    return RedirectToAction("ClientsOrders", "Order");
+                }
+                return Forbid();
             }
-            order.Status = Status.Dostarczone;
-            try
-            {
-                await this.dbContext.SaveChangesAsync();
-            }
-            catch (DbUpdateException e)
-            {
-                throw new DbUpdateException("Error DataBase", e);
-            }
-            return RedirectToAction("ClientsOrders", "Order");
-        }
+            return RedirectToAction("Login", "Account");
+    }
 
         [Route("Order")]
         public async Task<IActionResult> Order()
@@ -274,119 +338,159 @@ namespace GastroFaza.Controllers
         }
 
 
-
-
-
         [Route("PayForOrder")]
         public async Task<IActionResult> PayForOrder()
         {
-            int id = int.Parse(HttpContext.Session.GetString("current order"));
-            Order order =  await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == id);
-            if (order == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                throw new Exception("Order not found");
+                if (HttpContext.Session.GetString("isWorker") == "false")
+                {
+                    int id = int.Parse(HttpContext.Session.GetString("current order"));
+                    Order order =  await this.dbContext.Orders.FirstOrDefaultAsync(o => o.Id == id);
+                    if (order == null)
+                    {
+                        throw new Exception("Order not found");
+                    }
+                    order.Status = Status.Przyjete;
+
+                    string userEmail = HttpContext.Session.GetString("email");
+                    var client = await this.dbContext.Clients.FirstOrDefaultAsync(u => u.Email == userEmail);
+
+                    var dishOrder = this.dbContext.DishOrders.Where(x => x.OrderId == id);
+                    var dishList = await this.dbContext.Dishs.ToListAsync();
+
+                    History historyOrder = new History();
+                    historyOrder.Date = DateTime.Now;
+                    historyOrder.Stars = 0;
+
+                    foreach (var x in dishOrder)
+                    {
+                        var dish = dishList.FirstOrDefault(d => d.Id == x.DishesId);
+                        historyOrder.Dishes += dish.Name.ToString() + ", ";
+                    }
+
+                    historyOrder.AddedById = client.Id;
+
+                    this.dbContext.Histories.Add(historyOrder);
+
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+                    HttpContext.Session.SetString("current order", String.Empty);
+                    return View();
+                }
+                return Forbid();
             }
-            order.Status = Status.Przyjete;
-
-            string userEmail = HttpContext.Session.GetString("email");
-            var client = await this.dbContext.Clients.FirstOrDefaultAsync(u => u.Email == userEmail);
-
-            var dishOrder = this.dbContext.DishOrders.Where(x => x.OrderId == id);
-            var dishList = await this.dbContext.Dishs.ToListAsync();
-
-            History historyOrder = new History();
-            historyOrder.Date = DateTime.Now;
-            historyOrder.Stars = 0;
-
-            foreach (var x in dishOrder)
-            {
-                var dish = dishList.FirstOrDefault(d => d.Id == x.DishesId);
-                historyOrder.Dishes += dish.Name.ToString() + ", ";
-            }
-
-            historyOrder.AddedById = client.Id;
-
-            this.dbContext.Histories.Add(historyOrder);
-
-            try
-            {
-                await this.dbContext.SaveChangesAsync();
-            }
-            catch (DbUpdateException e)
-            {
-                throw new DbUpdateException("Error DataBase", e);
-            }
-            HttpContext.Session.SetString("current order", String.Empty);
-            return View();
+            return RedirectToAction("Login", "Account");
         }
 
 
         public async Task<IActionResult> RemoveDishFromOrder(Dish dish)
         {
-
-            int id = int.Parse(HttpContext.Session.GetString("current order"));
-
-            var dishOrder = await this.dbContext.DishOrders.SingleOrDefaultAsync(x => x.OrderId == id && x.DishesId == dish.Id);
-
-            this.dbContext.DishOrders.Remove(dishOrder);
-
-            try
+            if (HttpContext.Session.GetString("email") != null)
             {
-                await this.dbContext.SaveChangesAsync();
-            }
-            catch (DbUpdateException e)
-            {
-                throw new DbUpdateException("Error DataBase", e);
-            }
+                if (HttpContext.Session.GetString("Role") != "Cook")
+                {
 
-            return RedirectToAction("Order");
+                    int id = int.Parse(HttpContext.Session.GetString("current order"));
+
+                    var dishOrder = await this.dbContext.DishOrders.SingleOrDefaultAsync(x => x.OrderId == id && x.DishesId == dish.Id);
+
+                    this.dbContext.DishOrders.Remove(dishOrder);
+
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+
+                    return RedirectToAction("Order");
+                }
+                return Forbid();
+            }
+            return RedirectToAction("Login", "Account");
         }
 
         [Route("Create")]
         public async Task<IActionResult> Create()
         {
-            var order = new Order();
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                if (HttpContext.Session.GetString("Role") != "Cook")
+                {
+                    var order = new Order();
             
-            if (await this.dbContext.Workers.FirstOrDefaultAsync(u => u.Email == HttpContext.Session.GetString("email")) != null)
-            {
-                var user = await this.dbContext.Workers.FirstOrDefaultAsync(u => u.Email == HttpContext.Session.GetString("email"));
-                order.AddedById = user.Id;
-            }
-            else if(await this.dbContext.Clients.FirstOrDefaultAsync(u => u.Email == HttpContext.Session.GetString("email")) != null)
-            {
-                var user = await this.dbContext.Clients.FirstOrDefaultAsync(u => u.Email == HttpContext.Session.GetString("email"));
-                order.AddedById = user.Id;
-            } else
-            {
-                return RedirectToAction("Login", "Account");
-            }
+                    if (await this.dbContext.Workers.FirstOrDefaultAsync(u => u.Email == HttpContext.Session.GetString("email")) != null)
+                    {
+                        var user = await this.dbContext.Workers.FirstOrDefaultAsync(u => u.Email == HttpContext.Session.GetString("email"));
+                        order.AddedById = user.Id;
+                    }
+                    else if(await this.dbContext.Clients.FirstOrDefaultAsync(u => u.Email == HttpContext.Session.GetString("email")) != null)
+                    {
+                        var user = await this.dbContext.Clients.FirstOrDefaultAsync(u => u.Email == HttpContext.Session.GetString("email"));
+                        order.AddedById = user.Id;
+                    } else
+                    {
+                        return RedirectToAction("Login", "Account");
+                    }
 
-            order.Status = Status.Nowe;
+                    order.Status = Status.Nowe;
 
-            this.dbContext.Orders.Add(order);
-            try
-            {
-                await this.dbContext.SaveChangesAsync();
-                HttpContext.Session.SetString("current order",this.dbContext.Orders.FirstOrDefault(u => u == order).Id.ToString());
+                    this.dbContext.Orders.Add(order);
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                        HttpContext.Session.SetString("current order",this.dbContext.Orders.FirstOrDefault(u => u == order).Id.ToString());
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+                    return RedirectToAction("GetAll", "Dish");
+                }
+                return Forbid();
             }
-            catch (DbUpdateException e)
-            {
-                throw new DbUpdateException("Error DataBase", e);
-            }
-            return RedirectToAction("GetAll", "Dish");
-        }
+            return RedirectToAction("Login", "Account");
+}
         public async Task<IActionResult> GetAllOrders()
         {
-            var orders = await  this.dbContext.Orders.ToListAsync();
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                if (HttpContext.Session.GetString("isWorker") == "true")
+                {
+                    var orders = await  this.dbContext.Orders.ToListAsync();
 
-            return View(orders);
+                    return View(orders);
+                }
+                return Forbid();
+            }
+            return RedirectToAction("Login", "Account");
         }
+
         public async Task<IActionResult> Edit(int Id)
         {
-            var order = await this.dbContext.Orders.FirstOrDefaultAsync(s => s.Id == Id);
+            if (HttpContext.Session.GetString("email") != null)
+            {
+                if (HttpContext.Session.GetString("isWorker") == "true" && HttpContext.Session.GetString("Role") != "Cook")
+                {
+                    var order = await this.dbContext.Orders.FirstOrDefaultAsync(s => s.Id == Id);
 
-            return View(order);
+                    return View(order);
+                }
+                return Forbid();
+            }
+            return RedirectToAction("Login", "Account");
         }
+
+
         [HttpPost]
         public async Task<IActionResult> Edit(int? id, OrderDto modelDTO)
         {
@@ -412,24 +516,33 @@ namespace GastroFaza.Controllers
 
             return View(modelDTO);
         }
+
         public async Task<IActionResult> Delete(int? id)
         {
-            var order = await this.dbContext.Orders.FindAsync(id);
-            if (order == null)
+            if (HttpContext.Session.GetString("email") != null)
             {
-                return NotFound();
-            }
+                if (HttpContext.Session.GetString("isWorker") == "true" && HttpContext.Session.GetString("Role") != "Cook")
+                {
+                    var order = await this.dbContext.Orders.FindAsync(id);
+                    if (order == null)
+                    {
+                        return NotFound();
+                    }
 
-            this.dbContext.Orders.Remove(order);
-            try
-            {
-                await this.dbContext.SaveChangesAsync();
+                    this.dbContext.Orders.Remove(order);
+                    try
+                    {
+                        await this.dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        throw new DbUpdateException("Error DataBase", e);
+                    }
+                    return RedirectToAction("GetAllOrders");
+                }
+                return Forbid();
             }
-            catch (DbUpdateException e)
-            {
-                throw new DbUpdateException("Error DataBase", e);
-            }
-            return RedirectToAction("GetAllOrders");
+            return RedirectToAction("Login", "Account");
         }
 
 
@@ -466,7 +579,6 @@ namespace GastroFaza.Controllers
                 string userEmail = HttpContext.Session.GetString("email");
                 var client =  await this.dbContext.Clients.FirstOrDefaultAsync(u => u.Email == userEmail);
 
-
                 var clientHist = this.dbContext.Histories.Where(x => x.AddedById == client.Id);
 
                 foreach (var del in clientHist)
@@ -495,7 +607,7 @@ namespace GastroFaza.Controllers
         {
             if (HttpContext.Session.GetString("email") != null)
             {
-                if(HttpContext.Session.GetString("isWorker") != "true")
+                if (HttpContext.Session.GetString("isWorker") != "true")
                 {
                     return View();
                 }

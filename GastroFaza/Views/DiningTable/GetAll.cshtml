@@ -14,7 +14,7 @@
                 <h2>Tables</h2>
             </div>
             <div class="col-6 text-end">
-                @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
+                @if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Manager")
                 {
                     <a href='@Url.Action("Create", "DiningTable")' class="addOrderButton">Add Table</a>
                 }
@@ -58,8 +58,11 @@
                         </td>
                         <td width="50%">
                             <a  asp-controller="DiningTable" asp-action="SetBusy" asp-route-id="@obj.Id" class="setBusyButton">SetBusy</a>
-                            <a  asp-controller="DiningTable" asp-action="Edit" asp-route-id="@obj.Id" class="editButton">Edit</a>
-                            <a  asp-controller="DiningTable" asp-action="Delete" asp-route-id="@obj.Id" class="deleteButton">Delete</a>
+                            @if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Manager")
+                            {
+                                <a  asp-controller="DiningTable" asp-action="Edit" asp-route-id="@obj.Id" class="editButton">Edit</a>
+                                <a  asp-controller="DiningTable" asp-action="Delete" asp-route-id="@obj.Id" class="deleteButton">Delete</a>
+                            }
                         </td>
                     </tr>
                 }

@@ -17,7 +17,10 @@
                 <h2>History</h2>
             </div>
             <div class="col-6 text-end">
-                <a class="clearHistoryButton" asp-controller="Order" asp-action="ClearHistory">Clear history</a>
+                @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") != "true")
+                {
+                    <a class="clearHistoryButton" asp-controller="Order" asp-action="ClearHistory">Clear history</a>
+                }
             </div>
         </div>
     </div>
