@@ -79,8 +79,42 @@ namespace GastroFaza.Controllers
                 }
                 return Forbid();
             }
-            return RedirectToAction("Login", "Account");
+        Client client =  await this.dbContext.Clients.FirstOrDefaultAsync(x => x.Id == order.AddedById);
 
+
+            if (client == null)
+            {
+                Worker worker = await this.dbContext.Workers.FirstOrDefaultAsync(x => x.Id == order.AddedById);
+                OrderDetailsDto orderDetailsWorker = new OrderDetailsDto
+                {
+                    ClientId = worker.Id,
+                    Email = worker.Email,
+                    FirstName = worker.FirstName,
+                    LastName = worker.LastName,
+                    OrderId = orderId,
+                    Dishes = dishes,
+                    Status = order.Status,
+                    Description = order.Description,
+                    Price = order.Price,
+                };
+                return View(orderDetailsWorker);
+            }
+
+            OrderDetailsDto orderDetails = new OrderDetailsDto
+            {
+                ClientId = client.Id,
+                Email = client.Email,
+                FirstName = client.FirstName,
+                LastName = client.LastName,
+                PhoneNumber = client.PhoneNumber,
+                OrderId = orderId,
+                Dishes = dishes,
+                Status = order.Status,
+                Description = order.Description,
+                Price = order.Price,
+            };
+
+            return View(orderDetails);
         }
 
         [Route("OrderIsReceived")]
@@ -263,8 +297,8 @@ namespace GastroFaza.Controllers
 
 
         [HttpPost]
-        [Route("XXX")]
-        public async Task<IActionResult> XXX(AddressDto modelDTO)
+        [Route("Delivery")]
+        public async Task<IActionResult> Delivery(AddressDto modelDTO)
         {
             if (ModelState.IsValid)
             {

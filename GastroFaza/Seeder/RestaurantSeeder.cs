@@ -1,6 +1,7 @@
 ﻿using GastroFaza.Models;
 using GastroFaza.Models.Enum;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace GastroFaza.Seeder
 {
@@ -560,15 +561,15 @@ namespace GastroFaza.Seeder
             {
                 new Restaurant()
                 {
-                    Name = "ChujaCzita",
-                    Description="Niebo w gebie",
+                    Name = "GastroFaza",
+                    Description="Niebo w gebie, piekło w d*pie",
                     HasDelivery= true,
                     ContactEmail = "GastroFaza@wp.pl",
                     ContactNumber= "667 676 776",
                     Address= new Address()
                     {
-                        City = "Gastro",
-                        PostalCode="11-100",
+                        City = "Białystok",
+                        PostalCode="11-420",
                         Street ="Faza"
                     }
                 },
@@ -582,18 +583,18 @@ namespace GastroFaza.Seeder
         {
             return new List<Role>()
             {
-                new Role()
-                {
-                    Name ="Kelner"
-                },
-                new Role()
-                {
-                    Name ="Kucharz"
-                },
-                new Role()
-                {
-                    Name ="Menadżer"
-                },
+                 new Role()
+                 {
+                     Name = "Waiter"
+                 },
+                 new Role()
+                 {
+                     Name = "Cook"
+                 },
+                 new Role()
+                 {
+                     Name = "Manager"
+                 },
             };
         }
     }

@@ -87,6 +87,7 @@ namespace GastroFaza.Controllers
                     LastName = modelDTO.LastName,
                     DateOfBirth = modelDTO.DateOfBirth,
                     Nationality = modelDTO.Nationality,
+                    PhoneNumber = modelDTO.PhoneNumber,
                     PasswordHash = modelDTO.PasswordHash,
                 });
 

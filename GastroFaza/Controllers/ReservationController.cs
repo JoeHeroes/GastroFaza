@@ -36,6 +36,7 @@ namespace GastroFaza.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
+
         public async Task<IActionResult> GetAllReservations()
         {
             if (HttpContext.Session.GetString("email") != null)
@@ -192,7 +193,7 @@ namespace GastroFaza.Controllers
         }
 
 
-        public IActionResult WorkerCreate()
+        public IActionResult CreateReservation()
         {
             if (HttpContext.Session.GetString("email") != null)
             {
@@ -209,7 +210,7 @@ namespace GastroFaza.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> WorkerCreate(ReservationWorkerDto modelDTO)
+        public async Task<IActionResult> CreateReservation(ReservationWorkerDto modelDTO)
         {
             if (ModelState.IsValid)
             {
@@ -239,7 +240,7 @@ namespace GastroFaza.Controllers
             return View(modelDTO);
         }
 
-        public IActionResult WorkerEdit()
+        public IActionResult EditReservation()
         {
             if (HttpContext.Session.GetString("email") != null)
             {
@@ -256,7 +257,7 @@ namespace GastroFaza.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> WorkerEdit(int? id, ReservationWorkerDto modelDTO)
+        public async Task<IActionResult> EditReservation(int? id, ReservationWorkerDto modelDTO)
         {
             if (ModelState.IsValid)
             {

@@ -11,23 +11,23 @@
     <hr />
     <div class="row">
         <div class="col-md-4">
-            <form method="post" action="@Url.Action("XXX", "Order")" enctype="multipart/form-data">
+            <form method="post" action="@Url.Action("Delivery", "Order")" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="form-group">
-                    <label asp-for="City" class="control-label text-light">Miasto:</label>
+                    <label asp-for="City" class="control-label text-light">City:</label>
                     <input asp-for="City" class="edit_profile_input" type="text" />
                     <span asp-validation-for="City" class="text-danger"></span>
                 </div>
 
                  <div class="form-group">
-                    <label asp-for="Street" class="control-label text-light">Ulica:</label>
+                    <label asp-for="Street" class="control-label text-light">Street:</label>
                     <input asp-for="Street" class="edit_profile_input" type="text" />
                     <span asp-validation-for="Street" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="PostalCode" class="control-label text-light">Kod pocztowy:</label>
+                    <label asp-for="PostalCode" class="control-label text-light">Postal Code:</label>
                     <input asp-for="PostalCode" class="edit_profile_input" type="text" />
                     <span asp-validation-for="PostalCode" class="text-danger"></span>
                 </div>
@@ -39,10 +39,10 @@
 
                 <div style="float:left">
                     <div style="float:left">
-                        <input type="submit" value="Confirm" class="addToOrderButton" />
+                        <input type="submit" value="Confirm" class="btn btn-primary addToOrderButton" />
                     </div>
                     <div style="float:right">
-                        <a href='@Url.Action("ChooseOption", "Order")' class="addToOrderButton">Back</a>
+                        <a href='@Url.Action("ChooseOption", "Order")' class="btn btn-primary addToOrderButton">Back</a>
                     </div>
                 </div>
 

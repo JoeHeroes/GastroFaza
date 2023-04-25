@@ -132,6 +132,7 @@ namespace GastroFaza.Controllers
                 account.FirstName = dto.FirstName;
                 account.LastName = dto.LastName;
                 account.DateOfBirth = dto.DateOfBirth;
+                account.PhoneNumber= dto.PhoneNumber;
 
                 try
                 {
@@ -398,11 +399,12 @@ namespace GastroFaza.Controllers
                 var newClient = new Client()
                 {
                     Email = dto.Email,
-                    DateOfBirth = dto.DateOfBirth,
-                    Nationality = dto.Nationality,
                     FirstName = dto.FirstName,
                     LastName = dto.LastName,
                     PasswordHash = dto.Password,
+                    DateOfBirth = dto.DateOfBirth,
+                    Nationality = dto.Nationality,
+                    PhoneNumber= dto.PhoneNumber,
 
                 };
 

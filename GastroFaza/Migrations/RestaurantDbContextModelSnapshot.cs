@@ -303,6 +303,9 @@ namespace GastroFaza.Migrations
                     b.Property<int>("OrderID")
                         .HasColumnType("int");
 
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
+
                     b.Property<int?>("RestaurantId")
                         .HasColumnType("int");
 

@@ -18,7 +18,7 @@
                 {
                     @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") == "true")
                     {
-                        <a href='@Url.Action("WorkerCreate", "Reservation")' class="addOrderButton">Add Reservation</a>
+                        <a href='@Url.Action("CreateReservation", "Reservation")' class="addOrderButton">Add Reservation</a>
                     } else {
                         <a href='@Url.Action("Check", "Reservation")' class="addOrderButton">Add Reservation</a>
                     }
@@ -85,7 +85,7 @@
                             <td width="20%">
                                 @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") == "true")
                                 {
-                                    <a class="editButton" asp-controller="Reservation" asp-action="WorkerEdit" asp-route-id="@obj.Id">Edit</a>
+                                    <a class="editButton" asp-controller="Reservation" asp-action="EditReservation" asp-route-id="@obj.Id">Edit</a>
                                 } else {
                                     <a class="editButton" asp-controller="Reservation" asp-action="Edit" asp-route-id="@obj.Id">Edit</a>
                                 }

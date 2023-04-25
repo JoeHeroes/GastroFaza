@@ -5,6 +5,7 @@
 <ul class="navbar-nav">
     @if (@HttpContextAccessor.HttpContext.Session.GetString("email")!=null)
 {
+
         @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") != "true") @* If user is not Worker *@
         {
             <li class="nav-item">
@@ -13,6 +14,7 @@
         }
         else
         {
+            <li style="white-space: nowrap;">
                 @for (var i = 0; i < Convert.ToInt32(@HttpContextAccessor.HttpContext.Session.GetString("Rating")); i++)
                     {
                         <span class="rating_res fas fa-star gwiazdki" style="color:yellow;">
@@ -23,6 +25,7 @@
                         <span class="rating_empty fas fa-star gwiazdki" style="color:#49450A;">
                         </span>
                     }
+            </li>
         }
         <li class="nav-item">
         <a class="nav-link text-light" asp-controller="Account" asp-action="Logout">Logout</a>
