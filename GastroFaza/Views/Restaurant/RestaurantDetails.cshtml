@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "RestaurantDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    @inject IHttpContextAccessor HttpContextAccessor;
 }
 <head>
     <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
@@ -15,46 +16,48 @@
             </div>
         </div>
     </div>
-    <br />
-    <br />
+    <hr />
     <br />
     <div>
         <dl class="row">
-            <dt class = "col-sm-2 text-light">
+            <dt class="col-sm-2 text-light">
                 @Html.DisplayNameFor(model => model.Name)
             </dt>
-            <dd class = "col-sm-10 text-light">
+            <dd class="col-sm-10 text-light restaurantDetailclass">
                 @Html.DisplayFor(model => model.Name)
             </dd>
-            <dt class = "col-sm-2 text-light">
+            <dt class="col-sm-2 text-light">
                 @Html.DisplayNameFor(model => model.Description)
             </dt>
-            <dd class = "col-sm-10 text-light">
+            <dd class="col-sm-10 text-light restaurantDetailclass">
                 @Html.DisplayFor(model => model.Description)
             </dd>
-            <dt class = "col-sm-2 text-light">
+            <dt class="col-sm-2 text-light">
                 @Html.DisplayNameFor(model => model.HasDelivery)
             </dt>
-            <dd class = "col-sm-10 text-light">
+            <dd class="col-sm-10 text-light restaurantDetailclass">
                 @Html.DisplayFor(model => model.HasDelivery)
             </dd>
-            <dt class = "col-sm-2 text-light">
+            <dt class="col-sm-2 text-light">
                 @Html.DisplayNameFor(model => model.ContactEmail)
             </dt>
-            <dd class = "col-sm-10 text-light" style="text-decoration:none">
-                @Html.DisplayFor(model => model.ContactEmail)
+            <dd class="col-sm-10 text-light restaurantDetailclass">
+                <a>@Html.DisplayFor(model => model.ContactEmail)</a>              
             </dd>
-            <dt class = "col-sm-2 text-light">
+            <dt class="col-sm-2 text-light">
                 @Html.DisplayNameFor(model => model.ContactNumber)
             </dt>
-            <dd class = "col-sm-10 text-light">
+            <dd class="col-sm-10 text-light restaurantDetailclass">
                 @Html.DisplayFor(model => model.ContactNumber)
             </dd>
         </dl>
     </div>
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model?.Id" class="addToOrderButton">Edit</a>
-    </div>
+    @if (HttpContextAccessor.HttpContext.Session.GetString("Role") == "Manager")
+    {
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="addToOrderButton">Edit</a>
+        </div>
+    }
 </body>
 
 

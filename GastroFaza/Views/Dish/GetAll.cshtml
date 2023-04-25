@@ -18,7 +18,10 @@
             <div class="col-6 text-end">
                 @if (@HttpContextAccessor.HttpContext.Session.GetString("email") != null)
                 {
-                    <a href='@Url.Action("Order", "Order")' class="addOrderButton">Order</a>
+                    @if (@HttpContextAccessor.HttpContext.Session.GetString("isWorker") != "true")
+                    {
+                        <a href='@Url.Action("Order", "Order")' class="addOrderButton">Order</a>
+                    }
                 }
             </div>
 

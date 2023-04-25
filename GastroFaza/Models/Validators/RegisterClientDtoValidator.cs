@@ -40,6 +40,9 @@ namespace GastroFaza.Models.Validators
             
             RuleFor(x => x.Nationality)
                .NotEmpty().WithMessage("Please choose Nationality.");
+
+            RuleFor(x => x.PhoneNumber)
+              .NotEmpty().WithMessage("Phone number cannot be empty.");
         }
     }
 }

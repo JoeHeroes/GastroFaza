@@ -7,14 +7,9 @@ namespace GastroFaza.Interfaces
     {
         Task<string> GeneratJwt(LoginDto dto);
         Task RegisterUser(RegisterClientDto dto);
-
         Task<RegisterWorkerDto> CreateWorker();
-
         Task<Client> GetAccount();
-
         Task EditAccount();
-
-
         Task<PictureDto> SelectPicture();
     }
 }

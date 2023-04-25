@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Dishes";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    @inject IHttpContextAccessor HttpContextAccessor;
+
 }
 
 <head>
@@ -17,7 +19,10 @@
             </div>
             <div class="col-6 text-end">
                 <p>
-                    <a asp-action="Create" class="addOrderButton">Create New</a>
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("Role") == "Manager")
+                    {
+                        <a asp-action="Create" class="addOrderButton">Create New</a>
+                    }
                 </p>
             </div>
         </div>
@@ -51,9 +56,12 @@
                 <th>
                     @Html.DisplayNameFor(model => model.DishType)
                 </th>
-                <th style="text-align:center;">
-                    Actions
-                </th>
+                @if (HttpContextAccessor.HttpContext.Session.GetString("Role") == "Manager")
+                {
+                    <th style="text-align:center;">
+                        Actions
+                    </th>
+                }
             </tr>
         </thead>
         <tbody>
@@ -80,10 +88,13 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.DishType)
                     </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="editButton" style="width:auto;">Edit</a> 
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="deleteButton" style="width:auto;">Delete</a>
-                    </td>
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("Role") == "Manager")
+                    {
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="editButton" style="width:auto;">Edit</a> 
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="deleteButton" style="width:auto;">Delete</a>
+                        </td>
+                    }
                 </tr>
             }
         </tbody>

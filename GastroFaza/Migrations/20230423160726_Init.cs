@@ -187,6 +187,7 @@ namespace GastroFaza.Migrations
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProfileImg = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<int>(type: "int", nullable: true),
                     OrderID = table.Column<int>(type: "int", nullable: true),
                     RestaurantId = table.Column<int>(type: "int", nullable: true),
                     Salary = table.Column<float>(type: "real", nullable: true),
