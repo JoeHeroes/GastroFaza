@@ -1,10 +1,8 @@
 ﻿using GastroFaza.Models;
-using GastroFaza.Models;
 using GastroFaza.Models.DTO;
 using GastroFaza.Models.Enum;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.IO;
 
 namespace GastroFaza.Controllers
 {

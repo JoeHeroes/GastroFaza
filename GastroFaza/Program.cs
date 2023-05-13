@@ -75,9 +75,7 @@ try
     //Validator
     builder.Services.AddScoped<IValidator<RegisterClientDto>, RegisterClientDtoValidator>();
     builder.Services.AddScoped<IValidator<RegisterWorkerDto>, RegisterWorkerDtoValidator>();
-
     builder.Services.AddScoped<IValidator<LoginDto>, LoginDtoValidator>();
-
     builder.Services.AddScoped<IValidator<EditClientDto>, EditDtoValidator>();
 
     //ContextAccessor

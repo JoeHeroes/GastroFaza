@@ -7,7 +7,6 @@ namespace GastroFaza.Models
         public RestaurantDbContext(DbContextOptions<RestaurantDbContext> options) : base(options)
         {
         }
-
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Dish> Dishs { get; set; }
         public DbSet<Order> Orders { get; set; }

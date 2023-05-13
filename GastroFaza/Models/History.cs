@@ -6,7 +6,6 @@
         public string Dishes { get; set; }
         public DateTime Date { get; set; }
         public int AddedById { get; set; }
-
         public int Stars { get; set; }
 
     }

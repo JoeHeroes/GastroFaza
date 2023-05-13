@@ -1,7 +1,5 @@
 ﻿using GastroFaza.Models;
 using GastroFaza.Models.Enum;
-using Microsoft.EntityFrameworkCore;
-using System.Xml.Linq;
 
 namespace GastroFaza.Seeder
 {

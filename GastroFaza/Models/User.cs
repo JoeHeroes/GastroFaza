@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace GastroFaza.Models
 {
     public abstract class User
