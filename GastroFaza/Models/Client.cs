@@ -6,6 +6,5 @@ namespace GastroFaza.Models
     {
         public int PhoneNumber { get; set; }
         public int OrderID { get; set; }
-        //test
     }
 }

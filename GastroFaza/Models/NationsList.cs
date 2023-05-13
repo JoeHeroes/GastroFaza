@@ -8,7 +8,7 @@ namespace GastroFaza.Models
         {
             return new List<Nation>()
             {
-new Nation() { Name = "Poland" },
+                 new Nation() { Name = "Poland" },
                  new Nation() { Name = "Great Britain" },
                  new Nation() { Name = "Norway" },
                  new Nation() { Name = "Sweden" },
