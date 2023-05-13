@@ -18,11 +18,6 @@ namespace GastroFaza.Seeder
         {
             if (dbContext.Database.CanConnect())
             {
-                var pending = this.dbContext.Database.GetPendingMigrations();
-                if(pending != null && pending.Any())
-                {
-                    this.dbContext.Database.Migrate();
-                }
 
                 if (!dbContext.Roles.Any())
                 {

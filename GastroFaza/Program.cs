@@ -115,8 +115,6 @@ try
     app.UseMiddleware<ErrorHandlingMiddleware>();
     app.UseMiddleware<RequestTimeMiddleware>();
 
-    app.UseHttpsRedirection();
-
     app.UseStaticFiles();
 
     app.UseHttpsRedirection();

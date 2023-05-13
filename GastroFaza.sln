@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GastroFaza", "GastroFaza\GastroFaza.csproj", "{BAD485E4-CB8A-483B-8822-83AF103A78BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GastroFaza", "GastroFaza\GastroFaza.csproj", "{BAD485E4-CB8A-483B-8822-83AF103A78BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GastroFaza.Test", "GastroFaza.Test\GastroFaza.Test.csproj", "{5B23C389-8FC7-4131-A539-8A1ACF445992}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{BAD485E4-CB8A-483B-8822-83AF103A78BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAD485E4-CB8A-483B-8822-83AF103A78BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAD485E4-CB8A-483B-8822-83AF103A78BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B23C389-8FC7-4131-A539-8A1ACF445992}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B23C389-8FC7-4131-A539-8A1ACF445992}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B23C389-8FC7-4131-A539-8A1ACF445992}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B23C389-8FC7-4131-A539-8A1ACF445992}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

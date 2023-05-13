@@ -49,10 +49,27 @@ namespace GastroFaza.Controllers
         [Route("CreateWorkerAccount")]      //for manager
         public async Task<IActionResult> CreateWorkerAccount()
         {
-            if (HttpContext.Session.GetString("email") != null)
-            {
-                if (HttpContext.Session.GetString("Role") == "Manager")
-                {
+            //if (HttpContext.Session.GetString("email") != null)
+            //{
+            //    if (HttpContext.Session.GetString("Role") == "Manager")
+            //    {
+            //        var model = new RegisterWorkerDto();
+            //        model.Roles = new List<SelectListItem>();           
+
+            //        foreach(var role in await this.dbContext.Roles.ToListAsync())
+            //        {
+            //            model.Roles.Add(new SelectListItem() { Text = role.Name, Value = role.Id.ToString() });
+            //        }
+            //        return View(model);
+            //    }
+            //    return Forbid();
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
+
+
                     var model = new RegisterWorkerDto();
                     model.Roles = new List<SelectListItem>();           
 
@@ -61,13 +78,6 @@ namespace GastroFaza.Controllers
                         model.Roles.Add(new SelectListItem() { Text = role.Name, Value = role.Id.ToString() });
                     }
                     return View(model);
-                }
-                return Forbid();
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
         }
 
         [Route("Logout")]
