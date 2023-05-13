@@ -35,16 +35,16 @@ namespace GastroFaza.Controllers
 
 
         [Route("SearchTable")]
-        public async Task<IActionResult> SearchTable(string id)
+        public async Task<IActionResult> SearchTable(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 var tables  = await this.dbContext.Tables.ToListAsync();
 
                 return View(tables);
             }
 
-            var baseQuery = this.dbContext.Tables.Where(x => x.Id == int.Parse(id));
+            var baseQuery = await this.dbContext.Tables.Where(x => x.Id == id).ToListAsync();
 
             return View(baseQuery);
         }

@@ -61,7 +61,7 @@ namespace GastroFaza.Controllers
                         return NotFound();
                     }
 
-                    var worker = await this.dbContext.Workers.FindAsync(id);
+                    var worker = await this.dbContext.Workers.FirstOrDefaultAsync(x => x.Id == id);
 
                     return View(worker);
                 }
