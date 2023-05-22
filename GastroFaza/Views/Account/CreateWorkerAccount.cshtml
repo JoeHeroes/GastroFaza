@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
 </head>
 <body>
-    <form class="registerbox" method="post" action="@Url.Action("registerWorker", "Account")">
+    <form class="registerbox" method="post" action="@Url.Action("CreateWorkerAccount", "Account")">
 
         <h1>Register</h1>
         <tr>
@@ -40,8 +40,7 @@
 
         <tr>
             <td><label class="text-dark" asp-for="Nationality"></label></td>
-            <td><select asp-items=@NationsList.GetSelectNations() asp-for="Nationality" class="select_list_register" style="padding:11px;"></select></td>
-            @*<td><input asp-for="Nationality" class="form-control">option</input></td>*@
+            <td><select asp-items=@NationsList.GetSelectNations() asp-for="Nationality" class="select_list">option</select></td>
         </tr>
         <tr>
             <td><label class="text-dark" asp-for="DateOfBirth"></label></td>

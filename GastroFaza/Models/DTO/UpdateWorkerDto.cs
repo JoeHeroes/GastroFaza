@@ -8,7 +8,7 @@ namespace GastroFaza.Models.DTO
         [EmailAddress]
         public string Email { get; set; }
         public float Salary { get; set; }
-        public int Rating { get; set; }
+
         [DisplayName("Role")]
         public int RoleId { get; set; }
         [DisplayName("First Name")]

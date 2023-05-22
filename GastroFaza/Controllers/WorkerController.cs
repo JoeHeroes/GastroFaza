@@ -119,7 +119,6 @@ namespace GastroFaza.Controllers
             {
                 var model = await this.dbContext.Workers.FindAsync(id);
                 model.Salary = modelDTO.Salary;
-                model.Rating = modelDTO.Rating;
                 model.Email = modelDTO.Email;
                 model.FirstName = modelDTO.FirstName;
                 model.LastName = modelDTO.LastName;
